@@ -1,12 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
-
-    @font-face {
-        font-family: "Arsenal";
-        src: url("../assets/fonts/Arsenal-Regular.ttf");
-    }
-
     body {
         box-sizing: border-box;
         margin: 0px;
@@ -18,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
             margin: 0px;
             padding: 0px;
             color: white;
-            font-family: Arsenal;
+            font-family: "Arsenal", sans-serif;
         }
 
         #gatsby-focus-wrapper {
@@ -37,6 +31,6 @@ export const GlobalStyle = createGlobalStyle`
 
 
 export const Layout = styled.div.attrs({ className: "layout" })`
-    
+
 `
 
