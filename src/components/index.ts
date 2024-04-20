@@ -1,5 +1,5 @@
 export * from "./banner"
-export * from "./header"
+export * from "./navbar"
 export * from "./button-border"
 export * from "./button-border/types"
 export * from "./user-menu"

@@ -1,25 +1,8 @@
 import React, { FunctionComponent } from "react"
 import type { HeadFC, PageProps } from "gatsby"
-import * as Styled from "../styles"
-import { Banner, Header } from "../components"
-import { Link } from "gatsby"
+import * as Screens from "../screens"
 
-const IndexPage: FunctionComponent<PageProps> = () => {
-
-  return (
-    <Styled.Main>
-        <Header />
-        <Banner />
-        <Link to="/search">clica porra</Link>
-    </Styled.Main>
-  )
-}
+const IndexPage: FunctionComponent<PageProps> = () => <Screens.Home />
 
 export default IndexPage
-
-export const Head: HeadFC = () => (
-    <>
-        <Styled.GlobalBody />
-        <title> C-Streaming </title>
-    </>
-)
+export const Head: HeadFC = () => <title> C-Streaming </title>
