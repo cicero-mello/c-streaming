@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from "react"
+import { PageProps } from "gatsby"
+import { Banner } from "../../components"
 import * as Styled from "./styles"
-import { Link } from "gatsby"
 
-export const Home: FunctionComponent = () => {
+export const Home: FunctionComponent<PageProps> = ( { location }) => {
 
   return (
     <Styled.Home>
-        <Link to="/search">clica porra</Link>
+        {/* <Banner /> */}
     </Styled.Home>
   )
 }
