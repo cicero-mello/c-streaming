@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react"
 
-export interface BorderButtonProps extends
+export interface WatchLatterButtonProps extends
     Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">{
-    text: string
+    alreadySaveToWatch: boolean
 }

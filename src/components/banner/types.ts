@@ -1,14 +1,9 @@
-import { IGatsbyImageData } from "gatsby-plugin-image";
+import { MediaWithGatsbyImage } from "../../shared/types"
 
-export interface BannerMovie {
-    id: string
-    name: string
-    synopsis: string
-    image: IGatsbyImageData,
-    type: "movie" | "serie" | "anime"
+export interface BannerMedia extends MediaWithGatsbyImage{
     watchLater: boolean
 }
 
 export interface BannerProps {
-    movie: BannerMovie
+    media: BannerMedia
 }

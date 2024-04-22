@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from "react"
 import * as Styles from "./styles"
-import { BorderButtonProps } from "./types"
+import { HeaderButtonProps } from "./types"
 
-export const BorderButton: FunctionComponent<BorderButtonProps> = ({ text, ...rest}) => {
+export const HeaderButton: FunctionComponent<HeaderButtonProps> = ({ ...rest}) => {
     return (
         <Styles.Button {...rest}>
-            {text}
+            C-Streaming
         </Styles.Button>
     )
 }

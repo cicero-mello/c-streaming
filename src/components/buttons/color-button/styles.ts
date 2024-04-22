@@ -3,13 +3,18 @@ import styled from "styled-components"
 export const Button = styled.button.attrs({
     className: "color-button"
 })`
-
+    outline: none;
+    border: unset;
+    white-space: nowrap;
     cursor: pointer;
     padding: 6px 13px;
-    font-size: 29px;
-    border: 1px solid #8D8D8D;
+    font-size: 23px;
     border-radius: 2px;
-    background: none;
+    background-color: #4A7D2B;
+    padding: 6px 21px;
+    transition: 100ms linear;
 
-    font-family: "Arsenal", sans-serif;
+    &:hover{
+        background-color: #5A9A32;
+    }
 `

@@ -8,27 +8,23 @@ const borderButtonCustomHover = css`
     }
 `
 
-export const Component = styled.header.attrs({
-    className: "header"
-})<{borderButtonDisabled: boolean}>`
+export const Component = styled.header.attrs((props: any)=> ({
+    className: "header",
+    $borderButtonDisabled: props.$borderButtonDisabled || false
+}))<{ $borderButtonDisabled: boolean }>`
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 80px;
     padding: 24px 101px;
 
-    .border-button {
-        border: 1px solid #FFFFFF;
-        padding-bottom: 11px;
-        border-radius: 3px;
-        height: 33px;
-        width: 185px;
-        line-height: 0px;
+    /* .border-button {
 
-        ${({borderButtonDisabled}) =>
-            borderButtonDisabled ?
+
+        ${({$borderButtonDisabled}) =>
+            $borderButtonDisabled ?
             css`cursor: unset;` :
             borderButtonCustomHover
         }
-    }
+    } */
 `
