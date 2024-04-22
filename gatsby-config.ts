@@ -18,8 +18,15 @@ const config: GatsbyConfig = {
     {
         resolve: "gatsby-source-filesystem",
         options: {
-            path: "./src/assets/images",
-            name: "images"
+            path: "./src/assets/images/media/banner/",
+            name: "banner-images"
+        },
+    },
+    {
+        resolve: "gatsby-source-filesystem",
+        options: {
+            path: "./src/assets/images/media/poster/",
+            name: "poster-images"
         },
     }
 ]

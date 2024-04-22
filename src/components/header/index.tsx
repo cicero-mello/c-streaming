@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { UserMenu } from "../user-menu"
-import { BorderButton } from "../buttons"
+import { HeaderButton } from "../buttons"
 import { navigate } from "gatsby"
 import { PATHS } from "../../paths"
 import { HeaderProps } from "./types"
@@ -17,11 +17,10 @@ export const Header: FunctionComponent<HeaderProps> = ({ path }) => {
     }
 
     return (
-        <Styled.Component borderButtonDisabled={path === PATHS.HOME}>
-            <BorderButton
+        <Styled.Component $borderButtonDisabled={path === PATHS.HOME}>
+            <HeaderButton
                 onClick={onClickBorderButton}
                 disabled={path === PATHS.HOME}
-                text="C-Streaming"
             />
             <UserMenu
                 onClick={onClickUserMenu}

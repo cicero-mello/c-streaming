@@ -1,5 +1,5 @@
 export enum PATHS {
     HOME = "/",
-    SEARCH = "/search/",
-    USER = "/user/"
+    SEARCH = "/search",
+    USER = "/user"
 }

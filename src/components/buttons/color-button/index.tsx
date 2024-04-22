@@ -2,10 +2,12 @@ import React, { FunctionComponent } from "react"
 import { ColorButtonProps } from "./types"
 import * as Styles from "./styles"
 
-export const ColorButton: FunctionComponent<ColorButtonProps> = (props) => {
+export const ColorButton: FunctionComponent<ColorButtonProps> = ({
+    text, ...rest
+}) => {
     return (
-        <Styles.Button {...props}>
-            C-Streaming
+        <Styles.Button {...rest}>
+            {text}
         </Styles.Button>
     )
 }
