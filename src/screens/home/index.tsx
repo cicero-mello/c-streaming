@@ -1,15 +1,16 @@
 import React, { FunctionComponent, useEffect, useLayoutEffect, useMemo, useState } from "react"
-import { PageProps, graphql } from "gatsby"
 import { Banner } from "../../components"
 import { HomeProps, QueryGatsbyImages } from "./type"
 import { getRandomMediaToBanner } from "./core"
 import * as Styled from "./styles"
-import { BannerMedia } from "../../components/banner/types"
+import { BannerProps } from "../../components/banner/types"
 
 export const Home: FunctionComponent<HomeProps> = ({ data }) => {
-    const [bannerMediaList, setBannterMediaList] = useState<BannerMedia[]>([])
+    const [bannerMediaList, setBannterMediaList] = useState<BannerProps[]>([])
+    const [loadingData, setLoadingData] = useState<boolean>(true)
+    const [freePointerEvents, setFreePointerEvents] = useState<boolean>(false)
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const bannerGatsbyImages: QueryGatsbyImages[] = data ? data.banner.edges.map(
             (obj: { node: any }) => ({...obj.node})
         ) : []
@@ -17,12 +18,26 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
             (obj: { node: any }) => ({...obj.node})
         ) : []
 
-        if(bannerGatsbyImages.length > 0) setBannterMediaList(getRandomMediaToBanner(bannerGatsbyImages))
+        if(bannerGatsbyImages.length > 0) {
+            const randomBannerMedia = getRandomMediaToBanner(bannerGatsbyImages)
+            setBannterMediaList(randomBannerMedia)
+        }
     }, [data])
 
+
+    useEffect(() => {
+        if(bannerMediaList.length > 0) {
+            setLoadingData(false)
+            setTimeout(() => {
+                setFreePointerEvents(true)
+            }, 300)
+        }
+    }, [bannerMediaList])
+
     return (
-        <Styled.Home>
-            {bannerMediaList.length> 0 && <Banner media={bannerMediaList[0]}/>}
+        <Styled.Home $freePointerEvents={freePointerEvents}>
+            <Styled.PageLoader $loading={loadingData}/>
+            {!loadingData && <Banner {...bannerMediaList[0]}/>}
         </Styled.Home>
     )
 }
