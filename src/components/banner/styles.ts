@@ -1,13 +1,33 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import { BannerAnimationState } from "./types"
 
-export const Component = styled.div`
+export const Component = styled.div.attrs((props: any) => ({
+    className: "banner",
+    $animationState: props.$animationState || "open"
+}))<{ $animationState: BannerAnimationState }>`
     display: flex;
     height: 350.4px;
-    margin: 10px 34px;
+    padding: 10px 34px;
+    width: 100%;
 
     .gatsby-image{
         width: 337.6px;
+        min-width: 337.6px;
+        transition: 340ms ease-in-out;
     }
+
+    ${({$animationState}) => $animationState === "closed" && css`
+        .gatsby-image {
+            width: 0px;
+            min-width: 0px;
+        }
+
+        .info-wrapper {
+            opacity: 0%;
+        }
+
+    `}
+
 `
 
 export const InfoAndButtons = styled.div`
@@ -15,12 +35,17 @@ export const InfoAndButtons = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background: linear-gradient(90deg, #303030, black);
-    width: 100%;
-    max-width: 1034px;
+    min-width: 100px;
     padding: 44px 49.6px 29px 49.6px;
+
+    /* transition: 200ms; */
 `
 
-export const InfoWrapper = styled.div`
+export const InfoWrapper = styled.div.attrs({
+    className: "info-wrapper"
+})`
+    opacity: 100%;
+    transition: 340ms ease-in-out;
 `
 
 export const MediaName = styled.h5`

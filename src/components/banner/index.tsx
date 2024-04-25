@@ -1,17 +1,17 @@
-import React, { FunctionComponent, useLayoutEffect, useState } from "react"
+import React, { FunctionComponent, useEffect, useLayoutEffect, useState } from "react"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
-import { BannerProps } from "./types"
+import { BannerAnimationState, BannerProps } from "./types"
 import * as Styles from "./styles"
 import { ColorButton, WatchLatterButton } from "../buttons"
 import { watchLaterStorage } from "../../localstorage"
 import { navigate } from "gatsby"
 import { PATHS } from "../../paths"
 
-export const Banner: FunctionComponent<BannerProps> = ({
-    type, image, name, synopsis, id
-}) => {
+export const Banner: FunctionComponent<BannerProps> = (newMedia) => {
+    const [showingMedia, setShowingMedia] = useState(newMedia)
     const [watchLater, setWatchLater] = useState<boolean>(false)
-    const textPlayButton = type === "movie" ? "Play" : "See Episodes"
+    const [bannerAnimation, setBannerAnimation] = useState<BannerAnimationState>("closed")
+    const { id, name, synopsis, image, type } = showingMedia
 
     const onClickWatchLater = () => {
         watchLaterStorage.set(id, !watchLater)
@@ -28,8 +28,16 @@ export const Banner: FunctionComponent<BannerProps> = ({
         setWatchLater(localStorageValue)
     }, [id])
 
+    useEffect(() => {
+        setBannerAnimation("closed")
+        setTimeout(() => {
+            setShowingMedia(newMedia)
+            setBannerAnimation("open")
+        }, 400)
+    }, [newMedia])
+
     return (
-        <Styles.Component>
+        <Styles.Component $animationState={bannerAnimation}>
             <GatsbyImage
                 className="gatsby-image"
                 image={image as IGatsbyImageData}
@@ -47,7 +55,7 @@ export const Banner: FunctionComponent<BannerProps> = ({
                     />
                     <ColorButton
                         onClick={onClickColorButton}
-                        text={textPlayButton}
+                        text={"See More"}
                     />
                 </Styles.ButtonsWrapper>
             </Styles.InfoAndButtons>

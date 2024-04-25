@@ -6,7 +6,7 @@ export const medias: Media[] = [
         id: "41c71f8fbc23d3cd1fa6045d4ee0c391",
         type: "anime",
         imageName: "berserk",
-        synopsis: `a dark fantasy anime based on the manga by Kentaro Miura.
+        synopsis: `A dark fantasy anime based on the manga by Kentaro Miura.
         The story follows Guts, a lone mercenary with a massive sword and a haunted past.
         He joins the Band of the Hawk, a group led by the charismatic and ambitious Griffith.`
     },
@@ -83,18 +83,6 @@ export const medias: Media[] = [
         detective sets out to track him down and stop his reign of terror. The series
         delves into themes of morality, justice, and the consequences of wielding power,
         as the student and detective engage in a cat-and-mouse game of wits.`
-    },
-    {
-        name: "Devilman",
-        id: "af183305702ade361d1f5032ed7f1119",
-        type: "anime",
-        imageName: "devilman",
-        synopsis: `A young man merges with a demon to gain its powers and protect humanity
-        from impending demonic threats. As he battles these demonic forces, he grapples with
-        his own inner turmoil and the fear and mistrust of those around him who view him as a
-        monster. The series explores dark themes of identity, morality, and the blurred lines
-        between human and demon, culminating in a tragic and intense confrontation between the
-        forces of good and evil.`
     },
     {
         name: "Devilman",
@@ -435,21 +423,21 @@ export const medias: Media[] = [
 
 const bannerChoicedImageNameList: string[] = [
     "evangelion",
-    "piratesofthecaribbean1",
+    "pulpfiction",
     "cowboybebop",
     "theoffice",
     "mrpickles",
-    "pulpfiction",
+    "it",
     "berserk",
     "theevildead",
     "frankweenie",
-    "breakingbad",
+    "smilingfriends",
     "thenightmarebeforechristmas",
     "kingdom"
 ]
 
-export const bannerMediasMock = medias.filter(media =>
-    bannerChoicedImageNameList.includes(media.imageName)
+export const bannerMediasMock = bannerChoicedImageNameList.map(imageName =>
+    medias.find((media) => media.imageName === imageName)
 )
 
 export const mock = {
