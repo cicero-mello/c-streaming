@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
             margin: 0px;
             padding: 0px;
             color: white;
-            font-family: "Arsenal", sans-serif;
+            font-family: "Arsenal", math;
         }
 
         #gatsby-focus-wrapper {

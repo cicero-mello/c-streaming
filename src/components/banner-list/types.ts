@@ -1,9 +1,5 @@
-import { MediaWithGatsbyImage } from "../../shared/types"
-
-export interface BannerListMedia extends MediaWithGatsbyImage{
-    watchLater: boolean
-}
+import { BannerProps } from "../banner/types"
 
 export interface BannerListProps {
-    mediaList: BannerListMedia[]
+    banners: BannerProps[]
 }

@@ -1,11 +1,11 @@
 import { Media } from "../shared/types"
 
-export const mediasMock: Media[] = [
+export const medias: Media[] = [
     {
         name: "Berserk (1997)",
         id: "41c71f8fbc23d3cd1fa6045d4ee0c391",
         type: "anime",
-        imageName: "berserk-horizontal",
+        imageName: "berserk",
         synopsis: `a dark fantasy anime based on the manga by Kentaro Miura.
         The story follows Guts, a lone mercenary with a massive sword and a haunted past.
         He joins the Band of the Hawk, a group led by the charismatic and ambitious Griffith.`
@@ -45,18 +45,6 @@ export const mediasMock: Media[] = [
         to protect his family from various monsters, aliens, and otherworldly creatures.
         Each episode sees the dog confronting new challenges, often with comedic and surreal
         twists, showcasing his determination and love for his family.`
-    },
-    {
-        name: "Cowboy Bebop",
-        id: "6a58e4bec8ad4cecc2ad617a27267826",
-        type: "anime",
-        imageName: "cowboybebop",
-        synopsis: `In a futuristic setting, a group of bounty hunters travels through space in
-        their spaceship, the Bebop, hunting down criminals and fugitives to earn a living. Each
-        member of the eclectic crew has their own past and motivations, which are gradually revealed
-        through episodic adventures. The series blends action, humor, and jazz-inspired music,
-        creating a stylish and unique atmosphere as the characters confront their pasts and face the
-        challenges of life on the frontier of space.`
     },
     {
         name: "Cowboy Bebop",
@@ -444,3 +432,27 @@ export const mediasMock: Media[] = [
         and the human spirit.`
     }
 ]
+
+const bannerChoicedImageNameList: string[] = [
+    "evangelion",
+    "piratesofthecaribbean1",
+    "cowboybebop",
+    "theoffice",
+    "mrpickles",
+    "pulpfiction",
+    "berserk",
+    "theevildead",
+    "frankweenie",
+    "breakingbad",
+    "thenightmarebeforechristmas",
+    "kingdom"
+]
+
+export const bannerMediasMock = medias.filter(media =>
+    bannerChoicedImageNameList.includes(media.imageName)
+)
+
+export const mock = {
+    medias: medias,
+    bannerMedias: bannerMediasMock
+}

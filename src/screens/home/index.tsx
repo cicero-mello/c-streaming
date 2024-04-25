@@ -1,9 +1,8 @@
-import React, { FunctionComponent, useEffect, useLayoutEffect, useMemo, useState } from "react"
-import { Banner } from "../../components"
-import { HomeProps, QueryGatsbyImages } from "./type"
-import { getRandomMediaToBanner } from "./core"
+import React, { FunctionComponent, useEffect, useState } from "react"
+import { HomeProps } from "./type"
+import { BannerProps, BannerList } from "../../components"
+import * as core from "./core"
 import * as Styled from "./styles"
-import { BannerProps } from "../../components/banner/types"
 
 export const Home: FunctionComponent<HomeProps> = ({ data }) => {
     const [bannerMediaList, setBannterMediaList] = useState<BannerProps[]>([])
@@ -11,33 +10,27 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
     const [freePointerEvents, setFreePointerEvents] = useState<boolean>(false)
 
     useEffect(() => {
-        const bannerGatsbyImages: QueryGatsbyImages[] = data ? data.banner.edges.map(
-            (obj: { node: any }) => ({...obj.node})
-        ) : []
-        const posterGatsbyImages: QueryGatsbyImages[] = data ? data.poster.edges.map(
-            (obj: { node: any }) => ({...obj.node})
-        ) : []
+        const bannerGatsbyImages = core.getBannerGatsbyImages(data)
+        if(bannerGatsbyImages.length <= 0) return
 
-        if(bannerGatsbyImages.length > 0) {
-            const randomBannerMedia = getRandomMediaToBanner(bannerGatsbyImages)
-            setBannterMediaList(randomBannerMedia)
-        }
-    }, [data])
+        const posterGatsbyImages = core.getPosterGatsbyImages(data)
+        if(posterGatsbyImages.length <= 0) return
 
+        const bannerMedia = core.createBannerMedia(bannerGatsbyImages)
 
-    useEffect(() => {
-        if(bannerMediaList.length > 0) {
+        if(bannerMedia.length > 0){
+            setBannterMediaList(bannerMedia)
             setLoadingData(false)
             setTimeout(() => {
                 setFreePointerEvents(true)
             }, 300)
         }
-    }, [bannerMediaList])
+    }, [data])
 
     return (
         <Styled.Home $freePointerEvents={freePointerEvents}>
             <Styled.PageLoader $loading={loadingData}/>
-            {!loadingData && <Banner {...bannerMediaList[0]}/>}
+            {!loadingData && <BannerList banners={bannerMediaList} />}
         </Styled.Home>
     )
 }

@@ -1,18 +1,39 @@
 import { getImage } from "gatsby-plugin-image"
 import { BannerProps } from "../../components/banner/types"
 import { QueryGatsbyImages } from "./type"
+import { mock } from "../../assets/media-mock"
 
-export const getRandomMediaToBanner = (bannerGastbyImages: QueryGatsbyImages[]):BannerProps[] => {
-    const image = getImage(bannerGastbyImages.find(img => img.name === "evangelion")?.childImageSharp || bannerGastbyImages[0].childImageSharp)
+export const createBannerMedia = (
+    bannerGastbyImages: QueryGatsbyImages[]
+):BannerProps[] => {
 
-    return [{
-        name: "Neon Genesis Evangelion",
-        id: "f35eed00f4c1feb97103cbbac86c5a6b",
-        type: "anime",
-        image: image,
-        synopsis: `A renowned anime series that blends mecha action with psychological drama.
-        Set in a post-apocalyptic world, it follows teenager Shinji Ikari, who is recruited by
-        his estranged father to pilot a giant bio-machine called an "Evangelion" to defend Tokyo-3
-        from monstrous beings known as Angels.`,
-    }]
+    const bannerMediasWithGatsbyImage = mock.bannerMedias.map(bannerMedia => {
+        const gatsbyImage = getImage(
+            bannerGastbyImages.find(
+                img => img.name === bannerMedia.imageName
+            )?.childImageSharp || bannerGastbyImages[0].childImageSharp
+        )
+
+        return {
+            id: bannerMedia.id,
+            name: bannerMedia.name,
+            synopsis: bannerMedia.synopsis,
+            type: bannerMedia.type,
+            image: gatsbyImage
+        }
+    })
+
+    return bannerMediasWithGatsbyImage
 }
+
+export const getBannerGatsbyImages = (data: any):QueryGatsbyImages[] => (
+    data ? data.banner.edges.map(
+        (obj: {node: any}) => ({...obj.node})
+    ) : []
+)
+
+export const getPosterGatsbyImages = (data: any):QueryGatsbyImages[] => (
+    data ? data.poster.edges.map(
+        (obj: {node: any}) => ({...obj.node})
+    ) : []
+)

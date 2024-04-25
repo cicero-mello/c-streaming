@@ -1,4 +1,7 @@
 export * from "./banner"
+export * from "./banner/types"
+export * from "./banner-list"
+export * from "./banner-list/types"
 export * from "./buttons"
 export * from "./header"
 export * from "./user-menu"

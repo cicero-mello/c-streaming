@@ -38,10 +38,10 @@ export const Synopsis = styled.p`
     margin-top: 11px;
     max-height: 180px;
 
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 `
 
 export const ButtonsWrapper = styled.div`
