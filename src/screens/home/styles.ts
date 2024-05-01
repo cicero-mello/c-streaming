@@ -6,7 +6,6 @@ export const Home = styled.main.attrs((props: any) => ({
 }))<{$freePointerEvents: boolean}>`
     display: flex;
     flex-direction: column;
-    font-size: 90px;
     width: 100%;
 
     ${({ $freePointerEvents }) => !$freePointerEvents && css`

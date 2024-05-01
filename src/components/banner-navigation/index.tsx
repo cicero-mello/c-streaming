@@ -1,16 +1,35 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState } from "react"
 import { BannerNavigationProps } from "./types"
+import { TriangleRadioInput } from "../triangle-radio-input"
 import * as Styled from "./styles"
-
 
 export const BannerNavigation: FunctionComponent<BannerNavigationProps> = ({
     onClickEachButton
 }) => {
+    const [needAwaitNextClick, setNeedAwaitNextClick] = useState(false)
+
+    const handleClick = (func: () => void) => {
+        if(needAwaitNextClick) return
+
+        setNeedAwaitNextClick(true)
+        setTimeout(() => {
+            setNeedAwaitNextClick(false)
+        }, 600)
+        func()
+    }
 
     return(
         <Styled.Component>
             {onClickEachButton.map(
-                (func) => (<button onClick={func}> a </button>)
+                (func, i) => (
+                    <TriangleRadioInput
+                        onClick={() => handleClick(func)}
+                        name="lorem"
+                        defaultChecked={i === 0}
+                        key={`a${i}`}
+                        disabled={needAwaitNextClick}
+                    />
+                )
             )}
         </Styled.Component>
     )

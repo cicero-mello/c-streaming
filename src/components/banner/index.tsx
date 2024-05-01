@@ -1,17 +1,17 @@
 import React, { FunctionComponent, useEffect, useLayoutEffect, useState } from "react"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { BannerAnimationState, BannerProps } from "./types"
-import * as Styles from "./styles"
 import { ColorButton, WatchLatterButton } from "../buttons"
 import { watchLaterStorage } from "../../localstorage"
 import { navigate } from "gatsby"
 import { PATHS } from "../../paths"
+import * as Styled from "./styles"
 
 export const Banner: FunctionComponent<BannerProps> = (newMedia) => {
     const [showingMedia, setShowingMedia] = useState(newMedia)
+    const { id, name, synopsis, image, type } = showingMedia
     const [watchLater, setWatchLater] = useState<boolean>(false)
     const [bannerAnimation, setBannerAnimation] = useState<BannerAnimationState>("closed")
-    const { id, name, synopsis, image, type } = showingMedia
 
     const onClickWatchLater = () => {
         watchLaterStorage.set(id, !watchLater)
@@ -37,18 +37,18 @@ export const Banner: FunctionComponent<BannerProps> = (newMedia) => {
     }, [newMedia])
 
     return (
-        <Styles.Component $animationState={bannerAnimation}>
+        <Styled.Component $animationState={bannerAnimation}>
             <GatsbyImage
                 className="gatsby-image"
                 image={image as IGatsbyImageData}
                 alt={`Image of ${name}`}
             />
-            <Styles.InfoAndButtons>
-                <Styles.InfoWrapper>
-                    <Styles.MediaName> {name.toLocaleUpperCase()} </Styles.MediaName>
-                    <Styles.Synopsis> {synopsis} </Styles.Synopsis>
-                </Styles.InfoWrapper>
-                <Styles.ButtonsWrapper>
+            <Styled.InfoAndButtons>
+                <Styled.InfoWrapper>
+                    <Styled.MediaName> {name.toLocaleUpperCase()} </Styled.MediaName>
+                    <Styled.Synopsis> {synopsis} </Styled.Synopsis>
+                </Styled.InfoWrapper>
+                <Styled.ButtonsWrapper>
                     <WatchLatterButton
                         onClick={onClickWatchLater}
                         alreadySaveToWatch={watchLater}
@@ -57,8 +57,8 @@ export const Banner: FunctionComponent<BannerProps> = (newMedia) => {
                         onClick={onClickColorButton}
                         text={"See More"}
                     />
-                </Styles.ButtonsWrapper>
-            </Styles.InfoAndButtons>
-        </Styles.Component>
+                </Styled.ButtonsWrapper>
+            </Styled.InfoAndButtons>
+        </Styled.Component>
     )
 }

@@ -9,12 +9,9 @@ export const BannerList: FunctionComponent<BannerListProps> = ({
 }) => {
     const [currentBanner, setCurrentBanner] = useState(banners[0])
 
-    let nextBanner = useRef(banners[0])
     const onClickEachNavButton = useMemo(() => (
         banners.map(banner => () => setCurrentBanner(banner))
     ),[])
-
-    console.log(nextBanner)
 
     return (
         <Styled.Component>

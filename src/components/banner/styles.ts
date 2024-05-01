@@ -24,8 +24,8 @@ export const Component = styled.div.attrs((props: any) => ({
 
         .info-wrapper {
             opacity: 0%;
+            margin-right: 337.6px;
         }
-
     `}
 
 `
@@ -37,8 +37,7 @@ export const InfoAndButtons = styled.div`
     background: linear-gradient(90deg, #303030, black);
     min-width: 100px;
     padding: 44px 49.6px 29px 49.6px;
-
-    /* transition: 200ms; */
+    margin-left: 20px;
 `
 
 export const InfoWrapper = styled.div.attrs({
@@ -69,10 +68,14 @@ export const Synopsis = styled.p`
     overflow: hidden;
 `
 
-export const ButtonsWrapper = styled.div`
+export const ButtonsWrapper = styled.div.attrs({
+    className: "buttons-wrapper"
+})`
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    transition: 340ms ease-in-out;
+    opacity: 100%;
 
     :first-child{
         margin: 0px 18px 4px 18px;

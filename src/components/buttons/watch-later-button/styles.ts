@@ -16,9 +16,8 @@ export const Button = styled.button.attrs((props: any)=> ({
     color: #8D8D8D;
     border-radius: 3px;
     background: none;
-    transition: 200ms linear;
     font-family: "Arsenal", sans-serif;
-    transition: 100ms ease-in-out;
+    transition: 200ms ease-in-out;
 
     &:hover{
         color: #cccccc;
