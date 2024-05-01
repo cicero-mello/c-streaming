@@ -11,6 +11,10 @@ export const Home = styled.main.attrs((props: any) => ({
     ${({ $freePointerEvents }) => !$freePointerEvents && css`
         *{ pointer-events: none; }
     `}
+
+    .banner-navigation{
+        margin: 16px 16px 20px 16px;
+    }
 `
 
 export const PageLoader = styled.div.attrs((props: any) => ({
