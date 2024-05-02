@@ -15,6 +15,12 @@ export const GlobalStyle = createGlobalStyle`
             font-family: "Arsenal", math;
         }
 
+        button {
+            outline: none;
+            background-color: unset;
+            border: none;
+        }
+
         #gatsby-focus-wrapper {
             display: flex;
             flex-direction: column;

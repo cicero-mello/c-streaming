@@ -1,6 +1,6 @@
-import { Media } from "../shared/types"
+import { Media, MediaType } from "../shared/types"
 
-export const medias: Media[] = [
+const medias: Media[] = [
     {
         name: "Berserk (1997)",
         id: "41c71f8fbc23d3cd1fa6045d4ee0c391",
@@ -381,11 +381,20 @@ const bannerChoicedImageNameList: string[] = [
     "kingdom"
 ]
 
-export const bannerMediasMock = bannerChoicedImageNameList.map(imageName =>
+const bannerMediasMock = bannerChoicedImageNameList.map(imageName =>
     medias.find((media) => media.imageName === imageName)
 )
 
+const posterAnimesMedia = medias.filter(media => media.type === "anime")
+const posterMoviesMedia = medias.filter(media => media.type === "movie")
+const posterSeriesMedia = medias.filter(media => media.type === "serie")
+
 export const mock = {
-    medias: medias,
-    bannerMedias: bannerMediasMock
+    medias: medias as Media[],
+    bannerMedias: bannerMediasMock as Media[],
+    posterMedias: new Map<MediaType, Media[]>([
+        ["anime", posterAnimesMedia],
+        ["movie", posterMoviesMedia],
+        ["serie", posterSeriesMedia]
+    ])
 }

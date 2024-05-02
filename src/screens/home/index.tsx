@@ -1,11 +1,14 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { HomeProps } from "./type"
-import { BannerProps, BannerList, Line, SearchInput } from "../../components"
+import { BannerProps, BannerList, Line, SearchInput, PosterList, PosterProps } from "../../components"
 import * as core from "./core"
 import * as Styled from "./styles"
 
 export const Home: FunctionComponent<HomeProps> = ({ data }) => {
-    const [bannerMediaList, setBannterMediaList] = useState<BannerProps[]>([])
+    const [bannersMediaList, setBannersMediaList] = useState<BannerProps[]>([])
+    const [postersAnimeMediaList, setPostersAnimeMediaList] = useState<PosterProps[]>([])
+    const [postersSerieMediaList, setPostersSerieMediaList] = useState<PosterProps[]>([])
+    const [postersMovieMediaList, setPostersMovieMediaList] = useState<PosterProps[]>([])
     const [loadingData, setLoadingData] = useState<boolean>(true)
     const [freePointerEvents, setFreePointerEvents] = useState<boolean>(false)
 
@@ -17,9 +20,23 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
         if(posterGatsbyImages.length <= 0) return
 
         const bannerMedia = core.createBannerMedia(bannerGatsbyImages)
+        const posterMediaAnime = core.createPosterMedia("anime", posterGatsbyImages)
+        const posterMediaMovie = core.createPosterMedia("movie", posterGatsbyImages)
+        const posterMediaSerie = core.createPosterMedia("serie", posterGatsbyImages)
 
-        if(bannerMedia.length > 0){
-            setBannterMediaList(bannerMedia)
+        const haveAllData = (
+            bannerMedia.length > 0
+            && posterMediaAnime.length > 0
+            && posterMediaSerie.length > 0
+            && posterMediaMovie.length > 0
+        )
+
+        if(haveAllData){
+            setBannersMediaList(bannerMedia)
+            setPostersAnimeMediaList(posterMediaAnime)
+            setPostersSerieMediaList(posterMediaSerie)
+            setPostersMovieMediaList(posterMediaMovie)
+
             setLoadingData(false)
             setTimeout(() => {
                 setFreePointerEvents(true)
@@ -30,10 +47,30 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
     return (
         <Styled.Home $freePointerEvents={freePointerEvents}>
             <Styled.PageLoader $loading={loadingData}/>
-            {!loadingData && <BannerList banners={bannerMediaList} />}
+            {!loadingData && <BannerList banners={bannersMediaList} />}
             <Line />
             <SearchInput onSearch={(inputValue) => console.log(inputValue)}/>
             <Line />
+            {!loadingData && <PosterList
+                titleText="Animes"
+                posters={postersAnimeMediaList}
+                buttonText="See All Animes"
+                buttonAction={() => alert("anime")}
+            />}
+            <Line />
+            {!loadingData && <PosterList
+                titleText="Movies"
+                posters={postersMovieMediaList}
+                buttonText="See All Movies"
+                buttonAction={() => alert("movies")}
+            />}
+            <Line />
+            {!loadingData && <PosterList
+                titleText="Series"
+                posters={postersSerieMediaList}
+                buttonText="See All Series"
+                buttonAction={() => alert("serie")}
+            />}
         </Styled.Home>
     )
 }

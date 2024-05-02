@@ -11,5 +11,5 @@ export interface Media {
 }
 
 export interface MediaWithGatsbyImage extends Omit<Media, "imageName">{
-    image: IGatsbyImageData | undefined
+    image?: IGatsbyImageData
 }

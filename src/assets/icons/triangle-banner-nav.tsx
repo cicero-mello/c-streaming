@@ -1,4 +1,3 @@
-
 import React, { FunctionComponent, SVGProps } from "react"
 
 export const TriangleBannerNav: FunctionComponent<SVGProps<SVGSVGElement>> = (props) => (
