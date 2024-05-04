@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react"
 import { PosterListProps } from "./types"
 import * as Styled from "./styles"
-import { SeeAllButton, TriangleNextButton } from "../buttons"
-import { Poster } from "../poster"
+import { SeeAllButton } from "../buttons"
+import { PosterCarousel } from "../poster-carousel"
 
 export const PosterList: FunctionComponent<PosterListProps> = ({
    posters, titleText, buttonText, buttonAction
@@ -15,12 +15,7 @@ export const PosterList: FunctionComponent<PosterListProps> = ({
                 <SeeAllButton text={buttonText} onClick={buttonAction}/>
             </Styled.TopSection>
             <Styled.DownSection>
-                <TriangleNextButton />
-                <Styled.PostersCarousel>
-                    {/* <Poster {...posters[0]}/> */}
-                    {posters.map(poster => <Poster {...poster} key={poster.id} />)}
-                </Styled.PostersCarousel>
-                <TriangleNextButton />
+                <PosterCarousel posters={posters}/>
             </Styled.DownSection>
         </Styled.Component>
     )

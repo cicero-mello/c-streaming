@@ -9,7 +9,11 @@ export const Poster: FunctionComponent<PosterProps> = ({
 
     return (
         <Styled.Component>
-            <GatsbyImage image={image} alt={name} />
+            <GatsbyImage
+                className="gatsby-image"
+                image={image}
+                alt={name}
+            />
             <Styled.Name> {name} </Styled.Name>
         </Styled.Component>
     )

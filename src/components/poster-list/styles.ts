@@ -31,6 +31,5 @@ export const DownSection = styled.div`
 export const PostersCarousel = styled.div`
     display: flex;
     width: calc(100% - 80px);
-    overflow-x: scroll;
+    overflow-x: hidden;
 `
-
