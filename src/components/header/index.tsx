@@ -9,22 +9,22 @@ import * as Styled from "./styles"
 export const Header: FunctionComponent<HeaderProps> = ({ path }) => {
 
     const onClickBorderButton = () => {
-        navigate(PATHS.HOME)
+        //navigate(PATHS.HOME)
     }
 
     const onClickUserMenu = () => {
-        navigate(PATHS.USER)
+        //navigate(PATHS.USER)
     }
 
     return (
         <Styled.Component $borderButtonDisabled={path === PATHS.HOME}>
             <HeaderButton
                 onClick={onClickBorderButton}
-                disabled={path === PATHS.HOME}
+                disabled={path === PATHS.HOME || !path}
             />
             <UserMenu
                 onClick={onClickUserMenu}
-                disabled={path === PATHS.USER || !path}
+                disabled={path === PATHS.USER}
             />
         </Styled.Component>
     )

@@ -4,8 +4,6 @@ import { HeaderButtonProps } from "./types"
 
 export const HeaderButton: FunctionComponent<HeaderButtonProps> = ({ ...rest}) => {
     return (
-        <Styles.Button {...rest}>
-            C-Streaming
-        </Styles.Button>
+        <Styles.Button {...rest} />
     )
 }

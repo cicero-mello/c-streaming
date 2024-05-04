@@ -1,6 +1,8 @@
 import styled from "styled-components"
 
-export const Component = styled.div`
+export const Component = styled.div.attrs({
+    className: "search-input"
+})`
     display: flex;
     position: relative;
     align-self: center;
@@ -15,7 +17,6 @@ export const Component = styled.div`
         }
 
         button {
-
             &::before{
                 border-color: #dcdcdc;
             }
@@ -27,9 +28,7 @@ export const Component = styled.div`
     }
 `
 
-export const Input = styled.input.attrs({
-    className: "search-input"
-})`
+export const Input = styled.input`
     outline: none;
     background-color: unset;
     border: 1px solid #5d5d5d;

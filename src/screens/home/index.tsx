@@ -51,28 +51,28 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
         <Styled.Home $freePointerEvents={freePointerEvents}>
             <PageLoader $loading={loadingData}/>
             {!loadingData && <BannerList banners={bannersMediaList} />}
-            <Line />
+            <Line id="first-line-home"/>
             <SearchInput onSearch={(inputValue) => console.log(inputValue)}/>
             <Line />
             {!loadingData && <PosterList
                 titleText="Animes"
                 posters={postersAnimeMediaList}
                 buttonText="See All Animes"
-                buttonAction={() => alert("anime")}
+                buttonAction={() => undefined}
             />}
             <Line />
             {!loadingData && <PosterList
                 titleText="Movies"
                 posters={postersMovieMediaList}
                 buttonText="See All Movies"
-                buttonAction={() => alert("movies")}
+                buttonAction={() => undefined}
             />}
             <Line />
             {!loadingData && <PosterList
                 titleText="Series"
                 posters={postersSerieMediaList}
                 buttonText="See All Series"
-                buttonAction={() => alert("serie")}
+                buttonAction={() => undefined}
             />}
             <Line />
             <Footer />

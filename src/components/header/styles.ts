@@ -1,10 +1,26 @@
 import styled, { css } from "styled-components"
 
-const borderButtonCustomHover = css`
-    &:hover{
-        background-color: #FFFFFF;
-        border: #090909;
-        color: #090909;
+const adaptativeCSS = css`
+    transition: 300ms ease-in-out;
+
+    .user-name {
+        opacity: 100%;
+        transition: 300ms ease-in-out;
+    }
+
+    @media(max-width: 600px){
+        padding: 24px 60px;
+
+        .user-name {
+            font-size: 1px;
+            opacity: 0;
+            margin: 0;
+        }
+
+        button{
+            width: 45px;
+            &::after{ content: "C"; }
+        }
     }
 `
 
@@ -18,13 +34,5 @@ export const Component = styled.header.attrs((props: any)=> ({
     height: 80px;
     padding: 24px 101px;
 
-    /* .border-button {
-
-
-        ${({$borderButtonDisabled}) =>
-            $borderButtonDisabled ?
-            css`cursor: unset;` :
-            borderButtonCustomHover
-        }
-    } */
+    ${adaptativeCSS}
 `

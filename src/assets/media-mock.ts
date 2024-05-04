@@ -280,7 +280,7 @@ const medias: Media[] = [
         of modern life.`
     },
     {
-        name: "Spider-Man: Across the Spider-Verse",
+        name: "Spider-Man: Into the Spider-Verse",
         id: "78cb231fc9d165c7b54b1e4af7a7eb8f",
         type: "movie",
         imageName: "spiderverse",

@@ -14,6 +14,11 @@ export const Button = styled.button.attrs({
     height: 33px;
     width: 185px;
     line-height: 0px;
+    overflow: hidden;
+
+    &::after{
+        content: "C-Streaming";
+    }
 
     ${({ disabled }) => !disabled && css`
         &:hover{
