@@ -1,20 +1,19 @@
 import React, { FunctionComponent } from "react"
-import { LayoutProps } from "./types"
 import { Header } from "../components"
-import * as Styles from "./styles"
 import { Fonts } from "./fonts"
 import { PageProps } from "gatsby"
 import { PATHS } from "../paths"
+import * as Styled from "./styles"
 
 const Layout: FunctionComponent<PageProps> = ({ children, path }) => {
 
     return (
-        <Styles.Layout>
-            <Styles.GlobalStyle />
+        <Styled.Layout>
+            <Styled.GlobalStyle />
             <Fonts />
             <Header path={path as PATHS}/>
             { children }
-        </Styles.Layout>
+        </Styled.Layout>
     )
 }
 

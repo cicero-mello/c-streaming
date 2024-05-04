@@ -24,7 +24,7 @@ export const Header: FunctionComponent<HeaderProps> = ({ path }) => {
             />
             <UserMenu
                 onClick={onClickUserMenu}
-                disabled={path === PATHS.USER}
+                disabled={path === PATHS.USER || !path}
             />
         </Styled.Component>
     )

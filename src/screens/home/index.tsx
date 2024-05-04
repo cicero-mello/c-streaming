@@ -1,6 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { HomeProps } from "./type"
-import { BannerProps, BannerList, Line, SearchInput, PosterList, PosterProps } from "../../components"
+import {
+    BannerProps, BannerList, Line, SearchInput, PosterList, PosterProps, PageLoader,
+    Footer
+} from "../../components"
 import * as core from "./core"
 import * as Styled from "./styles"
 
@@ -46,7 +49,7 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
 
     return (
         <Styled.Home $freePointerEvents={freePointerEvents}>
-            <Styled.PageLoader $loading={loadingData}/>
+            <PageLoader $loading={loadingData}/>
             {!loadingData && <BannerList banners={bannersMediaList} />}
             <Line />
             <SearchInput onSearch={(inputValue) => console.log(inputValue)}/>
@@ -71,6 +74,8 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
                 buttonText="See All Series"
                 buttonAction={() => alert("serie")}
             />}
+            <Line />
+            <Footer />
         </Styled.Home>
     )
 }

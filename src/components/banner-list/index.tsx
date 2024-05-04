@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useRef, useState } from "react"
+import React, { FunctionComponent, useMemo, useState } from "react"
 import { Banner } from "../banner"
 import { BannerListProps } from "./types"
 import * as Styled from "./styles"
