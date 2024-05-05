@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
             padding: 0px;
             color: white;
             font-family: "Arsenal", math;
+            user-select: none;
         }
 
         button {

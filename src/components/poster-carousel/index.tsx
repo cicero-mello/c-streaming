@@ -1,7 +1,9 @@
-import React, { FunctionComponent, useRef, useState } from "react"
+import React, { FunctionComponent, useCallback, useRef, useState } from "react"
 import { PosterCarouselProps } from "./types"
 import { Poster } from "../poster"
 import { TriangleNextButton } from "../buttons"
+import { debounce } from "../../shared/debounce"
+import { useDidMountEffect } from "../../hooks"
 import * as Styled from "./styles"
 
 export const PosterCarousel: FunctionComponent<PosterCarouselProps> = ({
@@ -57,13 +59,40 @@ export const PosterCarousel: FunctionComponent<PosterCarouselProps> = ({
         })
     }
 
+    const onScrollMobile = useCallback(() => debounce(() => {
+        if(!carouselRef.current) return
+
+        const { scrollLeft, clientWidth, scrollWidth } = carouselRef.current
+        const scrollOnEnd = scrollLeft + clientWidth >= scrollWidth - 2
+        const scrollOnStart = scrollLeft === 0
+
+        if(scrollOnEnd){
+            setCanGoAhead(false)
+            setCanGoBack(true)
+        }
+        else if(scrollOnStart){
+            setCanGoBack(false)
+            setCanGoAhead(true)
+        }
+        else {
+            setCanGoBack(true)
+            setCanGoAhead(true)
+        }
+    }, 50, posters[0].id), [carouselRef])
+
+    useDidMountEffect(() => {
+        window.addEventListener("resize", () => {
+            debounce(onScrollMobile, 50, "id")
+        })
+    }, [onScrollMobile])
+
     return (
         <Styled.Component>
             <TriangleNextButton
                 onClick={handleClickGoBack}
                 disabled={!canGoBack}
             />
-            <Styled.Carousel ref={carouselRef} id="aaa">
+            <Styled.Carousel ref={carouselRef} onScroll={onScrollMobile}>
                 {posters.map(poster => <Poster {...poster} key={poster.id}/>)}
             </Styled.Carousel>
             <TriangleNextButton

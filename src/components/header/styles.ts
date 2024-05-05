@@ -22,6 +22,10 @@ const adaptativeCSS = css`
             &::after{ content: "C"; }
         }
     }
+
+    @media(max-width: 440px){
+        padding: 24px;
+    }
 `
 
 export const Component = styled.header.attrs((props: any)=> ({

@@ -60,21 +60,21 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
                 buttonText="See All Animes"
                 buttonAction={() => undefined}
             />}
-            <Line />
+            <Line className="can-hide"/>
             {!loadingData && <PosterList
                 titleText="Movies"
                 posters={postersMovieMediaList}
                 buttonText="See All Movies"
                 buttonAction={() => undefined}
             />}
-            <Line />
+            <Line className="can-hide"/>
             {!loadingData && <PosterList
                 titleText="Series"
                 posters={postersSerieMediaList}
                 buttonText="See All Series"
                 buttonAction={() => undefined}
             />}
-            <Line />
+            <Line className="can-hide"/>
             <Footer />
         </Styled.Home>
     )

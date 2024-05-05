@@ -8,13 +8,17 @@ export const Component = styled.div.attrs({
     padding: 30px 45px;
 `
 
-export const TopSection = styled.div`
+export const TopSection = styled.div.attrs({
+    className: "poster-list-top-section"
+})`
     display: flex;
     justify-content: space-between;
     padding: 0px 14px;
 `
 
-export const Title = styled.h2`
+export const Title = styled.h2.attrs({
+    className:"title-poster-list"
+})`
     font-weight: normal;
     color: #F1F1F1;
 `

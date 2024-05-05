@@ -10,7 +10,7 @@ export const UserMenu: FunctionComponent<UserMenuProps> = ({
 }) => {
     return (
         <Styles.Component {...rest}>
-            <Styles.UserName> user-lorem </Styles.UserName>
+            <Styles.UserName> Gally </Styles.UserName>
             <UserIco />
         </Styles.Component>
     )

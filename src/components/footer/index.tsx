@@ -9,6 +9,7 @@ export const Footer: FunctionComponent = () => (
         <Styled.InfoLink
             href="https://www.instagram.com/umcicero/"
             target="_blank"
+            rel="preload"
         >
             <StaticImage
                 className="logo-img"
@@ -20,6 +21,7 @@ export const Footer: FunctionComponent = () => (
         <Styled.InfoLink
             href="https://www.gatsbyjs.com"
             target="_blank"
+            rel="preload"
         >
             <StaticImage
                 className="logo-img"

@@ -6,16 +6,19 @@ export const Button = styled.button.attrs({
     cursor: pointer;
     display: flex;
     align-items: center;
+    position: relative;
     border: 1px solid #8D8D8D;
     border-radius: 2px;
-    padding: 5px 10px 6px 13px;
+    padding: 5px 37px 6px 13px;
     font-size: 19px;
-    color: #dcdcdc;
     color: #cccccc;
     transition: 100ms linear;
+    white-space: nowrap;
+    overflow: hidden;
 
     .triangle-see-all {
-        margin-left: 6px;
+        position: absolute;
+        right: 8px;
     }
 
     svg path{
@@ -24,7 +27,6 @@ export const Button = styled.button.attrs({
 
     &:hover{
         border-color: #cccccc;
-        color: #cccccc;
 
         svg path{
             stroke: #cccccc;

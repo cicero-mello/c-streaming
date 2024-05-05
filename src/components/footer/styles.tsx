@@ -9,9 +9,12 @@ export const Component = styled.footer`
     .footer-info:first-child{
         margin-bottom: 10px;
 
-        .footer-link::before{
-            width: 48px;
-            margin-left: 10px;
+        .footer-link {
+            margin-bottom: 1px;
+            &::before{
+                width: 48px;
+                margin-left: 10px;
+            }
         }
     }
 `
@@ -26,8 +29,9 @@ export const InfoLink = styled.a.attrs({
     text-decoration: none;
 
     .logo-img{
+        width: 22px;
         filter: grayscale(1);
-        margin-right: 3px;
+        margin-right: 4px;
         transition: 100ms linear;
     }
 
