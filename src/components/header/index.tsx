@@ -16,6 +16,8 @@ export const Header: FunctionComponent<HeaderProps> = ({ path }) => {
         //navigate(PATHS.USER)
     }
 
+    console.log(`Path: ${path}`)
+
     return (
         <Styled.Component $borderButtonDisabled={path === PATHS.HOME}>
             <HeaderButton

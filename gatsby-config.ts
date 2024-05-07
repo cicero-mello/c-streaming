@@ -28,6 +28,12 @@ const config: GatsbyConfig = {
             path: "./src/assets/images/media/poster/",
             name: "poster-images"
         },
+    },
+    {
+        resolve: 'gatsby-plugin-manifest',
+        options: {
+          icon: 'src/assets/favicon.svg',
+        },
     }
 ]
 }

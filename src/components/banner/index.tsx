@@ -55,7 +55,7 @@ export const Banner: FunctionComponent<BannerProps> = (newMedia) => {
                     />
                     <ColorButton
                         onClick={onClickColorButton}
-                        text={"See More"}
+                        text="Play"
                     />
                 </Styled.ButtonsWrapper>
             </Styled.InfoAndButtons>

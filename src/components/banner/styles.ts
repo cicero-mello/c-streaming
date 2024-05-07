@@ -80,4 +80,8 @@ export const ButtonsWrapper = styled.div.attrs({
     :first-child{
         margin: 0px 18px 4px 18px;
     }
+
+    :last-child{
+        padding: 6px 42px;
+    }
 `

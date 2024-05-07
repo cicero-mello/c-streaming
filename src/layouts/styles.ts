@@ -14,6 +14,12 @@ export const GlobalStyle = createGlobalStyle`
             color: white;
             font-family: "Arsenal", math;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-drag: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         button {
