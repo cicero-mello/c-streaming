@@ -6,13 +6,14 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0px;
         padding: 0px;
         background-color: #090909;
+        overflow-y:scroll ;
 
         * {
             box-sizing: border-box ;
             margin: 0px;
             padding: 0px;
             color: white;
-            font-family: "Arsenal", math;
+            font-family: "Arsenal";
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             -webkit-user-drag: none;
@@ -44,6 +45,7 @@ export const GlobalStyle = createGlobalStyle`
 
 
 export const Layout = styled.div.attrs({ className: "layout" })`
-
+    position: relative;
+    height: 100%;
 `
 

@@ -82,6 +82,6 @@ export const ButtonsWrapper = styled.div.attrs({
     }
 
     :last-child{
-        padding: 6px 42px;
+        padding: 6px 26px;
     }
 `

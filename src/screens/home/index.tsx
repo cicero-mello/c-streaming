@@ -1,19 +1,20 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { HomeProps } from "./type"
+import { useNavigation } from "../../hooks"
 import {
-    BannerProps, BannerList, Line, SearchInput, PosterList, PosterProps, PageLoader,
+    BannerProps, BannerList, Line, SearchInput, PosterList, PosterProps,
     Footer
 } from "../../components"
 import * as core from "./core"
 import * as Styled from "./styles"
 
 export const Home: FunctionComponent<HomeProps> = ({ data }) => {
+    const { showScreen } = useNavigation()
     const [bannersMediaList, setBannersMediaList] = useState<BannerProps[]>([])
     const [postersAnimeMediaList, setPostersAnimeMediaList] = useState<PosterProps[]>([])
     const [postersSerieMediaList, setPostersSerieMediaList] = useState<PosterProps[]>([])
     const [postersMovieMediaList, setPostersMovieMediaList] = useState<PosterProps[]>([])
     const [loadingData, setLoadingData] = useState<boolean>(true)
-    const [freePointerEvents, setFreePointerEvents] = useState<boolean>(false)
 
     useEffect(() => {
         const bannerGatsbyImages = core.getBannerGatsbyImages(data)
@@ -41,15 +42,12 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
             setPostersMovieMediaList(posterMediaMovie)
 
             setLoadingData(false)
-            setTimeout(() => {
-                setFreePointerEvents(true)
-            }, 300)
+            showScreen()
         }
     }, [data])
 
     return (
-        <Styled.Home $freePointerEvents={freePointerEvents}>
-            <PageLoader $loading={loadingData}/>
+        <Styled.Home>
             {!loadingData && <BannerList banners={bannersMediaList} />}
             <Line id="first-line-home"/>
             <SearchInput onSearch={(inputValue) => console.log(inputValue)}/>

@@ -2,9 +2,9 @@ import React, { FunctionComponent } from "react"
 import type { HeadFC, PageProps } from "gatsby"
 import * as Screens from "../screens"
 
-const SerieOrAnimePage: FunctionComponent<PageProps> = (props) => (
-    <Screens.SerieOrAnime {...props} />
+const SeriesPage: FunctionComponent<PageProps> = (props) => (
+    <Screens.Series {...props} />
 )
 
-export default SerieOrAnimePage
+export default SeriesPage
 export const Head: HeadFC = () => <title>C-Streaming: Serie/Anime</title>

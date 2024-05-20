@@ -1,14 +1,22 @@
 import React, { FunctionComponent } from "react"
 import { PosterProps } from "./types"
-import * as Styled from "./styles"
 import { GatsbyImage } from "gatsby-plugin-image"
+import { useNavigation } from "../../hooks"
+import { PATHS } from "../../paths"
+import * as Styled from "./styles"
 
 export const Poster: FunctionComponent<PosterProps> = ({
-    id, name, image
+    id, name, image, type
 }) => {
+    const { navigate } = useNavigation()
+
+    const handleClick = () => {
+        if(type === "movie") navigate(PATHS.MOVIE + `?id=${id}`)
+        else navigate(PATHS.SERIES + `?id=${id}`)
+    }
 
     return (
-        <Styled.Component>
+        <Styled.Component onClick={handleClick}>
             <GatsbyImage
                 className="gatsby-image"
                 image={image}

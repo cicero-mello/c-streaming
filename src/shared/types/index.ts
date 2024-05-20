@@ -13,3 +13,7 @@ export interface Media {
 export interface MediaWithGatsbyImage extends Omit<Media, "imageName">{
     image?: IGatsbyImageData
 }
+
+export interface URLParams {
+    id?: string
+}

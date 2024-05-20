@@ -43,6 +43,7 @@ export const createPosterMedia = (
         return {
             id: posterMedia.id,
             name: posterMedia.name,
+            type: posterMedia.type,
             image: gatsbyImage
         }
     })

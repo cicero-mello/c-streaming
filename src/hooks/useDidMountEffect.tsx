@@ -7,7 +7,7 @@ export const useDidMountEffect = (
     const didMount = useRef(false)
 
     useEffect(() => {
-        if (didMount.current) func();
-        else didMount.current = true;
+        if (didMount.current) func()
+        else didMount.current = true
     }, deps)
 }
