@@ -1,20 +1,41 @@
-import React, { FunctionComponent, useEffect } from "react"
+import React, { FunctionComponent, useCallback, useEffect, useState } from "react"
 import { type PageProps } from "gatsby"
 import { useNavigation } from "../../hooks"
+import { FakeVideo, FakeVideoProps } from "../../components"
+import { IGatsbyImageData } from "gatsby-plugin-image"
+import * as media from "../../shared/media"
 import * as S from "./styles"
-import { FakeVideo } from "../../components"
 
 export const Movie: FunctionComponent<PageProps> = ({
     data
 }) => {
     const { getUrlParams, showScreen } = useNavigation()
+    const [fakeVideoProps, setFakeVideoProps] = useState<FakeVideoProps>()
+    // const [suggestionsMedias, setSuggestionsMedias] = useState()
 
+    const updateFakeVideoProps = useCallback((data: any) => {
+        const allBannerMediasFromQuery = media.getBannerGatsbyImages(data)
+        if(allBannerMediasFromQuery.length <= 0) return
+
+        const fakeVideoMideaFromMock = media.getMediaById(getUrlParams().id ?? "")
+        const mediaToFakeVideo = allBannerMediasFromQuery.find(
+            media => media.name === fakeVideoMideaFromMock?.imageName
+        )
+
+        if(!mediaToFakeVideo || !fakeVideoMideaFromMock) return
+        setFakeVideoProps({
+            thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
+            imageName: fakeVideoMideaFromMock.imageName,
+            onClickWatch: () => {}
+        })
+    }, [])
+
+    useEffect(() => { updateFakeVideoProps(data) }, [data])
     useEffect(() => { showScreen() }, [])
 
     return (
         <S.Component>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, fuga culpa aliquam fugit voluptates sint repellat error ut provident corporis quos? Necessitatibus accusamus eius voluptatibus quam suscipit nulla dignissimos qui.
-            {/* <FakeVideo thumbImage={}/> */}
+            {fakeVideoProps && <FakeVideo {...fakeVideoProps}/>}
         </S.Component>
     )
 }

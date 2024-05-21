@@ -17,3 +17,11 @@ export interface MediaWithGatsbyImage extends Omit<Media, "imageName">{
 export interface URLParams {
     id?: string
 }
+
+export interface QueryGatsbyImages {
+    id: string
+    name: string
+    childImageSharp: {
+        gatsbyImageData: IGatsbyImageData | undefined
+    }
+}

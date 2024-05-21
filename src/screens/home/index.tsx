@@ -5,7 +5,7 @@ import {
     BannerProps, BannerList, Line, SearchInput, PosterList, PosterProps,
     Footer
 } from "../../components"
-import * as core from "./core"
+import * as media from "../../shared/media"
 import * as Styled from "./styles"
 
 export const Home: FunctionComponent<HomeProps> = ({ data }) => {
@@ -17,16 +17,16 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
     const [loadingData, setLoadingData] = useState<boolean>(true)
 
     useEffect(() => {
-        const bannerGatsbyImages = core.getBannerGatsbyImages(data)
+        const bannerGatsbyImages = media.getBannerGatsbyImages(data)
         if(bannerGatsbyImages.length <= 0) return
 
-        const posterGatsbyImages = core.getPosterGatsbyImages(data)
+        const posterGatsbyImages = media.getPosterGatsbyImages(data)
         if(posterGatsbyImages.length <= 0) return
 
-        const bannerMedia = core.createBannerMedia(bannerGatsbyImages)
-        const posterMediaAnime = core.createPosterMedia("anime", posterGatsbyImages)
-        const posterMediaMovie = core.createPosterMedia("movie", posterGatsbyImages)
-        const posterMediaSerie = core.createPosterMedia("serie", posterGatsbyImages)
+        const bannerMedia = media.createBannerMedia(bannerGatsbyImages)
+        const posterMediaAnime = media.createPosterMedia("anime", posterGatsbyImages)
+        const posterMediaMovie = media.createPosterMedia("movie", posterGatsbyImages)
+        const posterMediaSerie = media.createPosterMedia("serie", posterGatsbyImages)
 
         const haveAllData = (
             bannerMedia.length > 0
