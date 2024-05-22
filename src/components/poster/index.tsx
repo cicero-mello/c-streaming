@@ -20,7 +20,7 @@ export const Poster: FunctionComponent<PosterProps> = ({
             <GatsbyImage
                 className="gatsby-image"
                 image={image}
-                alt={name}
+                alt={"Poster of " + name}
             />
             <Styled.Name> {name} </Styled.Name>
         </Styled.Component>

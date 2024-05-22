@@ -1,13 +1,14 @@
 import styled, { css } from "styled-components"
 
 export const Button = styled.button.attrs((props: any)=> ({
-    className: "header-buttom",
+    className: "watch-later-button",
     $alreadySaveToWatch: props.$alreadySaveToWatch || false
 }))<{ $alreadySaveToWatch: boolean }>`
     outline: none;
     height: min-content;
     position: relative;
     cursor: pointer;
+    width: fit-content;
     white-space: nowrap;
     padding: 6px 12px;
     line-height: 15px;
@@ -31,6 +32,7 @@ export const Button = styled.button.attrs((props: any)=> ({
     &::before{
         content: "";
         opacity: 0%;
+        overflow: hidden;
         position: absolute;
         transform: rotate(45deg);
         width: 10px;

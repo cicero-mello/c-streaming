@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from "react"
 import { type PageProps } from "gatsby"
 import { useNavigation } from "../../hooks"
-import { FakeVideo, FakeVideoProps } from "../../components"
+import { FakeVideo, Line, WatchLatterButton } from "../../components"
 import { IGatsbyImageData } from "gatsby-plugin-image"
+import { PageMediaProps } from "./types"
 import * as media from "../../shared/media"
 import * as S from "./styles"
 
@@ -10,8 +11,7 @@ export const Movie: FunctionComponent<PageProps> = ({
     data
 }) => {
     const { getUrlParams, showScreen } = useNavigation()
-    const [fakeVideoProps, setFakeVideoProps] = useState<FakeVideoProps>()
-    // const [suggestionsMedias, setSuggestionsMedias] = useState()
+    const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
     const updateFakeVideoProps = useCallback((data: any) => {
         const allBannerMediasFromQuery = media.getBannerGatsbyImages(data)
@@ -23,10 +23,15 @@ export const Movie: FunctionComponent<PageProps> = ({
         )
 
         if(!mediaToFakeVideo || !fakeVideoMideaFromMock) return
-        setFakeVideoProps({
-            thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
-            imageName: fakeVideoMideaFromMock.imageName,
-            onClickWatch: () => {}
+        setPageMedia({
+            fakeVideo: {
+                thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
+                imageName: fakeVideoMideaFromMock.imageName,
+                onClickWatch: () => {}
+            },
+            mediaTitle: fakeVideoMideaFromMock.name,
+            sinopsys: fakeVideoMideaFromMock.synopsis,
+            id: fakeVideoMideaFromMock.id
         })
     }, [])
 
@@ -35,7 +40,17 @@ export const Movie: FunctionComponent<PageProps> = ({
 
     return (
         <S.Component>
-            {fakeVideoProps && <FakeVideo {...fakeVideoProps}/>}
+            {pageMedia && <>
+                <S.FirstSection>
+                    <FakeVideo {...pageMedia.fakeVideo} />
+                    <S.RightSide>
+                        <S.MediaTitle> {pageMedia.mediaTitle} </S.MediaTitle>
+                        <WatchLatterButton mediaId={pageMedia.id} />
+                        <S.Sinopsys> {pageMedia.sinopsys} </S.Sinopsys>
+                    </S.RightSide>
+                </S.FirstSection>
+                <Line />
+            </>}
         </S.Component>
     )
 }

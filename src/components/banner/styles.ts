@@ -47,7 +47,7 @@ export const InfoWrapper = styled.div.attrs({
     transition: 340ms ease-in-out;
 `
 
-export const MediaName = styled.h5`
+export const MediaName = styled.h1`
     max-width: 85%;
     font-weight: normal;
     white-space: nowrap;

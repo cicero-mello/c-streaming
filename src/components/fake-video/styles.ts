@@ -8,8 +8,7 @@ export const Component = styled.div.attrs((props: any) => ({
     justify-content: center;
     align-items: center;
     position: relative;
-    max-width: 610px;
-    max-height: 344px;
+    
     border: 1px solid #9d9d9d;
     overflow: hidden;
 
@@ -62,5 +61,9 @@ export const PlayButton = styled.button.attrs({
 
     svg{
         margin-left: 5px;
+    }
+
+    &:hover{
+        
     }
 `
