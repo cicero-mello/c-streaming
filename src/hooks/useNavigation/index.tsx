@@ -1,10 +1,13 @@
 import React, {
-    FunctionComponent, createContext, useContext, useEffect, useRef
+    FunctionComponent, createContext,
+    useContext, useEffect, useRef
 } from "react"
 import { NavigationContextProps } from "./types"
 import { navigate } from "gatsby"
 import { URLParams } from "../../shared/types"
-import { PageTransition } from "../../components"
+import { Header } from "../../components"
+import { PageTransition } from "./styles"
+import { PATHS } from "../../paths"
 
 const NavigationContext = createContext<NavigationContextProps>({
     navigate: () => {},
@@ -15,28 +18,28 @@ const NavigationContext = createContext<NavigationContextProps>({
 export const useNavigation = () => useContext(NavigationContext)
 
 export const NavigationProvider: FunctionComponent<any> = ({
-    children
+    children, path
 }) => {
     const transitionRef = useRef<HTMLDivElement>(null)
 
     const customNavigate = (path: string) => {
-        setTimeout(() => { navigate(path) }, 50)
+        if(!transitionRef.current) return
+        transitionRef.current.style.opacity = "0%"
+        transitionRef.current.style.pointerEvents = "none"
 
+        setTimeout(() => { navigate(path) }, 180)
+    }
+
+    const showScreen = () => {
         if(!transitionRef.current) return
         transitionRef.current.style.opacity = "100%"
         transitionRef.current.style.pointerEvents = "unset"
     }
 
-    const showScreen = () => {
-        if(!transitionRef.current) return
-        transitionRef.current.style.opacity = "0%"
-        transitionRef.current.style.pointerEvents = "none"
-    }
-
     useEffect(() => {
         setTimeout(() => {
             if(!transitionRef.current) return
-            transitionRef.current.style.transition = "100ms linear"
+            transitionRef.current.style.transition = "180ms linear"
         }, 400)
     }, [])
 
@@ -52,8 +55,10 @@ export const NavigationProvider: FunctionComponent<any> = ({
                 showScreen: showScreen
             }}
         >
-            <PageTransition ref={transitionRef} />
-            {children}
+            <Header path={path as PATHS}/>
+            <PageTransition ref={transitionRef}>
+                {children}
+            </PageTransition>
         </NavigationContext.Provider>
     )
 }

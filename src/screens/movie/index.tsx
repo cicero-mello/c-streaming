@@ -40,8 +40,10 @@ export const Movie: FunctionComponent<PageProps> = ({
         })
     }, [])
 
-    useEffect(() => { updateFakeVideoProps(data) }, [data])
-    useEffect(() => { showScreen() }, [])
+    useEffect(() => {
+        updateFakeVideoProps(data),
+        showScreen()
+    }, [data])
 
     return (
         <S.Component>

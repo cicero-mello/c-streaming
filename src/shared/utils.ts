@@ -2,7 +2,7 @@ interface TimeOut { [key: string]: NodeJS.Timeout | number }
 const timeOut: TimeOut = {}
 
 /**
-     * Call a function after it stops repeating at a specified time. 
+     * Call a function after it stops repeating at a specified time.
      *
      * @param fn Function to be called.
      * @param time One replay wait time.
@@ -26,7 +26,6 @@ export const shuffle = (array: any[]): any[] => {
         )
 
         newArray.push(oldArray[randomIndexItemOfOldArray])
-
         oldArray.splice(randomIndexItemOfOldArray, 1)
     }
 

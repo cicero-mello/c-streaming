@@ -80,6 +80,7 @@ export const createSuggestionMedias = (
         return {
             id: mockData?.id ?? "",
             mediaName: mockData?.name ?? "",
+            type: mockData?.type ?? "movie",
             bannerImage:
                 bannerMedia.childImageSharp.gatsbyImageData as IGatsbyImageData
         }

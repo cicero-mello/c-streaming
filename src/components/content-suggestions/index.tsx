@@ -1,46 +1,87 @@
 import React, { FC, useState } from "react"
-import { ContentSuggestionsProps, CurrentSuggestionState } from "./types"
+import { ContentSuggestionsProps,
+    CurrentSuggestionState, OnTransitionState
+} from "./types"
 import { SuggestionTriangles } from "../../assets/icons"
 import { GatsbyImage } from "gatsby-plugin-image"
+import { useNavigation } from "../../hooks"
+import { PATHS } from "../../paths"
 import * as S from "./styles"
 
 export const ContentSuggestions: FC<ContentSuggestionsProps> = ({
     suggestionMedias
 }) => {
+    const { navigate } = useNavigation()
+    const [freePointerEvents, setFreePointerEvents] = useState(true)
+    const [onTransition, setOnTransition] = useState<OnTransitionState>("next-none")
     const [currentSuggestion, setCurrentSuggestion] = useState<CurrentSuggestionState>({
         item: suggestionMedias[0],
         index: 0
     })
     const { bannerImage, mediaName, id } = currentSuggestion.item
 
-    const nextSuggestion = () => {
+    const selectNextSuggestion = () => {
         if(currentSuggestion.index + 1 < suggestionMedias.length) {
             setCurrentSuggestion((old) => ({
                 item: suggestionMedias[old.index + 1],
                 index: old.index + 1
             }))
-            return
         }
-
-        setCurrentSuggestion({
+        else setCurrentSuggestion({
             item: suggestionMedias[0],
             index: 0
         })
     }
 
-    const previusSuggestion = () => {
+    const selectPreviusSuggestion = () => {
         if(currentSuggestion.index - 1 >= 0) {
             setCurrentSuggestion((old) => ({
                 item: suggestionMedias[old.index - 1],
                 index: old.index - 1
             }))
-            return
         }
-
-        setCurrentSuggestion({
+        else setCurrentSuggestion({
             item: suggestionMedias[suggestionMedias.length - 1],
             index: suggestionMedias.length - 1
         })
+    }
+
+    const handleClickNextSuggestion = () => {
+        if(!freePointerEvents) return
+
+        setOnTransition("next")
+        setFreePointerEvents(false)
+
+        setTimeout(() => {
+            selectNextSuggestion()
+            setOnTransition("next-none")
+            setTimeout(() => setFreePointerEvents(true), 330)
+        }, 360)
+
+    }
+
+    const handleClickPreviusSuggestion = () => {
+        if(!freePointerEvents) return
+
+        setOnTransition("previus")
+        setFreePointerEvents(false)
+
+        setTimeout(() => {
+            selectPreviusSuggestion()
+            setOnTransition("previus-none")
+            setTimeout(() => setFreePointerEvents(true), 330)
+        }, 360)
+    }
+
+    const goToNewMedia = () => {
+        if(!freePointerEvents) return
+
+        if(currentSuggestion.item.type === "movie"){
+            navigate(PATHS.MOVIE + `?id=${id}`)
+        }
+        else navigate(PATHS.SERIES + `?id=${id}`)
+
+        setTimeout(() => { handleClickNextSuggestion() }, 100)
     }
 
     return(
@@ -50,13 +91,23 @@ export const ContentSuggestions: FC<ContentSuggestionsProps> = ({
                 Why not try...
             </S.Text>
             <S.SuggestionsWrapper>
-                <S.Button onClick={previusSuggestion}>
+                <S.Button onClick={handleClickPreviusSuggestion}>
                     <SuggestionTriangles />
                 </S.Button>
-                <S.ImageWrapper>
-                    <GatsbyImage image={bannerImage} alt={`Image of ${mediaName}`}/>
+                <S.ImageWrapper
+                    onClick={goToNewMedia}
+                    $onTransition={onTransition}
+                    $freePointerEvents={freePointerEvents}
+                >
+                    <GatsbyImage
+                        image={bannerImage}
+                        alt={`Image of ${mediaName}`}
+                    />
+                    <S.SuggestionMediaName>
+                        {mediaName}
+                    </S.SuggestionMediaName>
                 </S.ImageWrapper>
-                <S.Button onClick={nextSuggestion}>
+                <S.Button onClick={handleClickNextSuggestion}>
                     <SuggestionTriangles />
                 </S.Button>
             </S.SuggestionsWrapper>

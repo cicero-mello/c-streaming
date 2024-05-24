@@ -36,6 +36,7 @@ export const FirstSection = styled.section`
     }
 
     @media (max-width: 600px){
+        padding: 24px 24px;
         .sinopsys{
             font-size: 18px;
         }
@@ -79,7 +80,22 @@ export const Sinopsys = styled.p.attrs({
 
 export const SecondSection = styled.section`
     display: flex;
-    padding: 24px 48px;
-    margin-top: 60px;
+    padding: 53px 48px 78px 48px;
     justify-content: center;
+    opacity: 25%;
+    height: 100%;
+    transition: opacity 200ms linear;
+
+    &:hover{
+        opacity: 100%;
+    }
+
+    @media(max-width: 1100px){
+        opacity: 100%;
+        padding-top: 32px;
+    }
+
+    @media(max-width: 600px){
+        padding: 32px 24px 78px 24px;
+    }
 `

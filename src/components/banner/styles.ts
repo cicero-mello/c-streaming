@@ -27,7 +27,6 @@ export const Component = styled.div.attrs((props: any) => ({
             margin-right: 337.6px;
         }
     `}
-
 `
 
 export const InfoAndButtons = styled.div`
@@ -77,11 +76,6 @@ export const ButtonsWrapper = styled.div.attrs({
     transition: 340ms ease-in-out;
     opacity: 100%;
 
-    :first-child{
-        margin: 0px 18px 4px 18px;
-    }
-
-    :last-child{
-        padding: 6px 26px;
-    }
+    :first-child{ margin: 0px 18px 4px 18px; }
+    :last-child{ padding: 6px 26px; }
 `
