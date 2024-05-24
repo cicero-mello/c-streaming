@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from "react"
 import { type PageProps } from "gatsby"
 import { useNavigation } from "../../hooks"
-import { FakeVideo, Line, WatchLatterButton } from "../../components"
+import { ContentSuggestions, FakeVideo, Line, WatchLatterButton } from "../../components"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import { PageMediaProps } from "./types"
 import * as media from "../../shared/media"
@@ -22,6 +22,10 @@ export const Movie: FunctionComponent<PageProps> = ({
             media => media.name === fakeVideoMideaFromMock?.imageName
         )
 
+        const suggestionMedias = media.createSuggestionMedias(
+            allBannerMediasFromQuery, fakeVideoMideaFromMock?.id ?? ""
+        )
+
         if(!mediaToFakeVideo || !fakeVideoMideaFromMock) return
         setPageMedia({
             fakeVideo: {
@@ -31,7 +35,8 @@ export const Movie: FunctionComponent<PageProps> = ({
             },
             mediaTitle: fakeVideoMideaFromMock.name,
             sinopsys: fakeVideoMideaFromMock.synopsis,
-            id: fakeVideoMideaFromMock.id
+            id: fakeVideoMideaFromMock.id,
+            suggestionMedias: suggestionMedias
         })
     }, [])
 
@@ -50,6 +55,9 @@ export const Movie: FunctionComponent<PageProps> = ({
                     </S.RightSide>
                 </S.FirstSection>
                 <Line />
+                <S.SecondSection>
+                    <ContentSuggestions suggestionMedias={pageMedia.suggestionMedias}/>
+                </S.SecondSection>
             </>}
         </S.Component>
     )

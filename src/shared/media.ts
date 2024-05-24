@@ -1,9 +1,10 @@
-import { getImage } from "gatsby-plugin-image"
+import { IGatsbyImageData, getImage } from "gatsby-plugin-image"
 import { BannerProps } from "../components/banner/types"
 import { QueryGatsbyImages } from "./types"
 import { mock } from "../assets/media-mock"
 import { MediaType } from "../shared/types"
-import { PosterProps } from "../components"
+import { PosterProps, SuggestionMedias } from "../components"
+import { shuffle } from "./utils"
 
 export const createBannerMedia = (
     bannerGastbyImages: QueryGatsbyImages[]
@@ -66,3 +67,29 @@ export const getPosterGatsbyImages = (data: any):QueryGatsbyImages[] => (
 export const getMediaById = (id: string) => mock.medias.find(
     (media) => media?.id === id
 )
+
+export const createSuggestionMedias = (
+    bannerMedias: QueryGatsbyImages[],
+    mediaExceptionId: string
+):SuggestionMedias[] => {
+    const suggestionMedias:SuggestionMedias[] = bannerMedias.map(bannerMedia => {
+        const mockData = mock.medias.find((media) => (
+            media.imageName === bannerMedia.name
+        ))
+
+        return {
+            id: mockData?.id ?? "",
+            mediaName: mockData?.name ?? "",
+            bannerImage:
+                bannerMedia.childImageSharp.gatsbyImageData as IGatsbyImageData
+        }
+    })
+
+    const indexItemToRemove = suggestionMedias.findIndex(media => (
+        media.id === mediaExceptionId
+    ))
+
+    suggestionMedias.splice(indexItemToRemove, 1)
+
+    return shuffle(suggestionMedias)
+}

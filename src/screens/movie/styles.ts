@@ -76,3 +76,10 @@ export const Sinopsys = styled.p.attrs({
     font-size: 23px;
     max-width: 573px;
 `
+
+export const SecondSection = styled.section`
+    display: flex;
+    padding: 24px 48px;
+    margin-top: 60px;
+    justify-content: center;
+`
