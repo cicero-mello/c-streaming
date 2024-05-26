@@ -14,15 +14,18 @@ export const FakeVideo: FunctionComponent<FakeVideoProps> = ({
     const handleClick = () => {
         if(onClickWatch) onClickWatch()
 
-        setShowVideo(true)
+        videoRef?.current?.load()
         videoRef?.current?.play()
+        setShowVideo(true)
     }
 
     return(
         <S.Component $showVideo={showVideo}>
-            <S.Video controls ref={videoRef}>
-                <source src={videoMock} type="video/mp4"/>
-            </S.Video>
+            <S.VideoContainerProportion>
+                <S.Video controls ref={videoRef} preload="none">
+                    <source src={videoMock} type="video/mp4" />
+                </S.Video>
+            </S.VideoContainerProportion>
             <S.PlayButton onClick={handleClick}>
                 <PlayTriangle />
             </S.PlayButton>
