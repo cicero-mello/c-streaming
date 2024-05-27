@@ -13,7 +13,7 @@ export const Movie: FunctionComponent<PageProps> = ({
     const { getUrlParams, showScreen } = useNavigation()
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
-    const updateFakeVideoProps = useCallback((data: any) => {
+    const updatePageMedia = useCallback((data: any) => {
         const allBannerMediasFromQuery = media.getBannerGatsbyImages(data)
         if(allBannerMediasFromQuery.length <= 0) return
 
@@ -30,8 +30,7 @@ export const Movie: FunctionComponent<PageProps> = ({
         setPageMedia({
             fakeVideo: {
                 thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
-                imageName: fakeVideoMideaFromMock.imageName,
-                onClickWatch: () => {}
+                imageName: fakeVideoMideaFromMock.imageName
             },
             mediaTitle: fakeVideoMideaFromMock.name,
             sinopsys: fakeVideoMideaFromMock.synopsis,
@@ -41,7 +40,7 @@ export const Movie: FunctionComponent<PageProps> = ({
     }, [])
 
     useEffect(() => {
-        updateFakeVideoProps(data),
+        updatePageMedia(data)
         showScreen()
     }, [data])
 
