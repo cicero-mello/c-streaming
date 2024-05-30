@@ -6,14 +6,17 @@ import * as S from "./styles"
 
 export const EpisodeCard: FC<EpisodeCardProps> = ({
     onClick, text, thumbImage, altImage, wasWatched,
-    season, episode
+    season, episode, topText
 }) => (
-    <S.Component onClick={onClick} $wasWatched={wasWatched}>
-        <GatsbyImage image={thumbImage} alt={altImage}/>
-        <Wrapper $direction="column">
-            <S.Title $season={season} $episode={episode} />
-            <S.Text> {text} </S.Text>
-        </Wrapper>
-        <S.WasWatchedIcon $wasWatched={wasWatched}/>
+    <S.Component>
+        {topText && <S.TopText> {topText} </S.TopText>}
+        <S.Card onClick={onClick} $wasWatched={wasWatched}>
+            <GatsbyImage image={thumbImage} alt={altImage}/>
+            <Wrapper $direction="column">
+                <S.Title $season={season} $episode={episode} />
+                <S.Text> {text} </S.Text>
+            </Wrapper>
+            <S.WasWatchedIcon $wasWatched={wasWatched}/>
+        </S.Card>
     </S.Component>
 )

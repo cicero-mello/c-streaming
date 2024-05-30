@@ -8,4 +8,5 @@ export interface EpisodeCardProps {
     episode: number
     text: string
     wasWatched?: boolean
+    topText?: string
 }

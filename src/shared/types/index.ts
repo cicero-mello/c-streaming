@@ -16,6 +16,8 @@ export interface MediaWithGatsbyImage extends Omit<Media, "imageName">{
 
 export interface URLParams {
     id?: string
+    season?: number
+    ep?: number
 }
 
 export interface QueryGatsbyImages {

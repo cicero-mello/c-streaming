@@ -37,6 +37,7 @@ export const InfoAndButtons = styled.div`
     min-width: 100px;
     padding: 44px 49.6px 29px 49.6px;
     margin-left: 20px;
+    overflow: hidden;
 `
 
 export const InfoWrapper = styled.div.attrs({

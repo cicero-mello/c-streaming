@@ -60,14 +60,18 @@ export const PlayButton = styled.button.attrs({
 })`
     height: 94px;
     width: 94px;
-    background-color: #080808;
+    background-color: rgba(8,8,8, 0.7);
     position: absolute;
     border-radius: 31px;
-    opacity: 100%;
     cursor: pointer;
     z-index: 1;
+    transition: 80ms linear;
 
     svg{
         margin-left: 5px;
+    }
+
+    &:hover{
+        background-color: rgba(8,8,8, 0.9);
     }
 `

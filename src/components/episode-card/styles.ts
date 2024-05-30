@@ -1,7 +1,23 @@
 import styled, { css } from "styled-components"
 
-export const Component = styled.div.attrs((props: any) => ({
-    className: "episode-card",
+export const Component = styled.div.attrs({
+    className: "episode-card"
+})`
+    display: flex;
+    flex-direction:column ;
+    width: 100%;
+    max-width: 359px;
+`
+
+export const TopText = styled.h5`
+    font-weight: normal;
+    margin: 0px 9px 9px 9px;
+    color: #EDEDED;
+    font-size: 20px;
+`
+
+export const Card = styled.div.attrs((props: any) => ({
+    className: "card",
     $wasWatched: !!props?.$wasWatched
 }))<{ $wasWatched?: boolean }>`
     display: flex;
@@ -84,7 +100,9 @@ export const Title = styled.p.attrs((props: any) => ({
     }
 `
 
-export const Text = styled.p`
+export const Text = styled.p.attrs({
+    className: "episode-card-text"
+})`
     transition: 100ms linear;
     max-width: 180px;
     margin-top: 2px;

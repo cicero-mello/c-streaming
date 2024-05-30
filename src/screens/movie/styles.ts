@@ -10,11 +10,12 @@ export const Component = styled.div.attrs({
 export const FirstSection = styled.section`
     display: flex;
     padding: 24px 48px;
-    margin: 37px 0px 80px 0px;
+    margin-bottom: 50px;
 
     .fake-video{
         height: fit-content;
         max-width: 55%;
+        max-width: 60%;
         min-width: 640px;
     }
 
@@ -40,7 +41,7 @@ export const FirstSection = styled.section`
         .sinopsys{
             font-size: 18px;
         }
-        .media-title{
+        .media-title > .title{
             font-size: 32px;
             margin-left: 0px;
         }
@@ -76,6 +77,7 @@ export const Sinopsys = styled.p.attrs({
     color: #8D8D8D;
     font-size: 23px;
     max-width: 573px;
+    text-align: justify;
 `
 
 export const SecondSection = styled.section`
