@@ -20,6 +20,12 @@ export interface URLParams {
     ep?: number
 }
 
+export interface URLParamsAllString {
+    id?: string
+    season?: string
+    ep?: string
+}
+
 export interface QueryGatsbyImages {
     id: string
     name: string

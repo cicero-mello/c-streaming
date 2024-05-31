@@ -77,9 +77,9 @@ export const ContentSuggestions: FC<ContentSuggestionsProps> = ({
         if(!freePointerEvents) return
 
         if(currentSuggestion.item.type === "movie"){
-            navigate(PATHS.MOVIE + `?id=${id}`)
+            navigate(PATHS.MOVIE, { id: id })
         }
-        else navigate(PATHS.SERIES + `?id=${id}`)
+        else navigate(PATHS.SERIES, { id: id })
 
         setTimeout(() => { handleClickNextSuggestion() }, 100)
     }

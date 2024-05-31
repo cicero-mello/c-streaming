@@ -1,17 +1,42 @@
 const LOREM = `
-    Lorem ipsum dolor sit amet,
-    consectetur adipiscing elit,
-    sed do eiusmod tempor incididunt
-    ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud
-    exercitation ullamco laboris nisi ut
-    aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit
-    in voluptate velit esse cillum dolore
-    eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt
-    mollit anim id est laborum.
+    Lorem ipsum dolor sit amet.
+    Rem exercitationem aspernatur est delectus sint At
+    laudantium dolores At maxime nesciunt sit nihil
+    rerum et rerum distinctio id autem suscipit. Eos temporibus
+    suscipit quo molestias fugiat aut omnis possimus et distinctio
+    quis nam eligendi laudantium aut nihil saepe sed nesciunt cumque.
+    Vel amet soluta ut ducimus deleniti nam fuga quia non autem
+    nostrum et suscipit blanditiis et voluptas facere cum
+    excepturi neque. In repellendus harum nam cupiditate culpa
+    quo sint nostrum hic dolores odit rem voluptatibus ducimus
+    ab veniam voluptatum aut soluta facilis. Et commodi corporis
+    sed dolore molestias qui sint dolorum. In perferendis sunt sit
+    dolor consequatur id voluptas inventore. Non internos fugit eos
+    culpa nihil eos enim natus et minus nisi et rerum impedit. 33
+    quisquam molestiae quo adipisci illo non sunt sunt.
+    Hic accusamus fuga et inventore corporis eos quaerat omnis in
+    molestias Quis rem neque tenetur! Qui voluptas consequatur ad
+    minima consectetur eos architecto error ad natus quibusdam aut
+    consequuntur quis sit sint quod cum mollitia illo. Eum blanditiis
+    nihil ad molestiae voluptatem in recusandae veniam id esse iste
+    qui eveniet pariatur eos laboriosam ipsam ab repellat excepturi!
+    In repellat blanditiis sit architecto autem hic modi minus et
+    quisquam incidunt qui velit omnis. Id Quis quam in odit odit
+    et delectus blanditiis quo odit vitae ea explicabo fuga qui
+    praesentium dolorum. Aut itaque incidunt eos officiis reiciendis
+    ut atque enim ea unde provident aut eligendi ipsum nam molestiae
+    natus et voluptatem nihil. Et temporibus maiores a dolore sunt
+    et rerum quia et ipsum molestiae eos nulla reiciendis. Aut exercitationem
+    quia eum provident quisquam eos placeat galisum non maiores totam
+    ut beatae molestiae sit animi sint. Et maxime veniam ex natus
+    galisum aut perspiciatis corporis est natus sapiente. Non quaerat
+    doloremque ea molestiae ducimus qui consequatur aperiam. Eum
+    facilis tenetur qui consectetur cupiditate aut dignissimos quia
+    est quia excepturi. Et saepe ipsa ab galisum odio aut quisquam
+    deleniti cum architecto placeat. Ut omnis vero ut consectetur
+    velit ex repellat facere cum facilis vitae aut alias quaerat.
+    Sit natus aperiam et omnis facilis in itaque quos et quia sapiente
+    quo quia quidem ex labore suscipit non omnis eligendi.
 `.replace(/\n/g, " ").replace(/\s+/g, " ").trim()
 
 const getRandomWordPosition = (strSplited: string[]): number => {
@@ -33,7 +58,7 @@ const finalDotRule = (str: string): string => {
 
 export const randomLoremWords = (numberOfWords?: number): string => {
     const loremWordsList = LOREM.split(" ")
-    const totalWords = numberOfWords ?? 4 + Math.floor(Math.random() * 2)
+    const totalWords = numberOfWords ?? 3 + Math.floor(Math.random() * 4)
     const randomWordPosition = getRandomWordPosition(loremWordsList)
     const thereWillBeSuficientWordsToComplete = loremWordsList[randomWordPosition + totalWords - 1]
     const wordsResponseList: string[] = []

@@ -1,55 +1,21 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from "react"
+import React, { FunctionComponent, useEffect, useRef, useState } from "react"
 import { type PageProps } from "gatsby"
 import { useNavigation } from "../../hooks"
-import { EpisodeCard, FakeVideo, Line, MediaTitle, WatchLatterButton, Wrapper } from "../../components"
+import { EpisodeCard, FakeVideo, FakeVideoRef, Line, MediaTitle } from "../../components"
 import { PageMediaProps } from "./types"
-import { IGatsbyImageData } from "gatsby-plugin-image"
-import * as media from "../../shared/media"
+import { createPageMedia } from "./core"
 import * as S from "./styles"
 
 export const Series: FunctionComponent<PageProps> = ({ data }) => {
-    const { getUrlParams, showScreen } = useNavigation()
+    const fakeVideoRef = useRef<FakeVideoRef>(null)
+    const { getUrlParams, showScreen, navigate } = useNavigation()
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
-    const updatePageMedia = useCallback((data: any) => {
-        const allBannerMediasFromQuery = media.getBannerGatsbyImages(data)
-        if(allBannerMediasFromQuery.length <= 0) return
-
-        const fakeVideoMideaFromMock = media.getMediaById(getUrlParams().id ?? "")
-        const mediaToFakeVideo = allBannerMediasFromQuery.find(
-            media => media.name === fakeVideoMideaFromMock?.imageName
-        )
-
-        const suggestionMedias = media.createSuggestionMedias(
-            allBannerMediasFromQuery, fakeVideoMideaFromMock?.id ?? ""
-        )
-
-        if(!mediaToFakeVideo || !fakeVideoMideaFromMock) return
-        setPageMedia({
-            fakeVideo: {
-                thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
-                imageName: fakeVideoMideaFromMock.imageName,
-                onClickWatch: () => {}
-            },
-            mediaTitle: {
-                title: fakeVideoMideaFromMock.name,
-                episodeName: "S.1 | Ep.1: Sit amet ipsum dolor",
-                mediaId: fakeVideoMideaFromMock.id
-            },
-            sinopsys: fakeVideoMideaFromMock.synopsis,
-            suggestionMedias: suggestionMedias,
-            nextEpisode: {
-                thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
-                season: 1,
-                episode: 1,
-                text: "Sit amet ipsum dolor",
-                altImage: "alt"
-            }
-        })
-    }, [])
-
     useEffect(() => {
-        updatePageMedia(data)
+        fakeVideoRef.current?.reload()
+        const { id, season, ep } = getUrlParams()
+        const newPageMedia = createPageMedia(data, navigate, id, season, ep)
+        if(newPageMedia) setPageMedia(newPageMedia)
         showScreen()
     }, [data])
 
@@ -58,16 +24,26 @@ export const Series: FunctionComponent<PageProps> = ({ data }) => {
             {pageMedia && <>
                 <S.FirstSection>
                     <S.TopWrapper>
-                        <FakeVideo {...pageMedia.fakeVideo} />
+                        <FakeVideo
+                            ref={fakeVideoRef}
+                            {...pageMedia.fakeVideo}
+                        />
                         <S.RightSide>
-                            <MediaTitle  {...pageMedia.mediaTitle} />
+                            <MediaTitle
+                                watchLaterText="Watch Series Later"
+                                {...pageMedia.mediaTitle}
+                            />
                             <S.Sinopspys800MediaWidth>
                                 {pageMedia.sinopsys}
                             </S.Sinopspys800MediaWidth>
-                            <EpisodeCard
-                                topText="Next Episode:"
-                                {...pageMedia.nextEpisode}
-                            />
+                            {pageMedia.nextEpisode ?
+                                <EpisodeCard
+                                    topText="Next Episode:"
+                                    {...pageMedia.nextEpisode}
+                                />
+                                :
+                                <S.LastEpisodeMessage />
+                            }
                         </S.RightSide>
                     </S.TopWrapper>
                     <S.Sinopsys>

@@ -1,22 +1,19 @@
 import React, { FunctionComponent } from "react"
 import { PosterListProps } from "./types"
-import * as Styled from "./styles"
 import { SeeAllButton } from "../buttons"
 import { PosterCarousel } from "../poster-carousel"
+import * as S from "./styles"
 
 export const PosterList: FunctionComponent<PosterListProps> = ({
    posters, titleText, buttonText, buttonAction
-}) => {
-
-    return (
-        <Styled.Component>
-            <Styled.TopSection>
-                <Styled.Title> {titleText} </Styled.Title>
-                <SeeAllButton text={buttonText} onClick={buttonAction}/>
-            </Styled.TopSection>
-            <Styled.DownSection>
-                <PosterCarousel posters={posters}/>
-            </Styled.DownSection>
-        </Styled.Component>
-    )
-}
+}) => (
+    <S.Component>
+        <S.TopSection>
+            <S.Title> {titleText} </S.Title>
+            <SeeAllButton text={buttonText} onClick={buttonAction}/>
+        </S.TopSection>
+        <S.DownSection>
+            <PosterCarousel posters={posters}/>
+        </S.DownSection>
+    </S.Component>
+)

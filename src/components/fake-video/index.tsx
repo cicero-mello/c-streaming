@@ -1,13 +1,13 @@
-import React, { FunctionComponent, useState, useRef } from "react"
-import { FakeVideoProps } from "./types"
-import videoMock from "../../assets/videos/gold-triangles.mp4"
+import React, { forwardRef, useState, useRef, useImperativeHandle } from "react"
+import { FakeVideoProps, FakeVideoRef } from "./types"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { PlayTriangle } from "../../assets/icons"
+import videoMock from "../../assets/videos/gold-triangles.mp4"
 import * as S from "./styles"
 
-export const FakeVideo: FunctionComponent<FakeVideoProps> = ({
+export const FakeVideo = forwardRef<FakeVideoRef, FakeVideoProps>(({
     thumbImage, onClickWatch, imageName
-}) => {
+}, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null)
     const [showVideo, setShowVideo] = useState(false)
 
@@ -18,6 +18,10 @@ export const FakeVideo: FunctionComponent<FakeVideoProps> = ({
         videoRef?.current?.play()
         setShowVideo(true)
     }
+
+    useImperativeHandle(ref, () => ({
+        reload: () => setShowVideo(false)
+    }))
 
     return(
         <S.Component $showVideo={showVideo}>
@@ -32,4 +36,4 @@ export const FakeVideo: FunctionComponent<FakeVideoProps> = ({
             <GatsbyImage image={thumbImage} alt={imageName} />
         </S.Component>
     )
-}
+})

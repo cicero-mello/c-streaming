@@ -14,8 +14,8 @@ export const Banner: FunctionComponent<BannerProps> = (newMedia) => {
     const [firstRender, setFirstRender] = useState(true)
 
     const onClickColorButton = () => {
-        if(type === "movie") navigate(PATHS.MOVIE + `?id=${id}`)
-        else navigate(PATHS.SERIES + `?id=${id}`)
+        if(type === "movie") navigate(PATHS.MOVIE, { id: id })
+        else navigate(PATHS.SERIES, { id: id })
     }
 
     useEffect(() => {

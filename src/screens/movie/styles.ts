@@ -66,7 +66,6 @@ export const RightSide = styled.div.attrs({
 export const MediaTitle = styled.h1.attrs({
     className: "media-title"
 })`
-    font-weight: normal;
     font-size: 37px;
     margin-left: 9px;
 `

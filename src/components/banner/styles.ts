@@ -49,7 +49,6 @@ export const InfoWrapper = styled.div.attrs({
 
 export const MediaName = styled.h1`
     max-width: 85%;
-    font-weight: normal;
     white-space: nowrap;
     font-size: 37px;
     overflow: hidden;

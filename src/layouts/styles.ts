@@ -27,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
             padding: 0px;
             color: white;
             font-family: "Arsenal";
+            font-weight: normal;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             -webkit-user-drag: none;

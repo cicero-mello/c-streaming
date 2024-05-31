@@ -11,7 +11,6 @@ export const MediaTitle = styled.h1.attrs((props: any) => ({
     className: "title",
     $title: props.$title
 }))<{ $title: string }>`
-    font-weight: normal;
     font-size: 37px;
     margin-left: 9px;
 

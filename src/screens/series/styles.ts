@@ -18,7 +18,7 @@ export const FirstSection = styled.section`
     }
 
     .watch-later-button{
-        margin: 7px 0px 37px 9px;
+        margin: 9px 0px 37px 9px;
     }
 
     .episode-card{
@@ -67,6 +67,10 @@ export const FirstSection = styled.section`
                 margin: 0px 9px 0px 0px;
             }
         }
+        .last-episode-message{
+            text-align: end;
+            margin: 6px 15px 0px 0px;
+        }
     }
 
     @media(max-width: 800px){
@@ -84,9 +88,6 @@ export const FirstSection = styled.section`
             margin-top: 24px;
             flex-direction: column;
             align-items: flex-end;
-            /* &:hover{
-                opacity: 0.95;
-            } */
             > h5 {
                 width: unset;
                 text-align: start;
@@ -98,6 +99,10 @@ export const FirstSection = styled.section`
         }
         .sinopsys-800-media-width {
             display: unset;
+        }
+        .last-episode-message{
+            align-self: flex-end;
+            margin: 23px 0px 0px 0px;
         }
     }
 
@@ -120,6 +125,7 @@ export const FirstSection = styled.section`
         }
         .watch-later-button {
             margin-left: 0px;
+            margin-top: 8px;
         }
         .video-play-button{
             transform: scale(0.7);
@@ -143,7 +149,12 @@ export const FirstSection = styled.section`
                 margin: 11px 0px 6px 0px;
             }
         }
-
+        .last-episode-message{
+            align-self: center;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 30px;
+        }
     }
 `
 
@@ -182,4 +193,42 @@ export const Sinopspys800MediaWidth = styled.p.attrs({
     display: none;
     margin-top: 27px;
     ${sinopsysCSS}
+`
+
+export const LastEpisodeMessage = styled.input.attrs({
+    className: "last-episode-message",
+    type: "checkbox"
+})`
+    appearance: none;
+    cursor: pointer;
+    height: fit-content;
+    width: fit-content;
+    font-size: 24px;
+
+    &::before {
+        content: "Amazing, you've reached the last episode!";
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(
+            45deg,
+            red, orange, yellow, green, blue,
+            indigo, purple, red, orange, yellow,
+            green, blue, indigo, purple, red
+        );
+        text-shadow: 0 0 0px #ffffff91;
+        animation: 10s slideX linear infinite forwards;
+    }
+    &:checked::before{
+        -webkit-background-clip: unset;
+        -webkit-text-fill-color: unset;
+        text-shadow: unset;
+        background-image: unset;
+        animation: unset;
+        color: #e3e3e3;
+    }
+
+    @keyframes slideX {
+        from { background-position: 0px 0px; }
+        to { background-position: 4000px 0px; }
+    }
 `

@@ -3,8 +3,9 @@ import React, {
     useContext, useEffect, useRef
 } from "react"
 import { NavigationContextProps } from "./types"
+import { objectToQueryString } from "../../shared/utils"
+import { URLParams, URLParamsAllString } from "../../shared/types"
 import { navigate } from "gatsby"
-import { URLParams } from "../../shared/types"
 import { Header } from "../../components"
 import { PageTransition } from "./styles"
 import { PATHS } from "../../paths"
@@ -22,12 +23,15 @@ export const NavigationProvider: FunctionComponent<any> = ({
 }) => {
     const transitionRef = useRef<HTMLDivElement>(null)
 
-    const customNavigate = (path: string) => {
+    const customNavigate = (path: string, params?: URLParams) => {
         if(!transitionRef.current) return
         transitionRef.current.style.opacity = "0%"
         transitionRef.current.style.pointerEvents = "none"
 
-        setTimeout(() => { navigate(path) }, 180)
+        setTimeout(() => {
+            if(params) navigate(path + objectToQueryString(params))
+            else navigate(path)
+        }, 180)
     }
 
     const showScreen = () => {
@@ -44,7 +48,20 @@ export const NavigationProvider: FunctionComponent<any> = ({
     }, [])
 
     const getUrlParams = (): URLParams => {
-        return Object.fromEntries(new URLSearchParams(window.location.search))
+        let season: number | undefined
+        let ep: number | undefined
+        const URLObject: URLParamsAllString = Object.fromEntries(
+            new URLSearchParams(window.location.search)
+        )
+
+        if(URLObject?.season) season = parseInt(URLObject?.season)
+        if(URLObject?.ep) ep = parseInt(URLObject.ep)
+
+        return {
+            id: URLObject.id,
+            season: season,
+            ep: ep
+        }
     }
 
     return (

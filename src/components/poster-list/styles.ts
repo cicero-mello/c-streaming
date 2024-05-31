@@ -19,7 +19,6 @@ export const TopSection = styled.div.attrs({
 export const Title = styled.h2.attrs({
     className:"title-poster-list"
 })`
-    font-weight: normal;
     color: #F1F1F1;
 `
 

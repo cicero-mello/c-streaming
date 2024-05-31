@@ -31,3 +31,9 @@ export const shuffle = (array: any[]): any[] => {
 
     return newArray
 }
+
+export const objectToQueryString = (object: any): string => (
+    "?" + Object.keys(object)
+        .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(object[key]))
+        .join('&')
+)

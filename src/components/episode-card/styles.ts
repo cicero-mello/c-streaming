@@ -10,7 +10,6 @@ export const Component = styled.div.attrs({
 `
 
 export const TopText = styled.h5`
-    font-weight: normal;
     margin: 0px 9px 9px 9px;
     color: #EDEDED;
     font-size: 20px;

@@ -1,12 +1,17 @@
 import { randomLoremWords } from "../../shared/lorem"
-import { FakeEpisodes } from "./types"
+import { EpisodeInfo, FakeSeasons } from "./types"
 
-export const createFakeEpisodes = (
+export const createFakeSeasons = (
     mediaID: string, seasons?: number, episodes?:number
-): FakeEpisodes => {
-    const episodesBySeasons = Array.from({ length: seasons ?? 4 }).map(() =>
+): FakeSeasons => {
+    const episodesBySeasons: FakeSeasons = Array.from(
+        { length: seasons ?? 4 }
+    ).map(() =>
         Array.from({ length: episodes ?? 10 }).map(
-            () => randomLoremWords()
+            () => ({
+                name: randomLoremWords(),
+                wasWatched: false
+            })
         )
     )
 
@@ -16,13 +21,45 @@ export const createFakeEpisodes = (
     return episodesBySeasons
 }
 
-export const getFakeEpisodes = (mediaID: string): FakeEpisodes => {
-    const epsLocalStorage = localStorage.getItem("eps" + mediaID)
+export const getFakeSeasons = (mediaID: string): FakeSeasons => {
+    const seasonsLocalStorage = localStorage.getItem("eps" + mediaID)
 
-    if(!epsLocalStorage){
-        const fakeEpisodes = createFakeEpisodes(mediaID)
-        return fakeEpisodes
+    if(!seasonsLocalStorage){
+        const fakeSeasons = createFakeSeasons(mediaID)
+        return fakeSeasons
     }
 
-    return JSON.parse(epsLocalStorage)
+    return JSON.parse(seasonsLocalStorage)
+}
+
+export const setWasWatchedOnEpisode = (
+    mediaID: string, season: number, ep: number
+) => {
+    const fakeSeasons = getFakeSeasons(mediaID)
+    fakeSeasons[season - 1][ep - 1].wasWatched = true
+
+    const jsonStringified = JSON.stringify(fakeSeasons)
+    localStorage.setItem("eps" + mediaID, jsonStringified)
+}
+
+export const getLastWatchedEpisodeInfo = (
+    seasons: FakeSeasons
+): EpisodeInfo | undefined => {
+    let lastWatchedEpisode
+
+    seasons.every((season, seasonIndex) => {
+        return season.every((episode, episodeIndex) => {
+            if(!episode.wasWatched) {
+                lastWatchedEpisode = {
+                    ep: episodeIndex + 1,
+                    season: seasonIndex + 1,
+                    ...episode
+                }
+                return false
+            }
+            return true
+        })
+    })
+
+    return lastWatchedEpisode
 }

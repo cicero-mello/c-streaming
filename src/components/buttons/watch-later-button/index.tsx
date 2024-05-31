@@ -4,7 +4,7 @@ import { WatchLatterButtonProps } from "./types"
 import * as Styles from "./styles"
 
 export const WatchLatterButton: FC<WatchLatterButtonProps> = ({
-    mediaId, onClick, ...rest
+    mediaId, onClick, text, ...rest
 }) => {
     const [watchLater, setWatchLater] = useState(false)
 
@@ -27,7 +27,7 @@ export const WatchLatterButton: FC<WatchLatterButtonProps> = ({
             $alreadySaveToWatch={watchLater}
             onClick={handleClick}
         >
-            Watch Later
+            {text ?? "Watch Later"}
         </Styles.Button>
     )
 }

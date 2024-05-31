@@ -49,7 +49,6 @@ export const Text = styled.h1.attrs({
     className: "suggestion-text"
 })`
     color: #EDEDED;
-    font-weight: normal;
     font-size: 28px;
 `
 
@@ -165,7 +164,6 @@ export const SuggestionMediaName = styled.h2.attrs({
 })`
     color: #EDEDED;
     position: absolute;
-    font-weight: normal;
     font-size: 24px;
     top: calc(100% + 6px);
 
