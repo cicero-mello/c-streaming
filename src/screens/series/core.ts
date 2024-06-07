@@ -3,6 +3,7 @@ import { IGatsbyImageData } from "gatsby-plugin-image"
 import { customLocalStorage } from "../../localstorage"
 import { PATHS } from "../../paths"
 import { URLParams } from "../../shared/types"
+import { EpisodeCardsProps } from "../../components"
 import * as media from "../../shared/media"
 
 const epsInfo = (id: string, currentSeason?: number , currentEp?: number) => {
@@ -73,6 +74,22 @@ export const createPageMedia = (
         seasons, currentEpisode, nextEpisode
     } = epsInfo(id, currentSeason, currentEp)
 
+    const listEpisodeCards:EpisodeCardsProps[] = seasons.map((season, indexS) => ({
+        topText: `SEASON ${indexS + 1}`,
+        episodeCards: season.map((ep, indexEp) => ({
+            thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
+            altImage: fakeVideoMideaFromMock.imageName,
+            episode: indexEp + 1,
+            text: ep.name,
+            wasWatched: ep.wasWatched,
+            onClick: () => navigate(PATHS.SERIES, {
+                ep: indexEp + 1,
+                season: indexS + 1,
+                id: id
+            }),
+        }))
+    }))
+
     return {
         fakeVideo: {
             thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
@@ -102,6 +119,6 @@ export const createPageMedia = (
                 ep: nextEpisode.ep
             })
         },
-        seasons: seasons
+        listEpisodeCards: listEpisodeCards
     }
 }

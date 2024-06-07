@@ -9,6 +9,7 @@ export const FakeVideo = forwardRef<FakeVideoRef, FakeVideoProps>(({
     thumbImage, onClickWatch, imageName
 }, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null)
+    const [renderSource, setRenderSource] = useState(true)
     const [showVideo, setShowVideo] = useState(false)
 
     const handleClick = () => {
@@ -20,14 +21,22 @@ export const FakeVideo = forwardRef<FakeVideoRef, FakeVideoProps>(({
     }
 
     useImperativeHandle(ref, () => ({
-        reload: () => setShowVideo(false)
+        reload: () => {
+            setShowVideo(false)
+
+            videoRef?.current?.pause()
+            setRenderSource(false)
+            setTimeout(() => setRenderSource(true), 50)
+        }
     }))
 
     return(
         <S.Component $showVideo={showVideo}>
             <S.VideoContainerProportion>
                 <S.Video controls ref={videoRef} preload="none">
-                    <source src={videoMock} type="video/mp4" />
+                    {renderSource &&
+                        <source src={videoMock} type="video/mp4" />
+                    }
                 </S.Video>
             </S.VideoContainerProportion>
             <S.PlayButton onClick={handleClick}>

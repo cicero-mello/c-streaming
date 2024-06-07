@@ -1,5 +1,7 @@
-import { EpisodeCardProps, FakeVideoProps, MediaTitleProps, SuggestionMedias } from "../../components"
-import { FakeSeasons } from "../../localstorage"
+import {
+    EpisodeCardProps, EpisodeCardsProps,
+    FakeVideoProps, MediaTitleProps, SuggestionMedias
+} from "../../components"
 
 export interface PageMediaProps {
     fakeVideo: FakeVideoProps
@@ -7,5 +9,5 @@ export interface PageMediaProps {
     sinopsys: string
     suggestionMedias: SuggestionMedias[]
     nextEpisode?: EpisodeCardProps
-    seasons: FakeSeasons
+    listEpisodeCards: EpisodeCardsProps[]
 }

@@ -8,18 +8,10 @@ export const GlobalStyle = createGlobalStyle`
         background-color: #090909;
         overflow-y:scroll ;
 
-        &::-webkit-scrollbar {
-            width: 10px;
-        }
-        &::-webkit-scrollbar-track {
-            background: #262626;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: #555;
-        }
-        &::-webkit-scrollbar-thumb:hover {
-            background: #888;
-        }
+        &::-webkit-scrollbar { width: 10px; }
+        &::-webkit-scrollbar-track { background: #262626; }
+        &::-webkit-scrollbar-thumb { background: #555; }
+        &::-webkit-scrollbar-thumb:hover { background: #888; }
 
         * {
             box-sizing: border-box ;

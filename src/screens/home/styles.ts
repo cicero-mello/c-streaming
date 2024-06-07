@@ -91,19 +91,10 @@ const adaptativeCSS = css`
                 margin: 0px 10px;
                 overflow-x: scroll;
                 padding-bottom: 40px;
-                &::-webkit-scrollbar {
-                    height: 6px;
-                }
-                &::-webkit-scrollbar-track {
-                    background: #262626;
-                }
-                &::-webkit-scrollbar-thumb {
-                    background: #888;
-                    background: #555;
-                }
-                &::-webkit-scrollbar-thumb:hover {
-                    background: #888;
-                }
+                &::-webkit-scrollbar { height: 6px; }
+                &::-webkit-scrollbar-track { background: #262626; }
+                &::-webkit-scrollbar-thumb { background: #555; }
+                &::-webkit-scrollbar-thumb:hover { background: #888; }
             }
         }
     }

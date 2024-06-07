@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react"
 import { type PageProps } from "gatsby"
 import { useNavigation } from "../../hooks"
-import { EpisodeCard, FakeVideo, FakeVideoRef, Line, MediaTitle } from "../../components"
+import { EpisodeCard, FakeVideo, FakeVideoRef, Line,
+    MediaTitle, EpisodeCardsCarousel
+} from "../../components"
 import { PageMediaProps } from "./types"
 import { createPageMedia } from "./core"
 import * as S from "./styles"
@@ -51,6 +53,12 @@ export const Series: FunctionComponent<PageProps> = ({ data }) => {
                     </S.Sinopsys>
                 </S.FirstSection>
                 <Line />
+                {pageMedia.listEpisodeCards.map((episodeCards, index) =>
+                    <EpisodeCardsCarousel
+                        key={`episode-card-carousel-key-${index}`}
+                        {...episodeCards}
+                    />
+                )}
             </>}
         </S.Component>
     )
