@@ -10,14 +10,13 @@ import { createPageMedia } from "./core"
 import * as S from "./styles"
 
 export const Series: FunctionComponent<PageProps> = ({ data }) => {
-    const { getUrlParams, showScreen, navigate } = useNavigation()
+    const { getUrlParams, navigate } = useNavigation()
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
     useEffect(() => {
         const { id, season, ep } = getUrlParams()
         const newPageMedia = createPageMedia(data, navigate, id, season, ep)
         if(newPageMedia) setPageMedia(newPageMedia)
-        showScreen()
     }, [data])
 
     return (
@@ -56,7 +55,9 @@ export const Series: FunctionComponent<PageProps> = ({ data }) => {
                     />
                 )}
                 <S.SecondSection>
-                    <ContentSuggestions suggestionMedias={pageMedia.suggestionMedias}/>
+                    <ContentSuggestions
+                        suggestionMedias={pageMedia.suggestionMedias}
+                    />
                 </S.SecondSection>
             </>}
         </S.Component>

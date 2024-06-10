@@ -10,7 +10,7 @@ import * as S from "./styles"
 export const Movie: FunctionComponent<PageProps> = ({
     data
 }) => {
-    const { getUrlParams, showScreen } = useNavigation()
+    const { getUrlParams } = useNavigation()
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
     const updatePageMedia = useCallback((data: any) => {
@@ -43,7 +43,6 @@ export const Movie: FunctionComponent<PageProps> = ({
 
     useEffect(() => {
         updatePageMedia(data)
-        showScreen()
     }, [data])
 
     return (

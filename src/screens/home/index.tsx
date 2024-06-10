@@ -9,7 +9,6 @@ import * as media from "../../shared/media"
 import * as Styled from "./styles"
 
 export const Home: FunctionComponent<HomeProps> = ({ data }) => {
-    const { showScreen } = useNavigation()
     const [bannersMediaList, setBannersMediaList] = useState<BannerProps[]>([])
     const [postersAnimeMediaList, setPostersAnimeMediaList] = useState<PosterProps[]>([])
     const [postersSerieMediaList, setPostersSerieMediaList] = useState<PosterProps[]>([])
@@ -42,7 +41,6 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
             setPostersMovieMediaList(posterMediaMovie)
 
             setLoadingData(false)
-            showScreen()
         }
     }, [data])
 
