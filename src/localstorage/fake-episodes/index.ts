@@ -4,10 +4,12 @@ import { EpisodeInfo, FakeSeasons } from "./types"
 export const createFakeSeasons = (
     mediaID: string, seasons?: number, episodes?:number
 ): FakeSeasons => {
-    const episodesBySeasons: FakeSeasons = Array.from(
-        { length: seasons ?? 4 }
-    ).map(() =>
-        Array.from({ length: episodes ?? 10 }).map(
+    const episodesBySeasons: FakeSeasons = Array.from({
+        length: seasons ?? Math.floor(Math.random() * 2 ) + 3
+    }).map(() =>
+        Array.from({
+            length: episodes ?? Math.floor(Math.random() * 4 ) + 8
+        }).map(
             () => ({
                 name: randomLoremWords(),
                 wasWatched: false

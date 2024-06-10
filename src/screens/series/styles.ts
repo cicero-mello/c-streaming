@@ -232,3 +232,30 @@ export const LastEpisodeMessage = styled.input.attrs({
         to { background-position: 4000px 0px; }
     }
 `
+
+export const SecondSection = styled.section`
+    display: flex;
+    padding: 53px 48px 78px 48px;
+    margin: 24px 0px;
+    justify-content: center;
+    opacity: 0.7;
+    height: 100%;
+    transition: opacity 200ms linear;
+
+    &:hover{
+        opacity: 1;
+    }
+
+    @media(max-width: 1100px){
+        padding-bottom: 85px;
+    }
+
+    @media(max-width: 870px){
+        margin: 0px;
+    }
+
+    @media(max-width: 600px){
+        opacity: 1;
+        padding: 46px 24px 85px 24px;
+    }
+`

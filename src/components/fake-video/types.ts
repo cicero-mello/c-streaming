@@ -5,7 +5,3 @@ export interface FakeVideoProps {
     imageName: string
     onClickWatch?: () => void
 }
-
-export interface FakeVideoRef {
-    reload: () => void
-}

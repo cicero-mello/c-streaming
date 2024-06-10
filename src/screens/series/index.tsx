@@ -1,20 +1,19 @@
-import React, { FunctionComponent, useEffect, useRef, useState } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import { type PageProps } from "gatsby"
 import { useNavigation } from "../../hooks"
-import { EpisodeCard, FakeVideo, FakeVideoRef, Line,
-    MediaTitle, EpisodeCardsCarousel
+import { EpisodeCard, FakeVideo, Line,
+    MediaTitle, EpisodeCardsCarousel,
+    ContentSuggestions
 } from "../../components"
 import { PageMediaProps } from "./types"
 import { createPageMedia } from "./core"
 import * as S from "./styles"
 
 export const Series: FunctionComponent<PageProps> = ({ data }) => {
-    const fakeVideoRef = useRef<FakeVideoRef>(null)
     const { getUrlParams, showScreen, navigate } = useNavigation()
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
     useEffect(() => {
-        fakeVideoRef.current?.reload()
         const { id, season, ep } = getUrlParams()
         const newPageMedia = createPageMedia(data, navigate, id, season, ep)
         if(newPageMedia) setPageMedia(newPageMedia)
@@ -26,10 +25,7 @@ export const Series: FunctionComponent<PageProps> = ({ data }) => {
             {pageMedia && <>
                 <S.FirstSection>
                     <S.TopWrapper>
-                        <FakeVideo
-                            ref={fakeVideoRef}
-                            {...pageMedia.fakeVideo}
-                        />
+                        <FakeVideo {...pageMedia.fakeVideo} />
                         <S.RightSide>
                             <MediaTitle
                                 watchLaterText="Watch Series Later"
@@ -59,6 +55,9 @@ export const Series: FunctionComponent<PageProps> = ({ data }) => {
                         {...episodeCards}
                     />
                 )}
+                <S.SecondSection>
+                    <ContentSuggestions suggestionMedias={pageMedia.suggestionMedias}/>
+                </S.SecondSection>
             </>}
         </S.Component>
     )

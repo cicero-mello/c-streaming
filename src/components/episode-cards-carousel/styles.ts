@@ -8,6 +8,10 @@ export const Component = styled.div.attrs({
     &:hover{
         opacity: 1;
     }
+
+    @media(max-width: 600px){
+        opacity: 1;
+    }
 `
 
 export const TopText = styled.h3.attrs({
@@ -18,6 +22,13 @@ export const TopText = styled.h3.attrs({
     font-size: 23px;
     margin-top: 47px;
     margin-left: 48px;
+    z-index: 4;
+
+    @media(max-width: 600px){
+        font-size: 20px;
+        margin-top: 32px;
+        margin-left: 27px;
+    }
 `
 
 export const CarouselWrapper = styled.div.attrs({
@@ -53,7 +64,6 @@ export const Carousel = styled.div.attrs({
     align-items: flex-end;
     overflow-x: scroll;
     cursor: grab;
-
     &:active, *:active{
         cursor: grabbing;
     }
@@ -72,12 +82,10 @@ export const Carousel = styled.div.attrs({
 
     @media(max-width: 600px){
         margin: 0px 10px;
-        cursor: unset;
-        &:active, *:active{
-            cursor: unset;
-        }
+        height: 240px;
         .episode-card{
             min-width: 300px;
+            margin-bottom: 48px;
         }
         &::-webkit-scrollbar { height: 6px; }
         &::-webkit-scrollbar-thumb { background:#555; }

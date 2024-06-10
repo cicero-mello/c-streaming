@@ -1,6 +1,7 @@
 import React, {
     FunctionComponent, createContext,
-    useContext, useEffect, useRef
+    useContext, useEffect, useRef,
+    useState
 } from "react"
 import { NavigationContextProps } from "./types"
 import { objectToQueryString } from "../../shared/utils"
@@ -22,6 +23,12 @@ export const NavigationProvider: FunctionComponent<any> = ({
     children, path
 }) => {
     const transitionRef = useRef<HTMLDivElement>(null)
+    const [randomChildrenKey, setRandomChildrenKey] = useState(0)
+
+    const reloadChildrenElements = () => {
+        if(!!randomChildrenKey) setRandomChildrenKey(0)
+        else setRandomChildrenKey(1)
+    }
 
     const customNavigate = (path: string, params?: URLParams) => {
         if(!transitionRef.current) return
@@ -29,8 +36,13 @@ export const NavigationProvider: FunctionComponent<any> = ({
         transitionRef.current.style.pointerEvents = "none"
 
         setTimeout(() => {
-            if(params) navigate(path + objectToQueryString(params))
-            else navigate(path)
+            if(!params) {
+                navigate(path)
+                return
+            }
+            const newScreenIsSameThanOld = window.location.pathname.includes(path)
+            if(newScreenIsSameThanOld) setTimeout(() => reloadChildrenElements(), 50)
+            navigate(path + objectToQueryString(params))
         }, 180)
     }
 
@@ -74,7 +86,9 @@ export const NavigationProvider: FunctionComponent<any> = ({
         >
             <Header path={path as PATHS}/>
             <PageTransition ref={transitionRef}>
-                {children}
+                <div key={"ck-" + randomChildrenKey}>
+                    {children}
+                </div>
             </PageTransition>
         </NavigationContext.Provider>
     )

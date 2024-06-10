@@ -94,7 +94,13 @@ export const createPageMedia = (
         fakeVideo: {
             thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
             imageName: fakeVideoMideaFromMock.imageName,
-            onClickWatch: () => { }
+            onClickWatch: () => {
+                customLocalStorage.setWasWatchedOnEpisode(
+                    fakeVideoMideaFromMock.id,
+                    currentEpisode.season,
+                    currentEpisode.ep
+                )
+            }
         },
         mediaTitle: {
             title: fakeVideoMideaFromMock.name,

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useEffect, useRef, useState } from "react"
 import { type PageProps } from "gatsby"
 import { useNavigation } from "../../hooks"
-import { ContentSuggestions, FakeVideo, FakeVideoRef, Line, MediaTitle } from "../../components"
+import { ContentSuggestions, FakeVideo, Line, MediaTitle } from "../../components"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import { PageMediaProps } from "./types"
 import * as media from "../../shared/media"
@@ -10,7 +10,6 @@ import * as S from "./styles"
 export const Movie: FunctionComponent<PageProps> = ({
     data
 }) => {
-    const fakeVideoRef = useRef<FakeVideoRef>(null)
     const { getUrlParams, showScreen } = useNavigation()
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
@@ -43,7 +42,6 @@ export const Movie: FunctionComponent<PageProps> = ({
     }, [])
 
     useEffect(() => {
-        fakeVideoRef.current?.reload()
         updatePageMedia(data)
         showScreen()
     }, [data])
@@ -52,10 +50,7 @@ export const Movie: FunctionComponent<PageProps> = ({
         <S.Component>
             {pageMedia && <>
                 <S.FirstSection>
-                    <FakeVideo
-                        ref={fakeVideoRef}
-                        {...pageMedia.fakeVideo}
-                    />
+                    <FakeVideo {...pageMedia.fakeVideo} />
                     <S.RightSide>
                         <MediaTitle {...pageMedia.mediaTitle} />
                         <S.Sinopsys> {pageMedia.sinopsys} </S.Sinopsys>

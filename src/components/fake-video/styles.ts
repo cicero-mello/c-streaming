@@ -32,12 +32,12 @@ export const Component = styled.div.attrs((props: any) => ({
         }
     `}
 
-    animation: initialAnimation linear 200ms;
-    animation-iteration-count: 1;
-    @keyframes initialAnimation {
+    /* animation: initialAnimation linear 200ms; */
+    /* animation-iteration-count: 1; */
+    /* @keyframes initialAnimation {
         from { opacity: 0%; }
         to { opacity: 100%; }
-    }
+    } */
 `
 
 export const VideoContainerProportion = styled.div`
