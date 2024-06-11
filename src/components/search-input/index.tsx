@@ -1,15 +1,19 @@
-import React, { KeyboardEvent, FunctionComponent, useRef, RefObject } from "react"
+import React, { KeyboardEvent, FunctionComponent, useRef } from "react"
 import { SearchInputProps } from "./types"
-import * as Styled from "./styles"
+import { useNavigation } from "../../hooks"
+import { PATHS } from "../../paths"
+import * as S from "./styles"
 
 export const SearchInput: FunctionComponent<SearchInputProps> = ({
     onSearch
 }) => {
+    const { navigate } = useNavigation()
     const ref = useRef<any>(null)
 
     const onClickButton = () => {
         const inputValue = ref?.current?.value ?? ""
-        onSearch(inputValue)
+        if(onSearch) onSearch(inputValue)
+        else navigate(PATHS.SEARCH, { search: inputValue })
     }
 
     const handleInputChange = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -17,11 +21,15 @@ export const SearchInput: FunctionComponent<SearchInputProps> = ({
     }
 
     return (
-        <Styled.Component>
-            <Styled.Input ref={ref} spellCheck={false} onKeyDown={handleInputChange}/>
-            <Styled.Button onClick={onClickButton}>
+        <S.Component>
+            <S.Input
+                ref={ref}
+                spellCheck={false}
+                onKeyDown={handleInputChange}
+            />
+            <S.Button onClick={onClickButton}>
                 Search
-            </Styled.Button>
-        </Styled.Component>
+            </S.Button>
+        </S.Component>
     )
 }

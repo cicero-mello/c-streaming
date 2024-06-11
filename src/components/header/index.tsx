@@ -18,15 +18,9 @@ export const Header: FunctionComponent<HeaderProps> = ({ path }) => {
     }
 
     return (
-        <Styled.Component $borderButtonDisabled={path === PATHS.HOME}>
-            <HeaderButton
-                onClick={onClickBorderButton}
-                disabled={path === PATHS.HOME || !path}
-            />
-            <UserMenu
-                onClick={onClickUserMenu}
-                disabled={path === PATHS.USER}
-            />
+        <Styled.Component>
+            <HeaderButton onClick={onClickBorderButton} />
+            <UserMenu onClick={onClickUserMenu} />
         </Styled.Component>
     )
 }

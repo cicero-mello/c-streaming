@@ -3,5 +3,7 @@ export enum PATHS {
     SEARCH = "/search",
     USER = "/user",
     MOVIE = "/movie",
-    SERIES = "/series"
+    SERIES = "/series",
+    WATCH_LATER = "/watch-later",
+    HISTORY = "/history"
 }

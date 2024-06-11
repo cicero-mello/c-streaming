@@ -52,19 +52,15 @@ export const NavigationProvider: FunctionComponent<any> = ({
     }
 
     const getUrlParams = (): URLParams => {
-        let season: number | undefined
-        let ep: number | undefined
         const URLObject: URLParamsAllString = Object.fromEntries(
             new URLSearchParams(window.location.search)
         )
 
-        if(URLObject?.season) season = parseInt(URLObject?.season)
-        if(URLObject?.ep) ep = parseInt(URLObject.ep)
-
         return {
             id: URLObject.id,
-            season: season,
-            ep: ep
+            season: URLObject?.season ? parseInt(URLObject.season) : undefined,
+            ep: URLObject?.ep ? parseInt(URLObject.ep) : undefined,
+            search: URLObject.search
         }
     }
 

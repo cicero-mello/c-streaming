@@ -1,3 +1,3 @@
 export interface SearchInputProps {
-    onSearch: (inputValue: string) => void
+    onSearch?: (inputValue: string) => void
 }

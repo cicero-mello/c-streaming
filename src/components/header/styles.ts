@@ -28,10 +28,9 @@ const adaptativeCSS = css`
     }
 `
 
-export const Component = styled.header.attrs((props: any)=> ({
-    className: "header",
-    $borderButtonDisabled: props.$borderButtonDisabled || false
-}))<{ $borderButtonDisabled: boolean }>`
+export const Component = styled.header.attrs({
+    className: "header"
+})`
     display: flex;
     justify-content: space-between;
     align-items: center;

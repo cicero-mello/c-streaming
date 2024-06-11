@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 
-export const Component = styled.div`
+export const Component = styled.main`
     display: flex;
     flex-direction: column;
 `
@@ -236,7 +236,7 @@ export const LastEpisodeMessage = styled.input.attrs({
 export const SecondSection = styled.section`
     display: flex;
     padding: 53px 48px 78px 48px;
-    margin: 24px 0px;
+    padding: 77px 48px 102px 48px;
     justify-content: center;
     opacity: 0.7;
     height: 100%;
@@ -251,7 +251,7 @@ export const SecondSection = styled.section`
     }
 
     @media(max-width: 870px){
-        margin: 0px;
+        padding: 53px 48px 85px 48px;
     }
 
     @media(max-width: 600px){

@@ -1,8 +1,6 @@
 import styled from "styled-components"
 
-export const Component = styled.div.attrs({
-    className: "teste"
-})`
+export const Component = styled.main`
     display: flex;
     flex-direction: column;
 `

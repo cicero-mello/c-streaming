@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { HomeProps } from "./type"
-import { useNavigation } from "../../hooks"
 import {
     BannerProps, BannerList, Line, SearchInput, PosterList, PosterProps,
     Footer
@@ -48,7 +47,7 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
         <Styled.Home>
             {!loadingData && <BannerList banners={bannersMediaList} />}
             <Line id="first-line-home"/>
-            <SearchInput onSearch={(inputValue) => console.log(inputValue)}/>
+            <SearchInput />
             <Line />
             {!loadingData && <PosterList
                 titleText="Animes"

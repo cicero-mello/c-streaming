@@ -133,9 +133,7 @@ const adaptativeCSS = css`
     }
 `
 
-export const Home = styled.main.attrs({
-    className: "home-page"
-})`
+export const Home = styled.main`
     display: flex;
     flex-direction: column;
     width: 100%;
