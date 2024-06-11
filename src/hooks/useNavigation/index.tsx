@@ -52,6 +52,9 @@ export const NavigationProvider: FunctionComponent<any> = ({
     }
 
     const getUrlParams = (): URLParams => {
+        const isBrowser = typeof window !== "undefined"
+        if(!isBrowser) return {}
+
         const URLObject: URLParamsAllString = Object.fromEntries(
             new URLSearchParams(window.location.search)
         )
