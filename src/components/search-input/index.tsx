@@ -13,7 +13,7 @@ export const SearchInput: FunctionComponent<SearchInputProps> = ({
     const onClickButton = () => {
         const inputValue = ref?.current?.value ?? ""
         if(onSearch) onSearch(inputValue)
-        else navigate(PATHS.SEARCH, { search: inputValue })
+        else navigate(PATHS.SEARCH, { searchText: inputValue })
     }
 
     const handleInputChange = (event: KeyboardEvent<HTMLInputElement>) => {

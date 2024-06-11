@@ -5,7 +5,7 @@ import React, {
 } from "react"
 import { NavigationContextProps } from "./types"
 import { objectToQueryString } from "../../shared/utils"
-import { URLParams, URLParamsAllString } from "../../shared/types"
+import { MediaType, URLParams, URLParamsAllString } from "../../shared/types"
 import { navigate } from "gatsby"
 import { Header } from "../../components"
 import { PageTransition } from "./styles"
@@ -63,7 +63,8 @@ export const NavigationProvider: FunctionComponent<any> = ({
             id: URLObject.id,
             season: URLObject?.season ? parseInt(URLObject.season) : undefined,
             ep: URLObject?.ep ? parseInt(URLObject.ep) : undefined,
-            search: URLObject.search
+            searchText: URLObject.searchText,
+            searchType: URLObject.searchType as MediaType
         }
     }
 

@@ -18,14 +18,16 @@ export interface URLParams {
     id?: string
     season?: number
     ep?: number
-    search?: string
+    searchText?: string
+    searchType?: MediaType
 }
 
 export interface URLParamsAllString {
     id?: string
     season?: string
     ep?: string
-    search?: string
+    searchText?: string
+    searchType?: string
 }
 
 export interface QueryGatsbyImages {

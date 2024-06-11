@@ -6,7 +6,7 @@ export const Component = styled.div.attrs({
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    min-width: 171px;
+    width: 171px;
     margin: 30px 20px 0px 20px;
 
     .gatsby-image {

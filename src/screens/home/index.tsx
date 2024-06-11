@@ -4,10 +4,13 @@ import {
     BannerProps, BannerList, Line, SearchInput, PosterList, PosterProps,
     Footer
 } from "../../components"
+import { useNavigation } from "../../hooks"
 import * as media from "../../shared/media"
 import * as Styled from "./styles"
+import { PATHS } from "../../paths"
 
 export const Home: FunctionComponent<HomeProps> = ({ data }) => {
+    const { navigate } = useNavigation()
     const [bannersMediaList, setBannersMediaList] = useState<BannerProps[]>([])
     const [postersAnimeMediaList, setPostersAnimeMediaList] = useState<PosterProps[]>([])
     const [postersSerieMediaList, setPostersSerieMediaList] = useState<PosterProps[]>([])
@@ -53,21 +56,21 @@ export const Home: FunctionComponent<HomeProps> = ({ data }) => {
                 titleText="Animes"
                 posters={postersAnimeMediaList}
                 buttonText="See All Animes"
-                buttonAction={() => undefined}
+                buttonAction={() => navigate(PATHS.SEARCH, { searchType: "anime"})}
             />}
             <Line className="can-hide"/>
             {!loadingData && <PosterList
                 titleText="Movies"
                 posters={postersMovieMediaList}
                 buttonText="See All Movies"
-                buttonAction={() => undefined}
+                buttonAction={() => navigate(PATHS.SEARCH, { searchType: "movie"})}
             />}
             <Line className="can-hide"/>
             {!loadingData && <PosterList
                 titleText="Series"
                 posters={postersSerieMediaList}
                 buttonText="See All Series"
-                buttonAction={() => undefined}
+                buttonAction={() => navigate(PATHS.SEARCH, { searchType: "serie"})}
             />}
             <Line className="can-hide"/>
             <Footer />

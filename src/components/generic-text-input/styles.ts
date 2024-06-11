@@ -18,8 +18,6 @@ export const Input = styled.input.attrs((props: any) => ({
     background-color: unset;
     border-radius: 2px;
     font-size: 15px;
-    color: #dcdcdc;
-    caret-color: #dcdcdc;
     color: #EDEDED;
     caret-color: #EDEDED;
     padding: 0px 10px;
@@ -35,6 +33,5 @@ export const Label = styled.label.attrs({
     display: flex;
     flex-direction: column;
     font-size: 17px;
-    color: #dcdcdc;
     color: #EDEDED;
 `
