@@ -2,10 +2,11 @@ import React, {
     ChangeEvent, FunctionComponent, useLayoutEffect, useState
 } from "react"
 import {
-    GenericTextInput, Poster, PosterProps, SelectInput
+    GenericTextInput, Line, Poster, PosterProps, SelectInput
 } from "../../components"
 import { PageProps } from "gatsby"
 import { useNavigation } from "../../hooks"
+import { debounce, scrollPageToTop } from "../../shared/utils"
 import * as core from "./core"
 import * as S from "./styles"
 
@@ -17,21 +18,36 @@ export const Search: FunctionComponent<PageProps> = ({
     const [searchType, setSearchType] = useState(getUrlParams().searchType ?? "all")
     const [posters, setPosters] = useState<PosterProps[]>([])
     const [filteredPosters, setFilteredPosters] = useState<PosterProps[]>([])
+    const [showPosters, setShowPosters] = useState(true)
+
+    const changeFilteredPostersWithAnimation = (
+        newFilteredPosters: PosterProps[]
+    ) => {
+        setShowPosters(false)
+        setTimeout(() => {
+            setFilteredPosters(newFilteredPosters)
+            setShowPosters(true)
+        }, 250)
+    }
 
     const onChangeSearchText = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchText(e.target.value)
         const newFilteredPosters = core.getFilteredPosters(
             e.target.value, searchType, posters
         )
-        setFilteredPosters(newFilteredPosters)
+        debounce(() => {
+            scrollPageToTop()
+            changeFilteredPostersWithAnimation(newFilteredPosters)
+        }, 250)
     }
 
     const onChangeSearchType = (e: ChangeEvent<HTMLSelectElement>) => {
         setSearchType(e.target.value)
+        scrollPageToTop()
         const newFilteredPosters = core.getFilteredPosters(
             searchText, e.target.value, posters
         )
-        setFilteredPosters(newFilteredPosters)
+        changeFilteredPostersWithAnimation(newFilteredPosters)
     }
 
     useLayoutEffect(() => {
@@ -45,8 +61,10 @@ export const Search: FunctionComponent<PageProps> = ({
 
     return (
         <S.Component>
+            <Line />
             <S.InputZone>
                 <GenericTextInput
+                    onFocus={scrollPageToTop}
                     label="Name"
                     value={searchText}
                     onChange={onChangeSearchText}
@@ -56,12 +74,18 @@ export const Search: FunctionComponent<PageProps> = ({
                     options={core.SELECT_OPTIONS}
                     value={searchType}
                     onChange={onChangeSearchType}
+                    onClick={scrollPageToTop}
                 />
             </S.InputZone>
-            <S.MediaListWrapper>
+            <S.MediaListWrapper $showPosters={showPosters}>
                 {filteredPosters.map((poster) =>
                     <Poster {...poster}/>
                 )}
+                {filteredPosters.length === 0 &&
+                    <S.NoMediaMessage>
+                        {"No results for your search :("}
+                    </S.NoMediaMessage>
+                }
             </S.MediaListWrapper>
         </S.Component>
     )

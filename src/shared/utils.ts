@@ -37,3 +37,10 @@ export const objectToQueryString = (object: any): string => (
         .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(object[key]))
         .join('&')
 )
+
+export const scrollPageToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+}
