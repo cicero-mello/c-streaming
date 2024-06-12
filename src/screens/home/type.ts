@@ -1,5 +1,8 @@
-import { PageProps } from "gatsby"
+import { BannerProps, PosterProps } from "../../components"
 
-export interface HomeProps extends Omit<PageProps, "data">{
-    data: any
+export interface PageMediaProps {
+    banners: BannerProps[]
+    postersAnimes: PosterProps[]
+    postersSeries: PosterProps[]
+    postersMovies: PosterProps[]
 }

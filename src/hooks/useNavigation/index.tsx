@@ -4,10 +4,10 @@ import React, {
     useState
 } from "react"
 import { NavigationContextProps } from "./types"
-import { objectToQueryString } from "../../shared/utils"
+import { objectToQueryString, scrollPageToTop } from "../../shared/utils"
 import { MediaType, URLParams, URLParamsAllString } from "../../shared/types"
 import { navigate } from "gatsby"
-import { Header } from "../../components"
+import { Header, PageLoader } from "../../components"
 import { PageTransition } from "./styles"
 import { PATHS } from "../../paths"
 
@@ -23,10 +23,27 @@ export const NavigationProvider: FunctionComponent<any> = ({
 }) => {
     const transitionRef = useRef<HTMLDivElement>(null)
     const [randomChildrenKey, setRandomChildrenKey] = useState(0)
+    const [showLoader, setShowLoader] = useState(false)
+    const [timerId, setTimerId] = useState<NodeJS.Timeout>()
 
     const reloadChildrenElements = () => {
         if(!!randomChildrenKey) setRandomChildrenKey(0)
         else setRandomChildrenKey(1)
+    }
+
+    const prepareLoader = () => {
+        const newTimerId = setTimeout(() => {
+            setShowLoader(true)
+        }, 2000)
+
+        setTimerId(newTimerId)
+    }
+
+    const cancelLoader = () => {
+        if(!timerId) return
+        clearTimeout(timerId)
+        setShowLoader(false)
+        setTimerId(undefined)
     }
 
     const customNavigate = (path: string, params?: URLParams) => {
@@ -35,12 +52,13 @@ export const NavigationProvider: FunctionComponent<any> = ({
         transitionRef.current.style.pointerEvents = "none"
 
         setTimeout(() => {
+            reloadChildrenElements()
+            scrollPageToTop()
+            prepareLoader()
             if(!params) {
                 navigate(path)
                 return
             }
-            const newScreenIsSameThanOld = window.location.pathname.includes(path)
-            if(newScreenIsSameThanOld) reloadChildrenElements()
             navigate(path + objectToQueryString(params))
         }, 180)
     }
@@ -69,6 +87,7 @@ export const NavigationProvider: FunctionComponent<any> = ({
     }
 
     useEffect(() => {
+        cancelLoader()
         setTimeout(() => showScreen(), 20)
     }, [children])
 
@@ -87,6 +106,7 @@ export const NavigationProvider: FunctionComponent<any> = ({
             }}
         >
             <Header path={path as PATHS}/>
+            <PageLoader show={showLoader}/>
             <PageTransition ref={transitionRef}>
                 <div key={"ck-" + randomChildrenKey}>
                     {children}

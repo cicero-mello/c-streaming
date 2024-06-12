@@ -9,6 +9,7 @@ export const FakeVideo: FC<FakeVideoProps> = ({
     thumbImage, onClickWatch, imageName
 }) => {
     const videoRef = useRef<HTMLVideoElement>(null)
+    const sourceRef = useRef<HTMLSourceElement>(null)
     const [showVideo, setShowVideo] = useState(false)
 
     const handleClick = () => {
@@ -23,7 +24,11 @@ export const FakeVideo: FC<FakeVideoProps> = ({
         <S.Component $showVideo={showVideo}>
             <S.VideoContainerProportion>
                 <S.Video controls ref={videoRef} preload="none">
-                    <source src={videoMock} type="video/mp4" />
+                    <source
+                        ref={sourceRef}
+                        src={videoMock}
+                        type="video/mp4"
+                    />
                 </S.Video>
             </S.VideoContainerProportion>
             <S.PlayButton onClick={handleClick}>
