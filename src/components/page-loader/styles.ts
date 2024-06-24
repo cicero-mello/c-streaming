@@ -4,6 +4,7 @@ export const Component = styled.div.attrs((props: any) => ({
     className: "page-loader",
     $show: props.$show
 }))<{ $show?: boolean }>`
+    pointer-events: none;
     position: absolute;
     display: flex;
     width: 100%;

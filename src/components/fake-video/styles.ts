@@ -27,32 +27,62 @@ export const Component = styled.div.attrs((props: any) => ({
             pointer-events: none;
         }
 
-        video{
-            opacity: 100%;
+        .fake-video-message {
+            opacity: 1;
         }
     `}
-
-    /* animation: initialAnimation linear 200ms; */
-    /* animation-iteration-count: 1; */
-    /* @keyframes initialAnimation {
-        from { opacity: 0%; }
-        to { opacity: 100%; }
-    } */
 `
 
-export const VideoContainerProportion = styled.div`
+export const ScreenSaverContainer = styled.div`
     position: relative;
     padding-top: 56.25%; // 16/9 trick
     width: 100%;
+    background: radial-gradient(#141414, #181818);
+    overflow: hidden;
+
+    .triangle-pong {
+        position: absolute;
+        top: 80px;
+        left: 100px;
+        height: 20%;
+        width: 14%;
+        opacity: 0;
+        animation: 4s rotate infinite linear;
+
+        path {
+            stroke: #923F3F;
+        }
+
+        @keyframes rotate {
+            from{
+                transform: rotate(360deg);
+            }
+        }
+    }
 `
 
-export const Video = styled.video`
+export const Message = styled.h3.attrs({
+    className: "fake-video-message"
+})`
     position: absolute;
-    top: 0;
-    left: 0;
+    opacity: 0;
+    top: -3%;
     width: 100%;
     height: 100%;
-    opacity: 0;
+    text-align: center;
+    align-content: center;
+    color: #dbdbdb;
+    text-shadow: 2px 2px 2px #3b3b3b;
+    font-size: 27px;
+    transition: font-size 100ms linear;
+
+    @media (max-width: 600px){
+        font-size: 22px;
+    }
+
+    @media (max-width: 330px){
+        font-size: 16px;
+    }
 `
 
 export const PlayButton = styled.button.attrs({

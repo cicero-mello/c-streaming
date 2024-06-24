@@ -34,7 +34,7 @@ export const NavigationProvider: FunctionComponent<any> = ({
     const prepareLoader = () => {
         const newTimerId = setTimeout(() => {
             setShowLoader(true)
-        }, 2000)
+        }, 1500)
 
         setTimerId(newTimerId)
     }

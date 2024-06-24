@@ -1,37 +1,42 @@
-import React, { FC, useState, useRef } from "react"
+import React, { FC, useState, useRef, useEffect } from "react"
 import { FakeVideoProps } from "./types"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { PlayTriangle } from "../../assets/icons"
-import videoMock from "../../assets/videos/gold-triangles.mp4"
+import { PlayTriangle, TrianglePong } from "../../assets/icons"
+import * as core from "./core"
 import * as S from "./styles"
 
 export const FakeVideo: FC<FakeVideoProps> = ({
     thumbImage, onClickWatch, imageName
 }) => {
-    const videoRef = useRef<HTMLVideoElement>(null)
-    const sourceRef = useRef<HTMLSourceElement>(null)
+    const containerPongRef = useRef<HTMLDivElement>(null)
+    const trianglePongRef = useRef<SVGSVGElement>(null)
     const [showVideo, setShowVideo] = useState(false)
 
-    const handleClick = () => {
+    const handleClickPlayButton = () => {
         if(onClickWatch) onClickWatch()
 
-        videoRef?.current?.load()
-        videoRef?.current?.play()
+        if(!!trianglePongRef.current && !!containerPongRef.current){
+            core.startPongAnimation(
+                trianglePongRef.current,
+                containerPongRef.current
+            )
+        }
+
         setShowVideo(true)
     }
 
+    useEffect(() => () => core.finishPongAnimation(), [])
+
     return(
         <S.Component $showVideo={showVideo}>
-            <S.VideoContainerProportion>
-                <S.Video controls ref={videoRef} preload="none">
-                    <source
-                        ref={sourceRef}
-                        src={videoMock}
-                        type="video/mp4"
-                    />
-                </S.Video>
-            </S.VideoContainerProportion>
-            <S.PlayButton onClick={handleClick}>
+            <S.ScreenSaverContainer ref={containerPongRef}>
+                <TrianglePong ref={trianglePongRef}/>
+                <S.Message>
+                    This page is just a demo.<br/>
+                    There is no real video here.
+                </S.Message>
+            </S.ScreenSaverContainer>
+            <S.PlayButton onClick={handleClickPlayButton}>
                 <PlayTriangle />
             </S.PlayButton>
             <GatsbyImage image={thumbImage} alt={imageName} />
