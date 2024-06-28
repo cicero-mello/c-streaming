@@ -44,3 +44,8 @@ export const scrollPageToTop = () => {
         behavior: 'smooth'
     })
 }
+
+export const isEmailValid = (email: string | null | undefined):boolean => {
+    if(!email) return false
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
+}
