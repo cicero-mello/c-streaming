@@ -45,7 +45,7 @@ export const startPongAnimation = (
     }
 
     const moveLeft = () => {
-        boxLeft -= HORIZONTAL_SPEED
+        boxLeft -= window.innerWidth > 400 ? HORIZONTAL_SPEED : HORIZONTAL_SPEED/2
         trianglePong.style.left = boxLeft + "px"
 
         if(boxHitsContainerOn("left")){
@@ -57,7 +57,7 @@ export const startPongAnimation = (
     }
 
     const moveRight = () => {
-        boxLeft += HORIZONTAL_SPEED
+        boxLeft += window.innerWidth > 400 ? HORIZONTAL_SPEED : HORIZONTAL_SPEED/2
         trianglePong.style.left = boxLeft + "px"
 
         if(boxHitsContainerOn("right")){
@@ -69,7 +69,7 @@ export const startPongAnimation = (
     }
 
     const moveUp = () => {
-        boxTop -= VERTICAL_SPEED
+        boxTop -= window.innerWidth > 400 ? VERTICAL_SPEED :  VERTICAL_SPEED/2
         trianglePong.style.top = boxTop + "px"
 
         if(boxHitsContainerOn("top")){
@@ -81,7 +81,7 @@ export const startPongAnimation = (
     }
 
     const moveDown = () => {
-        boxTop += VERTICAL_SPEED
+        boxTop += window.innerWidth > 400 ? VERTICAL_SPEED :  VERTICAL_SPEED/2
         trianglePong.style.top = boxTop + "px"
 
         if(boxHitsContainerOn("bottom")){

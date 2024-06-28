@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 
-export const Button = styled.button.attrs({
+export const HeaderButton = styled.button.attrs({
     className: "header-button"
 })`
     white-space: nowrap;
