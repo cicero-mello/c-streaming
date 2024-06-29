@@ -1,11 +1,13 @@
 import React, { FormEvent, FunctionComponent, useState } from "react"
 import { BorderButton, GenericTextInput, Line } from "../../components"
 import { UserIcoBig } from "../../assets/icons"
-import { type PageProps } from "gatsby"
 import { isEmailValid } from "../../shared/utils"
+import { useModals } from "../../hooks"
+import { type PageProps } from "gatsby"
 import * as S from "./styles"
 
 export const User: FunctionComponent<PageProps> = () => {
+    const modal = useModals()
     const [formHasNewValue, setFormHasNewValue] = useState(false)
     const [emailErrorMessage, setEmailErrorMessage] = useState("")
 
@@ -64,7 +66,7 @@ export const User: FunctionComponent<PageProps> = () => {
                 <BorderButton
                     $text="Delete Account"
                     $theme="red"
-                    onClick={() => {}}
+                    onClick={() => modal?.deleteAccountQuestion?.open()}
                 />
             </S.BottomSection>
         </S.Component>

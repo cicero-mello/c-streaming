@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { Fonts } from "./fonts"
 import { PageProps } from "gatsby"
-import { NavigationProvider } from "../hooks"
+import { NavigationProvider, ModalsProvider } from "../hooks"
 import * as Styled from "./styles"
 
 const Layout: FunctionComponent<PageProps> = ({ children, path }) => {
@@ -11,7 +11,9 @@ const Layout: FunctionComponent<PageProps> = ({ children, path }) => {
             <Styled.GlobalStyle />
             <Fonts />
             <NavigationProvider path={path}>
-                { children }
+                <ModalsProvider>
+                    { children }
+                </ModalsProvider>
             </NavigationProvider>
         </Styled.Layout>
     )

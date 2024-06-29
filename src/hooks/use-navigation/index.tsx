@@ -9,7 +9,6 @@ import { MediaType, URLParams, URLParamsAllString } from "../../shared/types"
 import { navigate } from "gatsby"
 import { Header, PageLoader } from "../../components"
 import { PageTransition } from "./styles"
-import { PATHS } from "../../paths"
 
 const NavigationContext = createContext<NavigationContextProps>({
     navigate: () => {},
@@ -19,7 +18,7 @@ const NavigationContext = createContext<NavigationContextProps>({
 export const useNavigation = () => useContext(NavigationContext)
 
 export const NavigationProvider: FunctionComponent<any> = ({
-    children, path
+    children
 }) => {
     const transitionRef = useRef<HTMLDivElement>(null)
     const [randomChildrenKey, setRandomChildrenKey] = useState(0)
@@ -105,7 +104,7 @@ export const NavigationProvider: FunctionComponent<any> = ({
                 getUrlParams: getUrlParams
             }}
         >
-            <Header path={path as PATHS}/>
+            <Header />
             <PageLoader show={showLoader}/>
             <PageTransition ref={transitionRef}>
                 <div key={"ck-" + randomChildrenKey}>
