@@ -23,18 +23,18 @@ export const BorderButton = styled.button.attrs((props: any) => ({
     }
 
     ${disabled && css`
-        pointer-events: none;
+        cursor: not-allowed;
         opacity: 0.5;
     `}
 
-    ${!$theme && css`
+    ${!$theme && !disabled && css`
         &:hover {
             border-color: #cccccc;
             color: #EDEDED;
         }
     `}
 
-    ${$theme === "red" && css`
+    ${$theme === "red"  && !disabled && css`
         background-color: #802222;
         &:hover {
             background-color: #760b0b;
@@ -43,7 +43,7 @@ export const BorderButton = styled.button.attrs((props: any) => ({
         }
     `}
 
-    ${$theme === "danger" && css`
+    ${$theme === "danger" && !disabled && css`
         background-color: #8B0202;
         color: white;
         &:hover {
@@ -52,7 +52,7 @@ export const BorderButton = styled.button.attrs((props: any) => ({
         }
     `}
 
-    ${$theme === "green" && css`
+    ${$theme === "green" && !disabled && css`
         background-color: #48792A;
         color: white;
         &:hover {

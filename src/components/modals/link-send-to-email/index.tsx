@@ -1,13 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react"
 import { BaseModalHandle } from "../base/types"
 import { BaseModal } from "../base"
-import { useModals } from "../../../hooks"
 import { GenericModalHandle } from ".."
 
-export const DeleteAccountQuestion = forwardRef<
+export const LinkSendToEmail = forwardRef<
     GenericModalHandle
 >((_, ref) => {
-    const modals = useModals()
     const baseModalRef = useRef<BaseModalHandle>(null)
 
     const open = () => {
@@ -21,24 +19,18 @@ export const DeleteAccountQuestion = forwardRef<
 
     return (
         <BaseModal
-            id="modal-aq"
+            id="modal-lste"
             ref={baseModalRef}
-            title="Are you sure about that?"
+            title="A link was send to your email"
             texts={[
-                "After delete your account, you will never get it back."
+                "Use that link to change your password.",
+                "This is just to confirm your identity"
             ]}
             buttons={[
                 {
-                    $text: "Cancel",
+                    $text: "OK",
+                    $theme: "green",
                     onClick: () => baseModalRef.current?.close()
-                },
-                {
-                    $text: "DELETE ACCOUNT",
-                    $theme: "danger",
-                    onClick: () => {
-                        setTimeout(() => baseModalRef.current?.close(), 180)
-                        modals?.deleteAccountConfirmation?.open()
-                    }
                 }
             ]}
         />

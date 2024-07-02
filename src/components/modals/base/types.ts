@@ -2,13 +2,14 @@ import { ReactNode } from "react"
 import { BorderButtonProps } from "../../buttons"
 
 export interface BaseModalHandle {
-    open: () => void | Promise<void>
+    open: (closeAction?: Function) => void
     close: () => void | Promise<void>
 }
 
 export interface BaseModalProps {
+    id: string
     title?: string
-    text?: string
+    texts?: string[]
     buttons?: BorderButtonProps[]
     children?: ReactNode
 }

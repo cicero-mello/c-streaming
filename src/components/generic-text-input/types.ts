@@ -5,4 +5,5 @@ export interface GenericTextInputProps extends Omit<
 > {
     label?: string
     errorMessage?: string
+    forgetPasswordAction?: () => void
 }

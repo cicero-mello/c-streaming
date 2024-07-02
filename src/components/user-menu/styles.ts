@@ -8,7 +8,7 @@ export const Component = styled.div.attrs((props: any) => ({
     position: relative;
 
     .user-ico{
-        fill: #090909;
+        fill: transparent;
         transition: 200ms ease-in-out;
     }
 

@@ -5,6 +5,7 @@ export const Component = styled.div`
     flex-direction: column;
     width: 100%;
     margin-top: 13px;
+    margin-bottom: 64px;
 `
 
 export const TopSection = styled.section`

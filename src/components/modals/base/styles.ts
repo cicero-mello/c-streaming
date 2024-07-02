@@ -44,12 +44,76 @@ export const Modal = styled.div.attrs({
     @keyframes crashzoom {
         to { transform: scale(1);}
     }
+
+    @media (max-width: 600px){
+        > h2 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        > p { font-size: 18px; }
+        > .buttons-wrapper {
+            margin-top: 38px;
+            * {
+                font-size: 16px;
+            }
+            > * {
+                min-width: 78px;
+            }
+        }
+    }
+
+    @media (max-width: 400px){
+        padding: 24px 24px;
+        .buttons-wrapper{
+            flex-wrap: wrap;
+        }
+    }
+`
+
+export const CloseModal = styled.button`
+    cursor: pointer;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    right: 16px;
+    top: 13px;
+    display: flex;
+
+    &::before {
+        position: absolute;
+        content: "";
+        margin-top: 9px;
+        width: 18px;
+        height: 2px;
+        border-radius: 4px;
+        background-color: #8D8D8D;
+        transform: rotate(-45deg);
+        transition: 100ms linear;
+    }
+
+    &::after {
+        position: absolute;
+        content: "";
+        margin-top: 9px;
+        width: 18px;
+        height: 2px;
+        border-radius: 4px;
+        background-color: #8D8D8D;
+        transform: rotate(45deg);
+        transition: 100ms linear;
+    }
+
+    &:hover {
+        &::after, &::before {
+            background-color: #EDEDED;
+        }
+    }
 `
 
 export const Title = styled.h2`
     font-weight: bold;
     color: #EDEDED;
-    margin-bottom: 16px;
+    margin: 0px 22px 16px 0px;
 `
 
 export const Text = styled.p`
@@ -57,9 +121,22 @@ export const Text = styled.p`
     color: #EDEDED;
 `
 
-export const ButtonsWrapper = styled.div`
+export const ChildrenWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 28px;
+`
+
+export const ButtonsWrapper = styled.div.attrs({
+    className: "buttons-wrapper"
+})`
     display: flex;
     justify-content: end;
-    gap: 24px;
+    gap: 10px 24px;
     margin-top: 48px;
+
+    > * {
+        min-width: 92px;
+    }
 `

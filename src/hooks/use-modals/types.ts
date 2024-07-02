@@ -1,5 +1,8 @@
-import { DeleteAccountQuestionHandle } from "../../components/modals"
+import { GenericModalHandle } from "../../components/modals"
 
 export interface ModalsContextProps {
-    deleteAccountQuestion: DeleteAccountQuestionHandle | null
+    deleteAccountQuestion: GenericModalHandle | null
+    deleteAccountConfirmation: GenericModalHandle | null
+    linkSendToEmail: GenericModalHandle | null
+    confirmYourPassword: GenericModalHandle | null
 }

@@ -7,7 +7,7 @@ import { type PageProps } from "gatsby"
 import * as S from "./styles"
 
 export const User: FunctionComponent<PageProps> = () => {
-    const modal = useModals()
+    const modals = useModals()
     const [formHasNewValue, setFormHasNewValue] = useState(false)
     const [emailErrorMessage, setEmailErrorMessage] = useState("")
 
@@ -18,6 +18,7 @@ export const User: FunctionComponent<PageProps> = () => {
 
         if(isEmailValid(currentEmail)) {
             setEmailErrorMessage("")
+            modals?.confirmYourPassword?.open()
             return
         }
 
@@ -57,16 +58,16 @@ export const User: FunctionComponent<PageProps> = () => {
             <S.BottomSection>
                 <BorderButton
                     $text="Change Password"
-                    onClick={() => {}}
+                    onClick={() => modals?.linkSendToEmail?.open()}
                 />
                 <BorderButton
                     $text="Logout"
-                    onClick={() => {}}
+                    disabled
                 />
                 <BorderButton
                     $text="Delete Account"
                     $theme="red"
-                    onClick={() => modal?.deleteAccountQuestion?.open()}
+                    onClick={() => modals?.deleteAccountQuestion?.open()}
                 />
             </S.BottomSection>
         </S.Component>

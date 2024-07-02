@@ -5,7 +5,7 @@ import { GenericTextInput } from "../../generic-text-input"
 import { useModals } from "../../../hooks"
 import { GenericModalHandle } from ".."
 
-export const DeleteAccountConfirmation = forwardRef<
+export const ConfirmYourPassword = forwardRef<
     GenericModalHandle
 >((_, ref) => {
     const modals = useModals()
@@ -23,11 +23,10 @@ export const DeleteAccountConfirmation = forwardRef<
 
     return (
         <BaseModal
-            id="modal-dac"
+            id="modal-cyp"
             ref={baseModalRef}
-            title="This is your last chance."
             texts={[
-                "If you really want to delete your account, confirm your password."
+                "Please, confirm your password to save the changes"
             ]}
             buttons={[
                 {
@@ -35,8 +34,8 @@ export const DeleteAccountConfirmation = forwardRef<
                     onClick: () => baseModalRef.current?.close()
                 },
                 {
-                    $text: "DELETE ACCOUNT",
-                    $theme: "danger",
+                    $text: "Save Changes",
+                    $theme: "green",
                     onClick: () => setPasswordErrorMessage("Wrong password")
                 }
             ]}

@@ -1,10 +1,7 @@
-import React, { FC, createContext, useContext, useEffect, useRef, useState } from "react"
+import React, { FC, createContext, useContext, useEffect, useRef } from "react"
 import { ModalsContextProps } from "./types"
-import {
-    DeleteAccountQuestion,
-    DeleteAccountQuestionHandle
-} from "../../components/modals"
 import { useForceUpdate } from "../use-force-update"
+import * as M from "../../components/modals"
 
 const ModalsContext = createContext<ModalsContextProps | undefined>(undefined)
 
@@ -14,17 +11,26 @@ export const ModalsProvider: FC<any> = ({
     children
 }) => {
     const forceUpdate = useForceUpdate()
-    const deleteAccountQuestionRef = useRef<DeleteAccountQuestionHandle>(null)
+    const deleteAccountQuestionRef = useRef<M.GenericModalHandle>(null)
+    const deleteAccountConfirmationRef = useRef<M.GenericModalHandle>(null)
+    const linkSendToEmailRef = useRef<M.GenericModalHandle>(null)
+    const confirmYourPasswordRef = useRef<M.GenericModalHandle>(null)
 
     useEffect(forceUpdate, [])
 
     return (
         <ModalsContext.Provider
             value={{
-                deleteAccountQuestion: deleteAccountQuestionRef.current
+                deleteAccountQuestion: deleteAccountQuestionRef.current,
+                deleteAccountConfirmation: deleteAccountConfirmationRef.current,
+                linkSendToEmail: linkSendToEmailRef.current,
+                confirmYourPassword: confirmYourPasswordRef.current
             }}
         >
-            <DeleteAccountQuestion ref={deleteAccountQuestionRef} />
+            <M.DeleteAccountQuestion ref={deleteAccountQuestionRef} />
+            <M.DeleteAccountConfirmation ref={deleteAccountConfirmationRef} />
+            <M.LinkSendToEmail ref={linkSendToEmailRef} />
+            <M.ConfirmYourPassword ref={confirmYourPasswordRef} />
             {children}
         </ModalsContext.Provider>
     )

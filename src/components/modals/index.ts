@@ -1,4 +1,8 @@
 export * from "./delete-account-question"
-export * from "./delete-account-question/types"
 export * from "./delete-account-confirmation"
-export * from "./delete-account-confirmation/types"
+export * from "./link-send-to-email"
+export * from "./confirm-your-password"
+
+export interface GenericModalHandle {
+    open: () => void
+}

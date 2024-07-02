@@ -6,40 +6,67 @@ import * as S from "./styles"
 
 export const BaseModal = forwardRef<
     BaseModalHandle, BaseModalProps
->(({ title, text, buttons, children }, ref) => {
+>(({ title, texts, buttons, children, id }, ref) => {
     const modalRef = useRef(null)
     const [render, setRender] = useState(false)
     const [show, setShow] = useState(false)
+    const [disabledOutsideClick, setDisabledOutsideClick] = useState(true)
+    const [closeAction, setCloseAction] = useState<Function>()
 
-    useOutsideClick(modalRef, () => setShow(false))
+    const open = (closeAction?: Function) => {
+        if(closeAction) setCloseAction(closeAction)
+        setRender(true)
+    }
+
+    const close = () => {
+        setShow(false)
+        if(closeAction) setTimeout(() => closeAction(), 200)
+    }
+
+    useOutsideClick(modalRef, close, disabledOutsideClick)
 
     useImperativeHandle(ref, () => ({
-        open: () => setRender(true),
-        close: () => setShow(false)
+        open: open,
+        close: close
     }))
 
     useEffect(() => {
-        if(render) setShow(true)
+        if(render) {
+            setShow(true)
+            setTimeout(() => setDisabledOutsideClick(false), 500)
+        }
     }, [render])
 
     useEffect(() => {
-        if(!show) setTimeout(() => setRender(false), 500)
+        if(!show) setTimeout(() => {
+            setRender(false)
+            setDisabledOutsideClick(true)
+        }, 500)
     }, [show])
 
     return render && (
-        <S.Component $show={show}>
+        <S.Component $show={show} id={id}>
             <S.Modal ref={modalRef}>
+                <S.CloseModal onClick={close}/>
                 <S.Title> {title} </S.Title>
-                <S.Text> {text} </S.Text>
-                {children}
+                {texts && texts.map((text, index) =>
+                    <S.Text key={`${id}-text-${index}`}>
+                        {text}
+                    </S.Text>
+                )}
+                {children &&
+                    <S.ChildrenWrapper> {children} </S.ChildrenWrapper>
+                }
                 <S.ButtonsWrapper>
                     {buttons && buttons.length > 0 &&
-                        buttons.map(buttonProps =>
-                            <BorderButton {...buttonProps} />
+                        buttons.map((buttonProps, index) =>
+                            <BorderButton
+                                {...buttonProps}
+                                key={`${id}-button-${index}`}
+                            />
                         )
                     }
                 </S.ButtonsWrapper>
-
             </S.Modal>
         </S.Component>
     )
