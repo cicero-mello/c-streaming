@@ -1,6 +1,7 @@
 import React, { FC, createContext, useContext, useEffect, useRef } from "react"
 import { ModalsContextProps } from "./types"
 import { useForceUpdate } from "../use-force-update"
+import { GenericModalHandle } from "../../components/modals"
 import * as M from "../../components/modals"
 
 const ModalsContext = createContext<ModalsContextProps | undefined>(undefined)
@@ -11,10 +12,10 @@ export const ModalsProvider: FC<any> = ({
     children
 }) => {
     const forceUpdate = useForceUpdate()
-    const deleteAccountQuestionRef = useRef<M.GenericModalHandle>(null)
-    const deleteAccountConfirmationRef = useRef<M.GenericModalHandle>(null)
-    const linkSendToEmailRef = useRef<M.GenericModalHandle>(null)
-    const confirmYourPasswordRef = useRef<M.GenericModalHandle>(null)
+    const deleteAccountQuestionRef = useRef<GenericModalHandle>(null)
+    const deleteAccountConfirmationRef = useRef<GenericModalHandle>(null)
+    const linkSendToEmailRef = useRef<GenericModalHandle>(null)
+    const confirmYourPasswordRef = useRef<GenericModalHandle>(null)
 
     useEffect(forceUpdate, [])
 

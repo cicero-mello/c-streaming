@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react"
 import { BannerNavigationProps } from "./types"
 import { TriangleRadioInput } from "../triangle-radio-input"
-import * as Styled from "./styles"
+import * as S from "./styles"
 
 export const BannerNavigation: FunctionComponent<BannerNavigationProps> = ({
     onClickEachButton
@@ -19,7 +19,7 @@ export const BannerNavigation: FunctionComponent<BannerNavigationProps> = ({
     }
 
     return(
-        <Styled.Component>
+        <S.Component>
             {onClickEachButton.map(
                 (func, i) => (
                     <TriangleRadioInput
@@ -31,6 +31,6 @@ export const BannerNavigation: FunctionComponent<BannerNavigationProps> = ({
                     />
                 )
             )}
-        </Styled.Component>
+        </S.Component>
     )
 }

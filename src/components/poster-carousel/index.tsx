@@ -4,7 +4,7 @@ import { Poster } from "../poster"
 import { TriangleNextButton } from "../buttons"
 import { debounce } from "../../shared/utils"
 import { useDidMountEffect } from "../../hooks"
-import * as Styled from "./styles"
+import * as S from "./styles"
 
 export const PosterCarousel: FunctionComponent<PosterCarouselProps> = ({
     posters
@@ -87,18 +87,18 @@ export const PosterCarousel: FunctionComponent<PosterCarouselProps> = ({
     }, [onScrollMobile])
 
     return (
-        <Styled.Component>
+        <S.Component>
             <TriangleNextButton
                 onClick={handleClickGoBack}
                 disabled={!canGoBack}
             />
-            <Styled.Carousel ref={carouselRef} onScroll={onScrollMobile}>
+            <S.Carousel ref={carouselRef} onScroll={onScrollMobile}>
                 {posters.map(poster => <Poster {...poster} key={poster.id}/>)}
-            </Styled.Carousel>
+            </S.Carousel>
             <TriangleNextButton
                 onClick={handleClickGoAhead}
                 disabled={!canGoAhead}
             />
-        </Styled.Component>
+        </S.Component>
     )
 }

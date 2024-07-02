@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from "react"
-import * as Styled from "./styles"
 import { StaticImage } from "gatsby-plugin-image"
+import * as S from "./styles"
+
 const gatbyLogoSrc = "../../assets/images/gatsby-logo.png"
 const instaLogoSrc = "../../assets/images/insta-logo.png"
 
 export const Footer: FunctionComponent = () => (
-    <Styled.Component>
-        <Styled.InfoLink
+    <S.Component>
+        <S.InfoLink
             href="https://www.instagram.com/umcicero/"
             target="_blank"
             rel="preload"
@@ -16,9 +17,9 @@ export const Footer: FunctionComponent = () => (
                 src={instaLogoSrc}
                 alt="A"
             />
-            <Styled.Text > @umcicero </Styled.Text>
-        </Styled.InfoLink>
-        <Styled.InfoLink
+            <S.Text > @umcicero </S.Text>
+        </S.InfoLink>
+        <S.InfoLink
             href="https://www.gatsbyjs.com"
             target="_blank"
             rel="preload"
@@ -28,8 +29,7 @@ export const Footer: FunctionComponent = () => (
                 src={gatbyLogoSrc}
                 alt="A"
             />
-            <Styled.Text> made with Gatsby </Styled.Text>
-        </Styled.InfoLink>
-    </Styled.Component>
+            <S.Text> made with Gatsby </S.Text>
+        </S.InfoLink>
+    </S.Component>
 )
-

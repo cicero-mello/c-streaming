@@ -1,7 +1,7 @@
 import React, { FC, useState, useLayoutEffect } from "react"
 import { customLocalStorage } from "../../../localstorage"
 import { WatchLatterButtonProps } from "./types"
-import * as Styles from "./styles"
+import * as S from "./styles"
 
 export const WatchLatterButton: FC<WatchLatterButtonProps> = ({
     mediaId, onClick, text, ...rest
@@ -22,12 +22,12 @@ export const WatchLatterButton: FC<WatchLatterButtonProps> = ({
     }, [mediaId])
 
     return (
-        <Styles.Button
+        <S.Button
             {...rest}
             $alreadySaveToWatch={watchLater}
             onClick={handleClick}
         >
             {text ?? "Watch Later"}
-        </Styles.Button>
+        </S.Button>
     )
 }

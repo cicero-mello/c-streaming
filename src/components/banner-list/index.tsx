@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useMemo, useState } from "react"
 import { Banner } from "../banner"
 import { BannerListProps } from "./types"
-import * as Styled from "./styles"
 import { BannerNavigation } from "../banner-navigation"
+import * as S from "./styles"
 
 export const BannerList: FunctionComponent<BannerListProps> = ({
     banners
@@ -14,9 +14,9 @@ export const BannerList: FunctionComponent<BannerListProps> = ({
     ),[])
 
     return (
-        <Styled.Component>
+        <S.Component>
             <Banner {...currentBanner}/>
             <BannerNavigation onClickEachButton={onClickEachNavButton}/>
-        </Styled.Component>
+        </S.Component>
     )
 }

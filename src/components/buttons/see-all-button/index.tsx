@@ -1,16 +1,13 @@
 import React, { FunctionComponent } from "react"
 import { SeeAllButtonProps } from "./types"
-import * as Styles from "./styles"
 import { TriangleSeeAll } from "../../../assets/icons"
+import * as S from "./styles"
 
 export const SeeAllButton: FunctionComponent<SeeAllButtonProps> = ({
     text, ...rest
-}) => {
-
-    return (
-        <Styles.Button {...rest}>
-            {text}
-            <TriangleSeeAll />
-        </Styles.Button>
-    )
-}
+}) => (
+    <S.Button {...rest}>
+        {text}
+        <TriangleSeeAll />
+    </S.Button>
+)

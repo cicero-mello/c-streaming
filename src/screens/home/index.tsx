@@ -5,7 +5,7 @@ import { PageMediaProps } from "./type"
 import { useNavigation } from "../../hooks"
 import { PATHS } from "../../paths"
 import { createPageMedia } from "./core"
-import * as Styled from "./styles"
+import * as S from "./styles"
 
 export const Home: FunctionComponent<PageProps> = ({ data }) => {
     const { navigate } = useNavigation()
@@ -17,7 +17,7 @@ export const Home: FunctionComponent<PageProps> = ({ data }) => {
     }, [data])
 
     return (
-        <Styled.Home>
+        <S.Home>
             {pageMedia && <>
                 <BannerList banners={pageMedia.banners} />
                 <Line id="first-line-home"/>
@@ -46,6 +46,6 @@ export const Home: FunctionComponent<PageProps> = ({ data }) => {
                 <Line className="can-hide"/>
                 <Footer />
             </>}
-        </Styled.Home>
+        </S.Home>
     )
 }

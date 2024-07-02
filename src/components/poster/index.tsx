@@ -3,7 +3,7 @@ import { PosterProps } from "./types"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useNavigation } from "../../hooks"
 import { PATHS } from "../../paths"
-import * as Styled from "./styles"
+import * as S from "./styles"
 
 export const Poster: FunctionComponent<PosterProps> = ({
     id, name, image, type
@@ -16,13 +16,13 @@ export const Poster: FunctionComponent<PosterProps> = ({
     }
 
     return (
-        <Styled.Component onClick={handleClick}>
+        <S.Component onClick={handleClick}>
             <GatsbyImage
                 className="gatsby-image"
                 image={image}
                 alt={"Poster of " + name}
             />
-            <Styled.Name> {name} </Styled.Name>
-        </Styled.Component>
+            <S.Name> {name} </S.Name>
+        </S.Component>
     )
 }

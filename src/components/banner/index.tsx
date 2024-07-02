@@ -4,7 +4,7 @@ import { BannerAnimationState, BannerProps } from "./types"
 import { ColorButton, WatchLatterButton } from "../buttons"
 import { useNavigation } from "../../hooks"
 import { PATHS } from "../../paths"
-import * as Styled from "./styles"
+import * as S from "./styles"
 
 export const Banner: FunctionComponent<BannerProps> = (newMedia) => {
     const { navigate } = useNavigation()
@@ -28,25 +28,25 @@ export const Banner: FunctionComponent<BannerProps> = (newMedia) => {
     }, [newMedia])
 
     return (
-        <Styled.Component $animationState={bannerAnimation}>
+        <S.Component $animationState={bannerAnimation}>
             <GatsbyImage
                 className="gatsby-image"
                 image={image as IGatsbyImageData}
                 alt={`Image of ${name}`}
             />
-            <Styled.InfoAndButtons>
-                <Styled.InfoWrapper>
-                    <Styled.MediaName> {name.toLocaleUpperCase()} </Styled.MediaName>
-                    <Styled.Synopsis> {synopsis} </Styled.Synopsis>
-                </Styled.InfoWrapper>
-                <Styled.ButtonsWrapper>
+            <S.InfoAndButtons>
+                <S.InfoWrapper>
+                    <S.MediaName> {name.toLocaleUpperCase()} </S.MediaName>
+                    <S.Synopsis> {synopsis} </S.Synopsis>
+                </S.InfoWrapper>
+                <S.ButtonsWrapper>
                     <WatchLatterButton mediaId={id} />
                     <ColorButton
                         onClick={onClickColorButton}
                         text="Watch Now"
                     />
-                </Styled.ButtonsWrapper>
-            </Styled.InfoAndButtons>
-        </Styled.Component>
+                </S.ButtonsWrapper>
+            </S.InfoAndButtons>
+        </S.Component>
     )
 }
