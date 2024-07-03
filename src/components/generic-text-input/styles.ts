@@ -127,5 +127,5 @@ export const ForgetPasswordMessage = styled.h4`
     overflow: hidden;
 
     &:hover { color: #EDEDED; }
-    &::before{ content: "Forget your password?"; }
+    &::before{ content: "Forgot your password?"; }
 `

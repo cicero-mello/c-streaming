@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
+import { type PageProps } from "gatsby"
 
-export const NotFound: FunctionComponent = () => {
+export const NotFound: FunctionComponent<PageProps> = () => {
 
   return (
     <main>

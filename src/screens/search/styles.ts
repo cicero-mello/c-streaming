@@ -86,7 +86,6 @@ export const MediaListWrapper = styled.section.attrs((props:any) => ({
     margin-top: 33px;
 
     ${({ $showPosters }) => !$showPosters && css`
-        margin-top: 102px;
         opacity: 0;
     `}
 `
