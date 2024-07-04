@@ -35,15 +35,15 @@ export const Search: FunctionComponent<PageProps> = ({
         const newFilteredPosters = core.getFilteredPosters(
             e.target.value, searchType, posters
         )
-        debounce(() => {
-            scrollPageToTop()
+        debounce(async () => {
+            await scrollPageToTop()
             changeFilteredPostersWithAnimation(newFilteredPosters)
         }, 250)
     }
 
-    const onChangeSearchType = (e: ChangeEvent<HTMLSelectElement>) => {
+    const onChangeSearchType = async (e: ChangeEvent<HTMLSelectElement>) => {
         setSearchType(e.target.value)
-        scrollPageToTop()
+        await scrollPageToTop()
         const newFilteredPosters = core.getFilteredPosters(
             searchText, e.target.value, posters
         )

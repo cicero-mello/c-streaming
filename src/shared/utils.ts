@@ -38,12 +38,23 @@ export const objectToQueryString = (object: any): string => (
         .join('&')
 )
 
-export const scrollPageToTop = () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    })
-}
+
+export const scrollPageToTop = () => new Promise((resolve) => {
+    let scrollLoopAnimationId: number
+
+    const scrollLoop = (resolve: (value: unknown) => void) => {
+        const scrollStep = window.scrollY / 8
+        window.scrollBy(0, -scrollStep)
+
+        if(window.scrollY <= 0){
+            cancelAnimationFrame(scrollLoopAnimationId)
+            resolve(true)
+        }
+        else scrollLoopAnimationId = requestAnimationFrame(() => scrollLoop(resolve))
+    }
+
+    scrollLoop(resolve)
+})
 
 export const isEmailValid = (email: string | null | undefined):boolean => {
     if(!email) return false

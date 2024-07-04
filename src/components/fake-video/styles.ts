@@ -54,9 +54,7 @@ export const ScreenSaverContainer = styled.div`
         }
 
         @keyframes rotate {
-            from{
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
     }
 `
@@ -97,11 +95,11 @@ export const PlayButton = styled.button.attrs({
     z-index: 1;
     transition: 80ms linear;
 
-    svg{
+    svg {
         margin-left: 5px;
     }
 
-    &:hover{
+    &:hover {
         background-color: rgba(8,8,8, 0.9);
     }
 `

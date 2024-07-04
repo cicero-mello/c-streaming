@@ -37,14 +37,14 @@ export const Component = styled.div.attrs((props: any) => ({
         > * { color: #EDEDED; }
     }
 
-    @keyframes close {
+    @keyframes close-history-card {
         99% {
             pointer-events: none;
             opacity: 0;
             padding: 0px;
             width: 0px;
             height: 0px;
-            margin: -20px -12px;
+            margin: 0px 0px;
             filter: blur(46px);
         }
         100% {
@@ -53,7 +53,7 @@ export const Component = styled.div.attrs((props: any) => ({
             padding: 0px;
             width: 0px;
             height: 0px;
-            margin: -20px -12px;
+            margin: 0px 0px;
             filter: blur(46px);
             display: none;
         }
@@ -91,7 +91,9 @@ export const CloseButton = styled.button`
     }
 `
 
-export const Title = styled.h3`
+export const Title = styled.h3.attrs({
+    className: "history-card-title"
+})`
     font-size: 20px;
     margin-bottom: 24px;
     margin: 0px 24px 24px 0px;

@@ -45,7 +45,7 @@ export const startPongAnimation = (
     }
 
     const moveLeft = () => {
-        boxLeft -= window.innerWidth > 400 ? HORIZONTAL_SPEED : HORIZONTAL_SPEED/2
+        boxLeft -= window.innerWidth > 500 ? HORIZONTAL_SPEED : HORIZONTAL_SPEED/2
         trianglePong.style.left = boxLeft + "px"
 
         if(boxHitsContainerOn("left")){

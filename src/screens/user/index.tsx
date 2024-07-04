@@ -46,7 +46,7 @@ export const User: FunctionComponent<PageProps> = () => {
                     <GenericTextInput
                         name="email"
                         label="E-mail"
-                        defaultValue="gally@daisukelab.com"
+                        defaultValue="gally@daisuke.com"
                         errorMessage={emailErrorMessage}
                     />
                     <BorderButton
