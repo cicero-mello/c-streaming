@@ -2,17 +2,22 @@ import styled, { css } from "styled-components"
 
 export const Component = styled.div.attrs({
     className: "generic-text-input"
-})`
+})<{ $disabled?: boolean }>`${({ $disabled }) => css`
     position: relative;
     max-width: 342px;
     width: 100%;
-`
 
-export const Input = styled.input.attrs((props: any) => ({
-    className: "input-generic-text-input",
-    $hasLabel: props?.$hasLabel,
-    $hasEye: props?.$hasEye
-}))<{ $hasLabel?: boolean, $hasEye?: boolean }>`${({ $hasLabel, $hasEye }) => css`
+    ${$disabled && css`
+        transition: 200ms linear;
+        opacity: 0.6;
+    `}
+`}`
+
+export const Input = styled.input.attrs({
+    className: "input-generic-text-input"
+})<{ $hasLabel?: boolean, $hasEye?: boolean }>`${({
+    $hasLabel, $hasEye, disabled
+}) => css`
     outline: none;
     appearance: none;
     border: 1px solid #8D8D8D;
@@ -25,7 +30,8 @@ export const Input = styled.input.attrs((props: any) => ({
     padding: 0px 10px;
 
     ${$hasLabel && css` margin-top: 8px; `}
-    ${$hasEye && css` padding-right: 42px;`}
+    ${$hasEye && css` padding-right: 42px; `}
+    ${disabled && css` cursor: not-allowed; `}
 `}`
 
 export const PasswordEye = styled.button.attrs((props: any) => ({

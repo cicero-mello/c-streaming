@@ -15,7 +15,7 @@ export const GenericTextInput: FC<GenericTextInputProps> = ({
     }
 
     return (
-        <S.Component>
+        <S.Component $disabled={rest.disabled}>
             <S.Label onClick={(e) => e.preventDefault()}>
                 { label ?? "" }
                 <S.Input

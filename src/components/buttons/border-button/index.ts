@@ -23,6 +23,7 @@ export const BorderButton = styled.button.attrs((props: any) => ({
     }
 
     ${disabled && css`
+        transition: 200ms linear;
         cursor: not-allowed;
         opacity: 0.5;
     `}

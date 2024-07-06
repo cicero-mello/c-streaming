@@ -1,7 +1,8 @@
-export interface HistoryCardProps{
+export interface HistoryCardProps {
     mediaName: string
     season?: number
     ep?: number
-    epName?: string
-    closeAction?: Function
+    episodeName?: string
+    closeAction: () => void
+    clickAction: () => void
 }

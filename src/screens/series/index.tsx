@@ -7,16 +7,30 @@ import { EpisodeCard, FakeVideo, Line,
 } from "../../components"
 import { PageMediaProps } from "./types"
 import { createPageMedia } from "./core"
+import { customLocalStorage } from "../../localstorage"
 import * as S from "./styles"
+import { mock } from "../../assets/media-mock"
+import { MediaType } from "../../shared/types"
 
 export const Series: FunctionComponent<PageProps> = ({ data }) => {
     const { getUrlParams, navigate } = useNavigation()
+
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
     useEffect(() => {
         const { id, season, ep } = getUrlParams()
         const newPageMedia = createPageMedia(data, navigate, id, season, ep)
-        if(newPageMedia) setPageMedia(newPageMedia)
+        if(newPageMedia) {
+            setPageMedia(newPageMedia)
+            if(!id) return
+            customLocalStorage.addMediaToHistory({
+                mediaID: id,
+                mediaName: newPageMedia.mediaTitle.title,
+                mediaType: mock.medias.find(
+                    media => media.id === id
+                )?.type as MediaType ?? "serie"
+            })
+        }
     }, [data])
 
     return (

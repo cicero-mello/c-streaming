@@ -37,3 +37,21 @@ export interface QueryGatsbyImages {
         gatsbyImageData: IGatsbyImageData | undefined
     }
 }
+
+export interface UserHistory {
+    mediaID: string
+    mediaName: string
+    mediaType: MediaType
+    season?: number
+    ep?: number
+    episodeName?: string
+}
+
+export interface UserHistoryAllString {
+    mediaID: string
+    mediaName: string
+    mediaType: string
+    season?: string
+    ep?: string
+    episodeName?: string
+}

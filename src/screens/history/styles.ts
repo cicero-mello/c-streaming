@@ -102,11 +102,9 @@ export const ContentWrapper = styled.div.attrs({
     width: 100%;
 `
 
-export const CardsWrapper = styled.div.attrs((props: any) => ({
-    className: "cards-wrapper",
-    $closeAllCards: !!props.$closeAllCards,
-    $removeHeight: !!props.$removeHeight
-}))<{ $closeAllCards?: boolean, $removeHeight?: boolean }>`${({
+export const CardsWrapper = styled.div.attrs({
+    className: "cards-wrapper"
+})<{ $closeAllCards?: boolean, $removeHeight?: boolean }>`${({
     $closeAllCards, $removeHeight
 }) => css`
     display: flex;
@@ -128,7 +126,7 @@ export const CardsWrapper = styled.div.attrs((props: any) => ({
 
 export const ActionsWrapper = styled.div.attrs({
     className: "action-wrapper"
-})`
+})<{ $hide?: boolean }>`${({ $hide }) => css`
     display: flex;
     flex-direction: column;
     margin-left: 79px;
@@ -141,13 +139,25 @@ export const ActionsWrapper = styled.div.attrs({
     .generic-text-input {
         margin-bottom: 14px;
     }
-`
 
-export const HistoryClearMessage = styled.h2.attrs((props: any) => ({
+    ${$hide && css`
+        animation: hideActionWrapper 400ms ease-in-out forwards;
+
+        @keyframes hideActionWrapper {
+            99% { opacity: 0; }
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+    `}
+`}`
+
+export const HistoryClearMessage = styled.h2.attrs({
     className: "history-clear-message"
-}))<{ $show?: boolean }>`${({ $show }) => css`
+})<{ $show?: boolean }>`${({ $show }) => css`
     display: flex;
-    width: 70%;
+    width: 0px;
     position: absolute;
     text-align: center;
     transition: 500ms linear;
@@ -158,6 +168,8 @@ export const HistoryClearMessage = styled.h2.attrs((props: any) => ({
     filter: blur(46px);
 
     ${$show && css`
+        width: 100%;
+        position: static;
         opacity: 1;
         filter: blur(0px);
     `}
