@@ -1,10 +1,10 @@
 import * as watchLater from "./watch-later"
-import * as fakeEpisodes from "./fake-episodes"
+import * as fakeSerie from "./fake-serie"
 import * as history from "./history"
-export * from "./fake-episodes/types"
+export * from "./fake-serie/types"
 
 export const customLocalStorage = {
     ...watchLater,
-    ...fakeEpisodes,
+    ...fakeSerie,
     ...history
 }

@@ -15,15 +15,13 @@ export const Movie: FunctionComponent<PageProps> = ({
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
     useEffect(() => {
-        const newPageMedia = createPageMedia(data, urlParams)
+        const newPageMedia = createPageMedia(data, urlParams?.mediaID)
         if(newPageMedia) {
             setPageMedia(newPageMedia)
 
-            if(!urlParams?.id) return
+            if(!urlParams?.mediaID) return
             customLocalStorage.addMediaToHistory({
-                mediaID: urlParams.id,
-                mediaName: newPageMedia.mediaTitle.title,
-                mediaType: "movie"
+                mediaID: urlParams.mediaID
             })
         }
     }, [data])

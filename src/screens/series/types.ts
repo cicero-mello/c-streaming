@@ -10,4 +10,5 @@ export interface PageMediaProps {
     suggestionMedias: SuggestionMedias[]
     nextEpisode?: EpisodeCardProps
     listEpisodeCards: EpisodeCardsProps[]
+    episodeID: string
 }

@@ -77,9 +77,8 @@ export const NavigationProvider: FunctionComponent<any> = ({
         )
 
         return {
-            id: URLObject.id,
-            season: URLObject?.season ? parseInt(URLObject.season) : undefined,
-            ep: URLObject?.ep ? parseInt(URLObject.ep) : undefined,
+            mediaID: URLObject.mediaID,
+            episodeID: URLObject?.episodeID,
             searchText: URLObject.searchText,
             searchType: URLObject.searchType as MediaType
         }

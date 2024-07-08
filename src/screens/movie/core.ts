@@ -1,15 +1,14 @@
 import { PageMediaProps } from "./types"
-import { URLParams } from "../../shared/types"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import * as media from "../../shared/media"
 
 export const createPageMedia = (
-    data: object, urlParams: URLParams
+    data: object, mediaID?: string
 ): PageMediaProps | undefined => {
     const allBannerMediasFromQuery = media.getBannerGatsbyImages(data)
     if(allBannerMediasFromQuery.length <= 0) return
 
-    const fakeVideoMideaFromMock = media.getMediaById(urlParams.id ?? "")
+    const fakeVideoMideaFromMock = media.getMediaById(mediaID ?? "")
     const mediaToFakeVideo = allBannerMediasFromQuery.find(
         media => media.name === fakeVideoMideaFromMock?.imageName
     )

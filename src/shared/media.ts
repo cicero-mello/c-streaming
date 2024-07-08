@@ -72,6 +72,7 @@ export const createSuggestionMedias = (
     bannerMedias: QueryGatsbyImages[],
     mediaExceptionId: string
 ):SuggestionMedias[] => {
+
     const suggestionMedias:SuggestionMedias[] = bannerMedias.map(bannerMedia => {
         const mockData = mock.medias.find((media) => (
             media.imageName === bannerMedia.name
@@ -94,3 +95,10 @@ export const createSuggestionMedias = (
 
     return shuffle(suggestionMedias)
 }
+
+export const lazyEpisodeIDGenerator = (
+    serieID: string, season: number, episode: number
+) => (
+    serieID.substring(season.toString().length + episode.toString().length)
+    + season + episode
+)

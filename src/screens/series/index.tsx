@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { type PageProps } from "gatsby"
 import { useNavigation } from "../../hooks"
-import { EpisodeCard, FakeVideo, Line,
+import {
+    EpisodeCard, FakeVideo, Line,
     MediaTitle, EpisodeCardsCarousel,
     ContentSuggestions
 } from "../../components"
@@ -9,8 +10,6 @@ import { PageMediaProps } from "./types"
 import { createPageMedia } from "./core"
 import { customLocalStorage } from "../../localstorage"
 import * as S from "./styles"
-import { mock } from "../../assets/media-mock"
-import { MediaType } from "../../shared/types"
 
 export const Series: FunctionComponent<PageProps> = ({ data }) => {
     const { getUrlParams, navigate } = useNavigation()
@@ -18,17 +17,15 @@ export const Series: FunctionComponent<PageProps> = ({ data }) => {
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
     useEffect(() => {
-        const { id, season, ep } = getUrlParams()
-        const newPageMedia = createPageMedia(data, navigate, id, season, ep)
+        const { mediaID, episodeID } = getUrlParams()
+        if(!mediaID) return
+
+        const newPageMedia = createPageMedia(data, navigate, mediaID, episodeID)
         if(newPageMedia) {
             setPageMedia(newPageMedia)
-            if(!id) return
             customLocalStorage.addMediaToHistory({
-                mediaID: id,
-                mediaName: newPageMedia.mediaTitle.title,
-                mediaType: mock.medias.find(
-                    media => media.id === id
-                )?.type as MediaType ?? "serie"
+                mediaID: mediaID,
+                episodeID: episodeID
             })
         }
     }, [data])

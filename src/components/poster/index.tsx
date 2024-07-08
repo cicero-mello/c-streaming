@@ -11,8 +11,8 @@ export const Poster: FunctionComponent<PosterProps> = ({
     const { navigate } = useNavigation()
 
     const handleClick = () => {
-        if(type === "movie") navigate(PATHS.MOVIE, { id: id })
-        else navigate(PATHS.SERIES, { id: id })
+        if(type === "movie") navigate(PATHS.MOVIE, { mediaID: id })
+        else navigate(PATHS.SERIES, { mediaID: id })
     }
 
     return (

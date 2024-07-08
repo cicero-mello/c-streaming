@@ -1,17 +1,16 @@
-import { MediaType, UserHistory, UserHistoryAllString } from "../shared/types"
+import { MediaType, UserHistory } from "../shared/types"
 
 export const getHistory = (): UserHistory[] => {
     const history = localStorage.getItem("history")
     if(!history) return []
 
-    const historyList: UserHistoryAllString[] = JSON.parse(history)
+    const historyList: UserHistory[] = JSON.parse(history)
 
-    return historyList.map((history: UserHistoryAllString) => ({
-        ...history,
-        mediaType: history?.mediaType as MediaType,
-        season: history?.season ? parseInt(history.season) : undefined,
-        ep: history?.ep ? parseInt(history.ep) : undefined
-    }))
+    //TODO
+    return historyList
+    // return historyList.map((history: UserHistory) => ({
+    //     ...history
+    // }))
 }
 
 export const addMediaToHistory = (props: UserHistory) => {
@@ -20,8 +19,7 @@ export const addMediaToHistory = (props: UserHistory) => {
     const mediaAlreadyExists = (
         !!history.find(media => (
             media.mediaID === props.mediaID &&
-            media.ep === props.ep &&
-            media.season === props.season
+            media.episodeID === props.episodeID
         ))
     )
 
@@ -33,13 +31,12 @@ export const addMediaToHistory = (props: UserHistory) => {
 }
 
 export const removeMediaFromHistory = (
-    mediaID: string, ep?: number, season?: number
+    mediaID: string, episodeID?: string
 ): UserHistory[] => {
     const history = getHistory()
     const newHistory = history.filter((media) => !(
             media.mediaID === mediaID &&
-            media.ep === ep &&
-            media.season === season
+            media.episodeID === episodeID
         )
     )
 

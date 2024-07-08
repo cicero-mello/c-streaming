@@ -15,17 +15,15 @@ export interface MediaWithGatsbyImage extends Omit<Media, "imageName">{
 }
 
 export interface URLParams {
-    id?: string
-    season?: number
-    ep?: number
+    mediaID?: string
+    episodeID?: string
     searchText?: string
     searchType?: MediaType
 }
 
 export interface URLParamsAllString {
-    id?: string
-    season?: string
-    ep?: string
+    mediaID?: string
+    episodeID?: string
     searchText?: string
     searchType?: string
 }
@@ -40,18 +38,5 @@ export interface QueryGatsbyImages {
 
 export interface UserHistory {
     mediaID: string
-    mediaName: string
-    mediaType: MediaType
-    season?: number
-    ep?: number
-    episodeName?: string
-}
-
-export interface UserHistoryAllString {
-    mediaID: string
-    mediaName: string
-    mediaType: string
-    season?: string
-    ep?: string
-    episodeName?: string
+    episodeID?: string
 }
