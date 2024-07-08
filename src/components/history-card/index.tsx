@@ -3,7 +3,7 @@ import { HistoryCardProps } from "./types"
 import * as S from "./styles"
 
 export const HistoryCard: FC<HistoryCardProps> = ({
-    mediaName, season, ep, episodeName, closeAction, clickAction
+    mediaName, episode, closeAction, clickAction
 }) => {
     const CLOSE_ANIMATION_TIME = 400
     const [render, setRender] = useState(true)
@@ -34,15 +34,15 @@ export const HistoryCard: FC<HistoryCardProps> = ({
         <S.Component ref={cardRef} onClick={clickAction}>
             <S.CloseButton onClick={handleClose}/>
             <S.Title> {mediaName} </S.Title>
-            {season && ep &&
-                <S.SeasonAndEp>
-                    {`S ${season} | E ${ep}`}
-                </S.SeasonAndEp>
-            }
-            {episodeName &&
-                <S.EpisodeName>
-                    {episodeName}
-                </S.EpisodeName>
+            {episode &&
+                <>
+                    <S.SeasonAndEp>
+                        {`S ${episode.season} | E ${episode.ep}`}
+                    </S.SeasonAndEp>
+                    <S.EpisodeName>
+                        {episode.name}
+                    </S.EpisodeName>
+                </>
             }
         </S.Component>
     )

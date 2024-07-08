@@ -25,7 +25,7 @@ export const Series: FunctionComponent<PageProps> = ({ data }) => {
             setPageMedia(newPageMedia)
             customLocalStorage.addMediaToHistory({
                 mediaID: mediaID,
-                episodeID: episodeID
+                episodeID: newPageMedia.episodeID
             })
         }
     }, [data])

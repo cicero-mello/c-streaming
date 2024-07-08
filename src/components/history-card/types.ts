@@ -1,8 +1,8 @@
+import { Episode } from "../../localstorage"
+
 export interface HistoryCardProps {
     mediaName: string
-    season?: number
-    ep?: number
-    episodeName?: string
+    episode?: Episode
     closeAction: () => void
     clickAction: () => void
 }

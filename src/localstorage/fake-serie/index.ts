@@ -1,48 +1,62 @@
 import { randomLoremWords } from "../../shared/lorem"
 import { lazyEpisodeIDGenerator } from "../../shared/media"
-import { FakeSerie, Episode, Season } from "./types"
+import { Serie, Episode, Season, SeasonLocalStorage } from "./types"
 
 const STORAGE_NAME = "series"
+/*
+    series: [{
+        serieID: string,
+        seasons: {
+            id: string,
+            name: string,
+            wasWatched: boolean
+        }
+    }]
+*/
 
 export const createFakeSerie = (
-    serieID: string, anotherFakeSeries: FakeSerie[]
-): FakeSerie => {
-    const seasons: Season[] = Array.from({
+    serieID: string, anotherFakeSeries: Serie[]
+): Serie => {
+    const seasons: SeasonLocalStorage[] = Array.from({
         length: Math.floor(Math.random() * 2 ) + 3
     }).map((_, seasonIndex) =>
         Array.from({ length: Math.floor(Math.random() * 4 ) + 8 }).map(
             (_, episodeIndex) => ({
                 id: lazyEpisodeIDGenerator(serieID, seasonIndex + 1, episodeIndex + 1),
                 name: randomLoremWords(),
-                ep: episodeIndex + 1,
-                season: seasonIndex + 1,
-                serieID: serieID,
                 wasWatched: false
             })
         )
     )
 
-    const fakeSerie = {
-        serieID: serieID,
-        seasons: seasons
-    }
-
-    const jsonStringified = JSON.stringify([fakeSerie, ...anotherFakeSeries])
+    const jsonStringified = JSON.stringify([
+        {serieID: serieID, seasons: seasons},
+        ...anotherFakeSeries
+    ])
     localStorage.setItem(STORAGE_NAME, jsonStringified)
 
-    return fakeSerie
+    return {
+        serieID: serieID,
+        seasons: putMoreDataOnSeasons(seasons)
+    }
 }
 
-export const getAllFakeSeries = (): FakeSerie[] => {
+export const getAllFakeSeries = (): Serie[] => {
     const series = localStorage.getItem(STORAGE_NAME)
     if(!series) return []
-    return JSON.parse(series)
+    return JSON.parse(series).map((serie: Serie) => ({
+        serieID: serie.serieID,
+        seasons: putMoreDataOnSeasons(serie.seasons)
+    }))
 }
 
-export const getFakeSerie = (serieID: string): FakeSerie => {
+export const getFakeSerie = (serieID: string): Serie => {
     const series = getAllFakeSeries()
     const wantedSerie = series.find(serie => serie.serieID === serieID)
-    if(!!wantedSerie) return wantedSerie
+    if(!!wantedSerie) return {
+        serieID: wantedSerie.serieID,
+        seasons: putMoreDataOnSeasons(wantedSerie.seasons)
+    }
     return createFakeSerie(serieID, series)
 }
 
@@ -61,7 +75,7 @@ export const setWasWatchedOnEpisode = (
 
     const allFakeSeries = getAllFakeSeries()
 
-    const newAllFakeSeries: FakeSerie[] = allFakeSeries.map((serie) => {
+    const newAllFakeSeries: Serie[] = allFakeSeries.map((serie) => {
         if(serie.serieID === serieID) return {
             serieID: serieID,
             seasons: episodesWithWasWatchedChanged(serie.seasons, episodeID)
@@ -76,16 +90,14 @@ export const setWasWatchedOnEpisode = (
 export const getLastWatchedEpisodeByOrder = (
     serieID: string
 ): Episode => {
-    let lastWatchedEpisode
+    let lastWatchedEpisode: Episode | undefined
 
-    const fakeSerie = getFakeSerie(serieID)
-    const seasons = fakeSerie.seasons
-
-    seasons.forEach(episodes => episodes.forEach(episode => {
+    const serie = getFakeSerie(serieID)
+    serie.seasons.forEach(season => season.forEach(episode => {
         if(episode.wasWatched) lastWatchedEpisode = episode
     }))
 
-    return lastWatchedEpisode ?? seasons[0][0]
+    return lastWatchedEpisode ?? serie.seasons[0][0]
 }
 
 export const getEpisodeByIDs = (
@@ -118,3 +130,13 @@ export const getNextEpisode = (
 
     return
 }
+
+const putMoreDataOnSeasons = (seasonsLocalStorage: SeasonLocalStorage[]): Season[] => (
+    seasonsLocalStorage.map((season, seasonIndex) =>
+        season.map((episode, episodeIndex) => ({
+            ...episode,
+            ep: episodeIndex + 1,
+            season: seasonIndex + 1
+        })
+    ))
+)

@@ -63,10 +63,10 @@ export const createPageMedia = (
         },
         listEpisodeCards: fakeSerie.seasons.map((episodes, indexSeason) => ({
             topText: `SEASON ${indexSeason + 1}`,
-            episodeCards: episodes.map((episode, indexEp) => ({
+            episodeCards: episodes.map((episode) => ({
                 thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,
                 altImage: fakeVideoMideaFromMock.imageName,
-                episode: indexEp + 1,
+                episode: episode.ep,
                 text: episode.name,
                 wasWatched: episode.wasWatched,
                 onClick: () => navigate(PATHS.SERIES, {

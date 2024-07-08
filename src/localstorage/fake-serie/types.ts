@@ -1,4 +1,4 @@
-export interface FakeSerie {
+export interface Serie {
     serieID: string
     seasons: Season[]
 }
@@ -10,6 +10,9 @@ export interface Episode {
     name: string
     ep: number
     season: number
-    serieID: string
     wasWatched: boolean
 }
+
+
+export type SeasonLocalStorage = EpisodeLocalStorage[]
+export type EpisodeLocalStorage = Omit<Episode, "season" | "ep">

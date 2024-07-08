@@ -1,6 +1,12 @@
 import { WatchLater } from "./types"
 
 const STORAGE_NAME = "watch-later"
+/*
+    watchLater: [{
+        id: string,
+        isSetToWatchLater: boolean
+    }]
+*/
 
 export const getAllWatchLater = (): WatchLater[] => {
     const watchLaterStringified = localStorage.getItem(STORAGE_NAME)

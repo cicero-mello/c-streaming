@@ -1,9 +1,8 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-export const Component = styled.div.attrs((props: any) => ({
-    className: "history-card",
-    $show: !!props.$show
-}))<{ $show?: boolean }>`${({ $show }) => css`
+export const Component = styled.div.attrs({
+    className: "history-card"
+})`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -58,7 +57,7 @@ export const Component = styled.div.attrs((props: any) => ({
             display: none;
         }
     }
-`}`
+`
 
 export const CloseButton = styled.button`
     display: flex;
@@ -99,6 +98,7 @@ export const Title = styled.h3.attrs({
     margin: 0px 24px 24px 0px;
     transition: 200ms linear;
     font-weight: bold;
+
 `
 
 export const SeasonAndEp = styled.h3`
