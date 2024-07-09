@@ -1,3 +1,4 @@
+import { useLayoutEffect, useState } from "react"
 import { HistoryCardProps } from "../../../components"
 import { useNavigation } from "../../../hooks"
 import { customLocalStorage, HistoryItem } from "../../../localstorage"
@@ -10,6 +11,7 @@ import { UsePageAnimation, UsePageMedia } from "./types"
 export const usePageMedia = (
     animation: UsePageAnimation
 ): UsePageMedia => {
+    const [historyCards, setHistoryCards] = useState<HistoryCardProps[]>([])
     const { navigate } = useNavigation()
 
     const getHistoryCards = (): HistoryCardProps[] => {
@@ -48,8 +50,11 @@ export const usePageMedia = (
         return historyCards
     }
 
+    useLayoutEffect(() => {
+        setHistoryCards(getHistoryCards())
+    }, [])
 
     return {
-        historyCards: getHistoryCards()
+        historyCards: historyCards
     }
 }

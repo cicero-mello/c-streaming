@@ -18,15 +18,12 @@ export const getHistory = (): UserHistory => {
 
 export const addMediaToHistory = (props: Omit<HistoryItem, "viewDate">) => debounce(() => {
     const history = getHistory()
-    console.log("caiu no add")
-    console.log(history[history.length - 1])
-    console.log(props)
 
     const mediaWasTheLastAdded = !!history && history.length > 0 && (
         history[0].mediaID === props.mediaID &&
         history[0].episodeID === props.episodeID
     )
-    console.log(mediaWasTheLastAdded)
+
     if(mediaWasTheLastAdded) return
 
     history.unshift({
