@@ -60,3 +60,7 @@ export const isEmailValid = (email: string | null | undefined):boolean => {
     if(!email) return false
     return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
 }
+
+export const delay = (time: number) => new Promise((resolve) => {
+    setTimeout(() => resolve(true), time)
+})

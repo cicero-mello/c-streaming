@@ -1,78 +1,52 @@
-import React, { FunctionComponent, useLayoutEffect, useState } from "react"
+import React, { FC } from "react"
 import { type PageProps } from "gatsby"
 import { BorderButton, GenericTextInput, HistoryCard, Line } from "../../components"
-import { scrollPageToTop } from "../../shared/utils"
+import { usePageAnimation, usePageMedia } from "./core"
 import { customLocalStorage } from "../../localstorage"
-import { PageAnimationStates, PageMediaProps } from "./types"
-import { useNavigation } from "../../hooks"
-import * as core from "./core"
 import * as S from "./styles"
 
-export const History: FunctionComponent<PageProps> = () => {
-    const { navigate } = useNavigation()
-    const [pageMedia, setPageMedia] = useState<PageMediaProps>()
-    const [pageAnimation, setPageAnimation] = useState<PageAnimationStates>({})
+export const History: FC<PageProps> = () => {
+    const animation = usePageAnimation()
+    const { historyCards } = usePageMedia(animation)
 
-    const clearAllHistory = () => {
+    const isToShowClearMessage = (
+        (historyCards.length === 0) ||
+        (animation.states.isActionsHidden && animation.states.isPageOnTopWithNoCards)
+    )
+
+    const onClickClearAllHistory = async () => {
+        await animation.clearAllHistory()
         customLocalStorage.clearAllHistory()
-
-        const startAnimation = async () => {
-            setPageAnimation(old => ({...old, isHistoryClear: true}))
-            setTimeout(() => setPageAnimation(old => ({...old, isAllCardsClosed: true})), 800)
-            setTimeout(() => setPageAnimation(old => ({...old, isActionsHidden: true})), 1200)
-            await scrollPageToTop()
-            setPageAnimation(old => ({...old, isPageOnTopWithNoCards: true}))
-        }
-        startAnimation()
     }
-
-    const onEveryHistoryWasRemoved = () => {
-        const startAnimation = async () => {
-            setPageAnimation(old => ({...old, isHistoryClear: true, isAllCardsClosed: true}))
-            setTimeout(() => setPageAnimation(old => ({...old, isActionsHidden: true})), 400)
-            await scrollPageToTop()
-            setPageAnimation(old => ({...old, isPageOnTopWithNoCards: true}))
-        }
-        startAnimation()
-    }
-
-    useLayoutEffect(() => {
-        const history = customLocalStorage.getHistory()
-        const newPageMedia = core.createPageMedia(history, navigate, onEveryHistoryWasRemoved)
-        setPageMedia(newPageMedia)
-    }, [])
 
     return (
         <S.Component>
             <Line />
             <S.Title> History </S.Title>
             <S.ContentWrapper>
-                <S.HistoryClearMessage
-                    $show={
-                        (pageMedia && pageMedia.historyCards.length === 0) ||
-                        (pageAnimation.isActionsHidden && pageAnimation.isPageOnTopWithNoCards)
-                    }
-                >
+                <S.HistoryClearMessage $show={isToShowClearMessage}>
                     Your history is already clear
                 </S.HistoryClearMessage>
-                {!!pageMedia && pageMedia.historyCards.length > 0 &&
+                {historyCards.length > 0 &&
                     <>
                         <S.CardsWrapper
-                            $closeAllCards={pageAnimation.isHistoryClear}
-                            $removeHeight={pageAnimation.isPageOnTopWithNoCards}
+                            $closeAllCards={animation.states.isHistoryClear}
+                            $removeHeight={animation.states.isPageOnTopWithNoCards}
                         >
-                            {pageMedia.historyCards.map(media => <HistoryCard {...media} />)}
+                            {historyCards.map((props) => <HistoryCard {...props} />)}
                         </S.CardsWrapper>
-                        <S.ActionsWrapper $hide={pageAnimation.isAllCardsClosed}>
+                        <S.ActionsWrapper $hide={animation.states.isAllCardsClosed}>
                             <GenericTextInput
                                 label="Search"
-                                disabled={pageAnimation.isHistoryClear}
+                                // value={searchFilter}
+                                // onChange={(e) => setSearchFilter(e.target.value)}
+                                disabled={animation.states.isHistoryClear}
                             />
                             <BorderButton
                                 $text="Clear All History"
                                 $theme="red"
-                                disabled={pageAnimation.isHistoryClear}
-                                onClick={clearAllHistory}
+                                disabled={animation.states.isHistoryClear}
+                                onClick={onClickClearAllHistory}
                             />
                         </S.ActionsWrapper>
                     </>
