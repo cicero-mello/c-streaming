@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react"
 import { useNavigation } from "../../../hooks"
-import { customLocalStorage, HistoryItem, UserHistory } from "../../../localstorage"
+import { customLocalStorage, HistoryItem } from "../../../localstorage"
 import { getEpisodeByIDs } from "../../../localstorage/fake-serie"
 import { PATHS } from "../../../paths"
 import { getMediaById } from "../../../shared/media"
@@ -13,13 +13,12 @@ export const usePageMedia = (
     const [historyCards, setHistoryCards] = useState<PageHistoryCard[]>([])
     const { navigate } = useNavigation()
 
-    const updateHistoryCards = (historyInjection?: UserHistory) => {
-        const history = historyInjection ?? customLocalStorage.getHistory()
-        setHistoryCards(history.map(historyItem => historyItemToHistoryCard(historyItem)))
-    }
-
     const historyItemToHistoryCard = (historyItem: HistoryItem):PageHistoryCard => {
         const media = getMediaById(historyItem.mediaID)
+        const episode = (!!historyItem?.episodeID ?
+            getEpisodeByIDs(historyItem.mediaID, historyItem.episodeID) :
+            undefined
+        )
 
         const clickActionHistoryCard = () => {
             const { mediaID, episodeID } = historyItem
@@ -28,22 +27,15 @@ export const usePageMedia = (
         }
 
         const closeActionHistoryCard = async () => {
-            const history = customLocalStorage.getHistory()
-            if(history.length === 1){
-                await animation.onEveryHistoryWasRemoved()
-                const newHistory = customLocalStorage.removeMediaFromHistory(historyItem)
-                updateHistoryCards(newHistory)
-                return
-            }
+            const currentHistory = customLocalStorage.getHistory()
+            if(currentHistory.length === 1) await animation.onEveryHistoryWasRemoved()
 
-            const newHistory = customLocalStorage.removeMediaFromHistory(historyItem)
-            updateHistoryCards(newHistory)
+            customLocalStorage.removeMediaFromHistory(historyItem)
+            setHistoryCards(old => old.filter(card => !(
+                card.props.mediaName === media?.name &&
+                card.props.episode === episode
+            )))
         }
-
-        const episode = (!!historyItem?.episodeID ?
-            getEpisodeByIDs(historyItem.mediaID, historyItem.episodeID) :
-            undefined
-        )
 
         return {
             props: {
@@ -57,7 +49,8 @@ export const usePageMedia = (
     }
 
     useLayoutEffect(() => {
-        updateHistoryCards()
+        const history = customLocalStorage.getHistory()
+        setHistoryCards(history.map(historyItem => historyItemToHistoryCard(historyItem)))
     }, [])
 
     return {

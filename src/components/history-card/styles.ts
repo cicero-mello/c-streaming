@@ -14,7 +14,7 @@ export const Component = styled.div.attrs({
     padding: 24px 18px;
     overflow: hidden;
 
-    transition: 200ms linear;
+    transition: 100ms linear;
 
     > * { color: #8D8D8D; }
 
@@ -96,7 +96,7 @@ export const Title = styled.h3.attrs({
     font-size: 20px;
     margin-bottom: 24px;
     margin: 0px 24px 24px 0px;
-    transition: 200ms linear;
+    transition: 100ms linear;
     font-weight: bold;
 
 `
@@ -107,5 +107,5 @@ export const SeasonAndEp = styled.h3`
 
 export const EpisodeName = styled.h3`
     margin-top: 5px;
-    transition: 200ms linear;
+    transition: 100ms linear;
 `

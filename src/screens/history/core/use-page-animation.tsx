@@ -7,11 +7,13 @@ export const usePageAnimation = ():UsePageAnimation => {
     const [isPageOnTopWithNoCards, setIsPageOnTopWithNoCards] = useState(false)
     const [isActionsHidden, setIsActionsHidden] = useState(false)
     const [isAllCardsClosed, setIsAllCardsClosed] = useState(false)
+    const [isHistoryHidden, setIsHistoryHidden] = useState(false)
 
     const clearAllHistory = async () => {
         const startAnimation = async () => {
             setIsHistoryClear(true)
-            await scrollPageToTop()
+            scrollPageToTop()
+            await delay(800)
             setIsAllCardsClosed(true)
             await delay(400)
             setIsActionsHidden(true)
@@ -32,14 +34,21 @@ export const usePageAnimation = ():UsePageAnimation => {
         await startAnimation()
     }
 
+    const hideHistory = async (hide: boolean) => {
+        setIsHistoryHidden(hide)
+        await delay(190)
+    }
+
     return {
         clearAllHistory,
         onEveryHistoryWasRemoved,
+        hideHistory,
         states: {
             isHistoryClear,
             isPageOnTopWithNoCards,
             isActionsHidden,
-            isAllCardsClosed
+            isAllCardsClosed,
+            isHistoryHidden
         }
     }
 }

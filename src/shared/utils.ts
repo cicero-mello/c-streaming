@@ -59,6 +59,8 @@ export const disableScroll = (): () => void => {
 }
 
 export const scrollPageToTop = () => new Promise((resolve) => {
+    if(window.scrollY <= 0) resolve(true)
+
     const enableScroll = disableScroll()
     let scrollLoopAnimationId: number
 

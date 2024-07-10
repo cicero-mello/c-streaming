@@ -104,14 +104,16 @@ export const ContentWrapper = styled.div.attrs({
 
 export const CardsWrapper = styled.div.attrs({
     className: "cards-wrapper"
-})<{ $closeAllCards?: boolean, $removeHeight?: boolean }>`${({
-    $closeAllCards, $removeHeight
+})<{ $closeAllCards?: boolean, $removeHeight?: boolean, $hide?: boolean }>`${({
+    $closeAllCards, $removeHeight, $hide
 }) => css`
     display: flex;
     flex-wrap: wrap;
     width: 70%;
     margin-top: 12px;
     transform-origin: top left;
+    opacity: 1;
+    transition: 180ms linear;
 
     ${$closeAllCards && css`
         transition: 800ms ease-in-out;
@@ -121,6 +123,10 @@ export const CardsWrapper = styled.div.attrs({
 
     ${$removeHeight && css`
         height: 0px;
+    `}
+
+    ${$hide && css`
+        opacity: 0;
     `}
 `}`
 
@@ -142,7 +148,6 @@ export const ActionsWrapper = styled.div.attrs({
 
     ${$hide && css`
         animation: hideActionWrapper 400ms ease-in-out forwards;
-
         @keyframes hideActionWrapper {
             99% { opacity: 0; }
             100% {
@@ -161,9 +166,7 @@ export const HistoryClearMessage = styled.h2.attrs({
     position: absolute;
     text-align: center;
     transition: 500ms linear;
-
     color: #EDEDED;
-
     opacity: 0;
     filter: blur(46px);
 
@@ -175,5 +178,18 @@ export const HistoryClearMessage = styled.h2.attrs({
     `}
 `}`
 
-export const NoResults = styled.h4`
+export const NoResults = styled.h2`
+    color: #8b8b8b;
+    opacity: 0;
+    animation: showNoResultsHistorySearch 180ms linear forwards;
+
+    @keyframes showNoResultsHistorySearch {
+        to { opacity: 1; }
+    }
+
+    &::before { content: "No results for your search "; }
+    &::after {
+        content: ":(";
+        white-space: nowrap;
+    }
 `

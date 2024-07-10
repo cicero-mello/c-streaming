@@ -15,11 +15,13 @@ export interface PageAnimationStates {
     isPageOnTopWithNoCards?: boolean
     isActionsHidden?: boolean
     isAllCardsClosed?: boolean
+    isHistoryHidden?: boolean
 }
 
 export interface PageAnimationHandle {
     onEveryHistoryWasRemoved: () => Promise<void>
     clearAllHistory: () => Promise<void>
+    hideHistory: (hide: boolean) => Promise<void>
 }
 
 export interface UsePageAnimation extends PageAnimationHandle {

@@ -1,33 +1,29 @@
-import React, { FC, useState } from "react"
+import React, { FC } from "react"
 import { type PageProps } from "gatsby"
 import { BorderButton, GenericTextInput, HistoryCard, Line } from "../../components"
-import { usePageAnimation, usePageMedia } from "./core"
+import { usePageAnimation, usePageFilter, usePageMedia } from "./core"
 import { customLocalStorage } from "../../localstorage"
-import { stringIncludes } from "../../shared/utils"
 import * as S from "./styles"
 
 export const History: FC<PageProps> = () => {
     const animation = usePageAnimation()
     const { historyCards } = usePageMedia(animation)
-    const [searchFilter, setSearchFilter] = useState("")
-    // const { historyCardsFilteres, onChangeSearch } = usePageFilter(historyCards, animation)
+    const {
+        historyCardsFiltered,
+        onChangeSearch
+    } = usePageFilter(historyCards, animation)
 
     const isToShowClearMessage = (
-        (historyCards.length === 0) ||
-        (animation.states.isActionsHidden && animation.states.isPageOnTopWithNoCards)
+        (historyCards.length === 0) || (
+            animation.states.isActionsHidden &&
+            animation.states.isPageOnTopWithNoCards
+        )
     )
 
     const onClickClearAllHistory = async () => {
         await animation.clearAllHistory()
         customLocalStorage.clearAllHistory()
     }
-
-    const historyCardsFiltered = historyCards.filter(
-        ({ props }) => (
-            stringIncludes(props.mediaName, searchFilter) ||
-            (props.episode && stringIncludes(props.episode?.name, searchFilter))
-        )
-    )
 
     return (
         <S.Component>
@@ -41,16 +37,17 @@ export const History: FC<PageProps> = () => {
                     <S.CardsWrapper
                         $closeAllCards={animation.states.isHistoryClear}
                         $removeHeight={animation.states.isPageOnTopWithNoCards}
+                        $hide={animation.states.isHistoryHidden}
                     >
-                        {historyCards.map(
+                        {historyCardsFiltered.map(
                             ({ props, key }) => <HistoryCard {...props} key={key} />
                         )}
-                        {/* {historyCardsFiltered.length <= 0 && <S.NoResults />} */}
+                        {historyCardsFiltered.length <= 0 && <S.NoResults />}
                     </S.CardsWrapper>
                     <S.ActionsWrapper $hide={animation.states.isAllCardsClosed}>
                         <GenericTextInput
                             label="Search"
-                            onChange={(e) => setSearchFilter(e.target.value)}
+                            onChange={onChangeSearch}
                             disabled={animation.states.isHistoryClear}
                         />
                         <BorderButton
