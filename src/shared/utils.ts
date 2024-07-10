@@ -34,26 +34,49 @@ export const shuffle = (array: any[]): any[] => {
 
 export const objectToQueryString = (object: any): string => (
     "?" + Object.keys(object)
-        .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(object[key]))
-        .join('&')
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(object[key]))
+        .join("&")
 )
 
+/**
+     * Return a function to enable scroll.
+*/
+export const disableScroll = (): () => void => {
+    const scrollEvent = (event: Event) => {
+        event.preventDefault()
+        event.stopPropagation()
+    }
+
+    window.addEventListener("scroll", scrollEvent, { passive: false })
+    window.addEventListener("wheel", scrollEvent, { passive: false })
+    window.addEventListener("touchmove", scrollEvent, { passive: false })
+
+    return () => {
+        window.removeEventListener("scroll", scrollEvent)
+        window.removeEventListener("wheel", scrollEvent)
+        window.removeEventListener("touchmove", scrollEvent)
+    }
+}
 
 export const scrollPageToTop = () => new Promise((resolve) => {
+    const enableScroll = disableScroll()
     let scrollLoopAnimationId: number
 
-    const scrollLoop = (resolve: (value: unknown) => void) => {
+    const automaticScrollLoop = (resolve: (value: unknown) => void) => {
         const scrollStep = window.scrollY / 8
         window.scrollBy(0, -scrollStep)
 
         if(window.scrollY <= 0){
             cancelAnimationFrame(scrollLoopAnimationId)
+            enableScroll()
             resolve(true)
         }
-        else scrollLoopAnimationId = requestAnimationFrame(() => scrollLoop(resolve))
+        else scrollLoopAnimationId = requestAnimationFrame(
+            () => automaticScrollLoop(resolve)
+        )
     }
 
-    scrollLoop(resolve)
+    automaticScrollLoop(resolve)
 })
 
 export const isEmailValid = (email: string | null | undefined):boolean => {
@@ -64,3 +87,19 @@ export const isEmailValid = (email: string | null | undefined):boolean => {
 export const delay = (time: number) => new Promise((resolve) => {
     setTimeout(() => resolve(true), time)
 })
+
+export const getRandomID = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    let result = ""
+
+    for(let i = 0; i < 4; i++){
+        result += chars.charAt(Math.floor(Math.random() * chars.length))
+    }
+    return result + Date.now()
+}
+
+export const stringIncludes = (str1: string, str2: string) => {
+    return str1.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(
+        str2.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    )
+}

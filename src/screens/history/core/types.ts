@@ -1,7 +1,13 @@
+import { ChangeEvent } from "react"
 import { HistoryCardProps } from "../../../components"
 
 export interface UsePageMedia {
-    historyCards: HistoryCardProps[]
+    historyCards: PageHistoryCard[]
+}
+
+export interface PageHistoryCard {
+    props: HistoryCardProps
+    key: string
 }
 
 export interface PageAnimationStates {
@@ -18,4 +24,9 @@ export interface PageAnimationHandle {
 
 export interface UsePageAnimation extends PageAnimationHandle {
     states: PageAnimationStates
+}
+
+export interface UsePageFilter {
+    historyCardsFiltered: PageHistoryCard[]
+    onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void
 }

@@ -174,3 +174,6 @@ export const HistoryClearMessage = styled.h2.attrs({
         filter: blur(0px);
     `}
 `}`
+
+export const NoResults = styled.h4`
+`

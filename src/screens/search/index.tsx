@@ -74,7 +74,6 @@ export const Search: FunctionComponent<PageProps> = ({
                     options={core.SELECT_OPTIONS}
                     value={searchType}
                     onChange={onChangeSearchType}
-                    onClick={scrollPageToTop}
                 />
             </S.InputZone>
             <S.MediaListWrapper $showPosters={showPosters}>

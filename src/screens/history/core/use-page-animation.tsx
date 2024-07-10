@@ -11,11 +11,10 @@ export const usePageAnimation = ():UsePageAnimation => {
     const clearAllHistory = async () => {
         const startAnimation = async () => {
             setIsHistoryClear(true)
-            await delay(800)
+            await scrollPageToTop()
             setIsAllCardsClosed(true)
             await delay(400)
             setIsActionsHidden(true)
-            await scrollPageToTop()
             setIsPageOnTopWithNoCards(true)
         }
         await startAnimation()
