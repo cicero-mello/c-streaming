@@ -1,19 +1,19 @@
 import { ChangeEvent, useState } from "react"
-import { PageHistoryCard, UsePageAnimation, UsePageFilter } from "./types"
+import { PageAnimations, PageHistoryCard, UsePageFilter } from "./types"
 import { debounce, scrollPageToTop, stringIncludes } from "../../../shared/utils"
 
 export const usePageFilter = (
     historyCards: PageHistoryCard[],
-    animation: UsePageAnimation
+    animations: PageAnimations
 ):UsePageFilter => {
     const [search, setSearch] = useState("")
 
     const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
         debounce(async () => {
             await scrollPageToTop()
-            await animation.hideHistory(true)
+            await animations.hideHistory(true)
             setSearch(event.target.value)
-            await animation.hideHistory(false)
+            await animations.hideHistory(false)
         }, 200)
     }
 

@@ -1,8 +1,9 @@
 import { ChangeEvent } from "react"
 import { HistoryCardProps } from "../../../components"
 
-export interface UsePageMedia {
+export interface UsePageData {
     historyCards: PageHistoryCard[]
+    clearAllHistory: () => void
 }
 
 export interface PageHistoryCard {
@@ -18,14 +19,15 @@ export interface PageAnimationStates {
     isHistoryHidden?: boolean
 }
 
-export interface PageAnimationHandle {
-    onEveryHistoryWasRemoved: () => Promise<void>
+export interface PageAnimations {
+    onEveryHistoryCardWasRemoved: () => Promise<void>
     clearAllHistory: () => Promise<void>
     hideHistory: (hide: boolean) => Promise<void>
 }
 
-export interface UsePageAnimation extends PageAnimationHandle {
-    states: PageAnimationStates
+export interface UsePageAnimation {
+    animationState: PageAnimationStates
+    animations: PageAnimations
 }
 
 export interface UsePageFilter {

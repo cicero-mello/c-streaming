@@ -1,64 +1,55 @@
 import React, { FC } from "react"
-import { type PageProps } from "gatsby"
+import { PageProps } from "gatsby"
 import { BorderButton, GenericTextInput, HistoryCard, Line } from "../../components"
-import { usePageAnimation, usePageFilter, usePageMedia } from "./core"
-import { customLocalStorage } from "../../localstorage"
+import { usePageAnimation, usePageFilter, usePageData } from "./core"
 import * as S from "./styles"
 
 export const History: FC<PageProps> = () => {
-    const animation = usePageAnimation()
-    const { historyCards } = usePageMedia(animation)
-    const {
-        historyCardsFiltered,
-        onChangeSearch
-    } = usePageFilter(historyCards, animation)
-
-    const isToShowClearMessage = (
-        (historyCards.length === 0) || (
-            animation.states.isActionsHidden &&
-            animation.states.isPageOnTopWithNoCards
-        )
+    const { animationState, animations } = usePageAnimation()
+    const { historyCards, clearAllHistory } = usePageData(animations)
+    const { historyCardsFiltered, onChangeSearch } = usePageFilter(
+        historyCards, animations
     )
 
-    const onClickClearAllHistory = async () => {
-        await animation.clearAllHistory()
-        customLocalStorage.clearAllHistory()
-    }
+    const haveHistoryCards = historyCards.length > 0
+    const haveFilteredHistoryCards = historyCardsFiltered.length > 0
 
     return (
-        <S.Component>
+        <S.Screen>
             <Line />
             <S.Title> History </S.Title>
             <S.ContentWrapper>
-                <S.HistoryClearMessage $show={isToShowClearMessage}>
-                    Your history is already clear
-                </S.HistoryClearMessage>
-                {historyCards.length > 0 && <>
+                {!haveHistoryCards &&
+                    <S.HistoryClearMessage>
+                        Your history is already clear
+                    </S.HistoryClearMessage>
+                }
+                {haveHistoryCards && <>
                     <S.CardsWrapper
-                        $closeAllCards={animation.states.isHistoryClear}
-                        $removeHeight={animation.states.isPageOnTopWithNoCards}
-                        $hide={animation.states.isHistoryHidden}
+                        $closeAllCards={animationState.isHistoryClear}
+                        $removeHeight={animationState.isPageOnTopWithNoCards}
+                        $hide={animationState.isHistoryHidden}
                     >
                         {historyCardsFiltered.map(
                             ({ props, key }) => <HistoryCard {...props} key={key} />
                         )}
-                        {historyCardsFiltered.length <= 0 && <S.NoResults />}
+                        {!haveFilteredHistoryCards && <S.NoResults />}
                     </S.CardsWrapper>
-                    <S.ActionsWrapper $hide={animation.states.isAllCardsClosed}>
+                    <S.ActionsWrapper $hide={animationState.isAllCardsClosed}>
                         <GenericTextInput
                             label="Search"
                             onChange={onChangeSearch}
-                            disabled={animation.states.isHistoryClear}
+                            disabled={animationState.isHistoryClear}
                         />
                         <BorderButton
                             $text="Clear All History"
                             $theme="red"
-                            disabled={animation.states.isHistoryClear}
-                            onClick={onClickClearAllHistory}
+                            disabled={animationState.isHistoryClear}
+                            onClick={clearAllHistory}
                         />
                     </S.ActionsWrapper>
                 </>}
             </S.ContentWrapper>
-        </S.Component>
+        </S.Screen>
     )
 }

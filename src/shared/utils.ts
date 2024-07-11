@@ -65,7 +65,8 @@ export const scrollPageToTop = () => new Promise((resolve) => {
     let scrollLoopAnimationId: number
 
     const automaticScrollLoop = (resolve: (value: unknown) => void) => {
-        const scrollStep = window.scrollY / 8
+        let scrollStep = window.scrollY / 8
+        if(scrollStep <= 2) scrollStep = 2
         window.scrollBy(0, -scrollStep)
 
         if(window.scrollY <= 0){

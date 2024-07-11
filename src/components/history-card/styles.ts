@@ -16,7 +16,7 @@ export const Component = styled.div.attrs({
 
     transition: 100ms linear;
 
-    > * { color: #8D8D8D; }
+    > * { color: #b4b4b4; }
 
     &::before{
         content: "";

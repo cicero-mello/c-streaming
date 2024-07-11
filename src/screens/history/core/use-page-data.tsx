@@ -4,31 +4,40 @@ import { customLocalStorage, HistoryItem } from "../../../localstorage"
 import { getEpisodeByIDs } from "../../../localstorage/fake-serie"
 import { PATHS } from "../../../paths"
 import { getMediaById } from "../../../shared/media"
-import { PageHistoryCard, UsePageAnimation, UsePageMedia } from "./types"
+import { PageHistoryCard, PageAnimations, UsePageData } from "./types"
 import { getRandomID } from "../../../shared/utils"
 
-export const usePageMedia = (
-    animation: UsePageAnimation
-): UsePageMedia => {
+export const usePageData = (
+    animations: PageAnimations
+): UsePageData => {
     const [historyCards, setHistoryCards] = useState<PageHistoryCard[]>([])
     const { navigate } = useNavigation()
 
-    const historyItemToHistoryCard = (historyItem: HistoryItem):PageHistoryCard => {
+    const historyItemToHistoryCard = (
+        historyItem: HistoryItem
+    ):PageHistoryCard => {
         const media = getMediaById(historyItem.mediaID)
         const episode = (!!historyItem?.episodeID ?
-            getEpisodeByIDs(historyItem.mediaID, historyItem.episodeID) :
-            undefined
+            getEpisodeByIDs(
+                historyItem.mediaID, historyItem.episodeID
+            ) : undefined
         )
 
         const clickActionHistoryCard = () => {
             const { mediaID, episodeID } = historyItem
-            if(media?.type === "movie") navigate(PATHS.MOVIE, {mediaID, episodeID })
-            else navigate(PATHS.SERIES, { mediaID, episodeID })
+            if(media?.type === "movie"){
+                navigate(PATHS.MOVIE, { mediaID, episodeID })
+                return
+            }
+            navigate(PATHS.SERIES, { mediaID, episodeID })
         }
 
         const closeActionHistoryCard = async () => {
             const currentHistory = customLocalStorage.getHistory()
-            if(currentHistory.length === 1) await animation.onEveryHistoryWasRemoved()
+            const isTheLastCardsToClose = currentHistory.length === 1
+            if(isTheLastCardsToClose) {
+                await animations.onEveryHistoryCardWasRemoved()
+            }
 
             customLocalStorage.removeMediaFromHistory(historyItem)
             setHistoryCards(old => old.filter(card => !(
@@ -48,12 +57,22 @@ export const usePageMedia = (
         }
     }
 
+    const clearAllHistory = async () => {
+        await animations.clearAllHistory()
+        customLocalStorage.clearAllHistory()
+        setHistoryCards([])
+    }
+
     useLayoutEffect(() => {
         const history = customLocalStorage.getHistory()
-        setHistoryCards(history.map(historyItem => historyItemToHistoryCard(historyItem)))
+        const historyCards = history.map(
+            historyItem => historyItemToHistoryCard(historyItem)
+        )
+        setHistoryCards(historyCards)
     }, [])
 
     return {
-        historyCards: historyCards
+        historyCards: historyCards,
+        clearAllHistory: clearAllHistory
     }
 }

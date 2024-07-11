@@ -22,7 +22,7 @@ export const usePageAnimation = ():UsePageAnimation => {
         await startAnimation()
     }
 
-    const onEveryHistoryWasRemoved = async () => {
+    const onEveryHistoryCardWasRemoved = async () => {
         const startAnimation = async () => {
             setIsHistoryClear(true)
             setIsAllCardsClosed(true)
@@ -40,15 +40,17 @@ export const usePageAnimation = ():UsePageAnimation => {
     }
 
     return {
-        clearAllHistory,
-        onEveryHistoryWasRemoved,
-        hideHistory,
-        states: {
+        animationState: {
             isHistoryClear,
             isPageOnTopWithNoCards,
             isActionsHidden,
             isAllCardsClosed,
             isHistoryHidden
+        },
+        animations: {
+            clearAllHistory,
+            onEveryHistoryCardWasRemoved,
+            hideHistory
         }
     }
 }

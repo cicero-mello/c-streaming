@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 
-export const Component = styled.main`
+export const Screen = styled.main`
     display: flex;
     flex-direction: column;
     margin-top: 13px;
@@ -28,6 +28,7 @@ export const Component = styled.main`
             margin-bottom: 34px;
             flex-direction: row;
             width: 110%;
+            max-width: unset;
         }
         .border-button {
             margin-top: 27px;
@@ -97,19 +98,29 @@ export const ContentWrapper = styled.div.attrs({
 })`
     display: flex;
     position: relative;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 46px 79px;
     width: 100%;
+
+    &:has(.history-clear-message){
+        justify-content: space-between;
+    }
 `
+
+interface CardsWrapperProps {
+    $closeAllCards?: boolean,
+    $removeHeight?: boolean,
+    $hide?: boolean
+}
 
 export const CardsWrapper = styled.div.attrs({
     className: "cards-wrapper"
-})<{ $closeAllCards?: boolean, $removeHeight?: boolean, $hide?: boolean }>`${({
+})<CardsWrapperProps>`${({
     $closeAllCards, $removeHeight, $hide
 }) => css`
     display: flex;
     flex-wrap: wrap;
-    width: 70%;
+    width: 47%;
     margin-top: 12px;
     transform-origin: top left;
     opacity: 1;
@@ -140,6 +151,7 @@ export const ActionsWrapper = styled.div.attrs({
     height: fit-content;
     top: 120px;
     width: 305px;
+    max-width: 36%;
     height: fit-content;
 
     .generic-text-input {
@@ -148,38 +160,42 @@ export const ActionsWrapper = styled.div.attrs({
 
     ${$hide && css`
         animation: hideActionWrapper 400ms ease-in-out forwards;
-        @keyframes hideActionWrapper {
-            99% { opacity: 0; }
-            100% {
-                opacity: 0;
-                display: none;
-            }
-        }
     `}
+
+    @keyframes hideActionWrapper {
+        99% { opacity: 0; }
+        100% {
+            opacity: 0;
+            display: none;
+        }
+    }
 `}`
 
 export const HistoryClearMessage = styled.h2.attrs({
     className: "history-clear-message"
-})<{ $show?: boolean }>`${({ $show }) => css`
+})`
     display: flex;
-    width: 0px;
-    position: absolute;
     text-align: center;
-    transition: 500ms linear;
     color: #EDEDED;
-    opacity: 0;
-    filter: blur(46px);
+    position: static;
+    animation: showHistoryClearMessage 500ms linear forwards;
 
-    ${$show && css`
-        width: 100%;
-        position: static;
-        opacity: 1;
-        filter: blur(0px);
-    `}
-`}`
+    @keyframes showHistoryClearMessage {
+        from {
+            width: 0px;
+            opacity: 0;
+            filter: blur(46px);
+        }
+        to {
+            width: 100%;
+            opacity: 1;
+            filter: blur(0px);
+        }
+    }
+`
 
 export const NoResults = styled.h2`
-    color: #8b8b8b;
+    color: #b4b4b4;
     opacity: 0;
     animation: showNoResultsHistorySearch 180ms linear forwards;
 
