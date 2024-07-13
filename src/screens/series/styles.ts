@@ -207,6 +207,7 @@ export const LastEpisodeMessage = styled.input.attrs({
 
     &::before {
         content: "Amazing, you've reached the last episode!";
+        background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-image: linear-gradient(
@@ -219,6 +220,7 @@ export const LastEpisodeMessage = styled.input.attrs({
         animation: 10s slideX linear infinite forwards;
     }
     &:checked::before{
+        background-clip: unset;
         -webkit-background-clip: unset;
         -webkit-text-fill-color: unset;
         text-shadow: unset;
