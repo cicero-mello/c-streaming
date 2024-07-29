@@ -51,7 +51,6 @@ export const removeMediaFromHistory = ({
     return newHistory
 }
 
-
 export const clearAllHistory = () => {
     localStorage.setItem("history", JSON.stringify([]))
 }

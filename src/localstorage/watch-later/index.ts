@@ -19,7 +19,7 @@ export const getWatchLater = (mediaID: string): boolean => {
     return !!watchLater.find(item => item.id === mediaID)?.isSetToWatchLater
 }
 
-export const setWatchLater = (mediaID: string, watchLater: boolean) => {
+export const addWatchLater = (mediaID: string, watchLater: boolean) => {
     const allWatchLater = getAllWatchLater()
     const itemExists = allWatchLater.find(item => item.id === mediaID)
 
@@ -41,4 +41,13 @@ export const setWatchLater = (mediaID: string, watchLater: boolean) => {
     const jsonStringified = JSON.stringify(newWatchLater)
 
     localStorage.setItem(STORAGE_NAME, jsonStringified)
+}
+
+export const removeWatchLater = (mediaID: string): WatchLater[] => {
+    const watchLater = getAllWatchLater()
+    const newWatchLater = watchLater.filter(item => item.id != mediaID)
+    const jsonStringified = JSON.stringify(newWatchLater)
+    localStorage.setItem(STORAGE_NAME, jsonStringified)
+
+    return newWatchLater
 }

@@ -9,7 +9,7 @@ export const WatchLatterButton: FC<WatchLatterButtonProps> = ({
     const [watchLater, setWatchLater] = useState(false)
 
     const handleClick = (e: any) => {
-        customLocalStorage.setWatchLater(mediaId, !watchLater)
+        customLocalStorage.addWatchLater(mediaId, !watchLater)
         setWatchLater((old) => !old)
         if(onClick) onClick(e)
     }

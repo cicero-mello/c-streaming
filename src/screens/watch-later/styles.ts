@@ -10,6 +10,8 @@ export const Screen = styled.main`
 export const CardsContainer = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
+    /* width: 100%; */
     padding: 46px 79px;
 `
 

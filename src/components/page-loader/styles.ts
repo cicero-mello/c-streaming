@@ -28,7 +28,7 @@ export const Loader = styled.div`
         linear-gradient(currentColor 0 0) top   /100% 1px,
         linear-gradient(currentColor 0 0) bottom/100% 1px,
         linear-gradient(to bottom right, #0000 calc(50% - 2px),currentColor calc(50% - 1px),#0000 50%) top/100% calc(100% + 5px),
-        linear-gradient(to bottom left , #0000 calc(50% - 2px),currentColor calc(50% - 1px),#0000 50%) top/100% calc(100% + 5px); 
+        linear-gradient(to bottom left , #0000 calc(50% - 2px),currentColor calc(50% - 1px),#0000 50%) top/100% calc(100% + 5px);
     background-repeat: no-repeat;
     animation: l17 4s infinite linear;
 
