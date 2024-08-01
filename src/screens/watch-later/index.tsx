@@ -15,6 +15,11 @@ export const WatchLater: FC<PageProps> = ({ data }) => {
                 {watchLaterCards.map(({props, key }) =>
                     <WatchLaterCard {...props} key={key}/>
                 )}
+                {watchLaterCards.length === 0 &&
+                    <S.NoCardsMessage>
+                        Empty list
+                    </S.NoCardsMessage>
+                }
             </S.CardsContainer>
         </S.Screen>
     )
