@@ -5,12 +5,12 @@ import { NavigationProvider, ModalsProvider } from "../hooks"
 import * as S from "./styles"
 
 const Layout: FunctionComponent<PageProps> = ({
-    children, path
+    children
 }) => (
     <S.Layout>
         <S.GlobalStyle />
         <Fonts />
-        <NavigationProvider path={path}>
+        <NavigationProvider>
             <ModalsProvider>
                 { children }
             </ModalsProvider>
