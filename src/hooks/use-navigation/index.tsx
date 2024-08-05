@@ -8,7 +8,7 @@ import { objectToQueryString, scrollPageToTop } from "../../shared/utils"
 import { MediaType, URLParams, URLParamsAllString } from "../../shared/types"
 import { navigate } from "gatsby"
 import { Header, PageLoader } from "../../components"
-import { PageTransition } from "./styles"
+import * as S from "./styles"
 
 const NavigationContext = createContext<NavigationContextProps>({
     navigate: () => {},
@@ -105,11 +105,11 @@ export const NavigationProvider: FunctionComponent<any> = ({
         >
             <Header />
             <PageLoader show={showLoader}/>
-            <PageTransition ref={transitionRef}>
+            <S.PageTransition ref={transitionRef}>
                 <div key={"ck-" + randomChildrenKey}>
                     {children}
                 </div>
-            </PageTransition>
+            </S.PageTransition>
         </NavigationContext.Provider>
     )
 }

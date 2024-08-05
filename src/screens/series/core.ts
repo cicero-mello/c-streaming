@@ -24,7 +24,7 @@ export const createPageMedia = (
     const suggestionMedias = media.createSuggestionMedias(
         allBannerMediasFromQuery, fakeVideoMideaFromMock?.id ?? ""
     )
-    const fakeSerie = customLocalStorage.getFakeSerie(serieID)
+    const serie = customLocalStorage.getSerie(serieID)
     const lastWatchedEpisode = customLocalStorage.getLastWatchedEpisodeByOrder(serieID)
     const currentEpisode = customLocalStorage.getEpisodeByIDs(serieID, episodeID ?? lastWatchedEpisode.id)
 
@@ -61,7 +61,7 @@ export const createPageMedia = (
                 episodeID: nextEpisode.id
             })
         },
-        listEpisodeCards: fakeSerie.seasons.map((episodes, indexSeason) => ({
+        listEpisodeCards: serie.seasons.map((episodes, indexSeason) => ({
             topText: `SEASON ${indexSeason + 1}`,
             episodeCards: episodes.map((episode) => ({
                 thumbImage: mediaToFakeVideo.childImageSharp.gatsbyImageData as IGatsbyImageData,

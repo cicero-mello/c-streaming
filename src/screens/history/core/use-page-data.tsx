@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from "react"
 import { useNavigation } from "../../../hooks"
 import { customLocalStorage, HistoryItem } from "../../../localstorage"
-import { getEpisodeByIDs } from "../../../localstorage/fake-serie"
+import { getEpisodeByIDs } from "../../../localstorage/serie"
 import { PATHS } from "../../../paths"
 import { getMediaById } from "../../../shared/media"
 import { PageHistoryCard, PageAnimations, UsePageData } from "./types"

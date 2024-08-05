@@ -54,4 +54,3 @@ export const Layout = styled.div.attrs({ className: "layout" })`
     position: relative;
     height: 100%;
 `
-
