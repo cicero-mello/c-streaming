@@ -1,5 +1,5 @@
 import { IGatsbyImageData, getImage } from "gatsby-plugin-image"
-import { BannerProps } from "../components/banner/types"
+import { BannerProps } from "../components/banner-list/item/types"
 import { QueryGatsbyImages } from "./types"
 import { mock } from "../assets/media-mock"
 import { MediaType } from "../shared/types"

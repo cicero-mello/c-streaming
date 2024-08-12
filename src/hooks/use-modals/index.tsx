@@ -1,8 +1,8 @@
 import React, { FC, createContext, useContext, useEffect, useRef } from "react"
 import { ModalsContextProps } from "./types"
 import { useForceUpdate } from "../use-force-update"
-import { GenericModalHandle } from "../../components/modals"
-import * as M from "../../components/modals"
+import { GenericModalHandle } from "./modals"
+import * as M from "./modals"
 
 const ModalsContext = createContext<ModalsContextProps | undefined>(undefined)
 

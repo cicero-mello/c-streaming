@@ -1,25 +1,32 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { BannerList, Line, SearchInput, PosterList, Footer } from "../../components"
+
 import { PageProps } from "gatsby"
 import { PageMediaProps } from "./type"
-import { useNavigation } from "../../hooks"
+import {  useNavigation } from "../../hooks"
 import { PATHS } from "../../paths"
 import { createPageMedia } from "./core"
 import * as S from "./styles"
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
+import { useMediaStore } from "../../stores"
+import { Banner, Footer, SearchInput, Line, PosterList } from "../../components"
 
 export const Home: FunctionComponent<PageProps> = ({ data }) => {
+    const medias = useMediaStore((state) => state.medias)
+    console.log(medias)
+
     const { navigate } = useNavigation()
     const [pageMedia, setPageMedia] = useState<PageMediaProps>()
 
     useEffect(() => {
         const newPageMedia = createPageMedia(data)
         if(newPageMedia) setPageMedia(newPageMedia)
-    }, [data])
+        // console.log(medias)
+    }, [data, medias])
 
     return (
         <S.Home>
             {pageMedia && <>
-                <BannerList banners={pageMedia.banners} />
+                <Banner />
                 <Line id="first-line-home"/>
                 <SearchInput />
                 <Line />

@@ -1,10 +1,14 @@
 import React, { FunctionComponent } from "react"
-import { graphql, type HeadFC, type PageProps } from "gatsby"
-import * as Screens from "../screens"
+import { graphql, HeadFC, PageProps } from "gatsby"
+import { useMediaStore } from "../stores"
+import * as S from "../screens"
 
-const SearchPage: FunctionComponent<PageProps> = (props) => (
-    <Screens.Search {...props} />
-)
+const SearchPage: FunctionComponent<PageProps> = (props) => {
+    const updateMedias = useMediaStore((state) => state.updateMedias)
+    updateMedias(props.data)
+
+    return <S.Search {...props} />
+}
 
 export default SearchPage
 export const Head: HeadFC = () => <title>C-Streaming: Searching...</title>

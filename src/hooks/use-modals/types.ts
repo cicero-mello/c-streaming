@@ -1,4 +1,4 @@
-import { GenericModalHandle } from "../../components/modals"
+import { GenericModalHandle } from "./modals"
 
 export interface ModalsContextProps {
     deleteAccountQuestion: GenericModalHandle | null

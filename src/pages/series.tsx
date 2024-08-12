@@ -1,10 +1,14 @@
 import React, { FunctionComponent } from "react"
-import { graphql, type HeadFC, type PageProps } from "gatsby"
-import * as Screens from "../screens"
+import { graphql, HeadFC, PageProps } from "gatsby"
+import { useMediaStore } from "../stores"
+import * as S from "../screens"
 
-const SeriesPage: FunctionComponent<PageProps> = (props) => (
-    <Screens.Series {...props} />
-)
+const SeriesPage: FunctionComponent<PageProps> = (props) => {
+    const updateMedias = useMediaStore((state) => state.updateMedias)
+    updateMedias(props.data)
+
+    return <S.Series {...props} />
+}
 
 export default SeriesPage
 export const Head: HeadFC = () => <title>C-Streaming: Serie/Anime</title>
