@@ -13,9 +13,7 @@ export const Navigation: FunctionComponent<BannerNavigationProps> = ({
         if(needAwaitNextClick) return
 
         setNeedAwaitNextClick(true)
-        setTimeout(() => {
-            setNeedAwaitNextClick(false)
-        }, 600)
+        setTimeout(() => setNeedAwaitNextClick(false), 600)
         func()
     }
 

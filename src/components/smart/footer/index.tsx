@@ -2,8 +2,8 @@ import React, { FunctionComponent } from "react"
 import { StaticImage } from "gatsby-plugin-image"
 import * as S from "./styles"
 
-const gatbyLogoSrc = "../../assets/images/gatsby-logo.png"
-const instaLogoSrc = "../../assets/images/insta-logo.png"
+const gatbyLogoSrc = "../../../assets/images/gatsby-logo.png"
+const instaLogoSrc = "../../../assets/images/insta-logo.png"
 
 export const Footer: FunctionComponent = () => (
     <S.Component>

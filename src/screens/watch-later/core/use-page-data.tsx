@@ -1,7 +1,7 @@
 import { PageCards, UsePageData } from "./types"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import { useLayoutEffect, useState } from "react"
-import { customLocalStorage, WatchLater } from "../../../localstorage"
+import { customLocalStorage, WatchLater } from "../../../stores"
 import { useNavigation } from "../../../hooks"
 import { PATHS } from "../../../paths"
 import { getRandomID } from "../../../shared/utils"

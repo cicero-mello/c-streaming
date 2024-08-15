@@ -4,7 +4,7 @@ import { useMediaStore } from "../stores"
 import * as S from "../screens"
 
 const WatchLaterPage: FunctionComponent<PageProps> = (props) => {
-    const updateMedias = useMediaStore((state) => state.updateMedias)
+    const updateMedias = useMediaStore(state => state.updateMedias)
     updateMedias(props.data)
 
     return <S.WatchLater {...props} />

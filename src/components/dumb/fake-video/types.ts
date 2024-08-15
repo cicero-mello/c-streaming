@@ -1,7 +1,9 @@
 import { IGatsbyImageData } from "gatsby-plugin-image"
+import { HTMLAttributes } from "react"
 
-export interface FakeVideoProps {
-    thumbImage: IGatsbyImageData
-    imageName: string
-    onClickWatch?: () => void
+export interface FakeVideoProps extends Omit<
+    HTMLAttributes<HTMLDivElement>, "className"
+>{
+    thumbImage: IGatsbyImageData,
+    altThumbImage: string
 }

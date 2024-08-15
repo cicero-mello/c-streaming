@@ -14,6 +14,8 @@ export interface Media {
 export interface MediaStore {
     medias: Media[],
     updateMedias: (pageData: object) => void
+    getMediasByType: (type: MediaType) => Media[]
+    getMediaById: (id: string)  => Media | undefined
 }
 
 export interface QueryGatsbyImages {

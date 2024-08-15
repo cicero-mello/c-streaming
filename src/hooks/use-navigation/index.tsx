@@ -9,6 +9,7 @@ import { MediaType, URLParams, URLParamsAllString } from "../../shared/types"
 import { navigate } from "gatsby"
 import { Header, PageLoader } from "../../components"
 import * as S from "./styles"
+import { PATHS } from "../../paths"
 
 const NavigationContext = createContext<NavigationContextProps>({
     navigate: () => {},
@@ -49,10 +50,14 @@ export const NavigationProvider: FunctionComponent<any> = ({
         if(!transitionRef.current) return
         transitionRef.current.style.opacity = "0%"
         transitionRef.current.style.pointerEvents = "none"
-
         setTimeout(async () => {
             await scrollPageToTop()
-            reloadChildrenElements()
+            console.log("path: " + path)
+            console.log("window: " + window.location.pathname)
+            if(window.location.pathname === path){
+                console.log("caiu no true")
+                reloadChildrenElements()
+            }
             prepareLoader()
             if(!params) {
                 navigate(path)

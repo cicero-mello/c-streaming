@@ -1,5 +1,5 @@
 import React, { FC, useState, useLayoutEffect } from "react"
-import { customLocalStorage } from "../../../../localstorage"
+import { customLocalStorage } from "../../../../stores"
 import { WatchLatterButtonProps } from "./types"
 import * as S from "./styles"
 

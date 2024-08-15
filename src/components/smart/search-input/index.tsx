@@ -1,7 +1,7 @@
 import React, { KeyboardEvent, FunctionComponent, useRef } from "react"
 import { SearchInputProps } from "./types"
-import { useNavigation } from "../../hooks"
-import { PATHS } from "../../paths"
+import { useNavigation } from "../../../hooks"
+import { PATHS } from "../../../paths"
 import * as S from "./styles"
 
 export const SearchInput: FunctionComponent<SearchInputProps> = ({

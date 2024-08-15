@@ -1,5 +1,5 @@
-import { debounce } from "../../shared/utils"
-import { HistoryItem, UserHistory } from "./types"
+import { debounce } from "../../../shared/utils"
+import { HistoryItem } from "./types"
 
 const STORAGE_NAME = "history"
 /*
@@ -10,7 +10,7 @@ const STORAGE_NAME = "history"
     }]
 */
 
-export const getHistory = (): UserHistory => {
+export const getHistory = (): HistoryItem[] => {
     const history = localStorage.getItem(STORAGE_NAME)
     if(!history) return []
     return JSON.parse(history)
@@ -37,7 +37,7 @@ export const addMediaToHistory = (props: Omit<HistoryItem, "viewDate">) => debou
 
 export const removeMediaFromHistory = ({
     mediaID, viewDate, episodeID
-}: HistoryItem): UserHistory => {
+}: HistoryItem): HistoryItem[] => {
     const history = getHistory()
     const newHistory = history.filter((media) => !(
             media.viewDate === viewDate &&
@@ -53,4 +53,14 @@ export const removeMediaFromHistory = ({
 
 export const clearAllHistory = () => {
     localStorage.setItem("history", JSON.stringify([]))
+}
+
+export const episodeWasWatched = (
+    episodeID: string, history?: HistoryItem[]
+): boolean => {
+    const allHistory = history ?? getHistory()
+
+    const episodeOnHistory = allHistory.find(item => item.episodeID === episodeID)
+    if(!episodeOnHistory) return false
+    return true
 }

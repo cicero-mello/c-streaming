@@ -1,14 +1,20 @@
 import { create } from "zustand"
-import { MediaStore, Media, ImageInfo } from "./types"
+import { MediaStore, Media, ImageInfo, MediaType } from "./types"
 import { MEDIAS_LIST } from "./data"
 import { getImage } from "gatsby-plugin-image"
 
-export const useMediaStore = create<MediaStore>((set) => ({
+export const useMediaStore = create<MediaStore>((set, get) => ({
     medias: [],
     updateMedias: (pageData: any) => set(
         (state) => ({
             medias: getNewMedias(pageData, state.medias)
         })
+    ),
+    getMediasByType: (type: MediaType) => get().medias.filter(
+        media => media.type === type
+    ),
+    getMediaById: (id: string) => get().medias.find(
+        media => media.id === id
     )
 }))
 

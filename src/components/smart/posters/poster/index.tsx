@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react"
 import { PosterProps } from "./types"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { useNavigation } from "../../../hooks"
-import { PATHS } from "../../../paths"
+import { useNavigation } from "../../../../hooks"
+import { PATHS } from "../../../../paths"
 import * as S from "./styles"
 
 export const Poster: FunctionComponent<PosterProps> = ({
@@ -15,7 +15,7 @@ export const Poster: FunctionComponent<PosterProps> = ({
         else navigate(PATHS.SERIES, { mediaID: id })
     }
 
-    return (
+    return image &&(
         <S.Component onClick={handleClick}>
             <GatsbyImage
                 className="gatsby-image"

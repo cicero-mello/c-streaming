@@ -7,7 +7,7 @@ const MoviePage: FC<PageProps> = (props) => {
     const updateMedias = useMediaStore((state) => state.updateMedias)
     updateMedias(props.data)
 
-    return <S.Movie {...props} />
+    return <S.Movie />
 }
 
 export default MoviePage

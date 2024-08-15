@@ -7,7 +7,7 @@ const SeriesPage: FunctionComponent<PageProps> = (props) => {
     const updateMedias = useMediaStore((state) => state.updateMedias)
     updateMedias(props.data)
 
-    return <S.Series {...props} />
+    return <S.Series />
 }
 
 export default SeriesPage

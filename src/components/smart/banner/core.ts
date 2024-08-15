@@ -25,10 +25,8 @@ export const createBannerItems = (
         )
     )
 
-    const bannerItems = choicedMedias.map(media => {
-        if(!media?.bannerImage) throw new Error(
-            "Banner image does not exist!"
-        )
+    const bannerItems: BannerItem[] = choicedMedias.map(media => {
+        if(!media?.bannerImage) return undefined
         return {
             id: media.id,
             image: media.bannerImage,
@@ -36,7 +34,11 @@ export const createBannerItems = (
             synopsis: media.synopsis,
             type: media.type
         }
-    })
+    }).filter(item => item != undefined)
 
-    return bannerItems
+    const orderedBannersByName = choicedMediaNamesToBanner.map(
+        name => bannerItems.find(bannerItem => bannerItem.name === name)
+    ).filter(item => item != undefined)
+
+    return orderedBannersByName
 }

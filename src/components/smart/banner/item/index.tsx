@@ -9,13 +9,12 @@ import * as S from "./styles"
 export const Item: FunctionComponent<BannerItem> = (newMedia) => {
     const { navigate } = useNavigation()
     const [showingMedia, setShowingMedia] = useState(newMedia)
-    const { id, name, synopsis, image, type } = showingMedia
     const [bannerAnimation, setBannerAnimation] = useState<BannerAnimationState>("closed")
     const [firstRender, setFirstRender] = useState(true)
 
     const onClickColorButton = () => {
-        if(type === "movie") navigate(PATHS.MOVIE, { mediaID: id })
-        else navigate(PATHS.SERIES, { mediaID: id })
+        if(showingMedia.type === "movie") navigate(PATHS.MOVIE, { mediaID: showingMedia.id })
+        else navigate(PATHS.SERIES, { mediaID: showingMedia.id })
     }
 
     useEffect(() => {
@@ -31,16 +30,16 @@ export const Item: FunctionComponent<BannerItem> = (newMedia) => {
         <S.Component $animationState={bannerAnimation}>
             <GatsbyImage
                 className="gatsby-image"
-                image={image as IGatsbyImageData}
-                alt={`Image of ${name}`}
+                image={showingMedia.image as IGatsbyImageData}
+                alt={`Image of ${showingMedia.name}`}
             />
             <S.InfoAndButtons>
                 <S.InfoWrapper>
-                    <S.MediaName> {name.toLocaleUpperCase()} </S.MediaName>
-                    <S.Synopsis> {synopsis} </S.Synopsis>
+                    <S.MediaName> {showingMedia.name.toLocaleUpperCase()} </S.MediaName>
+                    <S.Synopsis> {showingMedia.synopsis} </S.Synopsis>
                 </S.InfoWrapper>
                 <S.ButtonsWrapper>
-                    <WatchLatterButton mediaId={id} />
+                    <WatchLatterButton mediaId={showingMedia.id} />
                     <ColorButton
                         onClick={onClickColorButton}
                         text="Watch Now"

@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useCallback, useRef, useState } from "react"
-import { PosterCarouselProps } from "./types"
+import { CarouselProps } from "./types"
 import { Poster } from "../poster"
-import { TriangleNextButton } from "../buttons"
-import { debounce } from "../../../shared/utils"
-import { useDidMountEffect } from "../../../hooks"
+import { TriangleNextButton } from "../../../dumb/buttons"
+import { debounce } from "../../../../shared/utils"
+import { useDidMountEffect } from "../../../../hooks"
 import * as S from "./styles"
 
-export const PosterCarousel: FunctionComponent<PosterCarouselProps> = ({
+export const Carousel: FunctionComponent<CarouselProps> = ({
     posters
 }) => {
     const carouselRef = useRef<HTMLDivElement>(null)

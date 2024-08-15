@@ -19,7 +19,7 @@ export const shuffle = (array: any[]): any[] => {
     const newArray = []
     let randomIndexItemOfOldArray
 
-    while (oldArray.length) {
+    while(oldArray.length){
 
         randomIndexItemOfOldArray = Math.floor(
             Math.random() * oldArray.length

@@ -1,10 +1,10 @@
 import React, { FC, MouseEvent, useRef } from "react"
-import { EpisodeCardsProps } from "./types"
-import { EpisodeCard } from "../dumb/episode-card"
+import { EpisodesCarrouselProps } from "./types"
+import { EpisodeCard } from "../episode-card"
 import * as S from "./styles"
 
-export const EpisodeCardsCarousel: FC<EpisodeCardsProps> = ({
-    episodeCards, topText
+export const EpisodesCarousel: FC<EpisodesCarrouselProps> = ({
+    episodes, topText
 }) => {
     const carouselRef = useRef<HTMLDivElement>(null)
     let isGrabbing = false
@@ -39,7 +39,9 @@ export const EpisodeCardsCarousel: FC<EpisodeCardsProps> = ({
         const oldScrollLeft = carouselRef.current.scrollLeft
         carouselRef.current.scrollLeft = scrollLeftInitialPosition - mouseWalk
 
-        if(Math.abs(carouselRef.current.scrollLeft - oldScrollLeft) < 3) momentumNextScrollX = null
+        if(Math.abs(carouselRef.current.scrollLeft - oldScrollLeft) < 3) {
+            momentumNextScrollX = null
+        }
         else momentumNextScrollX = carouselRef.current.scrollLeft - oldScrollLeft
     }
 
@@ -76,9 +78,9 @@ export const EpisodeCardsCarousel: FC<EpisodeCardsProps> = ({
                     onMouseMove={handleMouseMove}
                     onWheel={handleWheel}
                 >
-                    {episodeCards.map((ep, index) => (
+                    {episodes.map((ep, index) => (
                         <EpisodeCard
-                            key={ep.text.replace(" ", "-") + index}
+                            key={ep.episodeName.replace(" ", "-") + index}
                             {...ep}
                         />
                     ))}

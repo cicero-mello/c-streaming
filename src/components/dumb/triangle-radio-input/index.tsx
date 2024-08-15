@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useRef } from "react"
-import { TriangleBannerNav } from "../../assets/icons"
+import { TriangleBannerNav } from "../../../assets/icons"
 import { TriangleRadioInputProps } from "./types"
 import * as S from "./styles"
 

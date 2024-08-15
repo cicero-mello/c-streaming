@@ -1,16 +1,15 @@
-import { randomLoremWords } from "../../shared/lorem"
-import { lazyEpisodeIDGenerator } from "../../shared/media"
-import { Serie, Episode, Season, SeasonLocalStorage, SerieLocalStorage } from "./types"
+import { randomLoremWords } from "../../../shared/lorem"
+import { lazyEpisodeIDGenerator } from "../../../shared/media"
+import { Serie, Episode, Season, SeasonLocalStorage, SerieLocalStorage, GetNextEpisodeParams } from "./types"
 
 const STORAGE_NAME = "series"
 /*
     series: [{
         serieID: string,
-        seasons: {
+        seasons: [{
             id: string,
-            name: string,
-            wasWatched: boolean
-        }
+            name: string
+        }]
     }]
 */
 
@@ -36,7 +35,6 @@ const createSerieLocalStorage = (
         Array.from({ length: getRandomNumberOfEpisodes() }).map(
             (_, episodeIndex) => ({
                 name: randomLoremWords(),
-                wasWatched: false,
                 id: lazyEpisodeIDGenerator(serieID,
                     seasonIndex + 1,
                     episodeIndex + 1
@@ -68,57 +66,13 @@ export const getSerie = (serieID: string): Serie => {
     return serieLocalStorageToSerie(serieLocalStorage)
 }
 
-//TODO fazer lógica envolvendo o histórico e parar de usar essas 2 funções abaixo
-export const setWasWatchedOnEpisode = (
-    serieID: string, episodeID: string
-) => {
-    const getSeasonsWithWasWatchedChanged = (
-        seasons: SeasonLocalStorage[], episodeID: string
-    ): SeasonLocalStorage[] => seasons.map(episodes => episodes.map(episode => {
-        if(episode.id === episodeID) return ({
-            ...episode,
-            wasWatched: true
-        })
-        return episode
-    }))
-
-    const allSeriesLocalStorage = getAllSeriesLocalStorage()
-
-    const allNewSeries: SerieLocalStorage[] = allSeriesLocalStorage.map(
-        (serieLocalStorage) => {
-            if(serieLocalStorage.serieID === serieID) return {
-                serieID: serieID,
-                seasons: getSeasonsWithWasWatchedChanged(
-                    serieLocalStorage.seasons, episodeID
-                )
-            }
-        return serieLocalStorage
-    })
-
-    const jsonStringified = JSON.stringify(allNewSeries)
-    localStorage.setItem(STORAGE_NAME, jsonStringified)
-}
-
-export const getLastWatchedEpisodeByOrder = (
-    serieID: string
-): Episode => {
-    let lastWatchedEpisode: Episode | undefined
-
-    const serie = getSerie(serieID)
-    serie.seasons.forEach(season => season.forEach(episode => {
-        if(episode.wasWatched) lastWatchedEpisode = episode
-    }))
-
-    return lastWatchedEpisode ?? serie.seasons[0][0]
-}
-
 export const getEpisodeByIDs = (
-    serieID: string, episodeID: string
+    serieID: string, episodeID: string, serie?: Serie
 ): Episode | undefined => {
     let wantedEpisode: Episode | undefined
 
-    const serie = getSerie(serieID)
-    serie.seasons.forEach(episodes => episodes.forEach(episode => {
+    const currentSerie = serie ?? getSerie(serieID)
+    currentSerie.seasons.forEach(episodes => episodes.forEach(episode => {
         if(episode.id === episodeID) wantedEpisode = episode
     }))
 
@@ -126,19 +80,25 @@ export const getEpisodeByIDs = (
 }
 
 export const getNextEpisode = (
-    serieID: string, episodeID: string
-): Episode | undefined => {
-    const episode = getEpisodeByIDs(serieID, episodeID)
+    serieID: string, episodeID: string, serie?: Serie
+): GetNextEpisodeParams | undefined => {
+    const episode = getEpisodeByIDs(serieID, episodeID, serie)
     if(!episode) return
     const { ep, season } = episode
 
-    const seasons = getSerie(serieID).seasons
+    const seasons = serie?.seasons ?? getSerie(serieID).seasons
 
     const isNextEpisodeInThisSeason = !!seasons[season -1][ep]
-    if(isNextEpisodeInThisSeason) return seasons[season -1][ep]
+    if(isNextEpisodeInThisSeason) return {
+        episode: seasons[season -1][ep],
+        isNextEpisodeInAnotherSeason: false
+    }
 
     const nextSeasonExists = !!seasons[season][0]
-    if(nextSeasonExists) return seasons[season][0]
+    if(nextSeasonExists) return {
+        episode: seasons[season][0],
+        isNextEpisodeInAnotherSeason: true
+    }
 
     return
 }

@@ -1,9 +1,8 @@
 import styled, { css } from "styled-components"
 
-export const Component = styled.div.attrs((props: any) => ({
-    className: "fake-video",
-    $showVideo: props?.$showVideo
-}))<{ $showVideo?: boolean}>`
+export const Component = styled.div.attrs(({
+    className: "fake-video"
+}))<{ $showVideo?: boolean}>`${({ $showVideo }) => css`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +19,7 @@ export const Component = styled.div.attrs((props: any) => ({
         opacity: 100%;
     }
 
-    ${({ $showVideo }) => $showVideo && css`
+    ${$showVideo && css`
         .gatsby-image-wrapper, .video-play-button {
             transition: 200ms linear;
             opacity: 0%;
@@ -31,7 +30,7 @@ export const Component = styled.div.attrs((props: any) => ({
             opacity: 1;
         }
     `}
-`
+`}`
 
 export const ScreenSaverContainer = styled.div`
     position: relative;

@@ -79,49 +79,13 @@ export const Button = styled.button`
     }
 `
 
-const getTransitionImageWrapperCSS = (
-    onTransition: OnTransitionState
-) => {
-    if(onTransition === "previus-none") return css`
-        opacity: 100%;
-        &::before{
-            width: 0%;
-            right: -12px;
-            left: unset;
-        }
-    `
-
-    if(onTransition === "next-none") return css`
-        opacity: 100%;
-        &::before{
-            width: 0%;
-            right: unset;
-            left: -12px;
-        }
-    `
-
-    if(onTransition === "next") return css`
-        opacity: 0%;
-        &::before{
-            right: -10px;
-            width: calc(100% + 20px);
-        }
-    `
-
-    if(onTransition === "previus") return css`
-        opacity: 0%;
-        &::before{
-            left: -10px;
-            width: calc(100% + 20px);
-        }
-    `
-}
-
 export const ImageWrapper = styled.div.attrs((props: any) => ({
     className: "image-wrapper",
     $onTransition: props?.$onTransition ?? "none",
     $freePointerEvents: props?.$freePointerEvents ?? false
-}))<{ $onTransition: OnTransitionState; $freePointerEvents: boolean }>`
+}))<{ $onTransition: OnTransitionState; $freePointerEvents: boolean }>`${({
+    $onTransition, $freePointerEvents
+}) => css`
     display: flex;
     position: relative;
     max-width: 330px;
@@ -150,14 +114,44 @@ export const ImageWrapper = styled.div.attrs((props: any) => ({
         transition: 300ms ease-in-out;
     }
 
-    ${({ $onTransition }) =>
-        getTransitionImageWrapperCSS($onTransition)
-    }
+    ${$onTransition === "previus-none" && css`
+        opacity: 100%;
+        &::before{
+            width: 0%;
+            right: -12px;
+            left: unset;
+        }
+    `}
 
-    ${({ $freePointerEvents }) => !$freePointerEvents && css`
+    ${$onTransition === "next-none" && css`
+        opacity: 100%;
+        &::before{
+            width: 0%;
+            right: unset;
+            left: -12px;
+        }
+    `}
+
+    ${$onTransition === "next" && css`
+        opacity: 0%;
+        &::before{
+            right: -10px;
+            width: calc(100% + 20px);
+        }
+    `}
+
+    ${$onTransition === "previus" && css`
+        opacity: 0%;
+        &::before{
+            left: -10px;
+            width: calc(100% + 20px);
+        }
+    `}
+
+    ${!$freePointerEvents && css`
         pointer-events: none;
     `}
-`
+`}`
 
 export const SuggestionMediaName = styled.h2.attrs({
     className: "suggestion-media-name"

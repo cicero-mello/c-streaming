@@ -1,4 +1,4 @@
-import { Episode } from "../../../localstorage"
+import { Episode } from "../../../stores"
 
 export interface HistoryCardProps {
     mediaName: string

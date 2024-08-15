@@ -7,7 +7,7 @@ const IndexPage: FC<PageProps> = (props) => {
     const updateMedias = useMediaStore((state) => state.updateMedias)
     updateMedias(props.data)
 
-    return <S.Home {...props}/>
+    return <S.Home />
 }
 
 export default IndexPage

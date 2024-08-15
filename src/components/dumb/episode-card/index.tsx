@@ -5,7 +5,7 @@ import { Wrapper } from "../wrapper"
 import * as S from "./styles"
 
 export const EpisodeCard: FC<EpisodeCardProps> = ({
-    onClick, text, thumbImage, altImage, wasWatched,
+    onClick, episodeName, thumbImage, altImage, wasWatched,
     season, episode, topText
 }) => (
     <S.Component>
@@ -14,7 +14,7 @@ export const EpisodeCard: FC<EpisodeCardProps> = ({
             <GatsbyImage image={thumbImage} alt={altImage}/>
             <Wrapper $direction="column">
                 <S.Title $season={season} $episode={episode} />
-                <S.Text> {text} </S.Text>
+                <S.Text> {episodeName} </S.Text>
             </Wrapper>
             <S.WasWatchedIcon $wasWatched={wasWatched}/>
         </S.Card>

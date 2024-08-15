@@ -1,5 +1,5 @@
 import { PosterProps } from "../poster/types"
 
-export interface PosterCarouselProps {
+export interface CarouselProps {
     posters: PosterProps[]
 }
