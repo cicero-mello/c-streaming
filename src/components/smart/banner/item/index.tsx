@@ -35,7 +35,7 @@ export const Item: FunctionComponent<BannerItem> = (newMedia) => {
             />
             <S.InfoAndButtons>
                 <S.InfoWrapper>
-                    <S.MediaName> {showingMedia.name.toLocaleUpperCase()} </S.MediaName>
+                    <S.MediaName> {showingMedia.name?.toLocaleUpperCase() ?? ""} </S.MediaName>
                     <S.Synopsis> {showingMedia.synopsis} </S.Synopsis>
                 </S.InfoWrapper>
                 <S.ButtonsWrapper>

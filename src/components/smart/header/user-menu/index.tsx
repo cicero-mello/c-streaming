@@ -1,15 +1,14 @@
 import React, { FunctionComponent, useState, useRef } from "react"
 import { UserMenuProps } from "./types"
-import { UserIco } from "../../../assets/icons"
-import { PATHS } from "../../../paths"
-import { useNavigation, useOutsideClick } from "../../../hooks"
+import { UserIco } from "../../../../assets/icons"
+import { PATHS } from "../../../../paths"
+import { useNavigation, useOutsideClick } from "../../../../hooks"
 import * as S from "./styles"
 
 export const UserMenu: FunctionComponent<UserMenuProps> = (props) => {
     const componentRef = useRef(null)
     const [showMenu, setShowMenu] = useState(false)
     const { navigate } = useNavigation()
-    useOutsideClick(componentRef, () => setShowMenu(false))
 
     const handleClick = () => {
         if(!!props.disabled) return
@@ -20,6 +19,8 @@ export const UserMenu: FunctionComponent<UserMenuProps> = (props) => {
         navigate(path)
         setShowMenu(false)
     }
+
+    useOutsideClick(componentRef, () => setShowMenu(false))
 
     return (
         <S.Component

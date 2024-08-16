@@ -4,7 +4,7 @@ import { MediaSuggestionsProps,
 } from "./types"
 import { SuggestionTriangles } from "../../../assets/icons"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { useNavigation } from "../../../hooks"
+import { useNavigation, useURLParams } from "../../../hooks"
 import { PATHS } from "../../../paths"
 import { useMediaStore } from "../../../stores"
 import { createSuggestionMedias } from "./core"
@@ -15,12 +15,14 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
     medias: propMedias,
     ...rest
 }) => {
-    const { navigate, getUrlParams } = useNavigation()
-    const exceptionMediaID = propExceptionMediaID ?? getUrlParams()?.mediaID ?? ""
+    const { navigate } = useNavigation()
+    const [urlParams] = useURLParams()
     const medias = propMedias ?? useMediaStore(state => state.medias)
-    const suggestionMedias = useMemo(
-        () => createSuggestionMedias(medias, exceptionMediaID)
-    , [medias, exceptionMediaID])
+
+    const exceptionMediaID = propExceptionMediaID ?? urlParams.mediaID ?? ""
+    const suggestionMedias = useMemo(() => (
+        createSuggestionMedias(medias, exceptionMediaID)
+    ), [medias, exceptionMediaID])
 
     const [freePointerEvents, setFreePointerEvents] = useState(true)
     const [onTransition, setOnTransition] = useState<OnTransitionState>("next-none")

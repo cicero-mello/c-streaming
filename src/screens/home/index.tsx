@@ -1,5 +1,6 @@
 import React, { FC } from "react"
-import { Banner, Footer, SearchInput,
+import {
+    Banner, Footer, SearchInput,
     Line, Posters
 } from "../../components"
 import * as S from "./styles"

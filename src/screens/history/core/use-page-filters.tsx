@@ -1,9 +1,10 @@
 import { ChangeEvent, useState } from "react"
-import { PageAnimations, PageHistoryCard, UsePageFilter } from "./types"
+import { PageAnimations, UsePageFilter } from "./types"
 import { debounce, scrollPageToTop, stringIncludes } from "../../../shared/utils"
+import { HistoryCardProps } from "../../../components"
 
 export const usePageFilter = (
-    historyCards: PageHistoryCard[],
+    historyCards: HistoryCardProps[],
     animations: PageAnimations
 ):UsePageFilter => {
     const [search, setSearch] = useState("")
@@ -18,7 +19,7 @@ export const usePageFilter = (
     }
 
     const historyCardsFiltered = historyCards.filter(
-        ({ props }) => (
+        (props) => (
             stringIncludes(props.mediaName, search) ||
             (props.episode && stringIncludes(props.episode?.name, search))
         )

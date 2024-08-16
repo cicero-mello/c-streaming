@@ -5,15 +5,13 @@ import React, {
 } from "react"
 import { NavigationContextProps } from "./types"
 import { objectToQueryString, scrollPageToTop } from "../../shared/utils"
-import { MediaType, URLParams, URLParamsAllString } from "../../shared/types"
+import {  URLParams } from "../../shared/types"
 import { navigate } from "gatsby"
-import { Header, PageLoader } from "../../components"
+import {  Header, PageLoader } from "../../components"
 import * as S from "./styles"
-import { PATHS } from "../../paths"
 
 const NavigationContext = createContext<NavigationContextProps>({
-    navigate: () => {},
-    getUrlParams: () => ({})
+    navigate: () => {}
 })
 
 export const useNavigation = () => useContext(NavigationContext)
@@ -52,7 +50,9 @@ export const NavigationProvider: FunctionComponent<any> = ({
         transitionRef.current.style.pointerEvents = "none"
         setTimeout(async () => {
             await scrollPageToTop()
-            reloadChildrenElements()
+            if(path.includes(window.location.pathname)){
+                reloadChildrenElements()
+            }
             prepareLoader()
             if(!params) {
                 navigate(path)
@@ -66,22 +66,6 @@ export const NavigationProvider: FunctionComponent<any> = ({
         if(!transitionRef.current) return
         transitionRef.current.style.opacity = "100%"
         transitionRef.current.style.pointerEvents = "unset"
-    }
-
-    const getUrlParams = (): URLParams => {
-        const isBrowser = typeof window !== "undefined"
-        if(!isBrowser) return {}
-
-        const URLObject: URLParamsAllString = Object.fromEntries(
-            new URLSearchParams(window.location.search)
-        )
-
-        return {
-            mediaID: URLObject.mediaID,
-            episodeID: URLObject?.episodeID,
-            searchText: URLObject.searchText,
-            searchType: URLObject.searchType as MediaType
-        }
     }
 
     useEffect(() => {
@@ -99,8 +83,7 @@ export const NavigationProvider: FunctionComponent<any> = ({
     return (
         <NavigationContext.Provider
             value={{
-                navigate: customNavigate,
-                getUrlParams: getUrlParams
+                navigate: customNavigate
             }}
         >
             <Header />

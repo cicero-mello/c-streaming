@@ -16,5 +16,4 @@ export * from "./posters/types"
 export * from "./search-input"
 export * from "./search-input/types"
 
-export * from "./user-menu"
-export * from "./user-menu/types"
+export * from "./watch-later-list"

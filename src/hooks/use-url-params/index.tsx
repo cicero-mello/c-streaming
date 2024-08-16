@@ -23,6 +23,7 @@ export const URLParamsProvider: FunctionComponent<any> = ({
 
     const setParam: SetParam = (key, value) => {
         setQuery({[key]: value})
+
         forceUpdate() // Resolving a problem (probably) caused
         // by default Gatsby router + use-query-params
     }

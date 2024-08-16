@@ -2,9 +2,9 @@ import React, { FunctionComponent } from "react"
 import { Fonts } from "./fonts"
 import { PageProps } from "gatsby"
 import { NavigationProvider, ModalsProvider, URLParamsProvider } from "../hooks"
-import * as S from "./styles"
 import { QueryParamProvider } from "use-query-params"
-import { WindowHistoryAdapter } from 'use-query-params/adapters/window'
+import { ReachAdapter } from 'use-query-params/adapters/reach'
+import * as S from "./styles"
 
 const Layout: FunctionComponent<PageProps> = ({
     children
@@ -12,7 +12,7 @@ const Layout: FunctionComponent<PageProps> = ({
     <S.Layout>
         <S.GlobalStyle />
         <Fonts />
-        <QueryParamProvider adapter={WindowHistoryAdapter}>
+        <QueryParamProvider adapter={ReachAdapter}>
             <URLParamsProvider>
                 <NavigationProvider>
                     <ModalsProvider>

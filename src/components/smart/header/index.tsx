@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { UserMenu } from "../user-menu"
+import { UserMenu } from "./user-menu"
 import { HeaderButton } from "../../dumb/buttons"
 import { PATHS } from "../../../paths"
 import { useNavigation } from "../../../hooks"

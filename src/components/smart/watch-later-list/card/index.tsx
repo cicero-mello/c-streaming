@@ -1,12 +1,12 @@
 import React, { FC, useState } from "react"
-import { WatchLaterCardsProps } from "./types"
+import { WatchLaterCardProps } from "./types"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { BorderButton, ColorButton } from "../buttons"
-import { delay } from "../../../shared/utils"
+import { BorderButton, ColorButton } from "../../../dumb/buttons"
+import { delay } from "../../../../shared/utils"
 import * as S from "./styles"
 
-export const WatchLaterCard: FC<WatchLaterCardsProps> = ({
-    title, image, onGoWatch, onRemove
+export const WatchLaterCard: FC<WatchLaterCardProps> = ({
+    title, image, onGoWatch, onRemove, ...rest
 }) => {
     const [closeAnimationStarted, setCloseAnimationStarted] = useState(false)
 
@@ -19,7 +19,7 @@ export const WatchLaterCard: FC<WatchLaterCardsProps> = ({
     }
 
     return (
-        <S.Container $closed={closeAnimationStarted}>
+        <S.Container {...rest} $closed={closeAnimationStarted}>
             <S.Component $closed={closeAnimationStarted}>
                 <GatsbyImage image={image} alt={title}/>
                 <S.CardContent>

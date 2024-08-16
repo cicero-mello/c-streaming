@@ -14,13 +14,13 @@ export const Search: FC = () => {
     const [urlParams, setURLParam] = useURLParams()
     const { medias } = useMediaStore()
 
-    const posters = useMemo(() =>
+    const posters = useMemo(() => (
         mediasToPosters(medias)
-    , [medias])
+    ), [medias])
 
-    const filteredPosters = useMemo(() =>
+    const filteredPosters = useMemo(() => (
         getFilteredPosters(urlParams, posters)
-    , [urlParams, posters])
+    ), [urlParams, posters])
 
     const handleFilterChange = async (
         event: ChangeEvent<HTMLSelectElement | HTMLInputElement>
