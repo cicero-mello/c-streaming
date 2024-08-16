@@ -52,12 +52,7 @@ export const NavigationProvider: FunctionComponent<any> = ({
         transitionRef.current.style.pointerEvents = "none"
         setTimeout(async () => {
             await scrollPageToTop()
-            console.log("path: " + path)
-            console.log("window: " + window.location.pathname)
-            if(window.location.pathname === path){
-                console.log("caiu no true")
-                reloadChildrenElements()
-            }
+            reloadChildrenElements()
             prepareLoader()
             if(!params) {
                 navigate(path)

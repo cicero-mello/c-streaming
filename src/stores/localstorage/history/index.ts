@@ -1,5 +1,7 @@
 import { debounce } from "../../../shared/utils"
-import { HistoryItem } from "./types"
+import { getSerie } from "../serie"
+import { Episode } from "../serie/types"
+import { GetLastWatchedEpisodeParams, HistoryItem } from "./types"
 
 const STORAGE_NAME = "history"
 /*
@@ -63,4 +65,46 @@ export const episodeWasWatched = (
     const episodeOnHistory = allHistory.find(item => item.episodeID === episodeID)
     if(!episodeOnHistory) return false
     return true
+}
+
+export const getHistoryItemWithHigherViewDate = (
+    historyItems: HistoryItem[]
+): HistoryItem => (
+    historyItems.reduce((lastItem, currentItem) => (
+        currentItem.viewDate > lastItem.viewDate ?
+        currentItem : lastItem
+    ), historyItems[0])
+)
+
+export const getLastWatchedEpisode = ({
+    serieID: serieIDParam,
+    serie: serieParam,
+    history: historyParam
+}: GetLastWatchedEpisodeParams): Episode | undefined => {
+    const serieID = serieIDParam ?? serieParam?.serieID
+    if(!serieID) return undefined
+
+    const serie = serieParam ?? getSerie(serieID)
+
+    const allSerieEpisodes = serie.seasons.map(
+        season => season.map(episode => episode)
+    ).flat(1)
+
+    const allHistory = historyParam ?? getHistory()
+
+    const lastWatchedHistoryItems = allHistory.map(
+        item => !!allSerieEpisodes.find(
+            episode => episode.id === item.episodeID
+        ) ? item : undefined
+    ).filter(historyItem => historyItem != undefined)
+
+    if(lastWatchedHistoryItems.length === 0) return undefined
+
+    const lastWatchedHistoryItem = getHistoryItemWithHigherViewDate(
+        lastWatchedHistoryItems
+    )
+
+    return allSerieEpisodes.find(
+        episode => episode.id === lastWatchedHistoryItem.episodeID
+    )
 }

@@ -18,7 +18,7 @@ export interface URLParams {
     mediaID?: string
     episodeID?: string
     searchText?: string
-    searchType?: MediaType
+    searchType?: "movie" | "anime" | "serie" | "all"
 }
 
 export interface URLParamsAllString {

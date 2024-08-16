@@ -1,24 +1,18 @@
 import React, { FC, useEffect } from "react"
 import { useNavigation } from "../../hooks"
 import { useMediaStore, customLocalStorage } from "../../stores"
-import { PATHS } from "../../paths"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import {
     MediaSuggestions, FakeVideo,
-    Line, MediaTitle
+    Line, MediaTitle, Error
 } from "../../components"
 import * as S from "./styles"
 
 export const Movie: FC = () => {
-    console.log("render movie")
-    const { getUrlParams, navigate } = useNavigation()
+    const { getUrlParams } = useNavigation()
     const media = useMediaStore(state => state.getMediaById(
         getUrlParams()?.mediaID ?? ""
     ))
-
-    // if(!media?.bannerImage) {
-    //     navigate(PATHS.ERROR)
-    //     return
-    // }
 
     useEffect(() => {
         if(!media) return
@@ -27,11 +21,13 @@ export const Movie: FC = () => {
         })
     }, [])
 
-    return media && media.bannerImage && (
+    const invalidParameters = !media
+
+    return invalidParameters ? <Error errorCode="400" /> : (
         <S.Component>
             <S.FirstSection>
                 <FakeVideo
-                    thumbImage={media.bannerImage }
+                    thumbImage={media.bannerImage as IGatsbyImageData}
                     altThumbImage={"Image of" + media.name}
                 />
                 <S.RightSide>

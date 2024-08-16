@@ -1,38 +1,44 @@
 import React, { FC, useEffect, useMemo } from "react"
 import { useNavigation } from "../../hooks"
-import {
-    EpisodeCard, FakeVideo, Line,
-    MediaTitle, EpisodesCarousel,
-    MediaSuggestions,
-    InvalidParameters
-} from "../../components"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import { customLocalStorage } from "../../stores"
 import { useMediaStore } from "../../stores"
 import { PATHS } from "../../paths"
+import {
+    EpisodeCard, FakeVideo, Line, MediaTitle,
+    EpisodesCarousel, MediaSuggestions, Error
+} from "../../components"
 import * as S from "./styles"
-import { IGatsbyImageData } from "gatsby-plugin-image"
 
 export const Series: FC = () => {
-    console.log("render serie")
     const { getUrlParams, navigate } = useNavigation()
     const { mediaID, episodeID }= getUrlParams()
     const media = useMediaStore(state => state.getMediaById(
         mediaID ?? ""
     ))
 
+    const history = useMemo(() =>
+        customLocalStorage.getHistory()
+    , [])
+
     const serie = useMemo(() =>
         !media ? undefined :
         customLocalStorage.getSerie(media.id)
     , [media])
 
-    const currentEpisode = useMemo(() =>
-        !serie ? undefined :
-        customLocalStorage.getEpisodeByIDs(
+    const currentEpisode = useMemo(() => {
+        if(!serie) return undefined
+
+        if(!episodeID) return customLocalStorage.getLastWatchedEpisode({
+            history, serie
+        }) ?? serie.seasons[0][0]
+
+        return customLocalStorage.getEpisodeByIDs(
             serie.serieID,
-            episodeID ?? serie.seasons[0][0].id,
+            episodeID,
             serie
         )
-    , [serie])
+    }, [serie, episodeID])
 
     const nextEpisode = useMemo(() =>
         (!serie || !currentEpisode) ? undefined :
@@ -42,10 +48,6 @@ export const Series: FC = () => {
             serie
         )
     , [serie, currentEpisode])
-
-    const history = useMemo(() =>
-        customLocalStorage.getHistory()
-    , [])
 
     useEffect(() => {
         if(!media || !currentEpisode) return
@@ -61,7 +63,7 @@ export const Series: FC = () => {
         serie
     )
 
-    return invalidParameters ? <InvalidParameters /> : (
+    return invalidParameters ? <Error errorCode="400" /> : (
         <S.Component>
             <S.FirstSection>
                 <S.TopWrapper>
@@ -97,6 +99,10 @@ export const Series: FC = () => {
                                     mediaID: mediaID,
                                     episodeID: nextEpisode.episode.id
                                 })}
+                                wasWatched={customLocalStorage.episodeWasWatched(
+                                    nextEpisode.episode.id,
+                                    history
+                                )}
                             />
                             :
                             <S.LastEpisodeMessage />

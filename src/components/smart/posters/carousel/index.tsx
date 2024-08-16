@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useRef, useState } from "react"
 import { CarouselProps } from "./types"
-import { Poster } from "../poster"
+import { Poster } from "../../poster"
 import { TriangleNextButton } from "../../../dumb/buttons"
 import { debounce } from "../../../../shared/utils"
 import { useDidMountEffect } from "../../../../hooks"

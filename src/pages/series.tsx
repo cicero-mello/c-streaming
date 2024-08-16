@@ -1,11 +1,14 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useLayoutEffect } from "react"
 import { graphql, HeadFC, PageProps } from "gatsby"
 import { useMediaStore } from "../stores"
 import * as S from "../screens"
 
 const SeriesPage: FunctionComponent<PageProps> = (props) => {
     const updateMedias = useMediaStore((state) => state.updateMedias)
-    updateMedias(props.data)
+
+    useLayoutEffect(() => {
+        updateMedias(props.data)
+    }, [updateMedias])
 
     return <S.Series />
 }

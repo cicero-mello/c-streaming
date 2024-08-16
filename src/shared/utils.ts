@@ -106,3 +106,13 @@ export const stringIncludes = (str1: string, str2: string) => {
         str2.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     )
 }
+
+export const removeNullFieldsFromObject = (
+    obj: object
+): object => (
+    Object.fromEntries(
+        Object.entries(obj).filter(
+            ([key, value]) => value !== null
+        )
+    )
+)

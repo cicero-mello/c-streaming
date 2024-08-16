@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react"
 import { PosterProps } from "./types"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { useNavigation } from "../../../../hooks"
-import { PATHS } from "../../../../paths"
+import { useNavigation } from "../../../hooks"
+import { PATHS } from "../../../paths"
 import * as S from "./styles"
 
 export const Poster: FunctionComponent<PosterProps> = ({

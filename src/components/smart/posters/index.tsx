@@ -4,7 +4,7 @@ import { SeeAllButton } from "../../dumb/buttons"
 import { Carousel } from "./carousel"
 import { useNavigation } from "../../../hooks"
 import { useMediaStore } from "../../../stores"
-import { PosterProps } from "./poster/types"
+import { PosterProps } from "../poster/types"
 import { PATHS } from "../../../paths"
 import * as S from "./styles"
 
