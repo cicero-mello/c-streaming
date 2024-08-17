@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useMemo, useState } from "react"
-import {URLParams, useURLParams } from "../../hooks"
+import { UrlState, useUrlState } from "../../hooks"
 import { debounce, delay, scrollPageToTop } from "../../shared/utils"
 import { useMediaStore } from "../../stores"
 import { getFilteredPosters, mediasToPosters } from "./core"
@@ -11,7 +11,7 @@ import * as S from "./styles"
 
 export const Search: FC = () => {
     const [showPosters, setShowPosters] = useState(true)
-    const [urlParams, setURLParam] = useURLParams()
+    const [urlState, setUrlStateKey] = useUrlState()
     const { medias } = useMediaStore()
 
     const posters = useMemo(() => (
@@ -19,8 +19,8 @@ export const Search: FC = () => {
     ), [medias])
 
     const filteredPosters = useMemo(() => (
-        getFilteredPosters(urlParams, posters)
-    ), [urlParams, posters])
+        getFilteredPosters(urlState, posters)
+    ), [urlState, posters])
 
     const handleFilterChange = async (
         event: ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -28,8 +28,8 @@ export const Search: FC = () => {
         await scrollPageToTop()
         setShowPosters(false)
         await delay(250)
-        setURLParam(
-            event.target.name as keyof URLParams,
+        await setUrlStateKey(
+            event.target.name as keyof UrlState,
             event.target.value
         )
         setShowPosters(true)
@@ -43,7 +43,7 @@ export const Search: FC = () => {
                     onFocus={scrollPageToTop}
                     label="Name"
                     name="searchText"
-                    defaultValue={urlParams.searchText}
+                    defaultValue={urlState.searchText ?? ""}
                     onChange={(event) => debounce(
                         () => handleFilterChange(event), 250
                     )}
@@ -51,7 +51,7 @@ export const Search: FC = () => {
                 <SelectInput
                     label="Type"
                     name="searchType"
-                    defaultValue={urlParams.searchType}
+                    defaultValue={urlState.searchType ?? "all"}
                     onChange={handleFilterChange}
                     options={[
                         { value: "all", text: "All"},

@@ -13,6 +13,8 @@ const STORAGE_NAME = "history"
 */
 
 export const getHistory = (): HistoryItem[] => {
+    if(typeof window === 'undefined') return []
+
     const history = localStorage.getItem(STORAGE_NAME)
     if(!history) return []
     return JSON.parse(history)
@@ -54,6 +56,8 @@ export const removeMediaFromHistory = ({
 }
 
 export const clearAllHistory = () => {
+    if(typeof window === 'undefined') return
+
     localStorage.setItem("history", JSON.stringify([]))
 }
 

@@ -16,10 +16,11 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
     ...rest
 }) => {
     const { navigate } = useNavigation()
-    const [urlParams] = useURLParams()
+    // const [urlParams] = useURLParams()
     const medias = propMedias ?? useMediaStore(state => state.medias)
 
-    const exceptionMediaID = propExceptionMediaID ?? urlParams.mediaID ?? ""
+    // const exceptionMediaID = propExceptionMediaID ?? urlParams.mediaID ?? ""
+    const exceptionMediaID = propExceptionMediaID ?? ""
     const suggestionMedias = useMemo(() => (
         createSuggestionMedias(medias, exceptionMediaID)
     ), [medias, exceptionMediaID])

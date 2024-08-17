@@ -50,9 +50,7 @@ export const NavigationProvider: FunctionComponent<any> = ({
         transitionRef.current.style.pointerEvents = "none"
         setTimeout(async () => {
             await scrollPageToTop()
-            if(path.includes(window.location.pathname)){
-                reloadChildrenElements()
-            }
+            reloadChildrenElements()
             prepareLoader()
             if(!params) {
                 navigate(path)

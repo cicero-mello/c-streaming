@@ -1,5 +1,4 @@
 import { randomLoremWords } from "../../../shared/lorem"
-import { lazyEpisodeIDGenerator } from "../../../shared/media"
 import { Serie, Episode, Season, SeasonLocalStorage, SerieLocalStorage, GetNextEpisodeParams } from "./types"
 
 const STORAGE_NAME = "series"
@@ -16,6 +15,8 @@ const STORAGE_NAME = "series"
 const addNewSerieLocalStorage = (
     newSerie: SerieLocalStorage, oldSeries?: SerieLocalStorage[]
 ) => {
+    if(typeof window === 'undefined') return
+
     const jsonStringified = (oldSeries ?
         JSON.stringify([newSerie, ...oldSeries]) :
         JSON.stringify([newSerie])
@@ -50,6 +51,8 @@ const createSerieLocalStorage = (
 }
 
 const getAllSeriesLocalStorage = (): SerieLocalStorage[] => {
+    if(typeof window === 'undefined') return []
+
     const seriesLocalStorage = localStorage.getItem(STORAGE_NAME)
     if(!seriesLocalStorage) return []
 
@@ -126,3 +129,10 @@ const serieLocalStorageToSerie = (
         )
     }
 }
+
+const lazyEpisodeIDGenerator = (
+    serieID: string, season: number, episode: number
+) => (
+    serieID.substring(season.toString().length + episode.toString().length)
+    + season + episode
+)

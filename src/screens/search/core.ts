@@ -1,5 +1,5 @@
 import { PosterProps } from "../../components"
-import { URLParams } from "../../hooks"
+import { UrlState } from "../../hooks"
 import { stringIncludes } from "../../shared/utils"
 import { Media } from "../../stores"
 
@@ -13,11 +13,11 @@ export const mediasToPosters = (
 }))
 
 export const getFilteredPosters = (
-    urlParams: URLParams,
+    urlState: UrlState,
     posters: PosterProps[]
 ) => {
-    const searchText = urlParams.searchText ?? ""
-    const searchType = urlParams.searchType ?? "all"
+    const searchText = urlState.searchText ?? ""
+    const searchType = urlState.searchType ?? "all"
 
     let newFilteredPostersByType
     if(searchType === "all") newFilteredPostersByType = posters

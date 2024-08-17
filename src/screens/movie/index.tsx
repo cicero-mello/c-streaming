@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react"
-import { useURLParams } from "../../hooks"
+import { useUrlState } from "../../hooks"
 import { useMediaStore, customLocalStorage } from "../../stores"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import {
@@ -9,9 +9,10 @@ import {
 import * as S from "./styles"
 
 export const Movie: FC = () => {
-    const [urlParams] = useURLParams()
+    const [urlState] = useUrlState()
+
     const media = useMediaStore(state => state.getMediaById(
-        urlParams.mediaID ?? ""
+        urlState.mediaID ?? ""
     ))
 
     useEffect(() => {

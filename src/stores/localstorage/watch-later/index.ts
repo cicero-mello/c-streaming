@@ -9,6 +9,8 @@ const STORAGE_NAME = "watch-later"
 */
 
 export const getAllWatchLater = (): WatchLater[] => {
+    if(typeof window === 'undefined') return []
+
     const watchLaterStringified = localStorage.getItem(STORAGE_NAME)
     if(!watchLaterStringified) return []
     return JSON.parse(watchLaterStringified)

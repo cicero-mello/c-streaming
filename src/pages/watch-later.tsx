@@ -1,13 +1,16 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useLayoutEffect } from "react"
 import { graphql, HeadFC, PageProps } from "gatsby"
 import { useMediaStore } from "../stores"
 import * as S from "../screens"
 
 const WatchLaterPage: FunctionComponent<PageProps> = (props) => {
-    const updateMedias = useMediaStore(state => state.updateMedias)
-    updateMedias(props.data)
+    const updateMedias = useMediaStore((state) => state.updateMedias)
 
-    return <S.WatchLater {...props} />
+    useLayoutEffect(() => {
+        updateMedias(props.data)
+    }, [updateMedias])
+
+    return <S.WatchLater />
 }
 
 export default WatchLaterPage
