@@ -49,7 +49,7 @@ const addUpercaseFirstLetter = (str: string): string => (
     str.charAt(0).toLocaleUpperCase() + str.slice(1)
 )
 
-const finalDotRule = (str: string): string => {
+const applyFinalDotRule = (str: string): string => {
     if(str[str.length -1] === ".") return str
     if(str[str.length -1] === ",") return str.slice(0, -1) + "."
     if(str.includes(".")) return str + "!"
@@ -78,5 +78,5 @@ export const randomLoremWords = (numberOfWords?: number): string => {
     if(!thereWillBeSuficientWordsToComplete) pushOnlyLastWordsOnWordsReponseList()
     else pushRandomWordsSequencyOnWordsReponseList()
 
-    return finalDotRule(addUpercaseFirstLetter(wordsResponseList.join(" ")))
+    return applyFinalDotRule(addUpercaseFirstLetter(wordsResponseList.join(" ")))
 }

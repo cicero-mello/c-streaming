@@ -1,24 +1,23 @@
 import { useLayoutEffect, useState } from "react"
 import { useNavigation } from "../../../hooks"
-import { customLocalStorage, HistoryItem } from "../../../localstorage"
-import { getEpisodeByIDs } from "../../../localstorage/serie"
+import { customLocalStorage, HistoryItem, useMediaStore } from "../../../stores"
 import { PATHS } from "../../../paths"
-import { getMediaById } from "../../../shared/media"
-import { PageHistoryCard, PageAnimations, UsePageData } from "./types"
-import { getRandomID } from "../../../shared/utils"
+import { PageAnimations, UsePageData } from "./types"
+import { HistoryCardProps } from "../../../components"
 
 export const usePageData = (
     animations: PageAnimations
 ): UsePageData => {
-    const [historyCards, setHistoryCards] = useState<PageHistoryCard[]>([])
+    const getMediaById = useMediaStore(state => state.getMediaById)
+    const [historyCards, setHistoryCards] = useState<HistoryCardProps[]>([])
     const { navigate } = useNavigation()
 
     const historyItemToHistoryCard = (
         historyItem: HistoryItem
-    ):PageHistoryCard => {
+    ): HistoryCardProps => {
         const media = getMediaById(historyItem.mediaID)
         const episode = (!!historyItem?.episodeID ?
-            getEpisodeByIDs(
+            customLocalStorage.getEpisodeByIDs(
                 historyItem.mediaID, historyItem.episodeID
             ) : undefined
         )
@@ -41,19 +40,17 @@ export const usePageData = (
 
             customLocalStorage.removeMediaFromHistory(historyItem)
             setHistoryCards(old => old.filter(card => !(
-                card.props.mediaName === media?.name &&
-                card.props.episode === episode
+                card.mediaName === media?.name &&
+                card.episode === episode
             )))
         }
 
         return {
-            props: {
-                mediaName: media?.name ?? "",
-                episode: episode,
-                closeAction: () => closeActionHistoryCard(),
-                clickAction: () => clickActionHistoryCard(),
-            },
-            key: getRandomID()
+            id: media?.id,
+            mediaName: media?.name ?? "",
+            episode: episode,
+            closeAction: () => closeActionHistoryCard(),
+            clickAction: () => clickActionHistoryCard(),
         }
     }
 

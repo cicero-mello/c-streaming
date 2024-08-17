@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { PageProps } from "gatsby"
-import * as S from "./styles"
+import { Error } from "../../components"
 
 export const NotFound: FunctionComponent<PageProps> = () => (
-    <S.Screen>
-        <S.NotFound> 404 </S.NotFound>
-    </S.Screen>
+    <Error errorCode="404"/>
 )

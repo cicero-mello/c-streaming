@@ -31,7 +31,7 @@ export const History: FC<PageProps> = () => {
                         $hide={animationState.isHistoryHidden}
                     >
                         {historyCardsFiltered.map(
-                            ({ props, key }) => <HistoryCard {...props} key={key} />
+                            (props) => <HistoryCard {...props} key={props.id} />
                         )}
                         {!haveFilteredHistoryCards && <S.NoResults />}
                     </S.CardsWrapper>

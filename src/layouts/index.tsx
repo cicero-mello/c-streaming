@@ -10,11 +10,11 @@ const Layout: FunctionComponent<PageProps> = ({
     <S.Layout>
         <S.GlobalStyle />
         <Fonts />
-        <NavigationProvider>
-            <ModalsProvider>
-                { children }
-            </ModalsProvider>
-        </NavigationProvider>
+            <NavigationProvider>
+                <ModalsProvider>
+                    { children }
+                </ModalsProvider>
+            </NavigationProvider>
     </S.Layout>
 )
 

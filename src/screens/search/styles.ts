@@ -9,7 +9,7 @@ export const Component = styled.main`
     @media (max-width: 600px){
         margin: 14px 0px 30px 0px;
 
-        .input-zone{
+        form{
             flex-wrap: wrap-reverse;
             padding: 0px 60px;
             margin-top: 32px;
@@ -56,9 +56,7 @@ export const Component = styled.main`
     }
 `
 
-export const InputZone = styled.section.attrs({
-    className: "input-zone"
-})`
+export const Form = styled.form`
     display: flex;
     width: 100%;
     justify-content: center;

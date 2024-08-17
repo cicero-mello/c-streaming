@@ -1,10 +1,17 @@
-import React, { FunctionComponent } from "react"
-import { graphql, type HeadFC, type PageProps } from "gatsby"
-import * as Screens from "../screens"
+import React, { FC, useLayoutEffect } from "react"
+import { graphql, HeadFC, PageProps } from "gatsby"
+import { useMediaStore } from "../stores"
+import * as S from "../screens"
 
-const MoviePage: FunctionComponent<PageProps> = (props) => (
-    <Screens.Movie {...props} />
-)
+const MoviePage: FC<PageProps> = (props) => {
+    const updateMedias = useMediaStore((state) => state.updateMedias)
+
+    useLayoutEffect(() => {
+        updateMedias(props.data)
+    }, [updateMedias])
+
+    return <S.Movie />
+}
 
 export default MoviePage
 export const Head: HeadFC = () => <title>C-Streaming: Movie</title>

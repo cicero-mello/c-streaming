@@ -5,5 +5,6 @@ export enum PATHS {
     MOVIE = "/movie",
     SERIES = "/series",
     WATCH_LATER = "/watch-later",
-    HISTORY = "/history"
+    HISTORY = "/history",
+    ERROR = "/404"
 }

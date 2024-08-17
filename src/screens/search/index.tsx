@@ -1,84 +1,69 @@
-import React, {
-    ChangeEvent, FunctionComponent, useLayoutEffect, useState
-} from "react"
+import React, { ChangeEvent, FC, useMemo, useState } from "react"
+import { UrlState, useUrlState } from "../../hooks"
+import { debounce, delay, scrollPageToTop } from "../../shared/utils"
+import { useMediaStore } from "../../stores"
+import { getFilteredPosters, mediasToPosters } from "./core"
 import {
-    GenericTextInput, Line, Poster, PosterProps, SelectInput
+    GenericTextInput, Line,
+    Poster, SelectInput
 } from "../../components"
-import { PageProps } from "gatsby"
-import { useNavigation } from "../../hooks"
-import { debounce, scrollPageToTop } from "../../shared/utils"
-import * as core from "./core"
 import * as S from "./styles"
 
-export const Search: FunctionComponent<PageProps> = ({
-    data
-}) => {
-    const { getUrlParams } = useNavigation()
-    const [searchText, setSearchText] = useState(getUrlParams().searchText ?? "")
-    const [searchType, setSearchType] = useState(getUrlParams().searchType ?? "all")
-    const [posters, setPosters] = useState<PosterProps[]>([])
-    const [filteredPosters, setFilteredPosters] = useState<PosterProps[]>([])
+export const Search: FC = () => {
     const [showPosters, setShowPosters] = useState(true)
+    const [urlState, setUrlStateKey] = useUrlState()
+    const { medias } = useMediaStore()
 
-    const changeFilteredPostersWithAnimation = (
-        newFilteredPosters: PosterProps[]
+    const posters = useMemo(() => (
+        mediasToPosters(medias)
+    ), [medias])
+
+    const filteredPosters = useMemo(() => (
+        getFilteredPosters(urlState, posters)
+    ), [urlState, posters])
+
+    const handleFilterChange = async (
+        event: ChangeEvent<HTMLSelectElement | HTMLInputElement>
     ) => {
-        setShowPosters(false)
-        setTimeout(() => {
-            setFilteredPosters(newFilteredPosters)
-            setShowPosters(true)
-        }, 250)
-    }
-
-    const onChangeSearchText = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchText(e.target.value)
-        const newFilteredPosters = core.getFilteredPosters(
-            e.target.value, searchType, posters
-        )
-        debounce(async () => {
-            await scrollPageToTop()
-            changeFilteredPostersWithAnimation(newFilteredPosters)
-        }, 250)
-    }
-
-    const onChangeSearchType = async (e: ChangeEvent<HTMLSelectElement>) => {
-        setSearchType(e.target.value)
         await scrollPageToTop()
-        const newFilteredPosters = core.getFilteredPosters(
-            searchText, e.target.value, posters
+        setShowPosters(false)
+        await delay(250)
+        await setUrlStateKey(
+            event.target.name as keyof UrlState,
+            event.target.value
         )
-        changeFilteredPostersWithAnimation(newFilteredPosters)
+        setShowPosters(true)
     }
-
-    useLayoutEffect(() => {
-        const newPosters = core.createPosters(data)
-        setPosters(newPosters)
-        const newFilteredPosters = core.getFilteredPosters(
-            searchText, searchType, newPosters
-        )
-        setFilteredPosters(newFilteredPosters)
-    }, [data])
 
     return (
         <S.Component>
             <Line />
-            <S.InputZone>
+            <S.Form>
                 <GenericTextInput
                     onFocus={scrollPageToTop}
                     label="Name"
-                    value={searchText}
-                    onChange={onChangeSearchText}
+                    name="searchText"
+                    defaultValue={urlState.searchText ?? ""}
+                    onChange={(event) => debounce(
+                        () => handleFilterChange(event), 250
+                    )}
                 />
                 <SelectInput
                     label="Type"
-                    options={core.SELECT_OPTIONS}
-                    value={searchType}
-                    onChange={onChangeSearchType}
+                    name="searchType"
+                    defaultValue={urlState.searchType ?? "all"}
+                    onChange={handleFilterChange}
+                    options={[
+                        { value: "all", text: "All"},
+                        { value: "anime", text: "Anime"},
+                        { value: "movie", text: "Movie"},
+                        { value: "serie", text: "Serie"}
+                    ]}
                 />
-            </S.InputZone>
+            </S.Form>
             <S.MediaListWrapper $showPosters={showPosters}>
                 {filteredPosters.map((poster) =>
-                    <Poster {...poster}/>
+                    <Poster {...poster} key={poster.id} />
                 )}
                 {filteredPosters.length === 0 &&
                     <S.NoMediaMessage>

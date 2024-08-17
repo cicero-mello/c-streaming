@@ -19,7 +19,7 @@ export const shuffle = (array: any[]): any[] => {
     const newArray = []
     let randomIndexItemOfOldArray
 
-    while (oldArray.length) {
+    while(oldArray.length){
 
         randomIndexItemOfOldArray = Math.floor(
             Math.random() * oldArray.length
@@ -106,3 +106,13 @@ export const stringIncludes = (str1: string, str2: string) => {
         str2.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     )
 }
+
+export const removeNullFieldsFromObject = (
+    obj: object
+): object => (
+    Object.fromEntries(
+        Object.entries(obj).filter(
+            ([_, value]) => value !== null
+        )
+    )
+)

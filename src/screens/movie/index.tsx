@@ -1,48 +1,50 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
-import { type PageProps } from "gatsby"
-import { useNavigation } from "../../hooks"
-import { ContentSuggestions, FakeVideo, Line, MediaTitle } from "../../components"
-import { PageMediaProps } from "./types"
-import { createPageMedia } from "./core"
-import { customLocalStorage } from "../../localstorage"
+import React, { FC, useEffect } from "react"
+import { useUrlState } from "../../hooks"
+import { useMediaStore, customLocalStorage } from "../../stores"
+import { IGatsbyImageData } from "gatsby-plugin-image"
+import {
+    MediaSuggestions, FakeVideo,
+    Line, MediaTitle, Error
+} from "../../components"
 import * as S from "./styles"
 
-export const Movie: FunctionComponent<PageProps> = ({
-    data
-}) => {
-    const { getUrlParams } = useNavigation()
-    const urlParams = getUrlParams()
-    const [pageMedia, setPageMedia] = useState<PageMediaProps>()
+export const Movie: FC = () => {
+    const [urlState] = useUrlState()
+
+    const media = useMediaStore(state => state.getMediaById(
+        urlState.mediaID ?? ""
+    ))
 
     useEffect(() => {
-        const newPageMedia = createPageMedia(data, urlParams?.mediaID)
-        if(newPageMedia) {
-            setPageMedia(newPageMedia)
+        if(!media) return
+        customLocalStorage.addMediaToHistory({
+            mediaID: media.id
+        })
+    }, [])
 
-            if(!urlParams?.mediaID) return
-            customLocalStorage.addMediaToHistory({
-                mediaID: urlParams.mediaID
-            })
-        }
-    }, [data])
+    const invalidParameters = !media
 
-    return (
+    return invalidParameters ? <Error errorCode="400" /> : (
         <S.Component>
-            {pageMedia && <>
-                <S.FirstSection>
-                    <FakeVideo {...pageMedia.fakeVideo} />
-                    <S.RightSide>
-                        <MediaTitle {...pageMedia.mediaTitle} />
-                        <S.Sinopsys> {pageMedia.sinopsys} </S.Sinopsys>
-                    </S.RightSide>
-                </S.FirstSection>
-                <Line />
-                <S.SecondSection>
-                    <ContentSuggestions
-                        suggestionMedias={pageMedia.suggestionMedias}
+            <S.FirstSection>
+                <FakeVideo
+                    thumbImage={media.bannerImage as IGatsbyImageData}
+                    altThumbImage={"Image of" + media.name}
+                />
+                <S.RightSide>
+                    <MediaTitle
+                        title={media.name}
+                        mediaId={media.id}
                     />
-                </S.SecondSection>
-            </>}
+                    <S.Sinopsys>
+                        {media.synopsis}
+                    </S.Sinopsys>
+                </S.RightSide>
+            </S.FirstSection>
+            <Line />
+            <S.SecondSection>
+                <MediaSuggestions exceptionMediaID={media.id} />
+            </S.SecondSection>
         </S.Component>
     )
 }

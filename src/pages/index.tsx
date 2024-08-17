@@ -1,11 +1,17 @@
-import React, { FunctionComponent } from "react"
-import type { HeadFC, PageProps } from "gatsby"
-import { graphql } from "gatsby"
-import * as Screens from "../screens"
+import React, { FC, useLayoutEffect } from "react"
+import { HeadFC, PageProps, graphql } from "gatsby"
+import { useMediaStore } from "../stores"
+import * as S from "../screens"
 
-const IndexPage: FunctionComponent<PageProps> = (props) => (
-    <Screens.Home {...props}/>
-)
+const IndexPage: FC<PageProps> = (props) => {
+    const updateMedias = useMediaStore((state) => state.updateMedias)
+
+    useLayoutEffect(() => {
+        updateMedias(props.data)
+    }, [updateMedias])
+
+    return <S.Home />
+}
 
 export default IndexPage
 export const Head: HeadFC = () => <title> C-Streaming </title>

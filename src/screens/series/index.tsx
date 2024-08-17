@@ -1,76 +1,143 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
-import { type PageProps } from "gatsby"
-import { useNavigation } from "../../hooks"
+import React, { FC, useEffect, useMemo } from "react"
+import { useNavigation, useUrlState } from "../../hooks"
+import { IGatsbyImageData } from "gatsby-plugin-image"
+import { customLocalStorage } from "../../stores"
+import { useMediaStore } from "../../stores"
+import { PATHS } from "../../paths"
 import {
-    EpisodeCard, FakeVideo, Line,
-    MediaTitle, EpisodeCardsCarousel,
-    ContentSuggestions
+    EpisodeCard, FakeVideo, Line, MediaTitle,
+    EpisodesCarousel, MediaSuggestions, Error
 } from "../../components"
-import { PageMediaProps } from "./types"
-import { createPageMedia } from "./core"
-import { customLocalStorage } from "../../localstorage"
 import * as S from "./styles"
 
-export const Series: FunctionComponent<PageProps> = ({ data }) => {
-    const { getUrlParams, navigate } = useNavigation()
+export const Series: FC = () => {
+    const { navigate } = useNavigation()
+    const [urlState] = useUrlState()
 
-    const [pageMedia, setPageMedia] = useState<PageMediaProps>()
+    const media = useMediaStore(state => state.getMediaById(
+        urlState.mediaID ?? ""
+    ))
+
+    const history = useMemo(() => (
+        customLocalStorage.getHistory()
+    ), [])
+
+    const serie = useMemo(() => (
+        !media ? undefined :
+        customLocalStorage.getSerie(media.id)
+    ), [media])
+
+    const currentEpisode = useMemo(() => {
+        if(!serie) return undefined
+        if(!!urlState.episodeID){
+            return customLocalStorage.getEpisodeByIDs(
+                serie.serieID,
+                urlState.episodeID,
+                serie
+            )
+        }
+        return (
+            customLocalStorage.getLastWatchedEpisode({
+                history, serie
+            }) ?? serie.seasons[0][0]
+        )
+    }, [serie, urlState, history])
+
+    const nextEpisode = useMemo(() => (
+        (!serie || !currentEpisode) ? undefined :
+        customLocalStorage.getNextEpisode(
+            serie.serieID,
+            currentEpisode.id,
+            serie
+        )
+    ), [serie, currentEpisode])
 
     useEffect(() => {
-        const { mediaID, episodeID } = getUrlParams()
-        if(!mediaID) return
+        if(!media || !currentEpisode) return
+        customLocalStorage.addMediaToHistory({
+            mediaID: media.id,
+            episodeID: currentEpisode.id
+        })
+    }, [media, currentEpisode])
 
-        const newPageMedia = createPageMedia(data, navigate, mediaID, episodeID)
-        if(newPageMedia) {
-            setPageMedia(newPageMedia)
-            customLocalStorage.addMediaToHistory({
-                mediaID: mediaID,
-                episodeID: newPageMedia.episodeID
-            })
-        }
-    }, [data])
+    const invalidParameters = !(media && currentEpisode && serie && nextEpisode)
 
-    return (
+    return invalidParameters ? <Error errorCode="400" /> : (
         <S.Component>
-            {pageMedia && <>
-                <S.FirstSection>
-                    <S.TopWrapper>
-                        <FakeVideo {...pageMedia.fakeVideo} />
-                        <S.RightSide>
-                            <MediaTitle
-                                watchLaterText="Watch Series Later"
-                                {...pageMedia.mediaTitle}
-                            />
-                            <S.Sinopspys800MediaWidth>
-                                {pageMedia.sinopsys}
-                            </S.Sinopspys800MediaWidth>
-                            {pageMedia.nextEpisode ?
-                                <EpisodeCard
-                                    topText="Next Episode:"
-                                    {...pageMedia.nextEpisode}
-                                />
-                                :
-                                <S.LastEpisodeMessage />
+            <S.FirstSection>
+                <S.TopWrapper>
+                    <FakeVideo
+                        thumbImage={media.bannerImage as IGatsbyImageData}
+                        altThumbImage={`Image of ${media.name}`}
+                    />
+                    <S.RightSide>
+                        <MediaTitle
+                            watchLaterText="Watch Series Later"
+                            mediaId={media.id}
+                            title={media.name}
+                            episodeName={
+                                "S." + currentEpisode?.season +
+                                " | Ep." + currentEpisode?.ep +
+                                ": " + currentEpisode?.name
                             }
-                        </S.RightSide>
-                    </S.TopWrapper>
-                    <S.Sinopsys>
-                        {pageMedia.sinopsys}
-                    </S.Sinopsys>
-                </S.FirstSection>
-                <Line />
-                {pageMedia.listEpisodeCards.map((episodeCards, index) =>
-                    <EpisodeCardsCarousel
-                        key={`episode-card-carousel-key-${index}`}
-                        {...episodeCards}
-                    />
-                )}
-                <S.SecondSection>
-                    <ContentSuggestions
-                        suggestionMedias={pageMedia.suggestionMedias}
-                    />
-                </S.SecondSection>
-            </>}
+                        />
+                        <S.Sinopspys800MediaWidth>
+                            {media.synopsis}
+                        </S.Sinopspys800MediaWidth>
+                        {nextEpisode ?
+                            <EpisodeCard
+                                topText="Next Episode:"
+                                thumbImage={media.bannerImage as IGatsbyImageData}
+                                altImage={`Image of ${media.name}`}
+                                episode={nextEpisode.episode.ep}
+                                episodeName={nextEpisode.episode.name}
+                                season={nextEpisode.isNextEpisodeInAnotherSeason ?
+                                    nextEpisode.episode.season : undefined
+                                }
+                                onClick={() => navigate(PATHS.SERIES,{
+                                    mediaID: media.id,
+                                    episodeID: nextEpisode.episode.id
+                                })}
+                                wasWatched={customLocalStorage.episodeWasWatched(
+                                    nextEpisode.episode.id,
+                                    history
+                                )}
+                            />
+                            :
+                            <S.LastEpisodeMessage />
+                        }
+                    </S.RightSide>
+                </S.TopWrapper>
+                <S.Sinopsys>
+                    {media.synopsis}
+                </S.Sinopsys>
+            </S.FirstSection>
+            <Line />
+            {serie.seasons.map((season, seasonIndex) =>
+                <EpisodesCarousel
+                    key={`episodes-carousel-key-${seasonIndex}`}
+                    topText={`SEASON ${seasonIndex + 1}`}
+                    episodes={
+                        season.map(episode => ({
+                            thumbImage: media.bannerImage as IGatsbyImageData,
+                            altImage: `Image of ${media.name}`,
+                            episode: episode.ep,
+                            episodeName: episode.name,
+                            wasWatched: customLocalStorage.episodeWasWatched(
+                                episode.id,
+                                history
+                            ),
+                            onClick: () => navigate(PATHS.SERIES, {
+                                mediaID: media.id,
+                                episodeID: episode.id
+                            })
+                        }))
+                    }
+                />
+            )}
+            <S.SecondSection>
+                <MediaSuggestions exceptionMediaID={media.id} />
+            </S.SecondSection>
         </S.Component>
     )
 }
