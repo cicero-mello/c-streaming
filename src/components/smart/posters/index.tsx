@@ -29,7 +29,7 @@ export const Posters: FunctionComponent<PostersProps> = ({
     }))
 
     const handleClickSeeAll = () => {
-        navigate(PATHS.SEARCH, { searchType: "anime"})
+        navigate(PATHS.SEARCH, { searchType: "anime" })
     }
 
     return (

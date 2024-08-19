@@ -6,6 +6,6 @@ export interface HistoryCardProps extends Omit<
 > {
     mediaName: string
     episode?: Episode
-    closeAction: () => void
-    clickAction: () => void
+    onClickClose?: () => void | Promise<void>
+    onClickCard?: () => void | Promise<void>
 }

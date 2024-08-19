@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react"
-import type { HeadFC, PageProps } from "gatsby"
+import React, { FC } from "react"
+import type { HeadFC } from "gatsby"
 import * as Screens from "../screens"
 
-const HistoryPage: FunctionComponent<PageProps> = (props) => (
-    <Screens.History {...props} />
+const HistoryPage: FC = () => (
+    <Screens.History />
 )
 
 export default HistoryPage

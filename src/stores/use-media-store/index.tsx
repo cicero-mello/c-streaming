@@ -4,7 +4,7 @@ import { MEDIAS_LIST } from "./data"
 import { getImage } from "gatsby-plugin-image"
 
 export const useMediaStore = create<MediaStore>((set, get) => ({
-    medias: [],
+    medias: MEDIAS_LIST,
     updateMedias: (pageData: any) => set(
         (state) => ({
             medias: getNewMedias(pageData, state.medias)

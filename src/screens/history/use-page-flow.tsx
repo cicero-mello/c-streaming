@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { delay, scrollPageToTop } from "../../../shared/utils"
-import { UsePageAnimation } from "./types"
+import { delay, scrollPageToTop } from "../../shared/utils"
+import { UsePageFlow } from "./types"
 
-export const usePageAnimation = ():UsePageAnimation => {
+export const usePageFlow = (): UsePageFlow => {
     const [isHistoryClear, setIsHistoryClear] = useState(false)
     const [isPageOnTopWithNoCards, setIsPageOnTopWithNoCards] = useState(false)
     const [isActionsHidden, setIsActionsHidden] = useState(false)
@@ -10,7 +10,7 @@ export const usePageAnimation = ():UsePageAnimation => {
     const [isHistoryHidden, setIsHistoryHidden] = useState(false)
 
     const clearAllHistory = async () => {
-        const startAnimation = async () => {
+        const startFlow = async () => {
             setIsHistoryClear(true)
             scrollPageToTop()
             await delay(800)
@@ -19,11 +19,11 @@ export const usePageAnimation = ():UsePageAnimation => {
             setIsActionsHidden(true)
             setIsPageOnTopWithNoCards(true)
         }
-        await startAnimation()
+        await startFlow()
     }
 
-    const onEveryHistoryCardWasRemoved = async () => {
-        const startAnimation = async () => {
+    const eachHistoryCardWasRemoved = async () => {
+        const startFlow = async () => {
             setIsHistoryClear(true)
             setIsAllCardsClosed(true)
             await delay(400)
@@ -31,7 +31,7 @@ export const usePageAnimation = ():UsePageAnimation => {
             await scrollPageToTop()
             setIsPageOnTopWithNoCards(true)
         }
-        await startAnimation()
+        await startFlow()
     }
 
     const hideHistory = async (hide: boolean) => {
@@ -39,18 +39,18 @@ export const usePageAnimation = ():UsePageAnimation => {
         await delay(190)
     }
 
-    return {
-        animationState: {
+    return [
+        {
             isHistoryClear,
             isPageOnTopWithNoCards,
             isActionsHidden,
             isAllCardsClosed,
             isHistoryHidden
         },
-        animations: {
+        {
             clearAllHistory,
-            onEveryHistoryCardWasRemoved,
+            eachHistoryCardWasRemoved,
             hideHistory
         }
-    }
+    ]
 }

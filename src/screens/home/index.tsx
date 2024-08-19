@@ -5,7 +5,7 @@ import {
 } from "../../components"
 import * as S from "./styles"
 
-export const Home: FC = () =>  (
+export const Home: FC = () => (
     <S.Home>
         <Banner />
         <Line id="first-line-home"/>

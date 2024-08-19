@@ -1,15 +1,16 @@
-import React, { FC, MouseEvent, useRef, useState } from "react"
+import React, { FC, MouseEvent, useRef } from "react"
 import { HistoryCardProps } from "./types"
 import * as S from "./styles"
 
+const CLOSE_ANIMATION_TIME = 400
+
 export const HistoryCard: FC<HistoryCardProps> = ({
-    mediaName, episode, closeAction, clickAction, ...rest
+    mediaName, episode, onClickClose, onClickCard,
+    ...rest
 }) => {
-    const CLOSE_ANIMATION_TIME = 400
-    const [render, setRender] = useState(true)
     const cardRef = useRef<HTMLDivElement>(null)
 
-    const closeElementWithStyles = () => {
+    const closeElement = () => {
         if(!cardRef.current) return
         cardRef.current.style.height = cardRef.current.offsetHeight + "px"
         cardRef.current.style.width = cardRef.current.offsetWidth + "px"
@@ -21,18 +22,17 @@ export const HistoryCard: FC<HistoryCardProps> = ({
         `
     }
 
-    const handleClose = (event: MouseEvent) => {
+    const handleCloseClick = (event: MouseEvent) => {
         event.stopPropagation()
-        closeElementWithStyles()
-        setTimeout(() => {
-            setRender(false)
-            closeAction()
+        closeElement()
+        setTimeout(async () => {
+            if(!!onClickClose) await onClickClose()
         }, CLOSE_ANIMATION_TIME)
     }
 
-    return render &&(
-        <S.Component ref={cardRef} onClick={clickAction} {...rest}>
-            <S.CloseButton onClick={handleClose}/>
+    return (
+        <S.Component ref={cardRef} onClick={onClickCard} {...rest}>
+            <S.CloseButton onClick={handleCloseClick}/>
             <S.Title> {mediaName} </S.Title>
             {episode &&
                 <>

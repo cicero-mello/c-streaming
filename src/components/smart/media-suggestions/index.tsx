@@ -4,7 +4,7 @@ import { MediaSuggestionsProps,
 } from "./types"
 import { SuggestionTriangles } from "../../../assets/icons"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { useNavigation, useURLParams } from "../../../hooks"
+import { useNavigation } from "../../../hooks"
 import { PATHS } from "../../../paths"
 import { useMediaStore } from "../../../stores"
 import { createSuggestionMedias } from "./core"
@@ -16,10 +16,8 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
     ...rest
 }) => {
     const { navigate } = useNavigation()
-    // const [urlParams] = useURLParams()
     const medias = propMedias ?? useMediaStore(state => state.medias)
 
-    // const exceptionMediaID = propExceptionMediaID ?? urlParams.mediaID ?? ""
     const exceptionMediaID = propExceptionMediaID ?? ""
     const suggestionMedias = useMemo(() => (
         createSuggestionMedias(medias, exceptionMediaID)
@@ -60,7 +58,6 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
             setOnTransition("next-none")
             setTimeout(() => setFreePointerEvents(true), 330)
         }, 360)
-
     }
 
     const handleClickPreviusSuggestion = () => {
