@@ -1,14 +1,19 @@
 import React, { FC, useLayoutEffect } from "react"
 import { HeadFC, PageProps, graphql } from "gatsby"
 import { useMediaStore } from "../stores"
+import { Error } from "../components"
 import * as S from "../screens"
 
 const IndexPage: FC<PageProps> = (props) => {
-    const updateMedias = useMediaStore((state) => state.updateMedias)
+    const { updateMedias, medias } = useMediaStore()
 
     useLayoutEffect(() => {
         updateMedias(props.data)
     }, [updateMedias])
+
+    if(!medias[0].bannerImage || !medias[0].posterImage){
+        return <Error errorCode="500"/>
+    }
 
     return <S.Home />
 }

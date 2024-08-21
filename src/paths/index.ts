@@ -1,3 +1,7 @@
+import { UrlState } from "../hooks";
+import { objectToQueryString } from "../shared/utils";
+import { MediaType } from "../stores";
+
 export enum PATHS {
     HOME = "/",
     SEARCH = "/search",
@@ -8,3 +12,11 @@ export enum PATHS {
     HISTORY = "/history",
     ERROR = "/404"
 }
+
+export const getMediaPathByMediaType = (mediaType: MediaType): PATHS => (
+    mediaType === "movie" ? PATHS.MOVIE : PATHS.SERIES
+)
+
+export const createLinkPath = (path: PATHS, params?: UrlState): string => (
+    !params ? path : path + objectToQueryString(params)
+)

@@ -1,7 +1,6 @@
 import { IGatsbyImageData } from "gatsby-plugin-image"
-import { MediaType } from "../../../shared/types"
 import { HTMLAttributes } from "react"
-import { Media } from "../../../stores"
+import { Media, MediaType } from "../../../stores"
 
 export interface SuggestionMedia {
     bannerImage: IGatsbyImageData
@@ -22,4 +21,4 @@ export interface CurrentSuggestionState {
     index: number
 }
 
-export type OnTransitionState = "next" | "next-none" | "previus" | "previus-none"
+export type OnTransitionState = "next" | "next-to-none" | "previus" | "previus-to-none"

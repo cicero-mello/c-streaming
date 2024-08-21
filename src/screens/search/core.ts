@@ -1,20 +1,10 @@
-import { PosterProps } from "../../components"
 import { UrlState } from "../../hooks"
 import { stringIncludes } from "../../shared/utils"
-import { Media } from "../../stores"
-
-export const mediasToPosters = (
-    medias: Media[]
-): PosterProps[] => medias.map(media => ({
-    id: media.id,
-    image: media.posterImage,
-    name: media.name,
-    type: media.type
-}))
+import { PagePoster } from "./types"
 
 export const getFilteredPosters = (
     urlState: UrlState,
-    posters: PosterProps[]
+    posters: PagePoster[]
 ) => {
     const searchText = urlState.searchText ?? ""
     const searchType = urlState.searchType ?? "all"
@@ -22,7 +12,7 @@ export const getFilteredPosters = (
     let newFilteredPostersByType
     if(searchType === "all") newFilteredPostersByType = posters
     else newFilteredPostersByType = posters.filter(poster => (
-        poster.type === searchType
+        poster.mediaType === searchType
     ))
 
     return newFilteredPostersByType.filter(poster => (

@@ -4,8 +4,9 @@ import { SeeAllButton } from "../../dumb/buttons"
 import { Carousel } from "./carousel"
 import { useNavigation } from "../../../hooks"
 import { useMediaStore } from "../../../stores"
-import { PosterProps } from "../poster/types"
-import { PATHS } from "../../../paths"
+import { PosterProps } from "../../dumb/poster/types"
+import { createLinkPath, getMediaPathByMediaType, PATHS } from "../../../paths"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import * as S from "./styles"
 
 export const Posters: FunctionComponent<PostersProps> = ({
@@ -23,13 +24,20 @@ export const Posters: FunctionComponent<PostersProps> = ({
 
     const posters: PosterProps[] = medias.map(media => ({
         id: media.id,
-        image: media.posterImage,
+        image: media.posterImage as IGatsbyImageData,
         name: media.name,
-        type: mediaType
+        linkPath: createLinkPath(
+            getMediaPathByMediaType(mediaType),
+            { mediaID: media.id }
+        ),
+        onClick: () => navigate(
+            getMediaPathByMediaType(mediaType),
+            { mediaID: media.id }
+        )
     }))
 
     const handleClickSeeAll = () => {
-        navigate(PATHS.SEARCH, { searchType: "anime" })
+        navigate(PATHS.SEARCH, { searchType: mediaType })
     }
 
     return (

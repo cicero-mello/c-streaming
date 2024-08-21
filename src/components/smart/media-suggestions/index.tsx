@@ -1,14 +1,15 @@
-import React, { FC, useLayoutEffect, useMemo, useState } from "react"
+import React, { FC, useMemo, useState } from "react"
 import { MediaSuggestionsProps,
     SuggestionMedia, OnTransitionState,
 } from "./types"
 import { SuggestionTriangles } from "../../../assets/icons"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useNavigation } from "../../../hooks"
-import { PATHS } from "../../../paths"
+import { getMediaPathByMediaType } from "../../../paths"
 import { useMediaStore } from "../../../stores"
 import { createSuggestionMedias } from "./core"
 import * as S from "./styles"
+import { Link } from "gatsby"
 
 export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
     exceptionMediaID: propExceptionMediaID,
@@ -18,17 +19,18 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
     const { navigate } = useNavigation()
     const exceptionMediaID = propExceptionMediaID ?? ""
     const medias = propMedias ?? useMediaStore(state => state.medias)
-    const [freePointerEvents, setFreePointerEvents] = useState(true)
-    const [onTransition, setOnTransition] = useState<OnTransitionState>("next-none")
-    const [currentSuggestionMedia, setCurrentSuggestionMedia] = useState<SuggestionMedia>()
 
     const suggestionMedias = useMemo(() => (
         createSuggestionMedias(medias, exceptionMediaID)
     ), [medias, exceptionMediaID])
 
-    const getNextSuggestion = () => {
-        if(!currentSuggestionMedia) return
+    const [freePointerEvents, setFreePointerEvents] = useState(true)
+    const [onTransition, setOnTransition] = useState<OnTransitionState>("next-to-none")
+    const [currentSuggestionMedia, setCurrentSuggestionMedia] = useState(
+        suggestionMedias[0]
+    )
 
+    const getNextSuggestion = (): SuggestionMedia => {
         const indexSuggestionsMedia = suggestionMedias.findIndex(
             media => currentSuggestionMedia.id === media.id
         )
@@ -37,9 +39,7 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
         return nextSuggestionMedia
     }
 
-    const getPreviusSuggestion = () => {
-        if(!currentSuggestionMedia) return
-
+    const getPreviusSuggestion = (): SuggestionMedia => {
         const indexSuggestionsMedia = suggestionMedias.findIndex(
             media => currentSuggestionMedia.id === media.id
         )
@@ -56,7 +56,7 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
 
         setTimeout(() => {
             setCurrentSuggestionMedia(getNextSuggestion())
-            setOnTransition("next-none")
+            setOnTransition("next-to-none")
             setTimeout(() => setFreePointerEvents(true), 330)
         }, 360)
     }
@@ -69,27 +69,21 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
 
         setTimeout(() => {
             setCurrentSuggestionMedia(getPreviusSuggestion())
-            setOnTransition("previus-none")
+            setOnTransition("previus-to-none")
             setTimeout(() => setFreePointerEvents(true), 330)
         }, 360)
     }
 
     const goToNewMedia = () => {
         if(!freePointerEvents || !currentSuggestionMedia) return
-
-        if(currentSuggestionMedia.type === "movie"){
-            navigate(PATHS.MOVIE, { mediaID: currentSuggestionMedia.id })
-        }
-        else navigate(PATHS.SERIES, { mediaID: currentSuggestionMedia.id })
-
+        navigate(
+            getMediaPathByMediaType(currentSuggestionMedia.type),
+            { mediaID: currentSuggestionMedia.id }
+        )
         setTimeout(() => { handleClickNextSuggestion() }, 100)
     }
 
-    useLayoutEffect(() => {
-        setCurrentSuggestionMedia(suggestionMedias[0])
-    }, [suggestionMedias])
-
-    return !!currentSuggestionMedia && (
+    return (
         <S.Component {...rest}>
             <S.Text>
                 Want something different? <br/>
@@ -99,19 +93,21 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
                 <S.Button onClick={handleClickPreviusSuggestion}>
                     <SuggestionTriangles />
                 </S.Button>
-                <S.ImageWrapper
-                    onClick={goToNewMedia}
-                    $onTransition={onTransition}
-                    $freePointerEvents={freePointerEvents}
-                >
-                    <GatsbyImage
-                        image={currentSuggestionMedia.bannerImage}
-                        alt={`Image of ${currentSuggestionMedia.mediaName}`}
-                    />
-                    <S.SuggestionMediaName>
-                        {currentSuggestionMedia.mediaName}
-                    </S.SuggestionMediaName>
-                </S.ImageWrapper>
+                <Link to={""} onClick={(e) => e.preventDefault()}>
+                    <S.ImageWrapper
+                        onClick={goToNewMedia}
+                        $onTransition={onTransition}
+                        $freePointerEvents={freePointerEvents}
+                    >
+                        <GatsbyImage
+                            image={currentSuggestionMedia.bannerImage}
+                            alt={`Image of ${currentSuggestionMedia.mediaName}`}
+                        />
+                        <S.SuggestionMediaName>
+                            {currentSuggestionMedia.mediaName}
+                        </S.SuggestionMediaName>
+                    </S.ImageWrapper>
+                </Link>
                 <S.Button onClick={handleClickNextSuggestion}>
                     <SuggestionTriangles />
                 </S.Button>

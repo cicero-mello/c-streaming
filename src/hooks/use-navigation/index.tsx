@@ -4,11 +4,13 @@ import React, {
     useState
 } from "react"
 import { NavigationContextProps } from "./types"
-import { objectToQueryString, scrollPageToTop } from "../../shared/utils"
-import {  URLParams } from "../../shared/types"
+import { scrollPageToTop } from "../../shared/utils"
+
 import { navigate } from "gatsby"
 import {  Header, PageLoader } from "../../components"
 import * as S from "./styles"
+import { UrlState } from "../use-url-state/types"
+import { createLinkPath, PATHS } from "../../paths"
 
 const NavigationContext = createContext<NavigationContextProps>({
     navigate: () => {}
@@ -44,7 +46,7 @@ export const NavigationProvider: FunctionComponent<any> = ({
         setTimerId(undefined)
     }
 
-    const customNavigate = (path: string, params?: URLParams) => {
+    const customNavigate = (path: PATHS, params?: UrlState) => {
         if(!transitionRef.current) return
         transitionRef.current.style.opacity = "0%"
         transitionRef.current.style.pointerEvents = "none"
@@ -52,11 +54,7 @@ export const NavigationProvider: FunctionComponent<any> = ({
             await scrollPageToTop()
             reloadChildrenElements()
             prepareLoader()
-            if(!params) {
-                navigate(path)
-                return
-            }
-            navigate(path + objectToQueryString(params))
+            navigate(createLinkPath(path, params))
         }, 180)
     }
 

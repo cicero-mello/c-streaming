@@ -24,10 +24,7 @@ export const Movie: FC = () => {
 
     const invalidParameters = !media
 
-    if(invalidParameters) return <Error errorCode="400" />
-    if(!media?.bannerImage) return <Error errorCode="500" />
-
-    return (
+    return invalidParameters ? <Error errorCode="400" /> : (
         <S.Component>
             <S.FirstSection>
                 <FakeVideo

@@ -114,7 +114,7 @@ export const ImageWrapper = styled.div.attrs((props: any) => ({
         transition: 300ms ease-in-out;
     }
 
-    ${$onTransition === "previus-none" && css`
+    ${$onTransition === "previus-to-none" && css`
         opacity: 100%;
         &::before{
             width: 0%;
@@ -123,7 +123,7 @@ export const ImageWrapper = styled.div.attrs((props: any) => ({
         }
     `}
 
-    ${$onTransition === "next-none" && css`
+    ${$onTransition === "next-to-none" && css`
         opacity: 100%;
         &::before{
             width: 0%;

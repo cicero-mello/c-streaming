@@ -4,7 +4,7 @@ import { getRandomID } from "../../shared/utils"
 import { HistoryCardProps } from "../../components"
 import { PageFlowControl, UseHistoryCards } from "./types"
 import { useNavigation } from "../../hooks"
-import { PATHS } from "../../paths"
+import { getMediaPathByMediaType } from "../../paths"
 
 export const useHistoryCards = (
     pageFlowControl: PageFlowControl
@@ -31,13 +31,10 @@ export const useHistoryCards = (
                 id: getRandomID(),
                 mediaName: media.name,
                 episode: episode,
-                onClickCard: () => {
-                    if(media.type === "movie"){
-                        navigate(PATHS.MOVIE, {mediaID: media.id, episodeID: episode?.id})
-                        return
-                    }
-                    navigate(PATHS.SERIES, { mediaID: media.id, episodeID: episode?.id })
-                },
+                onClickCard: () => navigate(
+                    getMediaPathByMediaType(media.type),
+                    { mediaID: media.id, episodeID: episode?.id }
+                ),
                 onClickClose: async () => {
                     const currentHistory = customLocalStorage.getHistory()
                     const isTheLastCardsToClose = currentHistory.length === 1

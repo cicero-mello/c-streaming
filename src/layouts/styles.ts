@@ -35,6 +35,11 @@ export const GlobalStyle = createGlobalStyle`
             border: none;
         }
 
+        a {
+            text-decoration: none;
+            cursor: unset;
+        }
+
         #gatsby-focus-wrapper {
             display: flex;
             flex-direction: column;

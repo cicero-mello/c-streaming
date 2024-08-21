@@ -1,22 +1,18 @@
 import React, { ChangeEvent, FC, useMemo, useState } from "react"
 import { UrlState, useUrlState } from "../../hooks"
 import { debounce, delay, scrollPageToTop } from "../../shared/utils"
-import { useMediaStore } from "../../stores"
-import { getFilteredPosters, mediasToPosters } from "./core"
+import { getFilteredPosters } from "./core"
 import {
     GenericTextInput, Line,
     Poster, SelectInput
 } from "../../components"
 import * as S from "./styles"
+import { usePosters } from "./use-posters"
 
 export const Search: FC = () => {
     const [showPosters, setShowPosters] = useState(true)
     const [urlState, setUrlStateKey] = useUrlState()
-    const { medias } = useMediaStore()
-
-    const posters = useMemo(() => (
-        mediasToPosters(medias)
-    ), [medias])
+    const posters = usePosters()
 
     const filteredPosters = useMemo(() => (
         getFilteredPosters(urlState, posters)
@@ -62,8 +58,8 @@ export const Search: FC = () => {
                 />
             </S.Form>
             <S.MediaListWrapper $showPosters={showPosters}>
-                {filteredPosters.map((poster) =>
-                    <Poster {...poster} key={poster.id} />
+                {filteredPosters.map(({ mediaType, id, ...rest}) =>
+                    <Poster {...rest} key={id} />
                 )}
                 {filteredPosters.length === 0 &&
                     <S.NoMediaMessage>

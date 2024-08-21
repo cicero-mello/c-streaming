@@ -1,14 +1,17 @@
 import React, { FunctionComponent, useLayoutEffect } from "react"
 import { graphql, HeadFC, PageProps } from "gatsby"
 import { useMediaStore } from "../stores"
+import { Error } from "../components"
 import * as S from "../screens"
 
 const WatchLaterPage: FunctionComponent<PageProps> = (props) => {
-    const updateMedias = useMediaStore((state) => state.updateMedias)
+    const { updateMedias, medias } = useMediaStore()
 
     useLayoutEffect(() => {
         updateMedias(props.data)
     }, [updateMedias])
+
+    if(!medias[0].bannerImage) return <Error errorCode="500"/>
 
     return <S.WatchLater />
 }

@@ -26,6 +26,9 @@ export * from "./media-title/types"
 export * from "./page-loader"
 export * from "./page-loader/types"
 
+export * from "./poster"
+export * from "./poster/types"
+
 export * from "./select-input"
 export * from "./select-input/types"
 

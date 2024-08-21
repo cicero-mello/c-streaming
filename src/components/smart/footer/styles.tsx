@@ -27,6 +27,7 @@ export const InfoLink = styled.a.attrs({
     opacity: 72%;
     font-size: 13px;
     text-decoration: none;
+    cursor: pointer;
 
     .logo-img{
         width: 22px;

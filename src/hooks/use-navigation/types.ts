@@ -1,5 +1,8 @@
-import { URLParams } from "../../shared/types"
+import { PATHS } from "../../paths"
+import { UrlState } from "../use-url-state/types"
 
 export interface NavigationContextProps {
-    navigate: (path: string, params?: URLParams) => void | Promise<void>,
+    navigate: (
+        path: PATHS, params?: UrlState
+    ) => void | Promise<void>
 }
