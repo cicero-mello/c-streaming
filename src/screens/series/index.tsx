@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from "react"
+import React, { FC, useLayoutEffect, useMemo } from "react"
 import { useNavigation, useUrlState } from "../../hooks"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import { customLocalStorage } from "../../stores"
@@ -52,7 +52,7 @@ export const Series: FC = () => {
         )
     ), [serie, currentEpisode])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if(!media || !currentEpisode) return
         customLocalStorage.addMediaToHistory({
             mediaID: media.id,
@@ -60,9 +60,17 @@ export const Series: FC = () => {
         })
     }, [media, currentEpisode])
 
-    const invalidParameters = !(media && currentEpisode && serie && nextEpisode)
+    const invalidParameters = (
+        !media
+        || !currentEpisode
+        || !serie
+        || !nextEpisode
+    )
 
-    return invalidParameters ? <Error errorCode="400" /> : (
+    if(invalidParameters) return <Error errorCode="400" />
+    if(!media?.bannerImage) return <Error errorCode="500" />
+
+    return (
         <S.Component>
             <S.FirstSection>
                 <S.TopWrapper>

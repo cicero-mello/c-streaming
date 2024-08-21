@@ -1,9 +1,9 @@
 import { IGatsbyImageData } from "gatsby-plugin-image"
-import { MediaType } from "../../../shared/types"
+import { MediaType } from "../../../stores"
 
 export interface PosterProps{
     id: string
     name: string
-    image?: IGatsbyImageData
+    image: IGatsbyImageData
     type: MediaType
 }

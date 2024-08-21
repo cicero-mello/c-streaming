@@ -4,8 +4,8 @@ import { Navigation } from "./navigation"
 import { BannerProps } from "./types"
 import { useMediaStore } from "../../../stores"
 import { createBannerItems } from "./core"
-import * as S from "./styles"
 import { BannerItem } from "./item/types"
+import * as S from "./styles"
 
 export const Banner: FC<BannerProps> = (props) => {
     const medias = useMediaStore((state) => state.medias)

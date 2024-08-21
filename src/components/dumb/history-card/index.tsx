@@ -1,37 +1,30 @@
-import React, { FC, MouseEvent, useRef } from "react"
+import React, { FC, MouseEvent, useRef, useState } from "react"
 import { HistoryCardProps } from "./types"
 import * as S from "./styles"
-
-const CLOSE_ANIMATION_TIME = 400
 
 export const HistoryCard: FC<HistoryCardProps> = ({
     mediaName, episode, onClickClose, onClickCard,
     ...rest
 }) => {
     const cardRef = useRef<HTMLDivElement>(null)
-
-    const closeElement = () => {
-        if(!cardRef.current) return
-        cardRef.current.style.height = cardRef.current.offsetHeight + "px"
-        cardRef.current.style.width = cardRef.current.offsetWidth + "px"
-        cardRef.current.style.animation = `
-            close-history-card
-            ${CLOSE_ANIMATION_TIME}ms
-            forwards
-            ease-in-out
-        `
-    }
+    const [isClosing, setIsClosing] = useState(false)
 
     const handleCloseClick = (event: MouseEvent) => {
         event.stopPropagation()
-        closeElement()
+        S.prepareToClose(cardRef)
+        setIsClosing(true)
         setTimeout(async () => {
             if(!!onClickClose) await onClickClose()
-        }, CLOSE_ANIMATION_TIME)
+        }, S.CLOSE_ANIMATION_TIME)
     }
 
     return (
-        <S.Component ref={cardRef} onClick={onClickCard} {...rest}>
+        <S.Component
+            {...rest}
+            ref={cardRef}
+            onClick={onClickCard}
+            $closing={isClosing}
+        >
             <S.CloseButton onClick={handleCloseClick}/>
             <S.Title> {mediaName} </S.Title>
             {episode &&

@@ -1,8 +1,36 @@
-import styled from "styled-components"
+import { RefObject } from "react"
+import styled, { css, keyframes } from "styled-components"
+
+export const CLOSE_ANIMATION_TIME = 400
+
+export const prepareToClose = (
+    componentRef: RefObject<HTMLDivElement>
+) => {
+    if(!componentRef.current) return
+
+    componentRef.current.style.height = (
+        componentRef.current.offsetHeight + "px"
+    )
+    componentRef.current.style.width = (
+        componentRef.current.offsetWidth + "px"
+    )
+}
+
+const closeAnimation = keyframes`
+    to {
+        pointer-events: none;
+        opacity: 0;
+        padding: 0px;
+        width: 0px;
+        height: 0px;
+        margin: 0px 0px;
+        filter: blur(46px);
+    }
+`
 
 export const Component = styled.div.attrs({
     className: "history-card"
-})`
+})<{ $closing?: boolean }>`${({ $closing }) => css`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -36,28 +64,15 @@ export const Component = styled.div.attrs({
         > * { color: #EDEDED; }
     }
 
-    @keyframes close-history-card {
-        99% {
-            pointer-events: none;
-            opacity: 0;
-            padding: 0px;
-            width: 0px;
-            height: 0px;
-            margin: 0px 0px;
-            filter: blur(46px);
-        }
-        100% {
-            pointer-events: none;
-            opacity: 0;
-            padding: 0px;
-            width: 0px;
-            height: 0px;
-            margin: 0px 0px;
-            filter: blur(46px);
-            display: none;
-        }
-    }
-`
+    ${$closing && css`
+        animation:
+            ${closeAnimation}
+            ${CLOSE_ANIMATION_TIME}ms
+            forwards
+            ease-in-out
+        ;
+    `}
+`}`
 
 export const CloseButton = styled.button`
     display: flex;

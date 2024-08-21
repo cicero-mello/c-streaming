@@ -32,7 +32,7 @@ export const History: FC = () => {
         setHistoryCards([])
     }, [pageFlowControl, setHistoryCards])
 
-    const haveHistoryItems = historyCards.length > 0
+    const haveHistoryCards = historyCards.length > 0
     const haveFilteredHistoryCards = filteredHistoryCards.length > 0
 
     return (
@@ -40,12 +40,12 @@ export const History: FC = () => {
             <Line />
             <S.Title> History </S.Title>
             <S.ContentWrapper>
-                {!haveHistoryItems &&
+                {!haveHistoryCards &&
                     <S.HistoryClearMessage>
                         Your history is already clear
                     </S.HistoryClearMessage>
                 }
-                {haveHistoryItems && <>
+                {haveHistoryCards && <>
                     <S.CardsWrapper
                         $closeAllCards={pageFlowStates.isHistoryClear}
                         $removeHeight={pageFlowStates.isPageOnTopWithNoCards}

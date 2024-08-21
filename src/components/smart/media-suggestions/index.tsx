@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from "react"
+import React, { FC, useLayoutEffect, useMemo, useState } from "react"
 import { MediaSuggestionsProps,
     SuggestionMedia, OnTransitionState,
 } from "./types"
@@ -16,20 +16,19 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
     ...rest
 }) => {
     const { navigate } = useNavigation()
-    const medias = propMedias ?? useMediaStore(state => state.medias)
-
     const exceptionMediaID = propExceptionMediaID ?? ""
+    const medias = propMedias ?? useMediaStore(state => state.medias)
+    const [freePointerEvents, setFreePointerEvents] = useState(true)
+    const [onTransition, setOnTransition] = useState<OnTransitionState>("next-none")
+    const [currentSuggestionMedia, setCurrentSuggestionMedia] = useState<SuggestionMedia>()
+
     const suggestionMedias = useMemo(() => (
         createSuggestionMedias(medias, exceptionMediaID)
     ), [medias, exceptionMediaID])
 
-    const [freePointerEvents, setFreePointerEvents] = useState(true)
-    const [onTransition, setOnTransition] = useState<OnTransitionState>("next-none")
-    const [currentSuggestionMedia, setCurrentSuggestionMedia] = useState<SuggestionMedia>(
-        suggestionMedias[0]
-    )
-
     const getNextSuggestion = () => {
+        if(!currentSuggestionMedia) return
+
         const indexSuggestionsMedia = suggestionMedias.findIndex(
             media => currentSuggestionMedia.id === media.id
         )
@@ -39,6 +38,8 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
     }
 
     const getPreviusSuggestion = () => {
+        if(!currentSuggestionMedia) return
+
         const indexSuggestionsMedia = suggestionMedias.findIndex(
             media => currentSuggestionMedia.id === media.id
         )
@@ -74,7 +75,8 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
     }
 
     const goToNewMedia = () => {
-        if(!freePointerEvents) return
+        if(!freePointerEvents || !currentSuggestionMedia) return
+
         if(currentSuggestionMedia.type === "movie"){
             navigate(PATHS.MOVIE, { mediaID: currentSuggestionMedia.id })
         }
@@ -83,7 +85,11 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
         setTimeout(() => { handleClickNextSuggestion() }, 100)
     }
 
-    return(
+    useLayoutEffect(() => {
+        setCurrentSuggestionMedia(suggestionMedias[0])
+    }, [suggestionMedias])
+
+    return !!currentSuggestionMedia && (
         <S.Component {...rest}>
             <S.Text>
                 Want something different? <br/>

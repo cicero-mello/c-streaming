@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react"
+import React, { FC, useLayoutEffect } from "react"
 import { useUrlState } from "../../hooks"
 import { useMediaStore, customLocalStorage } from "../../stores"
 import { IGatsbyImageData } from "gatsby-plugin-image"
@@ -15,7 +15,7 @@ export const Movie: FC = () => {
         urlState.mediaID ?? ""
     ))
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if(!media) return
         customLocalStorage.addMediaToHistory({
             mediaID: media.id
@@ -24,7 +24,10 @@ export const Movie: FC = () => {
 
     const invalidParameters = !media
 
-    return invalidParameters ? <Error errorCode="400" /> : (
+    if(invalidParameters) return <Error errorCode="400" />
+    if(!media?.bannerImage) return <Error errorCode="500" />
+
+    return (
         <S.Component>
             <S.FirstSection>
                 <FakeVideo
