@@ -29,12 +29,13 @@ export const DeleteAccountQuestion = forwardRef<
             ]}
             buttons={[
                 {
-                    $text: "Cancel",
+                    children: "Cancel",
+                    theme: "border",
                     onClick: () => baseModalRef.current?.close()
                 },
                 {
-                    $text: "DELETE ACCOUNT",
-                    $theme: "danger",
+                    children: "DELETE ACCOUNT",
+                    theme: "border-danger",
                     onClick: () => {
                         setTimeout(() => baseModalRef.current?.close(), 180)
                         modals?.deleteAccountConfirmation?.open()

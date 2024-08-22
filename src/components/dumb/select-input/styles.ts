@@ -28,7 +28,6 @@ export const Select = styled.select.attrs((props: any) => ({
 }))<{ $hasLabel?: boolean }>`
     cursor: pointer;
     appearance: none;
-    outline: none;
     width: 100%;
     height: 30px;
 

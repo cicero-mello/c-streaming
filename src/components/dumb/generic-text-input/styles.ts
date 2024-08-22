@@ -18,7 +18,6 @@ export const Input = styled.input.attrs({
 })<{ $hasLabel?: boolean, $hasEye?: boolean }>`${({
     $hasLabel, $hasEye, disabled
 }) => css`
-    outline: none;
     appearance: none;
     border: 1px solid #8D8D8D;
     height: 30px;

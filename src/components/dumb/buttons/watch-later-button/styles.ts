@@ -4,7 +4,7 @@ export const Button = styled.button.attrs((props: any)=> ({
     className: "watch-later-button",
     $alreadySaveToWatch: props.$alreadySaveToWatch || false
 }))<{ $alreadySaveToWatch: boolean }>`
-    outline: none;
+
     height: min-content;
     position: relative;
     cursor: pointer;

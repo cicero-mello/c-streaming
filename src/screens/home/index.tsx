@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import {
     Banner, Footer, SearchInput,
-    Line, Posters
+    Line, Posters, Button
 } from "../../components"
 import * as S from "./styles"
 

@@ -11,7 +11,7 @@ export const Screen = styled.main`
         margin-bottom: 40px;
     }
 
-    .border-button {
+    .border-button, .border-red-button {
         font-size: 16px;
         white-space: nowrap;
         height: min-content;
@@ -30,7 +30,7 @@ export const Screen = styled.main`
             width: 110%;
             max-width: unset;
         }
-        .border-button {
+        .border-button, .border-red-button {
             margin-top: 27px;
             margin-left: 24px;
         }
@@ -66,7 +66,7 @@ export const Screen = styled.main`
             flex-wrap: wrap;
             margin-bottom: 24px;
         }
-        .border-button {
+        .border-button, .border-red-button{
             margin: 0px 0px 24px 0px;
             width: 100%;
         }

@@ -1,15 +1,13 @@
-import React, { FunctionComponent, MouseEvent } from "react"
+import React, { FC, SVGProps } from "react"
 
-export const UserIco: FunctionComponent<{ onClick: (event: MouseEvent) => void }> = ({
-    onClick
-}) => (
+export const UserIco: FC<SVGProps<SVGSVGElement>> = (props) => (
     <svg
         className="user-ico"
         width="37"
         height="33"
         viewBox="0 0 37 33"
         fill="none" xmlns="http://www.w3.org/2000/svg"
-        onClick={onClick}
+        {...props}
     >
         <g clipPath="url(#clip0_308_7)">
             <circle

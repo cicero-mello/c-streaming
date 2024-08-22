@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components"
 
-export const Component = styled.div.attrs((props: any) => ({
+export const Component = styled.button.attrs((props: any) => ({
     className: "user-menu",
     $showMenu: props.$showMenu
 }))<{ $showMenu?: boolean, $disabled?: boolean} >`
     display: flex;
     position: relative;
-
+    cursor: pointer;
     .user-ico{
         fill: transparent;
         transition: 200ms ease-in-out;
@@ -34,15 +34,17 @@ export const Component = styled.div.attrs((props: any) => ({
 export const UserName = styled.p.attrs({
     className: "user-name"
 })`
+    cursor: pointer;
     font-size: 13px;
     padding: 7px 7px 0px 10px;
     user-select: none;
 `
 
-export const MenuList = styled.ul.attrs((props: any) => ({
+export const MenuList = styled.div.attrs((props: any) => ({
     className: "user-menu-list",
     $show: props.$show
 }))<{ $show: boolean }>`
+
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -63,34 +65,46 @@ export const MenuList = styled.ul.attrs((props: any) => ({
     padding: 0px 0px;
     opacity: 0;
     max-height: 0;
-    pointer-events: none;
+    cursor: default;
+
+    .clean-button {
+        cursor: pointer;
+        pointer-events: unset;
+        padding: 0px 11px;
+        width: 100%;
+        font-size: 16px;
+        justify-content: unset;
+        text-align: start;
+
+        &:hover {
+            outline: none;
+            background-color: white;
+            color: #080808;
+        }
+
+        &:focus-visible {
+            padding: 0;
+            margin: 0px 11px;
+            width: fit-content;
+            outline-offset: 4px;
+        }
+    }
 
     ${({ $show }) => $show ? css`
         opacity: 1;
         max-height: 129px;
         padding: 11px 0px;
+
         pointer-events: unset;
         border-color: white;
-        .user-menu-item {
+        .clean-button {
             transition: 100ms linear;
         }
     ` : css`
-        .user-menu-item {
+        .clean-button {
             transition: 500ms linear;
         }
     `}
-`
 
-export const MenuItem = styled.li.attrs({
-    className: "user-menu-item"
-})`
-    pointer-events: unset;
-    padding: 0px 11px;
-    width: 100%;
-    cursor: pointer;
 
-    &:hover {
-        background-color: white;
-        color: #080808;
-    }
 `

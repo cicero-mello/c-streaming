@@ -1,17 +1,15 @@
 import React, { FC } from "react"
 import { UserMenu } from "./user-menu"
-import { HeaderButton } from "../../dumb/buttons"
+import { Button } from "../../dumb"
 import { PATHS } from "../../../paths"
-import { useNavigation } from "../../../hooks"
 import * as S from "./styles"
 
-export const Header: FC = () => {
-    const { navigate } = useNavigation()
-
-    return (
-        <S.Component>
-            <HeaderButton onClick={() => navigate(PATHS.HOME)} />
-            <UserMenu />
-        </S.Component>
-    )
-}
+export const Header: FC = () => (
+    <S.Component>
+        <Button
+            theme="border"
+            url={{path:PATHS.HOME}}
+        />
+        <UserMenu />
+    </S.Component>
+)

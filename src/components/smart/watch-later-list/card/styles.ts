@@ -19,7 +19,6 @@ export const Component = styled.div<{$closed?: boolean }>`${({
     display: flex;
     height: 195px;
     max-height: 421px;
-    overflow: hidden;
     padding: 0px;
     border-color: #9999;
     transition: 100ms linear;
@@ -85,7 +84,7 @@ export const Component = styled.div<{$closed?: boolean }>`${({
             flex-wrap: wrap;
             gap: 12px;
             justify-content: end;
-            .color-button, .border-button {
+            .classic-button, .border-button {
                 width: 100%;
                 white-space: unset;
             }
@@ -103,7 +102,7 @@ export const Component = styled.div<{$closed?: boolean }>`${({
 
     @media(max-width: 600px){
         .title { font-size: 24px; }
-        .color-button { font-size: 22px; }
+        .classic-button { font-size: 22px; }
     }
 `}`
 
@@ -128,7 +127,7 @@ export const Buttons = styled.div.attrs({
         padding: 4px 10px;
     }
 
-    .color-button {
+    .classic-button {
         color: #ededed;
     }
 `

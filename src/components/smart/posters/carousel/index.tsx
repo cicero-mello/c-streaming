@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useCallback, useRef, useState } from "react"
 import { CarouselProps } from "./types"
 import { Poster } from "../../../dumb/poster"
-import { TriangleNextButton } from "../../../dumb/buttons"
 import { debounce } from "../../../../shared/utils"
 import { useDidMountEffect } from "../../../../hooks"
+import { TriangleNext } from "../../../../assets/icons"
 import * as S from "./styles"
 
 export const Carousel: FunctionComponent<CarouselProps> = ({
@@ -88,17 +88,25 @@ export const Carousel: FunctionComponent<CarouselProps> = ({
 
     return (
         <S.Component>
-            <TriangleNextButton
+            <S.TriangleNextButton
                 onClick={handleClickGoBack}
                 disabled={!canGoBack}
-            />
-            <S.Carousel ref={carouselRef} onScroll={onScrollMobile}>
+            >
+                <TriangleNext />
+            </S.TriangleNextButton>
+            <S.Carousel
+                tabIndex={-1}
+                ref={carouselRef}
+                onScroll={onScrollMobile}
+            >
                 {posters.map(poster => <Poster {...poster} key={poster.id}/>)}
             </S.Carousel>
-            <TriangleNextButton
+            <S.TriangleNextButton
                 onClick={handleClickGoAhead}
                 disabled={!canGoAhead}
-            />
+            >
+                <TriangleNext />
+            </S.TriangleNextButton>
         </S.Component>
     )
 }

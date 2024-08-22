@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react"
 import { BaseModalProps, BaseModalHandle } from "./types"
-import { BorderButton } from "../../../../components/dumb/buttons"
+import { Button } from "../../../../components"
 import { useOutsideClick } from "../../.."
 import * as S from "./styles"
 
@@ -60,7 +60,7 @@ export const BaseModal = forwardRef<
                 <S.ButtonsWrapper>
                     {buttons && buttons.length > 0 &&
                         buttons.map((buttonProps, index) =>
-                            <BorderButton
+                            <Button
                                 {...buttonProps}
                                 key={`${id}-button-${index}`}
                             />

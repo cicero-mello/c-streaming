@@ -36,7 +36,7 @@ export const InfoLink = styled.a.attrs({
         transition: 100ms linear;
     }
 
-    &:hover{
+    &:hover, &:focus-within{
         opacity: 100%;
         .footer-link::before{
             background-color: white;

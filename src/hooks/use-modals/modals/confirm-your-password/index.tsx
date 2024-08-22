@@ -30,12 +30,13 @@ export const ConfirmYourPassword = forwardRef<
             ]}
             buttons={[
                 {
-                    $text: "Cancel",
+                    children: "Cancel",
+                    theme: "border",
                     onClick: () => baseModalRef.current?.close()
                 },
                 {
-                    $text: "Save Changes",
-                    $theme: "green",
+                    children: "Save Changes",
+                    theme: "border-green",
                     onClick: () => setPasswordErrorMessage("Wrong password")
                 }
             ]}

@@ -10,7 +10,7 @@ export const Component = styled.div.attrs({
     max-width: 343px;
     margin: 30px;
 
-    &:has(input:focus){
+    &:focus-within{
         input, button {
             border-color: #8D8D8D;
             color: #dcdcdc;
@@ -58,7 +58,6 @@ export const Button = styled.button`
     right: 0;
     width: 85px;
     height: 100%;
-    outline: none;
     background-color: unset;
     border: none;
     border: 1px solid #5d5d5d;

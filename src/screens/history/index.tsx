@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useCallback, useMemo } from "react"
-import { BorderButton, GenericTextInput, HistoryCard, Line } from "../../components"
+import { Button, GenericTextInput, HistoryCard, Line } from "../../components"
 import { customLocalStorage } from "../../stores"
 import { useUrlState } from "../../hooks"
 import { debounce, scrollPageToTop } from "../../shared/utils"
@@ -63,10 +63,11 @@ export const History: FC = () => {
                             disabled={pageFlowStates.isHistoryClear}
                             onChange={onChangeSearch}
                         />
-                        <BorderButton
-                            $text="Clear All History"
-                            $theme="red"
+                        <Button
+                            children="Clear All History"
+                            theme="border-red"
                             disabled={pageFlowStates.isHistoryClear}
+                            // disabled={true}
                             onClick={clearAllHistory}
                         />
                     </S.ActionsWrapper>

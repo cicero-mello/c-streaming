@@ -29,10 +29,22 @@ export const GlobalStyle = createGlobalStyle`
             -webkit-tap-highlight-color: transparent;
         }
 
-        button {
-            outline: none;
+        button, a, input {
             background-color: unset;
             border: none;
+
+            transition: 50ms linear;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:focus-visible {
+                /* outline: 2px outset #2eabff; */
+                outline: 2px outset #ffbf2e;
+                outline-offset: 4px;
+                border-radius: 3px;
+            }
         }
 
         a {

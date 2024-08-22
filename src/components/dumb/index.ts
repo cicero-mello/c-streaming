@@ -36,3 +36,6 @@ export * from "./triangle-radio-input"
 export * from "./triangle-radio-input/types"
 
 export * from "./wrapper"
+
+export * from "./button"
+export * from "./button/types"

@@ -1,6 +1,6 @@
-import React, { FunctionComponent, SVGProps } from "react"
+import React, { FC, SVGProps } from "react"
 
-export const UserIcoBig: FunctionComponent<SVGProps<SVGSVGElement>> = (props) => (
+export const UserIcoBig: FC<SVGProps<SVGSVGElement>> = (props) => (
     <svg
         width="109"
         height="96"

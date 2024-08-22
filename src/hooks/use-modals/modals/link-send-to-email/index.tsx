@@ -28,8 +28,8 @@ export const LinkSendToEmail = forwardRef<
             ]}
             buttons={[
                 {
-                    $text: "OK",
-                    $theme: "green",
+                    children: "OK",
+                    theme: "border-green",
                     onClick: () => baseModalRef.current?.close()
                 }
             ]}

@@ -1,5 +1,5 @@
 import React, { FormEvent, FunctionComponent, useState } from "react"
-import { BorderButton, GenericTextInput, Line } from "../../components"
+import { Button, GenericTextInput, Line } from "../../components"
 import { UserIcoBig } from "../../assets/icons"
 import { isEmailValid } from "../../shared/utils"
 import { useModals } from "../../hooks"
@@ -49,24 +49,27 @@ export const User: FunctionComponent<PageProps> = () => {
                         defaultValue="gally@email.com"
                         errorMessage={emailErrorMessage}
                     />
-                    <BorderButton
-                        $text="Save Changes"
+                    <Button
+                        children="Save Changes"
+                        theme="border"
                         disabled={!formHasNewValue}
                     />
                 </S.Form>
             </S.TopSection>
             <S.BottomSection>
-                <BorderButton
-                    $text="Change Password"
+                <Button
+                    children="Change Password"
+                    theme="border"
                     onClick={() => modals?.linkSendToEmail?.open()}
                 />
-                <BorderButton
-                    $text="Logout"
+                <Button
+                    children="Logout"
+                    theme="border"
                     disabled
                 />
-                <BorderButton
-                    $text="Delete Account"
-                    $theme="red"
+                <Button
+                    children="Delete Account"
+                    theme="border-red"
                     onClick={() => modals?.deleteAccountQuestion?.open()}
                 />
             </S.BottomSection>

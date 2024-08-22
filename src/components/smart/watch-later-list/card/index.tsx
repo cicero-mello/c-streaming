@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react"
 import { WatchLaterCardProps } from "./types"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { BorderButton, ColorButton } from "../../../dumb/buttons"
 import { delay } from "../../../../shared/utils"
+import { Button } from "../../../dumb"
 import * as S from "./styles"
 
 export const WatchLaterCard: FC<WatchLaterCardProps> = ({
@@ -25,12 +25,14 @@ export const WatchLaterCard: FC<WatchLaterCardProps> = ({
                 <S.CardContent>
                     <S.Title> {title} </S.Title>
                     <S.Buttons>
-                        <ColorButton
-                            text="Watch Now"
+                        <Button
+                            theme="classic"
+                            children="Watch Now"
                             onClick={handleClickWatchNow}
                         />
-                        <BorderButton
-                            $text="Remove"
+                        <Button
+                            theme="border"
+                            children="Remove"
                             onClick={handleClickRemove}
                         />
                     </S.Buttons>

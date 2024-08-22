@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { BorderButtonProps } from "../../../../components/dumb/buttons"
+import { ButtonProps } from "../../../../components"
 
 export interface BaseModalHandle {
     open: (closeAction?: Function) => void
@@ -10,6 +10,6 @@ export interface BaseModalProps {
     id: string
     title?: string
     texts?: string[]
-    buttons?: BorderButtonProps[]
+    buttons?: ButtonProps[]
     children?: ReactNode
 }

@@ -31,12 +31,13 @@ export const DeleteAccountConfirmation = forwardRef<
             ]}
             buttons={[
                 {
-                    $text: "Cancel",
+                    theme: "border",
+                    children: "Cancel",
                     onClick: () => baseModalRef.current?.close()
                 },
                 {
-                    $text: "DELETE ACCOUNT",
-                    $theme: "danger",
+                    children: "DELETE ACCOUNT",
+                    theme: "border-danger",
                     onClick: () => setPasswordErrorMessage("Wrong password")
                 }
             ]}

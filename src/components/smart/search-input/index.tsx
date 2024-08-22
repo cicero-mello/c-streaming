@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, FunctionComponent, useRef } from "react"
+import React, { KeyboardEvent, FunctionComponent, useRef, useState } from "react"
 import { SearchInputProps } from "./types"
 import { useNavigation } from "../../../hooks"
 import { PATHS } from "../../../paths"
@@ -7,8 +7,9 @@ import * as S from "./styles"
 export const SearchInput: FunctionComponent<SearchInputProps> = ({
     onSearch
 }) => {
+    // const [accessibilityFocus, setAccessibilityFocus] = useState(false)
     const { navigate } = useNavigation()
-    const ref = useRef<any>(null)
+    const ref = useRef<HTMLInputElement>(null)
 
     const onClickButton = () => {
         const inputValue = ref?.current?.value ?? ""
@@ -20,12 +21,15 @@ export const SearchInput: FunctionComponent<SearchInputProps> = ({
         if(event.key === "Enter") onClickButton()
     }
 
+
+
     return (
-        <S.Component>
+        <S.Component tabIndex={-1}>
             <S.Input
                 ref={ref}
                 spellCheck={false}
                 onKeyDown={handleInputChange}
+                onFocus={() => console.log("focus")}
             />
             <S.Button onClick={onClickButton}>
                 Search

@@ -1,23 +1,16 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { BannerAnimationState, BannerItem } from "./types"
-import { ColorButton, WatchLatterButton } from "../../../dumb/buttons"
+import { WatchLatterButton } from "../../../dumb/buttons"
 import { useNavigation } from "../../../../hooks"
 import { getMediaPathByMediaType } from "../../../../paths"
 import * as S from "./styles"
+import { Button } from "../../../dumb"
 
 export const Item: FunctionComponent<BannerItem> = (newMedia) => {
-    const { navigate } = useNavigation()
     const [showingMedia, setShowingMedia] = useState(newMedia)
     const [bannerAnimation, setBannerAnimation] = useState<BannerAnimationState>("closed")
     const [firstRender, setFirstRender] = useState(true)
-
-    const onClickColorButton = () => {
-        navigate(
-            getMediaPathByMediaType(showingMedia.type),
-            { mediaID: showingMedia.id }
-        )
-    }
 
     useEffect(() => {
         setBannerAnimation("closed")
@@ -42,9 +35,13 @@ export const Item: FunctionComponent<BannerItem> = (newMedia) => {
                 </S.InfoWrapper>
                 <S.ButtonsWrapper>
                     <WatchLatterButton mediaId={showingMedia.id} />
-                    <ColorButton
-                        onClick={onClickColorButton}
-                        text="Watch Now"
+                    <Button
+                        theme="classic"
+                        children="Watch Now"
+                        url={{
+                            path: getMediaPathByMediaType(showingMedia.type),
+                            params: { mediaID: showingMedia.id }
+                        }}
                     />
                 </S.ButtonsWrapper>
             </S.InfoAndButtons>

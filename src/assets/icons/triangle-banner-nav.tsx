@@ -1,6 +1,6 @@
-import React, { FunctionComponent, SVGProps } from "react"
+import React, { FC, SVGProps } from "react"
 
-export const TriangleBannerNav: FunctionComponent<SVGProps<SVGSVGElement>> = (props) => (
+export const TriangleBannerNav: FC<SVGProps<SVGSVGElement>> = (props) => (
     <svg
         className="triangle-banner-nav"
         width="24"
