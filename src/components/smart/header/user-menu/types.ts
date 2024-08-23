@@ -1,6 +1,6 @@
-import { HTMLAttributes } from "react"
+import { ButtonHTMLAttributes } from "react";
 
-export interface UserMenuProps extends
-Omit<HTMLAttributes<HTMLButtonElement>, "children" | "ref"> {
-    disabled?: boolean
-}
+export type UseMenuProps = Omit<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    "className" | "ref"
+>

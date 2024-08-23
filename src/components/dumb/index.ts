@@ -1,4 +1,5 @@
-export * from "./buttons"
+export * from "./see-all-button"
+export * from "./see-all-button/types"
 
 export * from "./episode-card"
 export * from "./episode-card/types"

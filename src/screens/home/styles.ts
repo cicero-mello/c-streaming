@@ -1,17 +1,26 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
-const adaptativeCSS = css`
+export const Home = styled.main`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .banner-navigation{
+        margin: 16px 16px 20px 16px;
+    }
+
     .banner-list {
         max-height: 420px;
         transition: 400ms ease-in-out;
         overflow: hidden;
         opacity: 100%;
     }
+
     #first-line-home{
         transition: 400ms ease-in-out;
     }
 
-    .see-all-button{
+    .poster-list .border-button {
         max-width: 200px;
         &::before{
             position: absolute;
@@ -35,6 +44,8 @@ const adaptativeCSS = css`
         .banner-list {
             max-height: 0px;
             opacity: 0%;
+            pointer-events: none;
+            user-select: none;
         }
         #first-line-home{
             margin-top: 13px;
@@ -100,7 +111,7 @@ const adaptativeCSS = css`
     }
 
     @media(max-width: 600px){
-        .see-all-button{
+        .poster-list .border-button{
             color: #08080800;
             max-width: 100px;
             &::before{
@@ -131,16 +142,4 @@ const adaptativeCSS = css`
             padding: 0px 24px;
         }
     }
-`
-
-export const Home = styled.main`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    .banner-navigation{
-        margin: 16px 16px 20px 16px;
-    }
-
-    ${adaptativeCSS}
 `

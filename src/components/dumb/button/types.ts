@@ -3,19 +3,19 @@ import { PATHS } from "../../../paths"
 import { UrlState } from "../../../hooks"
 
 export type ButtonThemes = (
-    "border" | "border-red" | "border-danger" | "border-green" |
-    "classic" |
-    "clean"
+    "border" | "border-red" | "border-danger" |
+    "border-green" | "border-logo" | "classic" |
+    "menu-item"
 )
 
 export interface ButtonProps extends Omit<
     HTMLAttributes<HTMLElement>,
-    "className"
+    "className" | "onContextMenu" | "onKeyDown" | "ref"
 >{
     theme: ButtonThemes
+    disabled?: boolean
     url?: {
         path: PATHS,
         params?: UrlState
     }
-    disabled?: boolean
 }

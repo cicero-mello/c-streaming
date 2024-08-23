@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { BannerAnimationState, BannerItem } from "./types"
-import { WatchLatterButton } from "../../../dumb/buttons"
+import { WatchLatterButton } from "../../../smart"
 import { useNavigation } from "../../../../hooks"
 import { getMediaPathByMediaType } from "../../../../paths"
 import * as S from "./styles"

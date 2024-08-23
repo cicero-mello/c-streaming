@@ -1,11 +1,12 @@
 import styled from "styled-components"
-import { ButtonThemes } from "./types"
+import { ButtonThemes } from "../types"
 import { borderThemes } from "./border.styles"
 import { classicThemes } from "./classic.styles"
+import { menuItemThemes } from "./menu-item.styles"
 import { Link } from "gatsby";
 
 const buttonThemes = new Map([
-    ...borderThemes, ...classicThemes
+    ...borderThemes, ...classicThemes, ...menuItemThemes
 ])
 
 export const StyledButton = styled.button.attrs((props: any) => ({

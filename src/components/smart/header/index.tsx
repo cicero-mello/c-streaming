@@ -7,7 +7,7 @@ import * as S from "./styles"
 export const Header: FC = () => (
     <S.Component>
         <Button
-            theme="border"
+            theme="border-logo"
             url={{path:PATHS.HOME}}
         />
         <UserMenu />

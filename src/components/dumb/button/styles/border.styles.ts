@@ -1,5 +1,5 @@
 import { css, RuleSet } from "styled-components"
-import { ButtonThemes } from "./types"
+import { ButtonThemes } from "../types"
 
 const border = ($disabled?: boolean) => css`
     cursor: pointer;
@@ -78,11 +78,42 @@ const borderGreen = ($disabled?: boolean) => css`
     `}
 `
 
+const borderLogo = ($disabled?: boolean) => css`
+    ${border($disabled)}
+
+    white-space: nowrap;
+    padding: 6px 13px 11px 13px;
+    font-size: 29px;
+    border-color: #FFFFFF;
+    border-radius: 3px;
+    line-height: 0px;
+    color: white;
+
+    transition-property:
+        outline,
+        width,
+        background-color,
+        border,
+        color
+    ;
+    transition-duration: 50ms, 300ms, 300ms;
+    transition-timing-function: linear, linear, ease;
+
+    ${!$disabled && css`
+        &:hover {
+            background-color: #FFFFFF;
+            border: #090909;
+            color: #090909;
+        }
+    `}
+`
+
 export const borderThemes: Map<
     ButtonThemes, ($disabled?: boolean) => RuleSet<object>
 > = new Map ([
     ["border", border],
     ["border-red",borderRed],
     ["border-danger", borderDanger],
-    ["border-green",borderGreen]
+    ["border-green",borderGreen],
+    ["border-logo", borderLogo]
 ])

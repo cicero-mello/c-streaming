@@ -16,31 +16,13 @@ export const Component = styled.header.attrs({
         transition: 300ms ease-in-out;
     }
 
-    .border-button {
-        white-space: nowrap;
-        padding: 6px 13px 11px 13px;
-        font-size: 29px;
-        border-color: #FFFFFF;
-        border-radius: 3px;
+    .border-logo-button {
         height: 33px;
         width: 185px;
-        line-height: 0px;
-        overflow: hidden;
-        color: white;
-        transition-property: outline, width, background-color, border, color;
-        transition-duration: 50ms, 300ms, 300ms;
-        transition-timing-function: linear, linear, ease;
-        justify-content: center;
 
         &::after {
             text-align: center;
             content: "C-Streaming";
-        }
-
-        &:hover {
-            background-color: #FFFFFF;
-            border: #090909;
-            color: #090909;
         }
     }
 
@@ -51,11 +33,14 @@ export const Component = styled.header.attrs({
             font-size: 1px;
             opacity: 0;
             margin: 0;
+            padding: 0px;
         }
 
-        .border-button{
+        .border-logo-button {
             width: 45px;
-            &::after{ content: "C"; }
+            &::after {
+                content: "C";
+            }
         }
     }
 

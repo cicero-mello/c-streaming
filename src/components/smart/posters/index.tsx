@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from "react"
 import { PostersProps } from "./types"
-import { SeeAllButton } from "../../dumb/buttons"
+import { SeeAllButton, PosterProps } from "../../dumb"
 import { Carousel } from "./carousel"
 import { useNavigation } from "../../../hooks"
 import { useMediaStore } from "../../../stores"
-import { PosterProps } from "../../dumb/poster/types"
 import { createLinkPath, getMediaPathByMediaType, PATHS } from "../../../paths"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import * as S from "./styles"
@@ -36,17 +35,17 @@ export const Posters: FunctionComponent<PostersProps> = ({
         )
     }))
 
-    const handleClickSeeAll = () => {
-        navigate(PATHS.SEARCH, { searchType: mediaType })
-    }
-
     return (
         <S.Component {...rest}>
             <S.TopSection>
                 <S.Title> {mediaTypeText} </S.Title>
                 <SeeAllButton
-                    text={`See All ${mediaTypeText}`}
-                    onClick={handleClickSeeAll}
+                    theme="border"
+                    children={`See All ${mediaTypeText}`}
+                    url={{
+                        path: PATHS.SEARCH,
+                        params: { searchType: mediaType }
+                    }}
                 />
             </S.TopSection>
             <S.DownSection>

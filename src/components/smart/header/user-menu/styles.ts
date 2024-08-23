@@ -3,7 +3,7 @@ import styled, { css } from "styled-components"
 export const Component = styled.button.attrs((props: any) => ({
     className: "user-menu",
     $showMenu: props.$showMenu
-}))<{ $showMenu?: boolean, $disabled?: boolean} >`
+}))<{ $showMenu?: boolean }>` ${({ $showMenu }) => css`
     display: flex;
     position: relative;
     cursor: pointer;
@@ -12,24 +12,26 @@ export const Component = styled.button.attrs((props: any) => ({
         transition: 200ms ease-in-out;
     }
 
-    ${({ $disabled, $showMenu }) => !$disabled && css`
-        .user-ico, .user-name {
-            cursor: pointer;
-        }
-
-        ${$showMenu && css`
-            .user-ico {
-                fill: #FFFF;
-                * { stroke: #090909;}
-            }
-        `}
-
-        &:hover .user-ico {
+    ${$showMenu && css`
+        .user-ico {
             fill: #FFFF;
             * { stroke: #090909;}
         }
     `}
-`
+
+    &:hover .user-ico {
+        fill: #FFFF;
+        * {
+            stroke: #090909;
+        }
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+        user-select: none;
+    }
+`}`
 
 export const UserName = styled.p.attrs({
     className: "user-name"
@@ -40,10 +42,10 @@ export const UserName = styled.p.attrs({
     user-select: none;
 `
 
-export const MenuList = styled.div.attrs((props: any) => ({
+export const MenuList = styled.nav.attrs((props: any) => ({
     className: "user-menu-list",
     $show: props.$show
-}))<{ $show: boolean }>`
+}))<{ $show: boolean }>`${({ $show }) => css`
 
     display: flex;
     flex-direction: column;
@@ -57,54 +59,27 @@ export const MenuList = styled.div.attrs((props: any) => ({
     line-height: 29px;
     background-color: #080808;
     z-index: 10;
-
-    transition-duration: 200ms, 250ms;
-    transition-property: all, opacity;
-    transition-timing-function: linear, linear;
-
     padding: 0px 0px;
     opacity: 0;
     max-height: 0;
     cursor: default;
 
-    .clean-button {
-        cursor: pointer;
-        pointer-events: unset;
-        padding: 0px 11px;
-        width: 100%;
-        font-size: 16px;
-        justify-content: unset;
-        text-align: start;
+    transition-duration: 200ms, 250ms;
+    transition-property: all, opacity;
+    transition-timing-function: linear, linear;
 
-        &:hover {
-            outline: none;
-            background-color: white;
-            color: #080808;
-        }
-
-        &:focus-visible {
-            padding: 0;
-            margin: 0px 11px;
-            width: fit-content;
-            outline-offset: 4px;
-        }
-    }
-
-    ${({ $show }) => $show ? css`
+    ${$show && css`
         opacity: 1;
         max-height: 129px;
         padding: 11px 0px;
 
         pointer-events: unset;
         border-color: white;
-        .clean-button {
-            transition: 100ms linear;
-        }
-    ` : css`
-        .clean-button {
+    `}
+
+    ${!$show && css`
+        .menu-item-button {
             transition: 500ms linear;
         }
     `}
-
-
-`
+`}`

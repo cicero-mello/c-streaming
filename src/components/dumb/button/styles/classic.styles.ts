@@ -1,5 +1,5 @@
 import { css, RuleSet } from "styled-components"
-import { ButtonThemes } from "./types"
+import { ButtonThemes } from "../types"
 
 const classic = ($disabled?: boolean) => css`
     border: unset;
@@ -25,7 +25,7 @@ const classic = ($disabled?: boolean) => css`
     `}
 
     ${!$disabled && css`
-        &:hover{
+        &:hover {
             background-color: #5A9A32;
         }
     `}

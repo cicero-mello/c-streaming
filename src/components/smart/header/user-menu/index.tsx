@@ -1,63 +1,55 @@
-import React, { FunctionComponent, useState, useRef, useEffect, useCallback } from "react"
-import { UserMenuProps } from "./types"
+import React, { FC, useState, useRef } from "react"
 import { UserIco } from "../../../../assets/icons"
 import { PATHS } from "../../../../paths"
-import { useOutsideClick } from "../../../../hooks"
 import { Button } from "../../../dumb"
+import { UseMenuProps } from "./types"
+import {
+    useOutsideClick,
+    useOutsideEnter
+} from "../../../../hooks"
 import * as S from "./styles"
 
-export const UserMenu: FunctionComponent<UserMenuProps> = (props) => {
+export const UserMenu: FC<UseMenuProps> = ({
+    onClick, ...rest
+}) => {
     const componentRef = useRef(null)
     const [showMenu, setShowMenu] = useState(false)
 
-    const handleClick = (e: any) => {
-        e.preventDefault()
-        if(!!props.disabled) return
-        setShowMenu(old => !old)
-    }
-
     useOutsideClick(componentRef, () => setShowMenu(false))
-
-    useEffect(() => {
-        const onAcessiblityNav = (e: KeyboardEvent) => {
-            if(e.key === "Enter" || e.key === " "){
-                setShowMenu(false)
-            }
-        }
-        document.addEventListener("keydown", onAcessiblityNav)
-        return () => document.removeEventListener(
-            "keydown",
-            onAcessiblityNav
-        )
-    }, [showMenu])
+    useOutsideEnter(componentRef, () => setShowMenu(false))
 
     return (
         <S.Component
-            {...props}
+            {...rest}
             ref={componentRef}
             $showMenu={showMenu}
-            $disabled={props.disabled}
-            onClick={handleClick}
+            onClick={(event) => {
+                setShowMenu(old => !old)
+                if(onClick) onClick(event)
+            }}
         >
             <S.UserName > Gally </S.UserName>
             <UserIco />
-            <S.MenuList $show={showMenu} onClick={(e) => e.stopPropagation()}>
+            <S.MenuList
+                $show={showMenu}
+                onClick={(e) => e.stopPropagation()}
+            >
                 <Button
-                    theme="clean"
+                    theme="menu-item"
                     children="Profile"
                     tabIndex={showMenu ? 0 : -1}
                     url={{path: PATHS.USER}}
                     onClick={() => setShowMenu(false)}
                 />
                 <Button
-                    theme="clean"
+                    theme="menu-item"
                     children="Watch Later"
                     tabIndex={showMenu ? 0 : -1}
                     url={{path: PATHS.WATCH_LATER}}
                     onClick={() => setShowMenu(false)}
                 />
                 <Button
-                    theme="clean"
+                    theme="menu-item"
                     children="History"
                     tabIndex={showMenu ? 0 : -1}
                     url={{path: PATHS.HISTORY}}
