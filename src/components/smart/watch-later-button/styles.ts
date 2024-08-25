@@ -20,7 +20,6 @@ export const Button = styled.button.attrs((props: any)=> ({
     font-family: "Arsenal", sans-serif;
 
     transition-property:
-        outline,
         border-color,
         color,
         background-color,
@@ -28,8 +27,8 @@ export const Button = styled.button.attrs((props: any)=> ({
         padding-left,
         opacity
     ;
-    transition-duration: 50ms, 200ms;
-    transition-timing-function: linear, ease-in-out;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
 
     &:hover, &:focus-visible{
         color: #cccccc;

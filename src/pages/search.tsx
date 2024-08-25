@@ -17,7 +17,7 @@ const SearchPage: FunctionComponent<PageProps> = (props) => {
 }
 
 export default SearchPage
-export const Head: HeadFC = () => <title>C-Streaming: Searching...</title>
+export const Head: HeadFC = () => <title> Search Page </title>
 
 export const pageQuery = graphql`
     query GatsbyImagesDataQuery {

@@ -1,22 +1,28 @@
 import styled, { css } from "styled-components"
-import { BannerAnimationState } from "./types"
+import { ItemAnimationState } from "./types"
 
 export const Component = styled.div.attrs((props: any) => ({
-    className: "banner",
+    className: "banner-item",
     $animationState: props.$animationState || "open"
-}))<{ $animationState: BannerAnimationState }>`
+}))<{ $animationState: ItemAnimationState }>`${({
+    $animationState
+}) => css`
     display: flex;
     height: 350.4px;
     padding: 10px 34px;
     width: 100%;
 
-    .gatsby-image{
+    .gatsby-image-wrapper {
+        overflow: unset;
+    }
+
+    .gatsby-image {
         width: 337.6px;
         min-width: 337.6px;
         transition: 340ms ease-in-out;
     }
 
-    ${({$animationState}) => $animationState === "closed" && css`
+    ${$animationState === "closed" && css`
         .gatsby-image {
             width: 0px;
             min-width: 0px;
@@ -27,7 +33,7 @@ export const Component = styled.div.attrs((props: any) => ({
             margin-right: 337.6px;
         }
     `}
-`
+`}`
 
 export const InfoAndButtons = styled.div`
     display: flex;
@@ -47,12 +53,14 @@ export const InfoWrapper = styled.div.attrs({
     transition: 340ms ease-in-out;
 `
 
-export const MediaName = styled.h1`
+export const MediaName = styled.p`
     max-width: 85%;
     white-space: nowrap;
     font-size: 37px;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: fit-content;
+    font-style: normal;
 `
 
 export const Synopsis = styled.p`

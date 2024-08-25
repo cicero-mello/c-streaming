@@ -11,12 +11,11 @@ const menuItem = ($disabled?: boolean) => css`
     text-align: start;
 
     transition-property:
-        outline,
         background-color,
         color,
         opacity
     ;
-    transition-duration: 50ms, 100ms;
+    transition-duration: 100ms;
     transition-timing-function: linear;
 
     ${$disabled && css`

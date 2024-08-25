@@ -27,24 +27,29 @@ export const GlobalStyle = createGlobalStyle`
             -webkit-user-select: none;
             -ms-user-select: none;
             -webkit-tap-highlight-color: transparent;
-        }
 
-        button, a, input {
-            background-color: unset;
-            border: none;
-
-            transition: 50ms linear;
+            transition-property:
+                outline,
+                outline-offset,
+                border-radius
+            ;
+            transition-duration: 50ms;
+            transition-timing-function: linear;
 
             &:focus {
                 outline: none;
             }
 
             &:focus-visible {
-                /* outline: 2px outset #2eabff; */
                 outline: 2px outset #ffbf2e;
                 outline-offset: 4px;
                 border-radius: 3px;
             }
+        }
+
+        button, a, input {
+            background-color: unset;
+            border: none;
         }
 
         a {

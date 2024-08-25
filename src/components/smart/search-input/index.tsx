@@ -29,7 +29,6 @@ export const SearchInput: FunctionComponent<SearchInputProps> = ({
                 ref={ref}
                 spellCheck={false}
                 onKeyDown={handleInputChange}
-                onFocus={() => console.log("focus")}
             />
             <S.Button onClick={onClickButton}>
                 Search

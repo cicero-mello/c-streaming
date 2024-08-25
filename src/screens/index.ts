@@ -1,6 +1,6 @@
 export * from "./home"
 export * from "./search"
-export * from "./user"
+export * from "./user-settings"
 export * from "./404"
 export * from "./movie"
 export * from "./series"

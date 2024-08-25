@@ -1,7 +1,7 @@
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import { MediaType } from "../../../../stores"
 
-export interface BannerItem {
+export interface BannerMedia {
     image: IGatsbyImageData
     name: string
     synopsis: string
@@ -9,4 +9,8 @@ export interface BannerItem {
     type: MediaType
 }
 
-export type BannerAnimationState = "closed" | "open"
+export interface BannerItemProps extends BannerMedia {
+    isBannerHidden: boolean
+}
+
+export type ItemAnimationState = "closed" | "open"

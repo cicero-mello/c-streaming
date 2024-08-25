@@ -17,7 +17,7 @@ const WatchLaterPage: FunctionComponent<PageProps> = (props) => {
 }
 
 export default WatchLaterPage
-export const Head: HeadFC = () => <title>C-Streaming: Watch Later</title>
+export const Head: HeadFC = () => <title> Watch Later </title>
 
 export const pageQuery = graphql`
     query GatsbyImagesDataQuery {

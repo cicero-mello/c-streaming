@@ -1,5 +1,5 @@
-import { Media } from "../../../stores"
-import { BannerItem } from "./item/types"
+import { useMediaStore } from "../../../stores"
+import { BannerMedia } from "./item/types"
 
 const choicedMediaNamesToBanner: string[] = [
     "Neon Genesis Evangelion",
@@ -16,16 +16,16 @@ const choicedMediaNamesToBanner: string[] = [
     "Kingdom"
 ]
 
-export const createBannerItems = (
-    medias: Media[]
-): BannerItem[] => {
+export const useBannerMedias = (): BannerMedia[] => {
+    const { medias } = useMediaStore()
+
     const choicedMedias = medias.filter(
         media => !!choicedMediaNamesToBanner.find(
             name => name === media.name
         )
     )
 
-    const bannerItems: BannerItem[] = choicedMedias.map(media => {
+    const bannerItems: BannerMedia[] = choicedMedias.map(media => {
         if(!media?.bannerImage) return undefined
         return {
             id: media.id,

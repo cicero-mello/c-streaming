@@ -7,4 +7,4 @@ const HistoryPage: FC = () => (
 )
 
 export default HistoryPage
-export const Head: HeadFC = () => <title>C-Streaming: History</title>
+export const Head: HeadFC = () => <title> History Page </title>

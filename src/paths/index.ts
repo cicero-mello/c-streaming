@@ -5,7 +5,7 @@ import { MediaType } from "../stores";
 export enum PATHS {
     HOME = "/",
     SEARCH = "/search",
-    USER = "/user",
+    USER_SETTINGS = "/user-settings",
     MOVIE = "/movie",
     SERIES = "/series",
     WATCH_LATER = "/watch-later",

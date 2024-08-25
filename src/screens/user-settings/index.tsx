@@ -6,7 +6,7 @@ import { useModals } from "../../hooks"
 import { type PageProps } from "gatsby"
 import * as S from "./styles"
 
-export const User: FunctionComponent<PageProps> = () => {
+export const UserSettings: FunctionComponent<PageProps> = () => {
     const modals = useModals()
     const [formHasNewValue, setFormHasNewValue] = useState(false)
     const [emailErrorMessage, setEmailErrorMessage] = useState("")

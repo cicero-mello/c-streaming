@@ -33,9 +33,6 @@ export * from "./poster/types"
 export * from "./select-input"
 export * from "./select-input/types"
 
-export * from "./triangle-radio-input"
-export * from "./triangle-radio-input/types"
-
 export * from "./wrapper"
 
 export * from "./button"

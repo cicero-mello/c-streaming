@@ -6,21 +6,8 @@ import * as S from "./styles"
 
 const Layout: FunctionComponent<PageProps> = ({
     children
-}) => {
-
-    useEffect(() => {
-        // document.querySelectorAll('a').forEach(link => {
-        //     link.addEventListener('keydown', (event) => {
-        //       if (event.code === 'Space') {
-        //         event.preventDefault()
-        //         link.click()
-        //       }
-        //     })
-        // })
-    }, [])
-
-    return (
-    <S.Layout>
+}) => (
+    <S.Layout lang="en">
         <S.GlobalStyle />
         <Fonts />
             <NavigationProvider>
@@ -29,6 +16,6 @@ const Layout: FunctionComponent<PageProps> = ({
                 </ModalsProvider>
             </NavigationProvider>
     </S.Layout>
-)}
+)
 
 export default Layout

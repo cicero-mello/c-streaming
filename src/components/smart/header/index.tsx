@@ -9,6 +9,7 @@ export const Header: FC = () => (
         <Button
             theme="border-logo"
             url={{path:PATHS.HOME}}
+            aria-label="Home page: C-Streaming"
         />
         <UserMenu />
     </S.Component>

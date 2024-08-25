@@ -5,16 +5,20 @@ export const useOutsideEnter = (
     callback: () => void,
     disabled?: boolean
 ) => {
-    const onClickOutside = useCallback((event: KeyboardEvent) => {
+    const onEnterOutside = useCallback((event: KeyboardEvent) => {
         if(!ref?.current) return
-        if(!ref.current.contains(event.target) && !disabled && (event.key === "Enter" || event.key === " ")) callback()
+        if(
+            !ref.current.contains(event.target)
+            && !disabled
+            && (event.key === "Enter" || event.key === " ")
+        ) callback()
     }, [ref, callback])
 
     useEffect(() => {
-        document.addEventListener('keydown', onClickOutside)
+        document.addEventListener('keydown', onEnterOutside)
 
         return () => (
-            document.removeEventListener('keydown', onClickOutside)
+            document.removeEventListener('keydown', onEnterOutside)
         )
     }, [ref, callback])
 }

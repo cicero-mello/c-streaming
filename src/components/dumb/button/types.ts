@@ -5,7 +5,7 @@ import { UrlState } from "../../../hooks"
 export type ButtonThemes = (
     "border" | "border-red" | "border-danger" |
     "border-green" | "border-logo" | "classic" |
-    "menu-item"
+    "menu-item" | "none"
 )
 
 export interface ButtonProps extends Omit<

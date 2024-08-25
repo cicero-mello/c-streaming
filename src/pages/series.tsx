@@ -17,7 +17,7 @@ const SeriesPage: FC<PageProps> = (props) => {
 }
 
 export default SeriesPage
-export const Head: HeadFC = () => <title>C-Streaming: Serie/Anime</title>
+export const Head: HeadFC = () => <title> Serie/Anime </title>
 
 export const pageQuery = graphql`
     query GatsbyImagesDataQuery {

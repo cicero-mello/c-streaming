@@ -12,11 +12,8 @@ const classic = ($disabled?: boolean) => css`
     padding: 6px 21px;
     overflow: hidden;
 
-    transition-property:
-        outline,
-        background-color
-    ;
-    transition-duration: 50ms, 100ms;
+    transition-property: background-color;
+    transition-duration: 100ms;
     transition-timing-function: linear;
 
     ${$disabled && css`

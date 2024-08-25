@@ -5,17 +5,6 @@ export const Home = styled.main`
     flex-direction: column;
     width: 100%;
 
-    .banner-navigation{
-        margin: 16px 16px 20px 16px;
-    }
-
-    .banner-list {
-        max-height: 420px;
-        transition: 400ms ease-in-out;
-        overflow: hidden;
-        opacity: 100%;
-    }
-
     #first-line-home{
         transition: 400ms ease-in-out;
     }
@@ -41,12 +30,6 @@ export const Home = styled.main`
     }
 
     @media(max-width: 850px){
-        .banner-list {
-            max-height: 0px;
-            opacity: 0%;
-            pointer-events: none;
-            user-select: none;
-        }
         #first-line-home{
             margin-top: 13px;
         }
