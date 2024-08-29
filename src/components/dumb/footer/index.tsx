@@ -15,7 +15,7 @@ export const Footer: FunctionComponent = () => (
             <StaticImage
                 className="logo-img"
                 src={instaLogoSrc}
-                alt="A"
+                alt="Instagram Logo"
             />
             <S.Text > @umcicero </S.Text>
         </S.InfoLink>
@@ -27,7 +27,7 @@ export const Footer: FunctionComponent = () => (
             <StaticImage
                 className="logo-img"
                 src={gatbyLogoSrc}
-                alt="A"
+                alt="Gatsby Logo"
             />
             <S.Text> made with Gatsby </S.Text>
         </S.InfoLink>

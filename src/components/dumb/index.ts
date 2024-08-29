@@ -10,6 +10,8 @@ export * from "./episodes-carousel/types"
 export * from "./fake-video"
 export * from "./fake-video/types"
 
+export * from "./footer"
+
 export * from "./generic-text-input"
 export * from "./generic-text-input/types"
 

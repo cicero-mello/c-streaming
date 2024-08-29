@@ -1,27 +1,22 @@
-import React, { KeyboardEvent, FunctionComponent, useRef, useState } from "react"
-import { SearchInputProps } from "./types"
-import { useNavigation } from "../../../hooks"
+import React, { KeyboardEvent, FC, useRef, useState } from "react"
+import { useFocusOrigin, useNavigation } from "../../../hooks"
 import { PATHS } from "../../../paths"
+import { Button } from "../../dumb"
 import * as S from "./styles"
 
-export const SearchInput: FunctionComponent<SearchInputProps> = ({
-    onSearch
-}) => {
-    // const [accessibilityFocus, setAccessibilityFocus] = useState(false)
-    const { navigate } = useNavigation()
+export const SearchInput: FC = () => {
+    const [searchText, setSearchText] = useState("")
     const ref = useRef<HTMLInputElement>(null)
+    const focusOrigin = useFocusOrigin(ref)
+    const { navigate } = useNavigation()
 
-    const onClickButton = () => {
-        const inputValue = ref?.current?.value ?? ""
-        if(onSearch) onSearch(inputValue)
-        else navigate(PATHS.SEARCH, { searchText: inputValue })
+    const handleInputChange = (
+        event: KeyboardEvent<HTMLInputElement>
+    ) => {
+        if(event.key === "Enter"){
+            navigate(PATHS.SEARCH, { searchText: searchText })
+        }
     }
-
-    const handleInputChange = (event: KeyboardEvent<HTMLInputElement>) => {
-        if(event.key === "Enter") onClickButton()
-    }
-
-
 
     return (
         <S.Component tabIndex={-1}>
@@ -29,10 +24,21 @@ export const SearchInput: FunctionComponent<SearchInputProps> = ({
                 ref={ref}
                 spellCheck={false}
                 onKeyDown={handleInputChange}
+                $focusOrigin={focusOrigin}
+                aria-label="Search any content"
+                onChange={(event) => {
+                    setSearchText(event.target.value)
+                }}
             />
-            <S.Button onClick={onClickButton}>
-                Search
-            </S.Button>
+            <Button
+                children="Search"
+                aria-label="Search"
+                theme="none"
+                url={{
+                    path: PATHS.SEARCH,
+                    params: { searchText: searchText }
+                }}
+             />
         </S.Component>
     )
 }

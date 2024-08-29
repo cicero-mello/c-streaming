@@ -1,4 +1,5 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import { FocusOrigin } from "../../../hooks"
 
 export const Component = styled.div.attrs({
     className: "search-input"
@@ -11,12 +12,12 @@ export const Component = styled.div.attrs({
     margin: 30px;
 
     &:focus-within{
-        input, button {
+        input, a {
             border-color: #8D8D8D;
             color: #dcdcdc;
         }
 
-        button {
+        a {
             &::before{
                 border-color: #dcdcdc;
             }
@@ -26,9 +27,102 @@ export const Component = styled.div.attrs({
             }
         }
     }
+
+    a {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 0;
+        width: 85px;
+        height: 100%;
+        background-color: unset;
+        border: none;
+        border: 1px solid #5d5d5d;
+        color: #b5b5b5;
+        font-size: 15px;
+        padding-right: 20px;
+        border-radius: 2px;
+
+        transition-property:
+            color,
+            background-color,
+            border-color,
+            width,
+            margin
+        ;
+        transition-duration: 100ms;
+        transition-timing-function: linear;
+
+        &::before{
+            content: "";
+            right: 12px;
+            top: 6px;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 20px;
+            border: 1px solid #b5b5b5;
+            transition: 100ms linear;
+        }
+
+        &::after{
+            content: "";
+            right: 6px;
+            top: 17px;
+            position: absolute;
+            width: 8px;
+            height: 1px;
+            border-radius: 2px;
+            background-color: #b5b5b5;
+            transform: rotate(37deg);
+
+        }
+
+        &:hover{
+            color: white;
+            background-color: #515151;
+            &::after{ background-color: white; }
+            &::before{ border-color: white; }
+        }
+    }
+
+    @media(max-width: 850px){
+        max-width: 640px;
+
+        input, a {
+            margin: 0px 60px;
+        }
+    }
+
+    @media(max-width: 440px){
+        max-width: 640px;
+        a {
+            color: transparent;
+            width: 36px;
+            margin: 0px 30px;
+
+            &:hover {
+                color: transparent;
+            }
+        }
+
+        &:has(input:focus){
+            a {
+                color: transparent;
+            }
+        }
+
+        input, :any-link {
+            margin: 0px 24px;
+        }
+    }
 `
 
-export const Input = styled.input`
+export const Input = styled.input
+<{ $focusOrigin: FocusOrigin}>`
+${({ $focusOrigin }) => css`
     outline: none;
     background-color: unset;
     border: 1px solid #5d5d5d;
@@ -50,52 +144,10 @@ export const Input = styled.input`
         height: 10px;
     }
 
-`
+    ${$focusOrigin === "click" && css`
+        &:focus-visible {
+            outline: none;
+        }
+    `}
 
-export const Button = styled.button`
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    width: 85px;
-    height: 100%;
-    background-color: unset;
-    border: none;
-    border: 1px solid #5d5d5d;
-    color: #b5b5b5;
-    font-size: 15px;
-    padding-right: 20px;
-    transition: 100ms linear;
-    border-radius: 2px;
-
-    &::before{
-        content: "";
-        right: 12px;
-        top: 6px;
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        border-radius: 20px;
-        border: 1px solid #b5b5b5;
-        transition: 100ms linear;
-    }
-
-    &::after{
-        content: "";
-        right: 6px;
-        top: 17px;
-        position: absolute;
-        width: 8px;
-        height: 1px;
-        border-radius: 2px;
-        background-color: #b5b5b5;
-        transform: rotate(37deg);
-
-    }
-
-    &:hover{
-        color: white;
-        background-color: #515151;
-        &::after{ background-color: white; }
-        &::before{ border-color: white; }
-    }
-`
+`}`

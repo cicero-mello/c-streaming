@@ -33,13 +33,6 @@ export const Home = styled.main`
         #first-line-home{
             margin-top: 13px;
         }
-        .search-input{
-            max-width: 640px;
-
-            input, button {
-                margin: 0px 60px;
-            }
-        }
     }
 
     @media(max-width: 660px){
@@ -104,23 +97,6 @@ export const Home = styled.main`
     }
 
     @media(max-width: 440px){
-        .search-input button {
-            color: #FFFFFF00;
-            width: 36px;
-            margin: 0px 30px;
-        }
-        .search-input:has(input:focus){
-            button{ color: #FFFFFF00; }
-        }
-
-        .search-input{
-            max-width: 640px;
-
-            input, button {
-                margin: 0px 24px;
-            }
-        }
-
         .poster-list .poster-list-top-section{
             padding: 0px 24px;
         }

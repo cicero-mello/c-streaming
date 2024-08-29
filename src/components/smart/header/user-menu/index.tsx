@@ -5,7 +5,8 @@ import { Button } from "../../../dumb"
 import { UseMenuProps } from "./types"
 import {
     useOutsideClick,
-    useOutsideEnter
+    useOutsideEnter,
+    useOutsideFocus
 } from "../../../../hooks"
 import * as S from "./styles"
 
@@ -17,6 +18,7 @@ export const UserMenu: FC<UseMenuProps> = ({
 
     useOutsideClick(componentRef, () => setShowMenu(false))
     useOutsideEnter(componentRef, () => setShowMenu(false))
+    useOutsideFocus(componentRef, () => setShowMenu(false))
 
     return (
         <S.Component
@@ -57,7 +59,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                 <Button
                     theme="menu-item"
                     children="User Settings"
-                    aria-label="User Settings"
+                    aria-label="User Settings - Last Menu Option"
                     tabIndex={showMenu ? 0 : -1}
                     url={{path: PATHS.USER_SETTINGS}}
                     onClick={() => setShowMenu(false)}
