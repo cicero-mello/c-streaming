@@ -1,35 +1,36 @@
-import React, { FunctionComponent } from "react"
+import React, { FC } from "react"
 import { StaticImage } from "gatsby-plugin-image"
+import { GitHubIco } from "../../../assets/icons"
 import * as S from "./styles"
 
-const gatbyLogoSrc = "../../../assets/images/gatsby-logo.png"
 const instaLogoSrc = "../../../assets/images/insta-logo.png"
 
-export const Footer: FunctionComponent = () => (
-    <S.Component>
+export const Footer: FC = () => (
+    <S.Component
+        tabIndex={0}
+        aria-label="footer: more information:"
+    >
         <S.InfoLink
             href="https://www.instagram.com/umcicero/"
             target="_blank"
             rel="preload"
+            aria-label="Instagram: @umcicero"
         >
             <StaticImage
-                className="logo-img"
+                className="instagram-logo"
                 src={instaLogoSrc}
                 alt="Instagram Logo"
             />
             <S.Text > @umcicero </S.Text>
         </S.InfoLink>
         <S.InfoLink
-            href="https://www.gatsbyjs.com"
+            href="https://github.com/cicero-mello/c-streaming"
             target="_blank"
             rel="preload"
+            aria-label="GitHub: source code"
         >
-            <StaticImage
-                className="logo-img"
-                src={gatbyLogoSrc}
-                alt="Gatsby Logo"
-            />
-            <S.Text> made with Gatsby </S.Text>
+            <GitHubIco />
+            <S.Text> source code </S.Text>
         </S.InfoLink>
     </S.Component>
 )

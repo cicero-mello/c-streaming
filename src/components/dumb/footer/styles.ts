@@ -2,9 +2,19 @@ import styled from "styled-components"
 
 export const Component = styled.footer`
     display: flex;
+    width: fit-content;
+    align-self: flex-end;
     flex-direction: column;
     align-items: flex-end;
     margin: 22px 30px;
+
+    .github-ico {
+        path {
+            fill: #676767;
+            transition: 100ms linear;
+        }
+        margin-right: 5px;
+    }
 
     .footer-info:first-child{
         margin-bottom: 10px;
@@ -29,7 +39,7 @@ export const InfoLink = styled.a.attrs({
     text-decoration: none;
     cursor: pointer;
 
-    .logo-img{
+    .instagram-logo{
         width: 22px;
         filter: grayscale(1);
         margin-right: 4px;
@@ -41,8 +51,14 @@ export const InfoLink = styled.a.attrs({
         .footer-link::before{
             background-color: white;
         }
-        .logo-img{
+        .instagram-logo{
             filter: grayscale(0);
+        }
+
+        .github-ico {
+            path {
+                fill: #f5f5f5;
+            }
         }
     }
 `
