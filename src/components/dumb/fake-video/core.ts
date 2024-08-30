@@ -17,12 +17,12 @@ let horizontalAnimationId: number
 let verticalAnimationId: number
 
 export const startPongAnimation = (
-    trianglePong: SVGSVGElement,
+    trianglePongIco: SVGSVGElement,
     containerPong: HTMLDivElement
 ) => {
     const boxHitsContainerOn = (direction: "top" | "bottom" | "left" | "right") => {
         const containerRect = containerPong.getBoundingClientRect()
-        const boxRect = trianglePong.getBoundingClientRect()
+        const boxRect = trianglePongIco.getBoundingClientRect()
 
         const boxTop = boxRect.top - containerRect.top
         const boxLeft = boxRect.left - containerRect.left
@@ -36,8 +36,8 @@ export const startPongAnimation = (
     }
 
     const changeColor = () => {
-        if(!trianglePong.firstChild?.firstChild) return
-        const pathElement: any = trianglePong.firstChild?.firstChild
+        if(!trianglePongIco.firstChild?.firstChild) return
+        const pathElement: any = trianglePongIco.firstChild?.firstChild
 
         currentColorIndex++
         if(currentColorIndex >= triangleColors.length) currentColorIndex = 0
@@ -46,7 +46,7 @@ export const startPongAnimation = (
 
     const moveLeft = () => {
         boxLeft -= window.innerWidth > 500 ? HORIZONTAL_SPEED : HORIZONTAL_SPEED/2
-        trianglePong.style.left = boxLeft + "px"
+        trianglePongIco.style.left = boxLeft + "px"
 
         if(boxHitsContainerOn("left")){
             changeColor()
@@ -58,7 +58,7 @@ export const startPongAnimation = (
 
     const moveRight = () => {
         boxLeft += window.innerWidth > 400 ? HORIZONTAL_SPEED : HORIZONTAL_SPEED/2
-        trianglePong.style.left = boxLeft + "px"
+        trianglePongIco.style.left = boxLeft + "px"
 
         if(boxHitsContainerOn("right")){
             changeColor()
@@ -70,7 +70,7 @@ export const startPongAnimation = (
 
     const moveUp = () => {
         boxTop -= window.innerWidth > 400 ? VERTICAL_SPEED :  VERTICAL_SPEED/2
-        trianglePong.style.top = boxTop + "px"
+        trianglePongIco.style.top = boxTop + "px"
 
         if(boxHitsContainerOn("top")){
             changeColor()
@@ -82,7 +82,7 @@ export const startPongAnimation = (
 
     const moveDown = () => {
         boxTop += window.innerWidth > 400 ? VERTICAL_SPEED :  VERTICAL_SPEED/2
-        trianglePong.style.top = boxTop + "px"
+        trianglePongIco.style.top = boxTop + "px"
 
         if(boxHitsContainerOn("bottom")){
             changeColor()
@@ -92,7 +92,7 @@ export const startPongAnimation = (
         verticalAnimationId = requestAnimationFrame(moveDown)
     }
 
-    trianglePong.style.opacity = "1"
+    trianglePongIco.style.opacity = "1"
     horizontalAnimationId = requestAnimationFrame(moveRight)
     verticalAnimationId = requestAnimationFrame(moveDown)
 }

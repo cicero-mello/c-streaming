@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef, useEffect } from "react"
 import { FakeVideoProps } from "./types"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { PlayTriangle, TrianglePong } from "../../../assets/icons"
+import { PlayTriangleIco, TrianglePongIco } from "../../../assets/icons"
 import * as core from "./core"
 import * as S from "./styles"
 
@@ -9,13 +9,13 @@ export const FakeVideo: FC<FakeVideoProps> = ({
     thumbImage, altThumbImage, ...rest
 }) => {
     const containerPongRef = useRef<HTMLDivElement>(null)
-    const trianglePongRef = useRef<SVGSVGElement>(null)
+    const trianglePongIcoRef = useRef<SVGSVGElement>(null)
     const [showVideo, setShowVideo] = useState(false)
 
     const handleClickPlayButton = () => {
-        if(!!trianglePongRef.current && !!containerPongRef.current){
+        if(!!trianglePongIcoRef.current && !!containerPongRef.current){
             core.startPongAnimation(
-                trianglePongRef.current,
+                trianglePongIcoRef.current,
                 containerPongRef.current
             )
         }
@@ -28,14 +28,14 @@ export const FakeVideo: FC<FakeVideoProps> = ({
     return (
         <S.Component {...rest} $showVideo={showVideo}>
             <S.ScreenSaverContainer ref={containerPongRef}>
-                <TrianglePong ref={trianglePongRef}/>
+                <TrianglePongIco ref={trianglePongIcoRef}/>
                 <S.Message>
                     This page is just a demo.<br/>
                     There is no real video here.
                 </S.Message>
             </S.ScreenSaverContainer>
             <S.PlayButton onClick={handleClickPlayButton}>
-                <PlayTriangle />
+                <PlayTriangleIco />
             </S.PlayButton>
             <GatsbyImage
                 image={thumbImage}

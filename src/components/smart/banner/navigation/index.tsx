@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
 import { BannerNavigationProps } from "./types"
-import { TriangleBannerNav } from "../../../../assets/icons"
+import { TriangleBannerNavIco } from "../../../../assets/icons"
 import * as S from "./styles"
 
 export const Navigation: FunctionComponent<BannerNavigationProps> = ({
@@ -43,7 +43,7 @@ export const Navigation: FunctionComponent<BannerNavigationProps> = ({
     return(
         <S.Component>
             {onClickEachButton.map((changeBanner, index) => (
-                <TriangleBannerNav
+                <TriangleBannerNavIco
                     role="radio"
                     id={`banner-radio-${index}`}
                     key={`banner-radio-${index}`}

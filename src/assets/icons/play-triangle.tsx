@@ -1,6 +1,6 @@
 import React, { FC, SVGProps } from "react"
 
-export const PlayTriangle: FC<SVGProps<SVGSVGElement>> = (props) => (
+export const PlayTriangleIco: FC<SVGProps<SVGSVGElement>> = (props) => (
     <svg
         className="play-triangle"
         width="44"

@@ -3,7 +3,7 @@ import { CarouselProps } from "./types"
 import { Poster } from "../../../dumb/poster"
 import { debounce, getRandomID } from "../../../../shared/utils"
 import { useDidMountEffect } from "../../../../hooks"
-import { TriangleNext } from "../../../../assets/icons"
+import { TriangleNextIco } from "../../../../assets/icons"
 import * as S from "./styles"
 
 export const Carousel: FC<CarouselProps> = ({
@@ -99,7 +99,7 @@ export const Carousel: FC<CarouselProps> = ({
                 disabled={!canGoBack}
                 tabIndex={-1}
             >
-                <TriangleNext />
+                <TriangleNextIco />
             </S.TriangleNextButton>
             <S.Carousel
                 tabIndex={0}
@@ -116,7 +116,7 @@ export const Carousel: FC<CarouselProps> = ({
                 disabled={!canGoAhead}
                 tabIndex={-1}
             >
-                <TriangleNext />
+                <TriangleNextIco />
             </S.TriangleNextButton>
         </S.Component>
     )

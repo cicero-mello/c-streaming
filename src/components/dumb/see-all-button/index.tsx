@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { TriangleSeeAll } from "../../../assets/icons"
+import { TriangleSeeAllIco } from "../../../assets/icons"
 import { Button } from "../button"
 import { ButtonProps } from "../button/types"
 import * as S from "./styles"
@@ -10,7 +10,7 @@ export const SeeAllButton: FC<ButtonProps> = ({
     <S.Component>
         <Button {...rest}>
             {children}
-            <TriangleSeeAll />
+            <TriangleSeeAllIco />
         </Button>
     </S.Component>
 )

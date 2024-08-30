@@ -2,7 +2,7 @@ import React, { FC, useMemo, useState } from "react"
 import { MediaSuggestionsProps,
     SuggestionMedia, OnTransitionState,
 } from "./types"
-import { SuggestionTriangles } from "../../../assets/icons"
+import { SuggestionTrianglesIco } from "../../../assets/icons"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useNavigation } from "../../../hooks"
 import { getMediaPathByMediaType } from "../../../paths"
@@ -91,7 +91,7 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
             </S.Text>
             <S.SuggestionsWrapper>
                 <S.Button onClick={handleClickPreviusSuggestion}>
-                    <SuggestionTriangles />
+                    <SuggestionTrianglesIco />
                 </S.Button>
                 <Link to={""} onClick={(e) => e.preventDefault()}>
                     <S.ImageWrapper
@@ -109,7 +109,7 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
                     </S.ImageWrapper>
                 </Link>
                 <S.Button onClick={handleClickNextSuggestion}>
-                    <SuggestionTriangles />
+                    <SuggestionTrianglesIco />
                 </S.Button>
             </S.SuggestionsWrapper>
         </S.Component>

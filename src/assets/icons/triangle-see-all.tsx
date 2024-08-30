@@ -1,6 +1,6 @@
 import React, { FC, SVGProps } from "react"
 
-export const TriangleSeeAll: FC<SVGProps<SVGSVGElement>> = (props) => (
+export const TriangleSeeAllIco: FC<SVGProps<SVGSVGElement>> = (props) => (
     <svg
         className="triangle-see-all"
         width="21"

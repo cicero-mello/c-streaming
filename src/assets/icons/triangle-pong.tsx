@@ -1,6 +1,6 @@
 import React, { SVGProps, forwardRef } from "react"
 
-export const TrianglePong = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((props, ref) => (
+export const TrianglePongIco = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((props, ref) => (
     <svg
         className="triangle-pong"
         width="47"
