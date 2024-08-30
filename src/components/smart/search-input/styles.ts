@@ -46,13 +46,16 @@ export const Component = styled.div.attrs({
         border-radius: 2px;
 
         transition-property:
+            outline,
+            outline-offset,
+            border-radius,
             color,
             background-color,
             border-color,
             width,
             margin
         ;
-        transition-duration: 100ms;
+        transition-duration: 50ms, 50ms, 50ms, 100ms;
         transition-timing-function: linear;
 
         &::before{
@@ -64,7 +67,6 @@ export const Component = styled.div.attrs({
             height: 10px;
             border-radius: 20px;
             border: 1px solid #b5b5b5;
-            transition: 100ms linear;
         }
 
         &::after{
@@ -77,7 +79,6 @@ export const Component = styled.div.attrs({
             border-radius: 2px;
             background-color: #b5b5b5;
             transform: rotate(37deg);
-
         }
 
         &:hover{
@@ -99,9 +100,13 @@ export const Component = styled.div.attrs({
     @media(max-width: 440px){
         max-width: 640px;
         a {
-            color: transparent;
             width: 36px;
             margin: 0px 30px;
+            color: transparent;
+
+            &:focus-within{
+                color: transparent;
+            }
 
             &:hover {
                 color: transparent;
@@ -111,6 +116,10 @@ export const Component = styled.div.attrs({
         &:has(input:focus){
             a {
                 color: transparent;
+
+                &:hover {
+                    color: transparent;
+                }
             }
         }
 

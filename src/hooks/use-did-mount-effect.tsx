@@ -7,7 +7,10 @@ export const useDidMountEffect = (
     const didMount = useRef(false)
 
     useEffect(() => {
-        if (didMount.current) func()
+        let unmount
+        if (didMount.current) unmount = func()
         else didMount.current = true
+
+        return unmount
     }, deps)
 }

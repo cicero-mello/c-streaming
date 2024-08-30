@@ -1,13 +1,13 @@
-import React, { FunctionComponent, useCallback, useRef, useState } from "react"
+import React, { FC, useCallback, useRef, useState } from "react"
 import { CarouselProps } from "./types"
 import { Poster } from "../../../dumb/poster"
-import { debounce } from "../../../../shared/utils"
+import { debounce, getRandomID } from "../../../../shared/utils"
 import { useDidMountEffect } from "../../../../hooks"
 import { TriangleNext } from "../../../../assets/icons"
 import * as S from "./styles"
 
-export const Carousel: FunctionComponent<CarouselProps> = ({
-    posters
+export const Carousel: FC<CarouselProps> = ({
+    posters, mediaType
 }) => {
     const carouselRef = useRef<HTMLDivElement>(null)
     const [canGoAhead, setCanGoAhead] = useState(true)
@@ -81,9 +81,15 @@ export const Carousel: FunctionComponent<CarouselProps> = ({
     }, 50, posters[0].id), [carouselRef])
 
     useDidMountEffect(() => {
-        window.addEventListener("resize", () => {
-            debounce(onScrollMobile, 50, "id")
-        })
+        const resizeId = getRandomID()
+        const onResize = () => {
+            debounce(onScrollMobile, 50, resizeId)
+        }
+
+        window.addEventListener("resize", onResize)
+        return () => {
+            window.removeEventListener("resize", onResize)
+        }
     }, [onScrollMobile])
 
     return (
@@ -91,19 +97,24 @@ export const Carousel: FunctionComponent<CarouselProps> = ({
             <S.TriangleNextButton
                 onClick={handleClickGoBack}
                 disabled={!canGoBack}
+                tabIndex={-1}
             >
                 <TriangleNext />
             </S.TriangleNextButton>
             <S.Carousel
-                tabIndex={-1}
+                tabIndex={0}
                 ref={carouselRef}
                 onScroll={onScrollMobile}
+                aria-label={`${mediaType} suggestions`}
             >
-                {posters.map(poster => <Poster {...poster} key={poster.id}/>)}
+                {posters.map(poster =>
+                    <Poster {...poster} key={poster.mediaId}/>
+                )}
             </S.Carousel>
             <S.TriangleNextButton
                 onClick={handleClickGoAhead}
                 disabled={!canGoAhead}
+                tabIndex={-1}
             >
                 <TriangleNext />
             </S.TriangleNextButton>

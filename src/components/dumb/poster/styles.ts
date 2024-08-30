@@ -3,20 +3,24 @@ import styled from "styled-components"
 export const Component = styled.div.attrs({
     className: "poster"
 })`
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     width: 171px;
-    margin: 30px 20px 0px 20px;
+    padding-bottom: 10px;
 
     .gatsby-image {
+        cursor: pointer;
         height: 260px;
         width: 171px;
         outline: 1px solid #080808;
         transition: 60ms linear;
+
+        &:hover {
+            outline-color: #E9E9E9;
+        }
     }
 
-    &:hover{
+    &:has(p:hover){
         .gatsby-image {
             outline-color: #E9E9E9;
         }
@@ -24,6 +28,7 @@ export const Component = styled.div.attrs({
 `
 
 export const Name = styled.p`
+    cursor: pointer;
     font-size: 16px;
     margin-top: 6px;
 

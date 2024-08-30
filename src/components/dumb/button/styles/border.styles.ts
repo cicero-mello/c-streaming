@@ -15,11 +15,14 @@ const border = ($disabled?: boolean) => css`
     overflow: hidden;
 
     transition-property:
+        outline,
+        outline-offset,
+        border-radius,
         border-color,
         color,
         background-color
     ;
-    transition-duration: 100ms;
+    transition-duration: 50ms, 50ms, 50ms, 100ms;
     transition-timing-function: linear;
 
     ${$disabled && css`
@@ -89,12 +92,15 @@ const borderLogo = ($disabled?: boolean) => css`
     color: white;
 
     transition-property:
+        outline,
+        outline-offset,
+        border-radius,
         width,
         background-color,
         border,
         color
     ;
-    transition-duration: 300ms, 300ms;
+    transition-duration: 50ms, 50ms, 50ms, 300ms, 300ms;
     transition-timing-function: linear, ease;
 
     ${!$disabled && css`
