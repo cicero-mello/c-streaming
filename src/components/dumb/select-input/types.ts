@@ -7,7 +7,7 @@ export interface SelectOption {
 
 export interface SelectInputProps extends Omit<
     SelectHTMLAttributes<HTMLSelectElement>,
-    "children" | "options" | "className"
+    "children" | "options" | "className" | "ref"
 >{
     options: SelectOption[]
     label?: string

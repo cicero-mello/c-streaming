@@ -1,15 +1,17 @@
 import styled, { css } from "styled-components"
 
+export const WINDOW_MAX_WIDTH_TO_VERTICAL_LAYOUT = 600
+
 export const Component = styled.main`
     display: flex;
     flex-direction: column;
     margin: 13px 0px 40px 0px;
     transition: 100ms linear;
 
-    @media (max-width: 600px){
+    @media (max-width: ${WINDOW_MAX_WIDTH_TO_VERTICAL_LAYOUT + "px"}){
         margin: 14px 0px 30px 0px;
 
-        form{
+        form {
             flex-wrap: wrap-reverse;
             padding: 0px 60px;
             margin-top: 32px;
@@ -25,33 +27,18 @@ export const Component = styled.main`
             }
         }
 
-        .posters-wrapper{
-            margin-top: 21px;
-            gap: 0px 0px;
-            padding: 0px 15px;
+        .posters-wrapper {
+            margin-top: 48px;
+            gap: 14px;
+            padding: 0px 24px;
             justify-content: space-evenly;
-
-            .poster {
-                margin-left: 10px;
-                margin-right: 10px;
-            }
         }
     }
 
     @media (max-width: 440px){
-        .input-zone{
-            padding: 0px 24px;
-        }
-    }
 
-    @media (max-width: 270px){
-        .posters-wrapper{
-            padding: 0px 0px;
-
-            .poster {
-                margin-left: 0px;
-                margin-right: 0px;
-            }
+        form {
+            padding: 0 24px;
         }
     }
 `
@@ -69,24 +56,24 @@ export const Form = styled.form`
     }
 `
 
-export const MediaListWrapper = styled.section.attrs((props:any) => ({
-    className: "posters-wrapper",
-    $showPosters: props?.$showPosters
-}))<{ $showPosters?: boolean }>`
+export const PostersWrapper = styled.section.attrs(({
+    className: "posters-wrapper"
+}))
+<{ $showPosters?: boolean }>`
+${({ $showPosters }) => css`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 38px 3px;
+    gap: 32px;
     transition: 250ms ease-out;
     padding: 0px 12px;
-
+    margin-top: 58px;
     opacity: 1;
-    margin-top: 33px;
 
-    ${({ $showPosters }) => !$showPosters && css`
+    ${!$showPosters && css`
         opacity: 0;
     `}
-`
+`}`
 
 export const NoMediaMessage = styled.h3`
     font-size: 24px;

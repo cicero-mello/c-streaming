@@ -1,10 +1,13 @@
-import React, { FC, useState } from "react"
+import React, { FC, useRef, useState } from "react"
 import { GenericTextInputProps } from "./types"
+import { useFocusOrigin } from "../../../hooks"
 import * as S from "./styles"
 
 export const GenericTextInput: FC<GenericTextInputProps> = ({
     label, errorMessage, forgetPasswordAction, type, ...rest
 }) => {
+    const inputRef = useRef<HTMLInputElement>(null)
+    const focusOrigin = useFocusOrigin(inputRef)
     const [inputType, setInputType] = useState(
         forgetPasswordAction ? "password" : type
     )
@@ -19,6 +22,8 @@ export const GenericTextInput: FC<GenericTextInputProps> = ({
             <S.Label onClick={(e) => e.preventDefault()}>
                 { label ?? "" }
                 <S.Input
+                    ref={inputRef}
+                    $focusOrigin={focusOrigin}
                     $hasLabel={!!label}
                     $hasEye={!!forgetPasswordAction}
                     spellCheck="false"

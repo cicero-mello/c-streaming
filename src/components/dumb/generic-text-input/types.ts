@@ -1,7 +1,8 @@
 import { InputHTMLAttributes } from "react";
 
 export interface GenericTextInputProps extends Omit<
-    InputHTMLAttributes<HTMLInputElement>, "className" | "children"
+    InputHTMLAttributes<HTMLInputElement>,
+    "className" | "children" | "ref"
 > {
     label?: string
     errorMessage?: string

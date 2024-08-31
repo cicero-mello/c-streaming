@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components"
+import { FocusOrigin } from "../../../hooks"
 
 export const Component = styled.div.attrs({
     className: "generic-text-input"
@@ -15,9 +16,8 @@ export const Component = styled.div.attrs({
 
 export const Input = styled.input.attrs({
     className: "input-generic-text-input"
-})<{ $hasLabel?: boolean, $hasEye?: boolean }>`${({
-    $hasLabel, $hasEye, disabled
-}) => css`
+})<{ $hasLabel?: boolean, $hasEye?: boolean, $focusOrigin: FocusOrigin }>`
+${({ $hasLabel, $hasEye, disabled, $focusOrigin }) => css`
     appearance: none;
     border: 1px solid #8D8D8D;
     height: 30px;
@@ -31,6 +31,11 @@ export const Input = styled.input.attrs({
     ${$hasLabel && css` margin-top: 8px; `}
     ${$hasEye && css` padding-right: 42px; `}
     ${disabled && css` cursor: not-allowed; `}
+    ${$focusOrigin === "click" && css`
+        &:focus-visible {
+            outline: none;
+        }
+    `}
 `}`
 
 export const PasswordEye = styled.button.attrs((props: any) => ({

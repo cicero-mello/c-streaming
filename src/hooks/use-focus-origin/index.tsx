@@ -9,7 +9,7 @@ export const useFocusOrigin = (
 
     const onMouseDownElement = useCallback((event: MouseEvent) => {
         if(!targetRefElement?.current) return
-        if(!!targetRefElement.current.contains(event.target)) {
+        if(!!targetRefElement.current.contains(event.target)){
             lastUserAction = "click"
         }
     }, [targetRefElement])

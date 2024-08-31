@@ -1,5 +1,5 @@
 import { MediaType } from "../../../../stores"
-import { PosterProps } from "../../../dumb/poster/types"
+import { PosterProps } from "../../poster/types"
 
 export interface CarouselProps {
     posters: PosterProps[]

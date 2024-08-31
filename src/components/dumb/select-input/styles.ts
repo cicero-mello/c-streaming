@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components"
+import { FocusOrigin } from "../../../hooks"
 
 export const Component = styled.div.attrs({
     className: "select-input"
@@ -22,10 +23,10 @@ export const Component = styled.div.attrs({
     }
 `
 
-export const Select = styled.select.attrs((props: any) => ({
-    className: "select-select-input",
-    $hasLabel: props?.$hasLabel
-}))<{ $hasLabel?: boolean }>`
+export const Select = styled.select.attrs(({
+    className: "select-select-input"
+}))<{ $hasLabel?: boolean, $focusOrigin: FocusOrigin }>`
+${({ $hasLabel, $focusOrigin }) => css`
     cursor: pointer;
     appearance: none;
     width: 100%;
@@ -39,10 +40,16 @@ export const Select = styled.select.attrs((props: any) => ({
     caret-color: #EDEDED;
     padding: 0px 35px 0px 10px;
 
-    ${({ $hasLabel }) => $hasLabel && css`
+    ${$hasLabel && css`
         margin-top: 8px;
     `}
-`
+
+    ${$focusOrigin === "click" && css`
+        &:focus-visible {
+            outline: none;
+        }
+    `}
+`}`
 
 export const Option = styled.option`
     outline: none;

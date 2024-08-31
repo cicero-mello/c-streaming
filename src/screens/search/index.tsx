@@ -2,16 +2,19 @@ import React, { ChangeEvent, FC, useMemo, useState } from "react"
 import { UrlState, useUrlState } from "../../hooks"
 import { debounce, delay, scrollPageToTop } from "../../shared/utils"
 import { getFilteredPosters } from "./core"
+import { usePosters } from "./use-posters"
+import { useFocusControl } from "./use-focus-control"
 import {
     GenericTextInput, Line,
     Poster, SelectInput
 } from "../../components"
 import * as S from "./styles"
-import { usePosters } from "./use-posters"
 
 export const Search: FC = () => {
     const [showPosters, setShowPosters] = useState(true)
     const [urlState, setUrlStateKey] = useUrlState()
+
+    const { isToFocusSelectFirst } = useFocusControl()
     const posters = usePosters()
 
     const filteredPosters = useMemo(() => (
@@ -36,6 +39,7 @@ export const Search: FC = () => {
             <Line />
             <S.Form>
                 <GenericTextInput
+                    tabIndex={2}
                     onFocus={scrollPageToTop}
                     label="Name"
                     name="searchText"
@@ -45,6 +49,7 @@ export const Search: FC = () => {
                     )}
                 />
                 <SelectInput
+                    tabIndex={isToFocusSelectFirst ? 1 : 2}
                     label="Type"
                     name="searchType"
                     defaultValue={urlState.searchType ?? "all"}
@@ -57,16 +62,16 @@ export const Search: FC = () => {
                     ]}
                 />
             </S.Form>
-            <S.MediaListWrapper $showPosters={showPosters}>
-                {filteredPosters.map(({ mediaType, id, ...rest}) =>
-                    <Poster {...rest} key={id} />
+            <S.PostersWrapper $showPosters={showPosters}>
+                {filteredPosters.map((props) =>
+                    <Poster {...props} key={props.mediaId}/>
                 )}
                 {filteredPosters.length === 0 &&
                     <S.NoMediaMessage>
                         {"No results for your search :("}
                     </S.NoMediaMessage>
                 }
-            </S.MediaListWrapper>
+            </S.PostersWrapper>
         </S.Component>
     )
 }
