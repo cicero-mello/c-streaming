@@ -19,3 +19,13 @@ export const getFilteredPosters = (
         stringIncludes(poster.name, searchText)
     ))
 }
+
+export const getAriaMessage = (
+    { searchText, searchType }: UrlState,
+    posters: PagePoster[]
+): string =>  (
+    (posters.length === 0 ? "No" : posters.length)
+    + " results"
+    + (searchText && (" for: " + searchText))
+    + `: in ${searchType} section`
+)

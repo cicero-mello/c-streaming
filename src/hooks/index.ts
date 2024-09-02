@@ -19,3 +19,6 @@ export * from "./use-focus-origin"
 export * from "./use-focus-origin/types"
 
 export * from "./use-outside-focus"
+
+export * from "./use-aria-message"
+export * from "./use-aria-message/types"

@@ -1,20 +1,18 @@
-import React, { ChangeEvent, FC, useMemo, useState } from "react"
-import { UrlState, useUrlState } from "../../hooks"
+import React, { ChangeEvent, FC, useEffect, useMemo, useState } from "react"
+import { UrlState, useAriaMessage, useUrlState } from "../../hooks"
 import { debounce, delay, scrollPageToTop } from "../../shared/utils"
-import { getFilteredPosters } from "./core"
+import { getAriaMessage, getFilteredPosters } from "./core"
 import { usePosters } from "./use-posters"
 import { useFocusControl } from "./use-focus-control"
-import {
-    GenericTextInput, Line,
-    Poster, SelectInput
-} from "../../components"
+import { GenericTextInput, Line, Poster, SelectInput } from "../../components"
 import * as S from "./styles"
 
 export const Search: FC = () => {
+    const { ariaReadMessage, removeAriaReader } = useAriaMessage()
     const [showPosters, setShowPosters] = useState(true)
     const [urlState, setUrlStateKey] = useUrlState()
 
-    const { isToFocusSelectFirst } = useFocusControl()
+    const { isToFocusSelectBeforeInput } = useFocusControl()
     const posters = usePosters()
 
     const filteredPosters = useMemo(() => (
@@ -34,6 +32,14 @@ export const Search: FC = () => {
         setShowPosters(true)
     }
 
+    useEffect(() => {
+        const ariaMessage = getAriaMessage(
+            urlState, filteredPosters
+        )
+        ariaReadMessage(ariaMessage)
+        return () => removeAriaReader()
+    }, [urlState, filteredPosters])
+
     return (
         <S.Component>
             <Line />
@@ -43,15 +49,17 @@ export const Search: FC = () => {
                     onFocus={scrollPageToTop}
                     label="Name"
                     name="searchText"
+                    aria-label="Search by name:"
                     defaultValue={urlState.searchText ?? ""}
                     onChange={(event) => debounce(
                         () => handleFilterChange(event), 250
                     )}
                 />
                 <SelectInput
-                    tabIndex={isToFocusSelectFirst ? 1 : 2}
+                    tabIndex={isToFocusSelectBeforeInput ? 1 : 2}
                     label="Type"
                     name="searchType"
+                    aria-label="Select the type of media: "
                     defaultValue={urlState.searchType ?? "all"}
                     onChange={handleFilterChange}
                     options={[
@@ -67,7 +75,7 @@ export const Search: FC = () => {
                     <Poster {...props} key={props.mediaId}/>
                 )}
                 {filteredPosters.length === 0 &&
-                    <S.NoMediaMessage>
+                    <S.NoMediaMessage tabIndex={0}>
                         {"No results for your search :("}
                     </S.NoMediaMessage>
                 }

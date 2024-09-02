@@ -1,3 +1,6 @@
+export * from "./aria-message"
+export * from "./aria-message/types"
+
 export * from "./see-all-button"
 export * from "./see-all-button/types"
 

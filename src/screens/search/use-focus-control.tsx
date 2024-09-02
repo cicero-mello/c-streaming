@@ -1,17 +1,18 @@
 import { useLayoutEffect, useState } from "react"
 import { WINDOW_MAX_WIDTH_TO_VERTICAL_LAYOUT } from "./styles"
+import { FocusControl } from "./types"
 
-export const useFocusControl = (): {isToFocusSelectFirst: boolean} => {
+export const useFocusControl = (): FocusControl => {
     const [
-        isToFocusSelectFirst,
-        setIsToFocusSelectFirst
+        isToFocusSelectBeforeInput,
+        setIsToFocusSelectBeforeInput
     ] = useState(window.innerWidth < WINDOW_MAX_WIDTH_TO_VERTICAL_LAYOUT)
 
     useLayoutEffect(() => {
         const onWindowResize = () => {
             if(window.innerWidth < WINDOW_MAX_WIDTH_TO_VERTICAL_LAYOUT){
-                setIsToFocusSelectFirst(true)
-            } else setIsToFocusSelectFirst(false)
+                setIsToFocusSelectBeforeInput(true)
+            } else setIsToFocusSelectBeforeInput(false)
         }
 
         window.addEventListener("resize", onWindowResize)
@@ -21,6 +22,6 @@ export const useFocusControl = (): {isToFocusSelectFirst: boolean} => {
     }, [])
 
     return {
-        isToFocusSelectFirst: isToFocusSelectFirst
+        isToFocusSelectBeforeInput: isToFocusSelectBeforeInput
     }
 }

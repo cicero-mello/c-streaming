@@ -75,7 +75,7 @@ ${({ $showPosters }) => css`
     `}
 `}`
 
-export const NoMediaMessage = styled.h3`
+export const NoMediaMessage = styled.p`
     font-size: 24px;
     margin-top: 55px;
     color: #d5d5d5;

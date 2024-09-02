@@ -14,7 +14,10 @@ export const SearchInput: FC = () => {
         event: KeyboardEvent<HTMLInputElement>
     ) => {
         if(event.key === "Enter"){
-            navigate(PATHS.SEARCH, { searchText: searchText })
+            navigate(PATHS.SEARCH, {
+                searchText: searchText,
+                searchType: "all"
+            })
         }
     }
 
@@ -25,7 +28,7 @@ export const SearchInput: FC = () => {
                 spellCheck={false}
                 onKeyDown={handleInputChange}
                 $focusOrigin={focusOrigin}
-                aria-label="Search any content"
+                aria-label="Search any content by name"
                 onChange={(event) => {
                     setSearchText(event.target.value)
                 }}
@@ -36,7 +39,10 @@ export const SearchInput: FC = () => {
                 theme="none"
                 url={{
                     path: PATHS.SEARCH,
-                    params: { searchText: searchText }
+                    params: {
+                        searchText: searchText,
+                        searchType: "all"
+                    }
                 }}
              />
         </S.Component>

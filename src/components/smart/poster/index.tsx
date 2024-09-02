@@ -29,6 +29,7 @@ export const Poster: FC<PosterProps> = ({
     return (
         <S.Component {...rest}>
             <Link
+                className="poster-link"
                 onClick={handleClick}
                 onKeyDown={handleKeyDown}
                 aria-label={name}
