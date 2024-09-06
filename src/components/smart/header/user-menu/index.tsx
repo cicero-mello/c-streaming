@@ -34,7 +34,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                 if(onClick) onClick(event)
             }}
         >
-            <S.UserName > Gally </S.UserName>
+            <S.UserName aria-hidden> Gally </S.UserName>
             <UserIco />
             <S.MenuList
                 $show={showMenu}

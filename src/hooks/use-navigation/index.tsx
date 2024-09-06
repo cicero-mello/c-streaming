@@ -3,16 +3,16 @@ import React, {
     useContext, useEffect, useRef,
     useState
 } from "react"
-import { NavigationContextProps } from "./types"
+import { NavigationContextType } from "./types"
 import { scrollPageToTop } from "../../shared/utils"
 
 import { navigate } from "gatsby"
-import {  Header, PageLoader } from "../../components"
-import * as S from "./styles"
+import { Header, PageLoader } from "../../components"
 import { UrlState } from "../use-url-state/types"
 import { createLinkPath, PATHS } from "../../paths"
+import * as S from "./styles"
 
-const NavigationContext = createContext<NavigationContextProps>({
+const NavigationContext = createContext<NavigationContextType>({
     navigate: () => {}
 })
 

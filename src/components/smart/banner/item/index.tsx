@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FC, useLayoutEffect, useState } from "react"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { ItemAnimationState, BannerItemProps } from "./types"
 import { getMediaPathByMediaType } from "../../../../paths"
 import { WatchLatterButton } from "../../../smart"
 import { Button, Wrapper } from "../../../dumb"
+import { useAriaNotification } from "../../../../hooks"
 import * as S from "./styles"
 
-export const Item: FunctionComponent<BannerItemProps> = ({
+export const Item: FC<BannerItemProps> = ({
     isBannerHidden, ...itemMedia
 }) => {
     const [firstRender, setFirstRender] = useState(true)
@@ -15,14 +16,21 @@ export const Item: FunctionComponent<BannerItemProps> = ({
         itemAnimation,
         setItemAnimation
     ] = useState<ItemAnimationState>("closed")
+    const {
+        readAriaNotification,
+        clearAriaNotification
+    } = useAriaNotification()
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setItemAnimation("closed")
         setTimeout(() => {
             setShowingMedia(itemMedia)
             setItemAnimation("open")
-            if(firstRender) setFirstRender(false)
+            if(!firstRender) readAriaNotification(itemMedia.name)
+            else setFirstRender(false)
         }, firstRender ? 100 : 360)
+
+        return clearAriaNotification
     }, [itemMedia.id])
 
     return (
@@ -42,7 +50,6 @@ export const Item: FunctionComponent<BannerItemProps> = ({
             <S.InfoAndButtons>
                 <S.InfoWrapper>
                     <S.MediaName
-                        aria-live="polite"
                         aria-label={`Banner title: ${showingMedia.name}`}
                         tabIndex={isBannerHidden ? -1 : 0}
                     >

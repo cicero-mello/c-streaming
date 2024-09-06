@@ -1,6 +1,6 @@
 import { GenericModalHandle } from "./modals"
 
-export interface ModalsContextProps {
+export interface ModalsContextType {
     deleteAccountQuestion: GenericModalHandle | null
     deleteAccountConfirmation: GenericModalHandle | null
     linkSendToEmail: GenericModalHandle | null

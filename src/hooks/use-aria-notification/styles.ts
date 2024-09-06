@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const Component = styled.span.attrs({
-    className: "aria-message"
+    className: "hidden-aria-notification"
 })`
     position: absolute;
     width: 0;

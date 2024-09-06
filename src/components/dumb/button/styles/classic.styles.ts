@@ -10,6 +10,7 @@ const classic = ($disabled?: boolean) => css`
     border-radius: 2px;
     background-color: #4A7D2B;
     padding: 6px 21px;
+    text-align: center;
     overflow: hidden;
 
     transition-property: background-color;

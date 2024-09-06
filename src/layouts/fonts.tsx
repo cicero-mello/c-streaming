@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react"
+import React, { FC } from "react"
 
-const Arsenal: FunctionComponent = () => (
+const Arsenal: FC = () => (
     <>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -9,6 +9,6 @@ const Arsenal: FunctionComponent = () => (
     </>
 )
 
-export const Fonts: FunctionComponent = () => (
+export const Fonts: FC = () => (
     <Arsenal />
 )

@@ -1,7 +1,10 @@
 import React, { FunctionComponent } from "react"
 import { Fonts } from "./fonts"
 import { PageProps } from "gatsby"
-import { NavigationProvider, ModalsProvider, AriaMessageProvider } from "../hooks"
+import {
+    NavigationProvider, ModalsProvider,
+    AriaNotificationProvider
+} from "../hooks"
 import * as S from "./styles"
 
 const Layout: FunctionComponent<PageProps> = ({
@@ -10,13 +13,13 @@ const Layout: FunctionComponent<PageProps> = ({
     <S.Layout lang="en">
         <S.GlobalStyle />
         <Fonts />
+        <AriaNotificationProvider>
             <NavigationProvider>
-                <AriaMessageProvider>
-                    <ModalsProvider>
-                        { children }
-                    </ModalsProvider>
-                </AriaMessageProvider>
+                <ModalsProvider>
+                    { children }
+                </ModalsProvider>
             </NavigationProvider>
+        </AriaNotificationProvider>
     </S.Layout>
 )
 

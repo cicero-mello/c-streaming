@@ -6,14 +6,10 @@ export const CLOSE_ANIMATION_TIME = 400
 export const prepareToClose = (
     componentRef: RefObject<HTMLDivElement>
 ) => {
-    if(!componentRef.current) return
-
-    componentRef.current.style.height = (
-        componentRef.current.offsetHeight + "px"
-    )
-    componentRef.current.style.width = (
-        componentRef.current.offsetWidth + "px"
-    )
+    const { current } = componentRef
+    if(!current) return
+    current.style.height = current.offsetHeight + "px"
+    current.style.width = current.offsetWidth + "px"
 }
 
 const closeAnimation = keyframes`

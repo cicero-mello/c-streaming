@@ -16,4 +16,5 @@ export * from "./search-input"
 export * from "./watch-later-button"
 export * from "./watch-later-button/types"
 
-export * from "./watch-later-list"
+export * from "./watch-later-card"
+export * from "./watch-later-card/types"

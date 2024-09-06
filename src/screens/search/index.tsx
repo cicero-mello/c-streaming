@@ -1,17 +1,17 @@
-import React, { ChangeEvent, FC, useEffect, useMemo, useState } from "react"
-import { UrlState, useAriaMessage, useUrlState } from "../../hooks"
+import React, { FC, ChangeEvent, useLayoutEffect, useMemo, useState } from "react"
+import { UrlState, useUrlState } from "../../hooks"
 import { debounce, delay, scrollPageToTop } from "../../shared/utils"
 import { getAriaMessage, getFilteredPosters } from "./core"
 import { usePosters } from "./use-posters"
 import { useFocusControl } from "./use-focus-control"
 import { GenericTextInput, Line, Poster, SelectInput } from "../../components"
+import { useAriaNotification } from "../../hooks/use-aria-notification"
 import * as S from "./styles"
 
 export const Search: FC = () => {
-    const { ariaReadMessage, removeAriaReader } = useAriaMessage()
+    const { readAriaNotification, clearAriaNotification } = useAriaNotification()
     const [showPosters, setShowPosters] = useState(true)
     const [urlState, setUrlStateKey] = useUrlState()
-
     const { isToFocusSelectBeforeInput } = useFocusControl()
     const posters = usePosters()
 
@@ -32,12 +32,12 @@ export const Search: FC = () => {
         setShowPosters(true)
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const ariaMessage = getAriaMessage(
             urlState, filteredPosters
         )
-        ariaReadMessage(ariaMessage)
-        return () => removeAriaReader()
+        readAriaNotification(ariaMessage)
+        return clearAriaNotification
     }, [urlState, filteredPosters])
 
     return (

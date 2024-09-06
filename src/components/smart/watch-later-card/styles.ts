@@ -1,4 +1,22 @@
-import styled, { css } from "styled-components"
+import { RefObject } from "react"
+import styled, { css, keyframes } from "styled-components"
+
+export const CLOSE_CARD_TIME = 500
+
+const hideElement = keyframes`
+    to {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+`
+
+const closeContainer = keyframes`
+    to {
+        margin: 0px ;
+    }
+`
 
 export const Container = styled.div.attrs({
     className: "watch-later-card"
@@ -8,10 +26,30 @@ export const Container = styled.div.attrs({
     container-type: inline-size;
 
     ${$closed && css`
-        transition: 500ms ease-in-out;
-        margin: 0px !important;
+        pointer-events: none;
+        animation:
+            ${closeContainer} ${CLOSE_CARD_TIME}ms ease-in-out forwards,
+            ${hideElement} 10ms ${CLOSE_CARD_TIME + 10}ms forwards;
+        ;
     `}
 `}`
+
+const closeComponent = keyframes`
+    to {
+        height: 0px;
+        filter: blur(30px) grayscale(1);
+        opacity: 0;
+    }
+`
+
+export const prepareToClose = (
+    componentRef: RefObject<HTMLDivElement>
+) => {
+    const { current } = componentRef
+    if(!current) return
+    current.style.height = current.offsetHeight + "px"
+    current.style.width = current.offsetWidth + "px"
+}
 
 export const Component = styled.div<{$closed?: boolean }>`${({
     $closed
@@ -24,11 +62,11 @@ export const Component = styled.div<{$closed?: boolean }>`${({
     transition: 100ms linear;
 
     ${$closed && css`
-        transition: 500ms ease-in-out;
-        height: 0px;
-        filter: blur(30px) grayscale(1);
-        opacity: 0;
         pointer-events: none;
+        animation:
+            ${closeComponent} ${CLOSE_CARD_TIME}ms ease-in-out forwards,
+            ${hideElement} 10ms ${CLOSE_CARD_TIME + 10}ms forwards
+        ;
     `}
 
     .gatsby-image-wrapper {
@@ -93,11 +131,6 @@ export const Component = styled.div<{$closed?: boolean }>`${({
         .title {
             -webkit-line-clamp: 7;
         }
-
-        ${$closed && css`
-            transition: 580ms ease-out;
-            max-height: 0px;
-        `}
     }
 
     @media(max-width: 600px){
