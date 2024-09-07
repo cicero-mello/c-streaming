@@ -1,15 +1,12 @@
-import { useCallback, useLayoutEffect, useState } from "react"
+import { useLayoutEffect, useMemo, useState } from "react"
 import { customLocalStorage, useMediaStore } from "../../stores"
-import { WatchLaterCardProps } from "../../components"
 import { UseWatchLaterCards } from "./types"
 
 export const useWatchLaterCards = (): UseWatchLaterCards => {
-    const getMediaById = useMediaStore(state => state.getMediaById)
-    const [cards, setCards] = useState<WatchLaterCardProps[]>([])
-    const [copyCards, setCopyCards] = useState<WatchLaterCardProps[]>([])
-    const isAllCardsClosed = copyCards.length === 0
+    const { getMediaById } = useMediaStore()
+    const [showingCardsNumber, setShowingCardsNumber] = useState<number>()
 
-    const createCards = useCallback(() => {
+    const cards = useMemo(() => {
         const allWatchLater = customLocalStorage.getAllWatchLater()
 
         const cards = allWatchLater.map(item => {
@@ -17,9 +14,7 @@ export const useWatchLaterCards = (): UseWatchLaterCards => {
             if(!media || !media.bannerImage) return undefined
 
             const onRemoveCard = async () => {
-                setCopyCards(copyCard => copyCard.filter(
-                    copyCard => copyCard.mediaID != media.id
-                ))
+                setShowingCardsNumber(old => (old ?? 1) - 1)
             }
 
             return {
@@ -35,13 +30,11 @@ export const useWatchLaterCards = (): UseWatchLaterCards => {
     }, [])
 
     useLayoutEffect(() => {
-        const cardsCreated = createCards()
-        setCards(cardsCreated)
-        setCopyCards(cardsCreated)
+        setShowingCardsNumber(cards.length)
     }, [])
 
     return {
         cards,
-        isAllCardsClosed
+        isAllCardsClosed: showingCardsNumber === 0
     }
 }
