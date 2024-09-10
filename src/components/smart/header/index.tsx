@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import { UserMenu } from "./user-menu"
-import { Button } from "../../dumb"
 import { PATHS } from "../../../paths"
+import { Button } from "../button"
 import * as S from "./styles"
 
 export const Header: FC = () => (

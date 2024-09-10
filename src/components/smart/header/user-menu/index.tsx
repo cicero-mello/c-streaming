@@ -1,7 +1,6 @@
 import React, { FC, useState, useRef } from "react"
 import { UserIco } from "../../../../assets/icons"
 import { PATHS } from "../../../../paths"
-import { Button } from "../../../dumb"
 import { UseMenuProps } from "./types"
 import {
     useOutsideClick,
@@ -9,6 +8,7 @@ import {
     useOutsideFocus
 } from "../../../../hooks"
 import * as S from "./styles"
+import { Button } from "../../button"
 
 export const UserMenu: FC<UseMenuProps> = ({
     onClick, ...rest
@@ -44,7 +44,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                     theme="menu-item"
                     children="History"
                     aria-label="History page"
-                    tabIndex={showMenu ? 0 : -1}
+                    tabIndex={showMenu ? 1 : -1}
                     url={{path: PATHS.HISTORY}}
                     onClick={() => setShowMenu(false)}
                 />
@@ -52,7 +52,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                     theme="menu-item"
                     children="Watch Later"
                     aria-label="Watch Later List"
-                    tabIndex={showMenu ? 0 : -1}
+                    tabIndex={showMenu ? 1 : -1}
                     url={{path: PATHS.WATCH_LATER}}
                     onClick={() => setShowMenu(false)}
                 />
@@ -60,7 +60,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                     theme="menu-item"
                     children="User Settings"
                     aria-label="User Settings - Last Menu Option"
-                    tabIndex={showMenu ? 0 : -1}
+                    tabIndex={showMenu ? 1 : -1}
                     url={{path: PATHS.USER_SETTINGS}}
                     onClick={() => setShowMenu(false)}
                 />

@@ -1,26 +1,38 @@
-import { useLayoutEffect, useMemo, useState } from "react"
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { customLocalStorage, useMediaStore } from "../../stores"
 import { getRandomID } from "../../shared/utils"
 import { HistoryCardProps } from "../../components"
 import { PageFlowControl, UseHistoryCards } from "./types"
-import { useNavigation } from "../../hooks"
-import { getMediaPathByMediaType } from "../../paths"
 
 export const useHistoryCards = (
     pageFlowControl: PageFlowControl
 ): UseHistoryCards => {
-    const { navigate } = useNavigation()
-    const getMediaById = useMediaStore(state => state.getMediaById)
+    const { getMediaById } = useMediaStore()
+    const [cards, setCards] = useState<HistoryCardProps[]>([])
+    const cardsRef = useRef<HistoryCardProps[]>([])
+
     const historyItems = useMemo(() => (
         customLocalStorage.getHistory()
     ), [])
-    const [historyCards, setHistoryCards] = useState<HistoryCardProps[]>([])
 
-    useLayoutEffect(() => {
-        const newHistoryCards: HistoryCardProps[] = historyItems.map(historyItem => {
+    const customSetCards = (newCards: HistoryCardProps[]) => {
+        cardsRef.current = newCards
+        setCards(newCards)
+    }
+
+    const removeCardById = (id: string) => {
+        cardsRef.current = cardsRef.current.filter(
+            card => card.id !== id
+        )
+        setCards(cardsRef.current)
+    }
+
+    const createCards = useCallback(() => {
+        const newCards = historyItems.map(historyItem => {
             const media = getMediaById(historyItem.mediaID)
             if(!media) return
 
+            const cardId = getRandomID()
             const episode = (!historyItem?.episodeID ? undefined :
                 customLocalStorage.getEpisodeByIDs(
                     historyItem.mediaID, historyItem.episodeID
@@ -28,30 +40,28 @@ export const useHistoryCards = (
             )
 
             return {
-                id: getRandomID(),
+                id: cardId,
+                mediaID: media.id,
+                mediaType: media.type,
                 mediaName: media.name,
+                historyViewDate: historyItem.viewDate,
                 episode: episode,
-                onClickCard: () => navigate(
-                    getMediaPathByMediaType(media.type),
-                    { mediaID: media.id, episodeID: episode?.id }
-                ),
-                onClickClose: async () => {
-                    const currentHistory = customLocalStorage.getHistory()
-                    const isTheLastCardsToClose = currentHistory.length === 1
-                    if(isTheLastCardsToClose) {
+                onRemove: async () => {
+                    if(cardsRef.current.length === 1){
                         await pageFlowControl.eachHistoryCardWasRemoved()
                     }
-                    setHistoryCards(oldCards => oldCards.filter(card => !(
-                        card.mediaName === media?.name &&
-                        card.episode === episode
-                    )))
-                    customLocalStorage.removeMediaFromHistory(historyItem)
+                    removeCardById(cardId)
                 }
-            }
-        }).filter(item => item != undefined)
+            } as HistoryCardProps
+        })
 
-        setHistoryCards(newHistoryCards)
-    }, [historyItems])
+        return newCards.filter(card => card != undefined)
+    }, [])
 
-    return [historyCards, setHistoryCards]
+    useLayoutEffect(() => {
+        cardsRef.current = createCards()
+        setCards(cardsRef.current)
+    }, [])
+
+    return [cards, customSetCards]
 }

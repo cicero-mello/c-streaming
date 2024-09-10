@@ -1,4 +1,4 @@
-import { EpisodeCardProps } from "../episode-card/types";
+import { EpisodeCardProps } from "../../dumb/episode-card/types";
 
 export interface EpisodesCarrouselProps {
     episodes: EpisodeCardProps[]

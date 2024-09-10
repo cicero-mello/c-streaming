@@ -43,6 +43,7 @@ export const Title = styled.h1.attrs({
     transition: 100ms linear;
     margin: 46px 24px 0px 46px;
     font-size: 37px;
+    width: fit-content;
 `
 
 export const CardsWrapper = styled.div.attrs({

@@ -13,7 +13,6 @@ export const Screen = styled.main`
 
     .border-button, .border-red-button {
         font-size: 16px;
-        white-space: nowrap;
         height: min-content;
     }
 
@@ -91,6 +90,7 @@ export const Title = styled.h1.attrs({
 })`
     margin: 46px 24px 0px 46px;
     font-size: 37px;
+    width: fit-content;
 `
 
 export const ContentWrapper = styled.div.attrs({
@@ -163,21 +163,19 @@ export const ActionsWrapper = styled.div.attrs({
     `}
 
     @keyframes hideActionWrapper {
-        99% { opacity: 0; }
-        100% {
-            opacity: 0;
-            display: none;
-        }
+        to { opacity: 0; }
     }
 `}`
 
-export const HistoryClearMessage = styled.h2.attrs({
+export const HistoryClearMessage = styled.p.attrs({
     className: "history-clear-message"
 })`
     display: flex;
     text-align: center;
     color: #EDEDED;
     position: static;
+    max-width: fit-content;
+    font-size: 22px;
     animation: showHistoryClearMessage 500ms linear forwards;
 
     @keyframes showHistoryClearMessage {
@@ -194,10 +192,11 @@ export const HistoryClearMessage = styled.h2.attrs({
     }
 `
 
-export const NoResults = styled.h2`
+export const NoResults = styled.p`
     color: #b4b4b4;
     opacity: 0;
     animation: showNoResultsHistorySearch 180ms linear forwards;
+    font-size: 24px;
 
     @keyframes showNoResultsHistorySearch {
         to { opacity: 1; }

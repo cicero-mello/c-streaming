@@ -1,6 +1,6 @@
 import React, { FC, MouseEvent, useRef } from "react"
 import { EpisodesCarrouselProps } from "./types"
-import { EpisodeCard } from "../episode-card"
+import { EpisodeCard } from "../../dumb/episode-card"
 import * as S from "./styles"
 
 export const EpisodesCarousel: FC<EpisodesCarrouselProps> = ({

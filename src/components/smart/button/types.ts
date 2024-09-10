@@ -13,6 +13,7 @@ export interface ButtonProps extends Omit<
     "className" | "onContextMenu" | "onKeyDown" | "ref"
 >{
     theme: ButtonThemes
+    keepFocusPositionWhenDisabled?: boolean
     disabled?: boolean
     url?: {
         path: PATHS,

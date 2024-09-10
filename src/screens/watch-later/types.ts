@@ -1,6 +1,5 @@
 import { WatchLaterCardProps } from "../../components"
 
-export interface UseWatchLaterCards {
+export type UseWatchLaterCards = [
     cards: WatchLaterCardProps[]
-    isAllCardsClosed: boolean
-}
+]

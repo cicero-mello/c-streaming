@@ -1,11 +1,11 @@
 import React, { FC, useLayoutEffect, useRef, useState } from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { WatchLaterCardProps } from "./types"
-import { Button } from "../../dumb"
 import { getMediaPathByMediaType } from "../../../paths"
 import { customLocalStorage } from "../../../stores"
 import { delay } from "../../../shared/utils"
 import { useAriaNotification } from "../../../hooks/"
+import { Button } from "../button"
 import * as S from "./styles"
 
 export const WatchLaterCard: FC<WatchLaterCardProps> = ({
@@ -18,8 +18,8 @@ export const WatchLaterCard: FC<WatchLaterCardProps> = ({
     const handleClickRemove = async () => {
         S.prepareToClose(componentRef)
         setCloseAnimationStarted(true)
-        await delay(S.CLOSE_CARD_TIME)
         readAriaNotification(`${mediaName} removed`)
+        await delay(S.CLOSE_CARD_TIME)
         customLocalStorage.removeWatchLater(mediaID)
         if(onRemove) onRemove()
     }

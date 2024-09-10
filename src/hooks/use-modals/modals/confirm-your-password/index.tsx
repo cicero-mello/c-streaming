@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from "react"
 import { BaseModalHandle } from "../base/types"
 import { BaseModal } from "../base"
-import { GenericTextInput } from "../../../../components/dumb/generic-text-input"
+import { GenericTextInput } from "../../../../components/smart/generic-text-input"
 import { useModals } from "../../.."
 import { GenericModalHandle } from ".."
 

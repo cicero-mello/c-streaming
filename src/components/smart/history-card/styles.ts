@@ -12,60 +12,74 @@ export const prepareToClose = (
     current.style.width = current.offsetWidth + "px"
 }
 
-const closeAnimation = keyframes`
+const closeCard = keyframes`
     to {
-        pointer-events: none;
         opacity: 0;
-        padding: 0px;
-        width: 0px;
         height: 0px;
         margin: 0px 0px;
         filter: blur(46px);
     }
 `
 
+const hideElement = keyframes`
+    to {
+        position: absolute;
+        width: 0px;
+    }
+`
+
 export const Component = styled.div.attrs({
     className: "history-card"
 })<{ $closing?: boolean }>`${({ $closing }) => css`
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    cursor: pointer;
-    width: 224px;
+    > a {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        cursor: pointer;
+        width: 100%;
+        border: 1px solid #8D8D8D;
+        border-radius: 2px;
+        padding: 24px 18px;
+        overflow: hidden;
 
-    border: 1px solid #8D8D8D;
-    border-radius: 2px;
-    padding: 24px 18px;
-    overflow: hidden;
+        transition-property:
+            outline,
+            outline-offset,
+            border-radius,
+            color,
+            border-color
+        ;
+        transition-duration: 50ms, 50ms, 50ms, 100ms;
+        transition-timing-function: linear;
 
-    transition: 100ms linear;
+        > * {
+            color: #b4b4b4;
+        }
 
-    > * { color: #b4b4b4; }
+        &::before{
+            content: "";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(
+                at right top, #222222, black
+            );
+            z-index: -1;
+        }
 
-    &::before{
-        content: "";
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        width: 150%;
-        height: 150%;
-        background: radial-gradient(
-            at right top, #222222, black
-        );
-        z-index: -1;
-    }
-
-    &:hover:not(:has(button:hover)){
-        border-color: #EDEDED;
-        > * { color: #EDEDED; }
+        &:hover:not(:has(button:hover)){
+            border-color: #EDEDED;
+            > * { color: #EDEDED; }
+        }
     }
 
     ${$closing && css`
+        pointer-events: none;
         animation:
-            ${closeAnimation}
-            ${CLOSE_ANIMATION_TIME}ms
-            forwards
-            ease-in-out
+            ${closeCard} ${CLOSE_ANIMATION_TIME}ms forwards ease-in-out,
+            ${hideElement} 10ms ${CLOSE_ANIMATION_TIME + 10}ms forwards
         ;
     `}
 `}`

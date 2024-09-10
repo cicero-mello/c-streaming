@@ -1,40 +1,32 @@
-import React, { FC, useLayoutEffect } from "react"
-import { Line, WatchLaterCard } from "../../components"
+import React, { FC } from "react"
+import { KeepFocusOnRemove, Line, WatchLaterCard } from "../../components"
 import { useWatchLaterCards } from "./use-watch-later-cards"
-import { useAriaNotification } from "../../hooks"
 import * as S from "./styles"
 
 export const WatchLater: FC = () => {
-    const { cards, isAllCardsClosed } = useWatchLaterCards()
-    const { readAriaNotification, clearAriaNotification } = useAriaNotification()
-
-    useLayoutEffect(() => {
-        if(isAllCardsClosed){
-            readAriaNotification("Your 'watch later list' is empty")
-        }
-        return clearAriaNotification
-    }, [isAllCardsClosed])
+    const [cards] = useWatchLaterCards()
 
     return (
         <S.Screen>
             <Line />
-            <S.Title> Watch Later </S.Title>
+            <S.Title tabIndex={0}> Watch Later </S.Title>
             <S.CardsWrapper>
-                {(isAllCardsClosed || cards.length === 0) && <>
+                {cards.length === 0 && <>
                     <S.NoCardsMessage
                         tabIndex={0}
                         aria-label="Your 'watch later list' is empty"
                     />
                 </>}
-                {cards.map(({mediaID, ...rest}) =>
-                    <WatchLaterCard
-                        {...rest}
-                        id={mediaID}
-                        key={mediaID}
-                        mediaID={mediaID}
-                        aria-label="teste"
-                    />
-                )}
+                <KeepFocusOnRemove>
+                    {cards.map(({mediaID, ...rest}) =>
+                        <WatchLaterCard
+                            {...rest}
+                            id={mediaID}
+                            key={mediaID}
+                            mediaID={mediaID}
+                        />
+                    )}
+                </KeepFocusOnRemove>
             </S.CardsWrapper>
         </S.Screen>
     )

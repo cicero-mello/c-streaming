@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction } from "react"
 import { HistoryCardProps } from "../../components"
 
 export type UseHistoryCards = [
-    historyCards: HistoryCardProps[],
-    setHistoryCards: Dispatch<SetStateAction<HistoryCardProps[]>>
+    cards: HistoryCardProps[],
+    setCards: (cards: HistoryCardProps[]) => void
 ]
 
 export interface PageFlowStates {

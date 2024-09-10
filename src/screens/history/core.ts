@@ -18,3 +18,11 @@ export const getFilteredHistoryCards = (
         ))
     ))
 )
+
+export const createSearchResultsMessage = (
+    cardsNumber: number, { searchText } : UrlState
+): string => (
+    (cardsNumber === 0 ? "No" : cardsNumber)
+    + " results"
+    + (searchText && (" for: " + searchText))
+)

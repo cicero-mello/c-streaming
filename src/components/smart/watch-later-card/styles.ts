@@ -12,7 +12,7 @@ const hideElement = keyframes`
     }
 `
 
-const closeContainer = keyframes`
+const removeMargin = keyframes`
     to {
         margin: 0px ;
     }
@@ -28,7 +28,7 @@ export const Container = styled.div.attrs({
     ${$closed && css`
         pointer-events: none;
         animation:
-            ${closeContainer} ${CLOSE_CARD_TIME}ms ease-in-out forwards,
+            ${removeMargin} ${CLOSE_CARD_TIME}ms ease-in-out forwards,
             ${hideElement} 10ms ${CLOSE_CARD_TIME + 10}ms forwards;
         ;
     `}
