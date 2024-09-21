@@ -5,5 +5,5 @@ export interface FakeVideoProps extends Omit<
     HTMLAttributes<HTMLDivElement>, "className"
 >{
     thumbImage: IGatsbyImageData,
-    altThumbImage: string
+    videoName: string
 }

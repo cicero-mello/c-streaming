@@ -73,7 +73,7 @@ export const Series: FC = () => {
                 <S.TopWrapper>
                     <FakeVideo
                         thumbImage={media.bannerImage as IGatsbyImageData}
-                        altThumbImage={`Image of ${media.name}`}
+                        videoName={media.name}
                     />
                     <S.RightSide>
                         <MediaTitle

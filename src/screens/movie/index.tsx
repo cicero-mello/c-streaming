@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect } from "react"
+import React, { FC, useEffect } from "react"
 import { useUrlState } from "../../hooks"
 import { useMediaStore, customLocalStorage } from "../../stores"
 import { IGatsbyImageData } from "gatsby-plugin-image"
@@ -15,7 +15,7 @@ export const Movie: FC = () => {
         urlState.mediaID ?? ""
     ))
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if(!media) return
         customLocalStorage.addMediaToHistory({
             mediaID: media.id
@@ -29,7 +29,7 @@ export const Movie: FC = () => {
             <S.FirstSection>
                 <FakeVideo
                     thumbImage={media.bannerImage as IGatsbyImageData}
-                    altThumbImage={"Image of" + media.name}
+                    videoName={media.name}
                 />
                 <S.RightSide>
                     <MediaTitle

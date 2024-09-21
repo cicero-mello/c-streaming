@@ -58,14 +58,16 @@ export const ScreenSaverContainer = styled.div`
     }
 `
 
-export const Message = styled.h3.attrs({
+export const Message = styled.p.attrs({
     className: "fake-video-message"
 })`
     position: absolute;
     opacity: 0;
-    top: -3%;
-    width: 100%;
-    height: 100%;
+    width: fit-content;
+    height: fit-content;
+    z-index: 1;
+    margin-bottom: 3%;
+
     text-align: center;
     align-content: center;
     color: #dbdbdb;
@@ -98,7 +100,10 @@ export const PlayButton = styled.button.attrs({
         margin-left: 5px;
     }
 
-    &:hover {
+    &:focus,
+    &:hover,
+    &:focus-visible {
         background-color: rgba(8,8,8, 0.9);
+        border-radius: 31px;
     }
 `
