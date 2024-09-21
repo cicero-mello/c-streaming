@@ -5,9 +5,6 @@ export * from "./media-suggestions/types"
 
 export * from "./header"
 
-export * from "./poster"
-export * from "./poster/types"
-
 export * from "./posters"
 export * from "./posters/types"
 

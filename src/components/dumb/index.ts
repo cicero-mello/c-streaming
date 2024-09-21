@@ -21,3 +21,6 @@ export * from "./select-input"
 export * from "./select-input/types"
 
 export * from "./wrapper"
+
+export * from "./poster"
+export * from "./poster/types"
