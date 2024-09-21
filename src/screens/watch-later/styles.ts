@@ -38,7 +38,8 @@ export const Screen = styled.main`
 `
 
 export const Title = styled.h1.attrs({
-    className: "page-title"
+    className: "page-title",
+    role: "presentation"
 })`
     transition: 100ms linear;
     margin: 46px 24px 0px 46px;
@@ -75,7 +76,9 @@ const showNoCardsMessage = keyframes`
     }
 `
 
-export const NoCardsMessage = styled.p`
+export const NoCardsMessage = styled.p.attrs({
+    role: "presentation"
+})`
     font-size: 24px;
     animation: ${showNoCardsMessage} 550ms linear forwards;
     max-width: fit-content;

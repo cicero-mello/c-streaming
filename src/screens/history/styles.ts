@@ -86,7 +86,8 @@ export const Screen = styled.main`
 `
 
 export const Title = styled.h1.attrs({
-    className: "page-title"
+    className: "page-title",
+    role: "presentation"
 })`
     margin: 46px 24px 0px 46px;
     font-size: 37px;
@@ -168,7 +169,8 @@ export const ActionsWrapper = styled.div.attrs({
 `}`
 
 export const HistoryClearMessage = styled.p.attrs({
-    className: "history-clear-message"
+    className: "history-clear-message",
+    role: "presentation"
 })`
     display: flex;
     text-align: center;
