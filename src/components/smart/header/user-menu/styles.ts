@@ -70,7 +70,7 @@ export const MenuList = styled.nav.attrs((props: any) => ({
 
     ${$show && css`
         opacity: 1;
-        max-height: 129px;
+        max-height: 140px;
         padding: 11px 0px;
 
         pointer-events: unset;

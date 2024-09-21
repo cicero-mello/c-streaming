@@ -25,6 +25,7 @@ export const UserMenu: FC<UseMenuProps> = ({
             {...rest}
             ref={componentRef}
             $showMenu={showMenu}
+            aria-expanded={showMenu}
             aria-label={showMenu ?
                 "Close navigation menu" :
                 "Open navigation menu"
@@ -35,15 +36,25 @@ export const UserMenu: FC<UseMenuProps> = ({
             }}
         >
             <S.UserName aria-hidden> Gally </S.UserName>
-            <UserIco />
+            <UserIco aria-hidden />
             <S.MenuList
                 $show={showMenu}
                 onClick={(e) => e.stopPropagation()}
             >
                 <Button
                     theme="menu-item"
+                    children="Search"
+                    aria-label="Search page"
+                    aria-hidden={showMenu ? "false" : "true"}
+                    tabIndex={showMenu ? 1 : -1}
+                    url={{path: PATHS.SEARCH, params: {searchText: "", searchType: "all"}}}
+                    onClick={() => setShowMenu(false)}
+                />
+                <Button
+                    theme="menu-item"
                     children="History"
                     aria-label="History page"
+                    aria-hidden={showMenu ? "false" : "true"}
                     tabIndex={showMenu ? 1 : -1}
                     url={{path: PATHS.HISTORY}}
                     onClick={() => setShowMenu(false)}
@@ -52,6 +63,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                     theme="menu-item"
                     children="Watch Later"
                     aria-label="Watch Later List"
+                    aria-hidden={showMenu ? "false" : "true"}
                     tabIndex={showMenu ? 1 : -1}
                     url={{path: PATHS.WATCH_LATER}}
                     onClick={() => setShowMenu(false)}
@@ -60,6 +72,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                     theme="menu-item"
                     children="User Settings"
                     aria-label="User Settings - Last Menu Option"
+                    aria-hidden={showMenu ? "false" : "true"}
                     tabIndex={showMenu ? 1 : -1}
                     url={{path: PATHS.USER_SETTINGS}}
                     onClick={() => setShowMenu(false)}
