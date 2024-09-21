@@ -244,8 +244,10 @@ export const SecondSection = styled.section`
     height: 100%;
     transition: opacity 200ms linear;
 
-    &:hover{
-        opacity: 1;
+    &:hover,
+    &:has(*:focus),
+    &:has(*:focus-visible){
+        opacity: 100%;
     }
 
     @media(max-width: 1100px){

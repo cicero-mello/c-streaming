@@ -1,24 +1,22 @@
-import React, { FC, useMemo, useState } from "react"
-import { MediaSuggestionsProps,
-    SuggestionMedia, OnTransitionState,
-} from "./types"
+import React, { FC, useLayoutEffect, useMemo, useState } from "react"
+import { MediaSuggestionsProps, SuggestionMedia, OnTransitionState } from "./types"
 import { SuggestionTrianglesIco } from "../../../assets/icons"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { useNavigation } from "../../../hooks"
 import { getMediaPathByMediaType } from "../../../paths"
 import { useMediaStore } from "../../../stores"
 import { createSuggestionMedias } from "./core"
+import { useAriaNotification } from "../../../hooks"
+import { Button } from "../button"
 import * as S from "./styles"
-import { Link } from "gatsby"
 
 export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
     exceptionMediaID: propExceptionMediaID,
     medias: propMedias,
     ...rest
 }) => {
-    const { navigate } = useNavigation()
     const exceptionMediaID = propExceptionMediaID ?? ""
     const medias = propMedias ?? useMediaStore(state => state.medias)
+    const { readAriaNotification, clearAriaNotification } = useAriaNotification()
 
     const suggestionMedias = useMemo(() => (
         createSuggestionMedias(medias, exceptionMediaID)
@@ -55,8 +53,10 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
         setFreePointerEvents(false)
 
         setTimeout(() => {
-            setCurrentSuggestionMedia(getNextSuggestion())
+            const nextSuggestion = getNextSuggestion()
+            setCurrentSuggestionMedia(nextSuggestion)
             setOnTransition("next-to-none")
+            readAriaNotification("Changed to: " + nextSuggestion.mediaName)
             setTimeout(() => setFreePointerEvents(true), 330)
         }, 360)
     }
@@ -68,37 +68,38 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
         setFreePointerEvents(false)
 
         setTimeout(() => {
-            setCurrentSuggestionMedia(getPreviusSuggestion())
+            const previusSuggestion = getPreviusSuggestion()
+            setCurrentSuggestionMedia(previusSuggestion)
             setOnTransition("previus-to-none")
+            readAriaNotification("Changed to: " + previusSuggestion.mediaName)
             setTimeout(() => setFreePointerEvents(true), 330)
         }, 360)
     }
 
-    const goToNewMedia = () => {
-        if(!freePointerEvents || !currentSuggestionMedia) return
-        navigate(
-            getMediaPathByMediaType(currentSuggestionMedia.type),
-            { mediaID: currentSuggestionMedia.id }
-        )
-        setTimeout(() => { handleClickNextSuggestion() }, 100)
-    }
+    useLayoutEffect(() => clearAriaNotification, [])
 
     return (
         <S.Component {...rest}>
-            <S.Text>
+            <S.Text role="presentation" tabIndex={0}>
                 Want something different? <br/>
                 Why not try...
             </S.Text>
-            <S.SuggestionsWrapper>
-                <S.Button onClick={handleClickPreviusSuggestion}>
+            <S.SuggestionsWrapper $freePointerEvents={freePointerEvents}>
+                <S.ArrowButton
+                    aria-label="Previus suggestion"
+                    onClick={handleClickPreviusSuggestion}
+                >
                     <SuggestionTrianglesIco />
-                </S.Button>
-                <Link to={""} onClick={(e) => e.preventDefault()}>
-                    <S.ImageWrapper
-                        onClick={goToNewMedia}
-                        $onTransition={onTransition}
-                        $freePointerEvents={freePointerEvents}
-                    >
+                </S.ArrowButton>
+                <Button
+                    theme="none"
+                    aria-label={currentSuggestionMedia.mediaName}
+                    url={{
+                        path: getMediaPathByMediaType(currentSuggestionMedia.type),
+                        params: { mediaID: currentSuggestionMedia.id }
+                    }}
+                >
+                    <S.ImageWrapper $onTransition={onTransition}>
                         <GatsbyImage
                             image={currentSuggestionMedia.bannerImage}
                             alt={`Image of ${currentSuggestionMedia.mediaName}`}
@@ -107,10 +108,13 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
                             {currentSuggestionMedia.mediaName}
                         </S.SuggestionMediaName>
                     </S.ImageWrapper>
-                </Link>
-                <S.Button onClick={handleClickNextSuggestion}>
+                </Button>
+                <S.ArrowButton
+                    aria-label="Next suggestion"
+                    onClick={handleClickNextSuggestion}
+                >
                     <SuggestionTrianglesIco />
-                </S.Button>
+                </S.ArrowButton>
             </S.SuggestionsWrapper>
         </S.Component>
     )

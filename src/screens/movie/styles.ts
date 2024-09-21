@@ -85,7 +85,9 @@ export const SecondSection = styled.section`
     height: 100%;
     transition: opacity 200ms linear;
 
-    &:hover{
+    &:hover,
+    &:has(*:focus),
+    &:has(*:focus-visible){
         opacity: 100%;
     }
 

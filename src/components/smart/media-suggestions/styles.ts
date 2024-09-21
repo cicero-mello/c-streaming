@@ -21,11 +21,11 @@ export const Component = styled.div.attrs({
         }
         .suggestions-wrapper{
             width: 100%;
-            button:first-child{
+            .arrow-button:first-child{
                 position: absolute;
                 z-index: 2;
             }
-            button:last-child{
+            .arrow-button:last-child{
                 position: absolute;
                 z-index: 2;
                 right: 0;
@@ -33,8 +33,12 @@ export const Component = styled.div.attrs({
         }
         .image-wrapper{
             max-width: 100%;
-            height: 230px;
             max-height: unset;
+            height: 230px;
+        }
+        .none-button{
+            max-width: calc(100% - 44px);
+            margin: auto;
         }
     }
 
@@ -45,7 +49,7 @@ export const Component = styled.div.attrs({
     }
 `
 
-export const Text = styled.h1.attrs({
+export const Text = styled.h2.attrs({
     className: "suggestion-text"
 })`
     color: #EDEDED;
@@ -54,16 +58,35 @@ export const Text = styled.h1.attrs({
 
 export const SuggestionsWrapper = styled.div.attrs({
     className: "suggestions-wrapper"
-})`
+})<{ $freePointerEvents: boolean }>`${({
+    $freePointerEvents
+}) => css`
     display: flex;
     position: relative;
     align-items: center;
-    button:first-child{
+    gap: 0px 12px;
+
+    .arrow-button:first-child{
         transform: rotate(180deg);
     }
-`
 
-export const Button = styled.button`
+    ${!$freePointerEvents && css`
+        pointer-events: none;
+    `}
+
+    .none-button:hover,
+    .none-button:focus,
+    .none-button:focus-visible {
+        .image-wrapper{
+            filter: grayscale(0.4);
+            border-color: #9d9d9d;
+        }
+    }
+`}`
+
+export const ArrowButton = styled.button.attrs({
+    className: "arrow-button"
+})`
     cursor: pointer;
     path { transition: 100ms linear; }
 
@@ -81,25 +104,18 @@ export const Button = styled.button`
 
 export const ImageWrapper = styled.div.attrs((props: any) => ({
     className: "image-wrapper",
-    $onTransition: props?.$onTransition ?? "none",
-    $freePointerEvents: props?.$freePointerEvents ?? false
-}))<{ $onTransition: OnTransitionState; $freePointerEvents: boolean }>`${({
-    $onTransition, $freePointerEvents
+    $onTransition: props?.$onTransition ?? "none"
+}))<{ $onTransition: OnTransitionState }>`${({
+    $onTransition
 }) => css`
     display: flex;
     position: relative;
     max-width: 330px;
     max-height: 185px;
-    margin: 0px 12px;
     border: 1px solid transparent;
     transition: all 100ms linear, opacity 360ms ease-in-out;
     cursor: pointer;
     filter: grayscale(0.6);
-
-    &:hover{
-        filter: grayscale(0.4);
-        border-color: #9d9d9d;
-    }
 
     &::before{
         content: "";
@@ -146,10 +162,6 @@ export const ImageWrapper = styled.div.attrs((props: any) => ({
             left: -10px;
             width: calc(100% + 20px);
         }
-    `}
-
-    ${!$freePointerEvents && css`
-        pointer-events: none;
     `}
 `}`
 
