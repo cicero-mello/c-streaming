@@ -36,7 +36,7 @@ export const Item: FC<BannerItemProps> = ({
     return (
         <S.Component $animationState={itemAnimation}>
             <Wrapper
-                role="img"
+                role="presentation"
                 aria-label={`Banner image of ${showingMedia.name}`}
                 tabIndex={isBannerHidden ? -1 : 0}
             >
@@ -50,12 +50,14 @@ export const Item: FC<BannerItemProps> = ({
             <S.InfoAndButtons>
                 <S.InfoWrapper>
                     <S.MediaName
+                        role="presentation"
                         aria-label={`Banner title: ${showingMedia.name}`}
                         tabIndex={isBannerHidden ? -1 : 0}
                     >
                         {showingMedia.name?.toLocaleUpperCase() ?? ""}
                     </S.MediaName>
                     <S.Synopsis
+                        role="presentation"
                         aria-label={`Synopsis: ${showingMedia.synopsis}`}
                         tabIndex={isBannerHidden ? -1 : 0}
                     >

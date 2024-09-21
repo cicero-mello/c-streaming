@@ -45,6 +45,10 @@ export const GlobalStyle = createGlobalStyle`
                 outline-offset: 4px;
                 border-radius: 3px;
             }
+
+            &[role="presentation"]:focus-visible {
+                outline-color: #2ecfff;
+            }
         }
 
         button, a, input {
