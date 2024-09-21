@@ -4,7 +4,12 @@ import { useForceUpdate } from "../use-force-update"
 import { GenericModalHandle } from "./modals"
 import * as M from "./modals"
 
-const ModalsContext = createContext<ModalsContextType | undefined>(undefined)
+const ModalsContext = createContext<ModalsContextType>({
+    deleteAccountQuestion: null,
+    deleteAccountConfirmation: null,
+    linkSendToEmail: null,
+    confirmYourPassword: null
+})
 
 export const useModals = () => useContext(ModalsContext)
 

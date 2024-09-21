@@ -18,7 +18,7 @@ export const UserSettings: FunctionComponent<PageProps> = () => {
 
         if(isEmailValid(currentEmail)) {
             setEmailErrorMessage("")
-            modals?.confirmYourPassword?.open()
+            modals.confirmYourPassword?.open()
             return
         }
 
