@@ -7,28 +7,22 @@ export const Component = styled.div.attrs({
     flex-direction: column;
 `
 
-export const MediaTitle = styled.h1.attrs((props: any) => ({
+export const MediaTitle = styled.h1.attrs({
     className: "title",
-    $title: props.$title
-}))<{ $title: string }>`
+    role: "presentation"
+})`
     font-size: 37px;
     margin-left: 9px;
-
-    &::before {
-        content: "${({ $title }) => $title}";
-    }
+    width: fit-content;
 `
 
-export const MediaEpisodeName = styled.p.attrs((props: any) => ({
+export const MediaEpisodeName = styled.p.attrs({
     className: "media-episode-name",
-    $episodeName: props?.$episodeName ?? ""
-}))< { $episodeName?: string } >`
+    role: "presentation"
+})`
     margin-left: 9px;
     color: #8D8D8D;
     font-size: 23px;
     max-width: 573px;
-
-    &::before{
-        content: "${({ $episodeName }) => $episodeName}";
-    }
+    width: fit-content;
 `

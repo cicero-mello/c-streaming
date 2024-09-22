@@ -73,18 +73,18 @@ export const Series: FC = () => {
                 <S.TopWrapper>
                     <FakeVideo
                         thumbImage={media.bannerImage as IGatsbyImageData}
-                        videoName={media.name}
+                        videoName={
+                            `${media.name}: ` +
+                            `Episode ${currentEpisode.ep}, ` +
+                            `Season ${currentEpisode.season}`
+                        }
                     />
                     <S.RightSide>
                         <MediaTitle
                             watchLaterText="Watch Series Later"
                             mediaId={media.id}
                             title={media.name}
-                            episodeName={
-                                "S." + currentEpisode?.season +
-                                " | Ep." + currentEpisode?.ep +
-                                ": " + currentEpisode?.name
-                            }
+                            episode={currentEpisode}
                         />
                         <S.Sinopspys800MediaWidth>
                             {media.synopsis}
