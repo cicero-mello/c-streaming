@@ -14,7 +14,7 @@ export const Series: FC = () => {
     const [urlState] = useUrlState()
 
     const media = useMediaStore(state => state.getMediaById(
-        urlState.mediaID ?? ""
+        urlState.mediaId ?? ""
     ))
 
     const history = useMemo(() => (
@@ -54,7 +54,7 @@ export const Series: FC = () => {
     useEffect(() => {
         if(!media || !currentEpisode) return
         customLocalStorage.addMediaToHistory({
-            mediaID: media.id,
+            mediaId: media.id,
             episodeID: currentEpisode.id
         })
     }, [media, currentEpisode])
@@ -102,7 +102,7 @@ export const Series: FC = () => {
                                 url={{
                                     path: PATHS.SERIES,
                                     params: {
-                                        mediaID: media.id,
+                                        mediaId: media.id,
                                         episodeID: nextEpisode.episode.id
                                     }
                                 }}
@@ -137,7 +137,7 @@ export const Series: FC = () => {
                         episodeName: episode.name,
                         url: {
                             path: PATHS.SERIES,
-                            params: { mediaID: media.id, episodeID: episode.id }
+                            params: { mediaId: media.id, episodeID: episode.id }
                         },
                         wasWatched: customLocalStorage.episodeWasWatched(
                             episode.id,

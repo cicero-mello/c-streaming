@@ -77,7 +77,7 @@ export const Item: FC<BannerItemProps> = ({
                         tabIndex={isBannerHidden ? -1 : 0}
                         url={{
                             path: getMediaPathByMediaType(showingMedia.type),
-                            params: { mediaID: showingMedia.id }
+                            params: { mediaId: showingMedia.id }
                         }}
                     />
                 </S.ButtonsWrapper>

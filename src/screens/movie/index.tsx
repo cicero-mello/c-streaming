@@ -12,13 +12,13 @@ export const Movie: FC = () => {
     const [urlState] = useUrlState()
 
     const media = useMediaStore(state => state.getMediaById(
-        urlState.mediaID ?? ""
+        urlState.mediaId ?? ""
     ))
 
     useEffect(() => {
         if(!media) return
         customLocalStorage.addMediaToHistory({
-            mediaID: media.id
+            mediaId: media.id
         })
     }, [])
 

@@ -16,18 +16,18 @@ export const getAllWatchLater = (): WatchLater[] => {
     return JSON.parse(watchLaterStringified)
 }
 
-export const getWatchLater = (mediaID: string): boolean => {
+export const getWatchLater = (mediaId: string): boolean => {
     const watchLater = getAllWatchLater()
-    return !!watchLater.find(item => item.id === mediaID)?.isSetToWatchLater
+    return !!watchLater.find(item => item.id === mediaId)?.isSetToWatchLater
 }
 
-export const addWatchLater = (mediaID: string, watchLater: boolean) => {
+export const addWatchLater = (mediaId: string, watchLater: boolean) => {
     const allWatchLater = getAllWatchLater()
-    const itemExists = allWatchLater.find(item => item.id === mediaID)
+    const itemExists = allWatchLater.find(item => item.id === mediaId)
 
     let newWatchLater: WatchLater[]
     if(itemExists) newWatchLater = allWatchLater.map(item => {
-        if(item.id === mediaID) {
+        if(item.id === mediaId) {
             return {
                 id: item.id,
                 isSetToWatchLater: watchLater
@@ -37,7 +37,7 @@ export const addWatchLater = (mediaID: string, watchLater: boolean) => {
     })
     else newWatchLater = [
         ...allWatchLater,
-        { id: mediaID, isSetToWatchLater: watchLater }
+        { id: mediaId, isSetToWatchLater: watchLater }
     ]
 
     const jsonStringified = JSON.stringify(newWatchLater)
@@ -45,9 +45,9 @@ export const addWatchLater = (mediaID: string, watchLater: boolean) => {
     localStorage.setItem(STORAGE_NAME, jsonStringified)
 }
 
-export const removeWatchLater = (mediaID: string): WatchLater[] => {
+export const removeWatchLater = (mediaId: string): WatchLater[] => {
     const watchLater = getAllWatchLater()
-    const newWatchLater = watchLater.filter(item => item.id != mediaID)
+    const newWatchLater = watchLater.filter(item => item.id != mediaId)
     const jsonStringified = JSON.stringify(newWatchLater)
     localStorage.setItem(STORAGE_NAME, jsonStringified)
 

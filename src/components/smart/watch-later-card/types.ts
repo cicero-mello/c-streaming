@@ -5,7 +5,7 @@ import { MediaType } from "../../../stores"
 export interface WatchLaterCardProps extends Omit<
     HTMLAttributes<HTMLDivElement>, "className"
 >{
-    mediaID: string
+    mediaId: string
     mediaType: MediaType
     mediaName: string
     image: IGatsbyImageData

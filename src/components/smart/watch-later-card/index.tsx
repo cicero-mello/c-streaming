@@ -9,7 +9,7 @@ import { Button } from "../button"
 import * as S from "./styles"
 
 export const WatchLaterCard: FC<WatchLaterCardProps> = ({
-    mediaID, mediaName, mediaType, image, onRemove, ...rest
+    mediaId, mediaName, mediaType, image, onRemove, ...rest
 }) => {
     const componentRef = useRef<HTMLDivElement>(null)
     const [closeAnimationStarted, setCloseAnimationStarted] = useState(false)
@@ -20,7 +20,7 @@ export const WatchLaterCard: FC<WatchLaterCardProps> = ({
         setCloseAnimationStarted(true)
         readAriaNotification(`${mediaName} removed`)
         await delay(S.CLOSE_CARD_TIME)
-        customLocalStorage.removeWatchLater(mediaID)
+        customLocalStorage.removeWatchLater(mediaId)
         if(onRemove) onRemove()
     }
 
@@ -46,7 +46,7 @@ export const WatchLaterCard: FC<WatchLaterCardProps> = ({
                             aria-label={`Watch "${mediaName}"`}
                             url={{
                                 path: getMediaPathByMediaType(mediaType),
-                                params: { mediaID: mediaID}
+                                params: { mediaId: mediaId}
                             }}
                         />
                         <Button

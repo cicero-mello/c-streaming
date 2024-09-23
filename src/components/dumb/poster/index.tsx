@@ -14,7 +14,7 @@ export const Poster: FC<PosterProps> = ({
             aria-label={name}
             url={{
                 path: getMediaPathByMediaType(mediaType),
-                params: { mediaID: mediaId }
+                params: { mediaId: mediaId }
             }}
         >
             <GatsbyImage

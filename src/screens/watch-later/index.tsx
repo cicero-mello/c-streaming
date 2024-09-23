@@ -18,12 +18,12 @@ export const WatchLater: FC = () => {
                     />
                 </>}
                 <KeepFocusOnRemove>
-                    {cards.map(({mediaID, ...rest}) =>
+                    {cards.map(({mediaId, ...rest}) =>
                         <WatchLaterCard
                             {...rest}
-                            id={mediaID}
-                            key={mediaID}
-                            mediaID={mediaID}
+                            id={mediaId}
+                            key={mediaId}
+                            mediaId={mediaId}
                         />
                     )}
                 </KeepFocusOnRemove>

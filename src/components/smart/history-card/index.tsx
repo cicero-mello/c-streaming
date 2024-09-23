@@ -8,7 +8,7 @@ import * as S from "./styles"
 import { useAriaNotification } from "../../../hooks"
 
 export const HistoryCard: FC<HistoryCardProps> = ({
-    mediaID, mediaType, mediaName,
+    mediaId, mediaType, mediaName,
     historyViewDate, episode, onRemove,
     ...rest
 }) => {
@@ -27,11 +27,11 @@ export const HistoryCard: FC<HistoryCardProps> = ({
         setCloseAnimationStarted(true)
         readAriaNotification(`${ariaName} removed`)
         await delay(S.CLOSE_ANIMATION_TIME)
-        // customLocalStorage.removeMediaFromHistory({
-        //     mediaID: mediaID,
-        //     viewDate: historyViewDate,
-        //     episodeID: episode?.id
-        // })
+        customLocalStorage.removeMediaFromHistory({
+            mediaId: mediaId,
+            viewDate: historyViewDate,
+            episodeID: episode?.id
+        })
         if(!!onRemove) await onRemove()
     }
 
@@ -47,7 +47,7 @@ export const HistoryCard: FC<HistoryCardProps> = ({
                 theme="none"
                 url={{
                     path: getMediaPathByMediaType(mediaType),
-                    params: { mediaID: mediaID, episodeID: episode?.id }
+                    params: { mediaId: mediaId, episodeID: episode?.id }
                 }}
                 aria-label={`Watch "${ariaName}"`}
             >

@@ -96,7 +96,7 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
                     aria-label={currentSuggestionMedia.mediaName}
                     url={{
                         path: getMediaPathByMediaType(currentSuggestionMedia.type),
-                        params: { mediaID: currentSuggestionMedia.id }
+                        params: { mediaId: currentSuggestionMedia.id }
                     }}
                 >
                     <S.ImageWrapper $onTransition={onTransition}>

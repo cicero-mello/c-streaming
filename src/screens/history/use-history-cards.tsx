@@ -29,19 +29,19 @@ export const useHistoryCards = (
 
     const createCards = useCallback(() => {
         const newCards = historyItems.map(historyItem => {
-            const media = getMediaById(historyItem.mediaID)
+            const media = getMediaById(historyItem.mediaId)
             if(!media) return
 
             const cardId = getRandomID()
             const episode = (!historyItem?.episodeID ? undefined :
                 customLocalStorage.getEpisodeByIDs(
-                    historyItem.mediaID, historyItem.episodeID
+                    historyItem.mediaId, historyItem.episodeID
                 )
             )
 
             return {
                 id: cardId,
-                mediaID: media.id,
+                mediaId: media.id,
                 mediaType: media.type,
                 mediaName: media.name,
                 historyViewDate: historyItem.viewDate,

@@ -16,12 +16,12 @@ export const useWatchLaterCards = (): UseWatchLaterCards => {
 
             const onRemoveCard = async () => {
                 setCards(cards => cards.filter(
-                    card => card.mediaID != media.id
+                    card => card.mediaId != media.id
                 ))
             }
 
             return {
-                mediaID: media.id,
+                mediaId: media.id,
                 mediaType: media.type,
                 mediaName: media.name,
                 image: media.bannerImage,

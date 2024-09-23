@@ -30,7 +30,7 @@ export const useUrlState = (): UseURLState => {
         )
 
         return {
-            mediaID: URLObject.mediaID,
+            mediaId: URLObject.mediaId,
             episodeID: URLObject.episodeID,
             searchText: URLObject.searchText,
             searchType: URLObject.searchType as SearchType

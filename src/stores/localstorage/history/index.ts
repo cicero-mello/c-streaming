@@ -6,7 +6,7 @@ import { GetLastWatchedEpisodeParams, HistoryItem } from "./types"
 const STORAGE_NAME = "history"
 /*
     history: [{
-        mediaID: string,
+        mediaId: string,
         episodeID?: string,
         viewDate: number // Date.now()
     }]
@@ -24,7 +24,7 @@ export const addMediaToHistory = (props: Omit<HistoryItem, "viewDate">) => debou
     const history = getHistory()
 
     const mediaWasTheLastAdded = !!history && history.length > 0 && (
-        history[0].mediaID === props.mediaID &&
+        history[0].mediaId === props.mediaId &&
         history[0].episodeID === props.episodeID
     )
 
@@ -40,12 +40,12 @@ export const addMediaToHistory = (props: Omit<HistoryItem, "viewDate">) => debou
 }, 200)
 
 export const removeMediaFromHistory = ({
-    mediaID, viewDate, episodeID
+    mediaId, viewDate, episodeID
 }: HistoryItem): HistoryItem[] => {
     const history = getHistory()
     const newHistory = history.filter((media) => !(
             media.viewDate === viewDate &&
-            media.mediaID === mediaID &&
+            media.mediaId === mediaId &&
             media.episodeID === episodeID
         )
     )

@@ -1,7 +1,7 @@
 import { Serie } from "../serie/types"
 
 export interface HistoryItem {
-    mediaID: string
+    mediaId: string
     episodeID?: string
     viewDate: number // Date.now()
 }

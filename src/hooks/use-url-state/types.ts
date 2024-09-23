@@ -1,5 +1,5 @@
 export interface UrlState {
-    mediaID?: string
+    mediaId?: string
     episodeID?: string
     searchText?: string
     searchType?: SearchType
