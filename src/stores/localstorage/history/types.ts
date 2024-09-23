@@ -7,7 +7,7 @@ export interface HistoryItem {
 }
 
 export interface GetLastWatchedEpisodeParams {
-    serieID?: string
+    serieId?: string
     history?: HistoryItem[]
     serie?: Serie
 }

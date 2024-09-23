@@ -4,7 +4,7 @@ import { Serie, Episode, Season, SeasonLocalStorage, SerieLocalStorage, GetNextE
 const STORAGE_NAME = "series"
 /*
     series: [{
-        serieID: string,
+        serieId: string,
         seasons: [{
             id: string,
             name: string
@@ -25,7 +25,7 @@ const addNewSerieLocalStorage = (
 }
 
 const createSerieLocalStorage = (
-    serieID: string
+    serieId: string
 ): SerieLocalStorage => {
     const randomNumberOfSeasons = Math.floor(Math.random() * 2 ) + 3
     const getRandomNumberOfEpisodes = () => Math.floor(Math.random() * 4 ) + 8
@@ -36,7 +36,7 @@ const createSerieLocalStorage = (
         Array.from({ length: getRandomNumberOfEpisodes() }).map(
             (_, episodeIndex) => ({
                 name: randomLoremWords(),
-                id: lazyEpisodeIDGenerator(serieID,
+                id: lazyEpisodeIDGenerator(serieId,
                     seasonIndex + 1,
                     episodeIndex + 1
                 )
@@ -45,7 +45,7 @@ const createSerieLocalStorage = (
     )
 
     return {
-        serieID: serieID,
+        serieId: serieId,
         seasons: seasons
     }
 }
@@ -59,22 +59,22 @@ const getAllSeriesLocalStorage = (): SerieLocalStorage[] => {
     return JSON.parse(seriesLocalStorage)
 }
 
-export const getSerie = (serieID: string): Serie => {
+export const getSerie = (serieId: string): Serie => {
     const seriesLocalStorage = getAllSeriesLocalStorage()
-    const wantedSerie = seriesLocalStorage.find(serie => serie.serieID === serieID)
+    const wantedSerie = seriesLocalStorage.find(serie => serie.serieId === serieId)
     if(!!wantedSerie) return serieLocalStorageToSerie(wantedSerie)
 
-    const serieLocalStorage = createSerieLocalStorage(serieID)
+    const serieLocalStorage = createSerieLocalStorage(serieId)
     addNewSerieLocalStorage(serieLocalStorage, seriesLocalStorage)
     return serieLocalStorageToSerie(serieLocalStorage)
 }
 
 export const getEpisodeByIDs = (
-    serieID: string, episodeID: string, serie?: Serie
+    serieId: string, episodeID: string, serie?: Serie
 ): Episode | undefined => {
     let wantedEpisode: Episode | undefined
 
-    const currentSerie = serie ?? getSerie(serieID)
+    const currentSerie = serie ?? getSerie(serieId)
     currentSerie.seasons.forEach(episodes => episodes.forEach(episode => {
         if(episode.id === episodeID) wantedEpisode = episode
     }))
@@ -83,13 +83,13 @@ export const getEpisodeByIDs = (
 }
 
 export const getNextEpisode = (
-    serieID: string, episodeID: string, serie?: Serie
+    serieId: string, episodeID: string, serie?: Serie
 ): GetNextEpisodeParams | undefined => {
-    const episode = getEpisodeByIDs(serieID, episodeID, serie)
+    const episode = getEpisodeByIDs(serieId, episodeID, serie)
     if(!episode) return
     const { ep, season } = episode
 
-    const seasons = serie?.seasons ?? getSerie(serieID).seasons
+    const seasons = serie?.seasons ?? getSerie(serieId).seasons
 
     const isNextEpisodeInThisSeason = !!seasons[season -1][ep]
     if(isNextEpisodeInThisSeason) return {
@@ -124,7 +124,7 @@ const serieLocalStorageToSerie = (
     )
 
     return {
-        serieID: serieLocalStorage.serieID,
+        serieId: serieLocalStorage.serieId,
         seasons: addEpAndSeasonNumberInEachEpisode(
             serieLocalStorage.seasons
         )
@@ -132,8 +132,8 @@ const serieLocalStorageToSerie = (
 }
 
 const lazyEpisodeIDGenerator = (
-    serieID: string, season: number, episode: number
+    serieId: string, season: number, episode: number
 ) => (
-    serieID.substring(season.toString().length + episode.toString().length)
+    serieId.substring(season.toString().length + episode.toString().length)
     + season + episode
 )

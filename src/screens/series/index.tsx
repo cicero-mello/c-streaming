@@ -30,7 +30,7 @@ export const Series: FC = () => {
         if(!serie) return undefined
         if(!!urlState.episodeID){
             return customLocalStorage.getEpisodeByIDs(
-                serie.serieID,
+                serie.serieId,
                 urlState.episodeID,
                 serie
             )
@@ -45,7 +45,7 @@ export const Series: FC = () => {
     const nextEpisode = useMemo(() => (
         (!serie || !currentEpisode) ? undefined :
         customLocalStorage.getNextEpisode(
-            serie.serieID,
+            serie.serieId,
             currentEpisode.id,
             serie
         )

@@ -81,14 +81,14 @@ export const getHistoryItemWithHigherViewDate = (
 )
 
 export const getLastWatchedEpisode = ({
-    serieID: serieIDParam,
+    serieId: serieIdParam,
     serie: serieParam,
     history: historyParam
 }: GetLastWatchedEpisodeParams): Episode | undefined => {
-    const serieID = serieIDParam ?? serieParam?.serieID
-    if(!serieID) return undefined
+    const serieId = serieIdParam ?? serieParam?.serieId
+    if(!serieId) return undefined
 
-    const serie = serieParam ?? getSerie(serieID)
+    const serie = serieParam ?? getSerie(serieId)
 
     const allSerieEpisodes = serie.seasons.map(
         season => season.map(episode => episode)

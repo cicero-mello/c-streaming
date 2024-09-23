@@ -1,5 +1,5 @@
 export interface Serie {
-    serieID: string
+    serieId: string
     seasons: Season[]
 }
 
@@ -16,7 +16,7 @@ export interface Episode {
 export type SeasonLocalStorage = EpisodeLocalStorage[]
 export type EpisodeLocalStorage = Omit<Episode, "season" | "ep">
 export interface SerieLocalStorage {
-    serieID: string
+    serieId: string
     seasons: SeasonLocalStorage[]
 }
 
