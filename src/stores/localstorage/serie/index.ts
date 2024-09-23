@@ -97,7 +97,8 @@ export const getNextEpisode = (
         isNextEpisodeInAnotherSeason: false
     }
 
-    const nextSeasonExists = !!seasons[season][0]
+    const nextSeasonExists = !!seasons?.[season]?.[0]
+
     if(nextSeasonExists) return {
         episode: seasons[season][0],
         isNextEpisodeInAnotherSeason: true

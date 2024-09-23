@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
 export const Component = styled.main`
     display: flex;
@@ -21,10 +21,12 @@ export const FirstSection = styled.section`
         margin: 9px 0px 37px 9px;
     }
 
-    .episode-card{
+    .episode-card {
         opacity: 0.7;
         transition: opacity 100ms linear;
-        &:hover{
+        &:has(:hover),
+        &:has(:focus),
+        &:has(:focus-visible){
             opacity: 1;
         }
     }
@@ -135,7 +137,7 @@ export const FirstSection = styled.section`
             margin-top: 14px;
             padding: 0px;
             opacity: 0.95;
-            > .card {
+            > .none-button {
                 max-width: 100%;
                 > .wrapper{
                     width: 70%;
@@ -154,6 +156,14 @@ export const FirstSection = styled.section`
             text-align: center;
             font-size: 20px;
             margin-top: 30px;
+        }
+    }
+
+    @media(max-width: 300px){
+        .episode-card {
+            .gatsby-image-wrapper{
+                display: none;
+            }
         }
     }
 `
@@ -181,23 +191,30 @@ const sinopsysCSS = css`
 `
 
 export const Sinopsys = styled.p.attrs({
-    className: "sinopsys"
+    className: "sinopsys",
+    role: "presentation"
 })`
     margin-top: 33px;
     ${sinopsysCSS}
 `
 
 export const Sinopspys800MediaWidth = styled.p.attrs({
-    className: "sinopsys-800-media-width"
+    className: "sinopsys-800-media-width",
+    role: "presentation"
 })`
     display: none;
     margin-top: 27px;
     ${sinopsysCSS}
 `
 
+const slideX = keyframes`
+    from { background-position: 0px 0px; }
+    to { background-position: 4000px 0px; }
+`
+
 export const LastEpisodeMessage = styled.input.attrs({
     className: "last-episode-message",
-    type: "checkbox"
+    type: "checkbox",
 })`
     appearance: none;
     cursor: pointer;
@@ -217,7 +234,7 @@ export const LastEpisodeMessage = styled.input.attrs({
             green, blue, indigo, purple, red
         );
         text-shadow: 0 0 0px #ffffff91;
-        animation: 10s slideX linear infinite forwards;
+        animation: 10s ${slideX} linear infinite forwards;
     }
     &:checked::before{
         background-clip: unset;
@@ -227,11 +244,6 @@ export const LastEpisodeMessage = styled.input.attrs({
         background-image: unset;
         animation: unset;
         color: #e3e3e3;
-    }
-
-    @keyframes slideX {
-        from { background-position: 0px 0px; }
-        to { background-position: 4000px 0px; }
     }
 `
 

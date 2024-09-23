@@ -39,7 +39,7 @@ export const objectToQueryString = (object: any): string => (
 )
 
 /**
-     * Return a function to enable scroll.
+     * Disable scroll and return a function to enable scroll.
 */
 export const disableScroll = (): () => void => {
     const scrollEvent = (event: Event) => {

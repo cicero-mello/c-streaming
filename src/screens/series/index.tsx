@@ -1,5 +1,5 @@
-import React, { FC, useLayoutEffect, useMemo } from "react"
-import { useNavigation, useUrlState } from "../../hooks"
+import React, { FC, useEffect, useMemo } from "react"
+import { useUrlState } from "../../hooks"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import { customLocalStorage } from "../../stores"
 import { useMediaStore } from "../../stores"
@@ -11,7 +11,6 @@ import {
 import * as S from "./styles"
 
 export const Series: FC = () => {
-    const { navigate } = useNavigation()
     const [urlState] = useUrlState()
 
     const media = useMediaStore(state => state.getMediaById(
@@ -52,7 +51,7 @@ export const Series: FC = () => {
         )
     ), [serie, currentEpisode])
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if(!media || !currentEpisode) return
         customLocalStorage.addMediaToHistory({
             mediaID: media.id,
@@ -64,10 +63,9 @@ export const Series: FC = () => {
         !media
         || !currentEpisode
         || !serie
-        || !nextEpisode
     )
 
-    return invalidParameters ?  <Error errorCode="400" /> : (
+    return invalidParameters ? <Error errorCode="400" /> : (
         <S.Component>
             <S.FirstSection>
                 <S.TopWrapper>
@@ -75,8 +73,8 @@ export const Series: FC = () => {
                         thumbImage={media.bannerImage as IGatsbyImageData}
                         videoName={
                             `${media.name}: ` +
-                            `Episode ${currentEpisode.ep}, ` +
-                            `Season ${currentEpisode.season}`
+                            `Season ${currentEpisode.season}` +
+                            `Episode ${currentEpisode.ep}, `
                         }
                     />
                     <S.RightSide>
@@ -86,34 +84,45 @@ export const Series: FC = () => {
                             title={media.name}
                             episode={currentEpisode}
                         />
-                        <S.Sinopspys800MediaWidth>
+                        <S.Sinopspys800MediaWidth
+                            tabIndex={0}
+                            aria-label={`Synopsis: ${media.synopsis}`}
+                        >
                             {media.synopsis}
                         </S.Sinopspys800MediaWidth>
                         {nextEpisode ?
                             <EpisodeCard
-                                topText="Next Episode:"
+                                isNextEpisode={true}
                                 thumbImage={media.bannerImage as IGatsbyImageData}
-                                altImage={`Image of ${media.name}`}
                                 episode={nextEpisode.episode.ep}
                                 episodeName={nextEpisode.episode.name}
                                 season={nextEpisode.isNextEpisodeInAnotherSeason ?
                                     nextEpisode.episode.season : undefined
                                 }
-                                onClick={() => navigate(PATHS.SERIES,{
-                                    mediaID: media.id,
-                                    episodeID: nextEpisode.episode.id
-                                })}
+                                url={{
+                                    path: PATHS.SERIES,
+                                    params: {
+                                        mediaID: media.id,
+                                        episodeID: nextEpisode.episode.id
+                                    }
+                                }}
                                 wasWatched={customLocalStorage.episodeWasWatched(
                                     nextEpisode.episode.id,
                                     history
                                 )}
                             />
                             :
-                            <S.LastEpisodeMessage />
+                            <S.LastEpisodeMessage
+                                aria-label="Amazing, you've reached the last episode!"
+                                role="note"
+                            />
                         }
                     </S.RightSide>
                 </S.TopWrapper>
-                <S.Sinopsys>
+                <S.Sinopsys
+                    tabIndex={0}
+                    aria-label={`Synopsis: ${media.synopsis}`}
+                >
                     {media.synopsis}
                 </S.Sinopsys>
             </S.FirstSection>
@@ -122,22 +131,19 @@ export const Series: FC = () => {
                 <EpisodesCarousel
                     key={`episodes-carousel-key-${seasonIndex}`}
                     topText={`SEASON ${seasonIndex + 1}`}
-                    episodes={
-                        season.map(episode => ({
-                            thumbImage: media.bannerImage as IGatsbyImageData,
-                            altImage: `Image of ${media.name}`,
-                            episode: episode.ep,
-                            episodeName: episode.name,
-                            wasWatched: customLocalStorage.episodeWasWatched(
-                                episode.id,
-                                history
-                            ),
-                            onClick: () => navigate(PATHS.SERIES, {
-                                mediaID: media.id,
-                                episodeID: episode.id
-                            })
-                        }))
-                    }
+                    episodes={season.map(episode => ({
+                        thumbImage: media.bannerImage as IGatsbyImageData,
+                        episode: episode.ep,
+                        episodeName: episode.name,
+                        url: {
+                            path: PATHS.SERIES,
+                            params: { mediaID: media.id, episodeID: episode.id }
+                        },
+                        wasWatched: customLocalStorage.episodeWasWatched(
+                            episode.id,
+                            history
+                        ),
+                    }))}
                 />
             )}
             <S.SecondSection>

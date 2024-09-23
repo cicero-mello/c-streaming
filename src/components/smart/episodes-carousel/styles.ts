@@ -5,7 +5,10 @@ export const Component = styled.div.attrs({
 })`
     opacity: 0.7;
     transition: 120ms linear;
-    &:hover{
+
+    &:has(:hover),
+    &:has(:focus),
+    &:has(:focus-visible){
         opacity: 1;
     }
 
@@ -14,8 +17,9 @@ export const Component = styled.div.attrs({
     }
 `
 
-export const TopText = styled.h3.attrs({
-    className: "top-text"
+export const TopText = styled.h2.attrs({
+    className: "top-text",
+    role: "presentation"
 })`
     position: absolute;
     color: #EDEDED;
@@ -64,13 +68,15 @@ export const Carousel = styled.div.attrs({
     align-items: flex-end;
     overflow-x: scroll;
     cursor: grab;
+    gap: 0px 30px;
+
     &:active, *:active{
         cursor: grabbing;
     }
 
     .episode-card {
         min-width: 350px;
-        margin: 50px 15px 66px 15px;
+        margin: 50px 0px 66px 0px;
         &:first-child{ margin-left: 35px; }
         &:last-child{ margin-right: 35px; }
     }
@@ -86,9 +92,22 @@ export const Carousel = styled.div.attrs({
         .episode-card{
             min-width: 300px;
             margin-bottom: 48px;
+            .none-button{
+                .episode-card-title,
+                .episode-card-text{
+                    font-size: 15px;
+                }
+            }
         }
         &::-webkit-scrollbar { height: 6px; }
         &::-webkit-scrollbar-thumb { background:#555; }
         &::-webkit-scrollbar-thumb:hover { background: #555; }
+    }
+
+    @media(max-width: 600px){
+        .episode-card{
+            min-width: 270px;
+            max-width: 270px;
+        }
     }
 `

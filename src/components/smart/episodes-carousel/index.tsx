@@ -1,6 +1,6 @@
 import React, { FC, MouseEvent, useRef } from "react"
 import { EpisodesCarrouselProps } from "./types"
-import { EpisodeCard } from "../../dumb/episode-card"
+import { EpisodeCard } from "../episode-card"
 import * as S from "./styles"
 
 export const EpisodesCarousel: FC<EpisodesCarrouselProps> = ({
@@ -68,7 +68,12 @@ export const EpisodesCarousel: FC<EpisodesCarrouselProps> = ({
 
     return (
         <S.Component>
-            <S.TopText> {topText} </S.TopText>
+            <S.TopText
+                tabIndex={0}
+                aria-label={topText.toLowerCase()}
+            >
+                {topText}
+            </S.TopText>
             <S.CarouselWrapper>
                 <S.Carousel
                     ref={carouselRef}

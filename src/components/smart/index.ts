@@ -33,3 +33,6 @@ export * from "./generic-text-input/types"
 
 export * from "./keep-focus-on-remove"
 export * from "./keep-focus-on-remove/types"
+
+export * from "./episode-card"
+export * from "./episode-card/types"

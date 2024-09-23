@@ -1,8 +1,8 @@
 import { Episode } from "../../../stores"
 
 export const getEpisodeAriaLabel = (episode: Episode) => (
-    `Episode ${episode?.ep}, ` +
     `Season ${episode.season}: ` +
+    `Episode ${episode?.ep}, ` +
     episode.name
 )
 
