@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
 export const Component = styled.div.attrs((props: any) => ({
     className: "base-modal-backdrop",
@@ -24,6 +24,10 @@ export const Component = styled.div.attrs((props: any) => ({
     ${$show && css` opacity: 1;`}
 `}`
 
+const crashZoom = keyframes`
+     to { transform: scale(1); }
+`
+
 export const Modal = styled.div.attrs({
     className: "base-modal"
 })`
@@ -37,13 +41,9 @@ export const Modal = styled.div.attrs({
     width: 100%;
     margin: 24px;
 
-    animation: crashzoom 340ms forwards ease-out;
-    animation-delay: 200ms;
     transform: scale(0);
-
-    @keyframes crashzoom {
-        to { transform: scale(1);}
-    }
+    animation: ${crashZoom} 340ms forwards ease-out;
+    animation-delay: 200ms;
 
     @media (max-width: 600px){
         > h2 {

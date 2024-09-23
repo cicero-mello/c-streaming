@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
 export const Component = styled.div.attrs((props: any) => ({
     className: "page-loader",
@@ -19,6 +19,10 @@ export const Component = styled.div.attrs((props: any) => ({
     `}
 `
 
+const rotate = keyframes`
+    to { transform: rotate(1turn) }
+`
+
 export const Loader = styled.div`
     width: 70px;
     aspect-ratio: .577;
@@ -30,7 +34,7 @@ export const Loader = styled.div`
         linear-gradient(to bottom right, #0000 calc(50% - 2px),currentColor calc(50% - 1px),#0000 50%) top/100% calc(100% + 5px),
         linear-gradient(to bottom left , #0000 calc(50% - 2px),currentColor calc(50% - 1px),#0000 50%) top/100% calc(100% + 5px);
     background-repeat: no-repeat;
-    animation: l17 4s infinite linear;
+    animation: ${rotate} 4s infinite linear;
 
     &::before, &::after {
         content: "";
@@ -41,8 +45,5 @@ export const Loader = styled.div`
     }
     &::after {
         animation-duration: 2s;
-    }
-    @keyframes l17 {
-        100% {transform: rotate(1turn)}
     }
 `

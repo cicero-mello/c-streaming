@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
 export const Component = styled.div.attrs(({
     className: "fake-video"
@@ -32,6 +32,10 @@ export const Component = styled.div.attrs(({
     `}
 `}`
 
+const rotate = keyframes`
+    to { transform: rotate(360deg); }
+`
+
 export const ScreenSaverContainer = styled.div`
     position: relative;
     padding-top: 56.25%; // 16/9 trick
@@ -46,14 +50,10 @@ export const ScreenSaverContainer = styled.div`
         height: 20%;
         width: 14%;
         opacity: 0;
-        animation: 4s rotate infinite linear;
+        animation: 4s ${rotate} infinite linear;
 
         path {
             stroke: #923F3F;
-        }
-
-        @keyframes rotate {
-            to { transform: rotate(360deg); }
         }
     }
 `

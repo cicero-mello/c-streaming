@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 
 export const Screen = styled.main`
     display: flex;
@@ -142,6 +142,10 @@ export const CardsWrapper = styled.div.attrs({
     `}
 `}`
 
+const hideActionWrapper = keyframes`
+    to { opacity: 0; }
+`
+
 export const ActionsWrapper = styled.div.attrs({
     className: "action-wrapper"
 })<{ $hide?: boolean }>`${({ $hide }) => css`
@@ -160,13 +164,22 @@ export const ActionsWrapper = styled.div.attrs({
     }
 
     ${$hide && css`
-        animation: hideActionWrapper 400ms ease-in-out forwards;
+        animation: ${hideActionWrapper} 400ms ease-in-out forwards;
     `}
-
-    @keyframes hideActionWrapper {
-        to { opacity: 0; }
-    }
 `}`
+
+const showHistoryClearMessage = keyframes`
+    from {
+            width: 0px;
+            opacity: 0;
+            filter: blur(46px);
+        }
+    to {
+        width: 100%;
+        opacity: 1;
+        filter: blur(0px);
+    }
+`
 
 export const HistoryClearMessage = styled.p.attrs({
     className: "history-clear-message",
@@ -178,31 +191,18 @@ export const HistoryClearMessage = styled.p.attrs({
     position: static;
     max-width: fit-content;
     font-size: 22px;
-    animation: showHistoryClearMessage 500ms linear forwards;
+    animation: ${showHistoryClearMessage} 500ms linear forwards;
+`
 
-    @keyframes showHistoryClearMessage {
-        from {
-            width: 0px;
-            opacity: 0;
-            filter: blur(46px);
-        }
-        to {
-            width: 100%;
-            opacity: 1;
-            filter: blur(0px);
-        }
-    }
+const showNoResultsHistorySearch = keyframes`
+     to { opacity: 1; }
 `
 
 export const NoResults = styled.p`
     color: #b4b4b4;
     opacity: 0;
-    animation: showNoResultsHistorySearch 180ms linear forwards;
+    animation: ${showNoResultsHistorySearch} 180ms linear forwards;
     font-size: 24px;
-
-    @keyframes showNoResultsHistorySearch {
-        to { opacity: 1; }
-    }
 
     &::before { content: "No results for your search "; }
     &::after {
