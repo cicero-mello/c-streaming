@@ -21,9 +21,8 @@ export const Poster: FC<PosterProps> = ({
                 className="gatsby-image"
                 image={image}
                 alt={"Poster of " + name}
-                aria-hidden="true"
             />
-            <S.Name aria-hidden="true"> {name} </S.Name>
+            <S.Name> {name} </S.Name>
         </Button>
     </S.Component>
 )

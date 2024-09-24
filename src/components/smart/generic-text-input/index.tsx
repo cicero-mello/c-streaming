@@ -26,6 +26,7 @@ export const GenericTextInput: FC<GenericTextInputProps> = ({
                     $focusOrigin={focusOrigin}
                     $hasLabel={!!label}
                     $hasEye={!!forgetPasswordAction}
+                    aria-label={label}
                     spellCheck="false"
                     autoComplete="off"
                     type={inputType}
@@ -35,6 +36,11 @@ export const GenericTextInput: FC<GenericTextInputProps> = ({
                     <S.PasswordEye
                         onClick={handleEyeChange}
                         $eyeClosed={inputType !== "password"}
+                        aria-label={
+                            inputType === "password" ?
+                            "Show password" :
+                            "Hide password"
+                        }
                     />
                 }
             </S.Label>
@@ -42,6 +48,8 @@ export const GenericTextInput: FC<GenericTextInputProps> = ({
                 <S.ErrorMessage $text={errorMessage} />
                 {!!forgetPasswordAction &&
                     <S.ForgetPasswordMessage
+                        tabIndex={0}
+                        aria-label="Forgot your password?"
                         onClick={forgetPasswordAction}
                     />
                 }

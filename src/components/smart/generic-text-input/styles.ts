@@ -46,6 +46,8 @@ export const PasswordEye = styled.button.attrs((props: any) => ({
     display: flex;
     bottom: 10px;
     right: 10px;
+    height: 11px;
+    width: 20px;
     cursor: pointer;
 
     &::before {
@@ -118,7 +120,7 @@ export const ErrorMessage = styled.h4.attrs((props: any) => ({
     &::before{ content: "${$text}"; }
 `}`
 
-export const ForgetPasswordMessage = styled.h4`
+export const ForgetPasswordMessage = styled.button`
     cursor: pointer;
     margin-left: auto;
     font-size: 14px;
@@ -127,15 +129,23 @@ export const ForgetPasswordMessage = styled.h4`
     height: 24px;
     margin-top: 2px;
 
-    transition-duration: 340ms, 100ms;
-    transition-property: all, color;
-    transition-timing-function: linear, linear;
+    transition-property:
+        outline,
+        outline-offset,
+        color
+    ;
+    transition-duration: 50ms, 50ms, 100ms;
+    transition-timing-function: linear;
 
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
 
-    &:hover { color: #EDEDED; }
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        color: #EDEDED;
+    }
     &::before{ content: "Forgot your password?"; }
 `
