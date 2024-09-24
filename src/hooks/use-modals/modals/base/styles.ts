@@ -1,57 +1,76 @@
 import styled, { css, keyframes } from "styled-components"
 
-export const Component = styled.div.attrs((props: any) => ({
-    className: "base-modal-backdrop",
-    $show: !!props.$show
-}))<{ $show?: boolean }>`${({ $show }) => css`
+export const OPACITY_TRANSITION_TIME = 180
+
+export const Modal = styled.dialog.attrs({
+    className: "base-modal"
+})<{ $open: boolean | undefined }>`${({ $open }) => css`
     position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100svw;
+    height: 100svh;
     z-index: 2;
     top: 0;
     left: 0;
-    background-color: rgba(255,255,255, 0.15);
-    backdrop-filter: blur(10px);
 
     opacity: 0;
-    transition-duration: 180ms;
-    transition-timing-function: linear;
-    transition-property: opacity, background-color, backdrop-filter;
+    background-color: rgba(255,255,255, 0.15);
+    border: none;
+    backdrop-filter: blur(10px);
 
-    ${$show && css` opacity: 1;`}
+    max-width: unset;
+    max-height: unset;
+
+    transition-property:
+        outline,
+        outline-offset,
+        opacity
+    ;
+    transition-duration:
+        50ms,
+        50ms,
+        ${OPACITY_TRANSITION_TIME}ms
+    ;
+    transition-timing-function: linear;
+
+    ${$open && css`
+        opacity: 1;
+    `}
 `}`
 
 const crashZoom = keyframes`
-     to { transform: scale(1); }
+    from { transform: scale(0); }
+    to { transform: scale(1); }
 `
 
-export const Modal = styled.div.attrs({
-    className: "base-modal"
+export const ModalContent = styled.div.attrs({
+    className: "modal-content",
+    role: "presentation"
 })`
     display: flex;
-    position: relative;
     flex-direction: column;
-    background-color: #080808;
-    padding: 32px 40px;
-    border-radius: 4px;
+    position: relative;
     max-width: 675px;
     width: 100%;
     margin: 24px;
+    background-color: #080808;
+    padding: 32px 40px;
+    border-radius: 4px;
 
     transform: scale(0);
-    animation: ${crashZoom} 340ms forwards ease-out;
-    animation-delay: 200ms;
+    animation: ${crashZoom} 340ms 200ms ease-out forwards;
 
     @media (max-width: 600px){
-        > h2 {
+        .modal-title {
             font-size: 20px;
             margin-bottom: 12px;
         }
-        > p { font-size: 18px; }
-        > .buttons-wrapper {
+        .modal-text {
+            font-size: 18px;
+        }
+        .buttons-wrapper {
             margin-top: 38px;
             * {
                 font-size: 16px;
@@ -64,7 +83,7 @@ export const Modal = styled.div.attrs({
 
     @media (max-width: 400px){
         padding: 24px 24px;
-        .buttons-wrapper{
+        .buttons-wrapper {
             flex-wrap: wrap;
         }
     }
@@ -110,13 +129,26 @@ export const CloseModal = styled.button`
     }
 `
 
-export const Title = styled.h2`
+export const Title = styled.h1.attrs({
+    className: "modal-title",
+    role: "presentation"
+})`
     font-weight: bold;
+    font-size: 24px;
     color: #EDEDED;
     margin: 0px 22px 16px 0px;
+    width: fit-content;
 `
 
-export const Text = styled.p`
+export const TextWrapper = styled.div.attrs({
+    role: "presentation"
+})`
+    width: fit-content;
+`
+
+export const Text = styled.p.attrs({
+    className: "modal-text"
+})`
     font-size: 22px;
     color: #EDEDED;
 `

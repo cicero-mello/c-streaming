@@ -17,7 +17,7 @@ import * as S from "./styles"
  * Important:
  * - Each child needs a exclusive id
  * - When the hidden "span" is focused
- *  you can ONLY REMOVE children/child (dont add or do mutation)
+ *  dont remove, add or change the children.
  *
  * @component
  *

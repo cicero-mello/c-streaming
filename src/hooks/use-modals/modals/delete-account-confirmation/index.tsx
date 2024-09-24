@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from "react"
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react"
 import { BaseModalHandle } from "../base/types"
 import { BaseModal } from "../base"
 import { GenericTextInput } from "../../../../components/smart/generic-text-input"
@@ -14,8 +14,10 @@ export const DeleteAccountConfirmation = forwardRef<
 
     const open = () => {
         if(!baseModalRef.current) return
-        baseModalRef.current.open(() => setPasswordErrorMessage(""))
+        baseModalRef.current.open()
     }
+
+    useEffect(() => () => setPasswordErrorMessage(""), [])
 
     useImperativeHandle(ref, () => ({
         open: open
