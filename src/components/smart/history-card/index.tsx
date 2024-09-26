@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, useLayoutEffect, useRef, useState } from "react"
+import React, { FC, MouseEvent, useRef, useState } from "react"
 import { HistoryCardProps } from "./types"
 import { Button } from "../button"
 import { getMediaPathByMediaType } from "../../../paths"
@@ -12,7 +12,7 @@ export const HistoryCard: FC<HistoryCardProps> = ({
     historyViewDate, episode, onRemove,
     ...rest
 }) => {
-    const { readAriaNotification, clearAriaNotification } = useAriaNotification()
+    const { readAriaNotification } = useAriaNotification()
     const [closeAnimationStarted, setCloseAnimationStarted] = useState(false)
     const cardRef = useRef<HTMLDivElement>(null)
 
@@ -34,8 +34,6 @@ export const HistoryCard: FC<HistoryCardProps> = ({
         })
         if(!!onRemove) await onRemove()
     }
-
-    useLayoutEffect(() => clearAriaNotification, [])
 
     return (
         <S.Component

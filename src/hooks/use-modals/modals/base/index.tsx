@@ -46,16 +46,23 @@ export const BaseModal = forwardRef<
     return render && (
         <S.Modal
             id={id}
-            aria-hidden
             ref={modalRef}
             $open={!!modalRef?.current?.open}
+            tabIndex={-1}
         >
             <S.ModalContent ref={modalContentRef}>
-                <S.Title tabIndex={0}>
-                    {title}
-                </S.Title>
+                {title &&
+                    <S.Title tabIndex={0} aria-label={title}>
+                        {title}
+                    </S.Title>
+                }
                 {texts &&
-                    <S.TextWrapper tabIndex={0}>
+                    <S.TextWrapper
+                        tabIndex={0}
+                        aria-label={texts.reduce((previus, current) => (
+                            previus + " " + current
+                        ), "")}
+                    >
                         {texts.map((text, index) =>
                             <S.Text key={`${id}-text-${index}`}>
                                 {text}

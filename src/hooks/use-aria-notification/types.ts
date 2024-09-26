@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react"
 
-export interface AriaNotificationContextType {
+export interface UseAriaNotification {
     readAriaNotification: (message: string) => void
     clearAriaNotification: () => void
 }

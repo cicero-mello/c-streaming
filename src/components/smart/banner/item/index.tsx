@@ -10,16 +10,13 @@ import * as S from "./styles"
 export const Item: FC<BannerItemProps> = ({
     isBannerHidden, ...itemMedia
 }) => {
+    const { readAriaNotification } = useAriaNotification()
     const [firstRender, setFirstRender] = useState(true)
     const [showingMedia, setShowingMedia] = useState(itemMedia)
     const [
         itemAnimation,
         setItemAnimation
     ] = useState<ItemAnimationState>("closed")
-    const {
-        readAriaNotification,
-        clearAriaNotification
-    } = useAriaNotification()
 
     useLayoutEffect(() => {
         setItemAnimation("closed")
@@ -29,8 +26,6 @@ export const Item: FC<BannerItemProps> = ({
             if(!firstRender) readAriaNotification(itemMedia.name)
             else setFirstRender(false)
         }, firstRender ? 100 : 360)
-
-        return clearAriaNotification
     }, [itemMedia.id])
 
     return (

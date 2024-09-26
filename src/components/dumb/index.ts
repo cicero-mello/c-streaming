@@ -1,3 +1,6 @@
+export * from "./aria-notification"
+export * from "./aria-notification/types"
+
 export * from "./see-all-button"
 export * from "./see-all-button/types"
 

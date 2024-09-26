@@ -1,13 +1,19 @@
-import React, { FC, createContext, useContext, useState } from "react"
-import { AriaNotificationContextType } from "./types"
-import { AriaNotification } from "./component"
+import React, { FC, createContext, useContext, useLayoutEffect, useState } from "react"
+import { UseAriaNotification } from "./types"
+import { AriaNotification } from "../../components"
 
-const AriaNotificationContext = createContext<AriaNotificationContextType>({
+const AriaNotificationContext = createContext<UseAriaNotification>({
     readAriaNotification: () => {},
     clearAriaNotification: () => {}
 })
 
-export const useAriaNotification = () => useContext(AriaNotificationContext)
+export const useAriaNotification = () => {
+    const context = useContext(AriaNotificationContext)
+
+    useLayoutEffect(() => context.clearAriaNotification, [])
+
+    return context
+}
 
 export const AriaNotificationProvider: FC<any> = ({
     children
@@ -29,7 +35,7 @@ export const AriaNotificationProvider: FC<any> = ({
                 clearAriaNotification: clearAriaNotification
             }}
         >
-            <AriaNotification aria-label={message} />
+            <AriaNotification message={message}/>
             {children}
         </AriaNotificationContext.Provider>
     )

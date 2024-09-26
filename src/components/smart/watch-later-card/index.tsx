@@ -13,7 +13,7 @@ export const WatchLaterCard: FC<WatchLaterCardProps> = ({
 }) => {
     const componentRef = useRef<HTMLDivElement>(null)
     const [closeAnimationStarted, setCloseAnimationStarted] = useState(false)
-    const { readAriaNotification, clearAriaNotification } = useAriaNotification()
+    const { readAriaNotification } = useAriaNotification()
 
     const handleClickRemove = async () => {
         S.prepareToClose(componentRef)
@@ -23,8 +23,6 @@ export const WatchLaterCard: FC<WatchLaterCardProps> = ({
         customLocalStorage.removeWatchLater(mediaId)
         if(onRemove) onRemove()
     }
-
-    useLayoutEffect(() => clearAriaNotification, [])
 
     return (
         <S.Container

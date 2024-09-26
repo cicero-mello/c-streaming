@@ -9,7 +9,7 @@ import { createSearchResultsMessage, getFilteredHistoryCards } from "./core"
 import * as S from "./styles"
 
 export const History: FC = () => {
-    const { readAriaNotification, clearAriaNotification } = useAriaNotification()
+    const { readAriaNotification } = useAriaNotification()
     const [pageFlowStates, pageFlowControl] = usePageFlow()
     const [cards, setCards] = useHistoryCards(pageFlowControl)
     const [urlState, setUrlStateKey] = useUrlState()
@@ -46,10 +46,7 @@ export const History: FC = () => {
 
     useDidMountEffect(() => {
         readAriaNotificationWithDelay()
-        return clearAriaNotification
     }, [urlState.searchText])
-
-    useLayoutEffect(() => clearAriaNotification, [])
 
     const haveCards = cards.length > 0
     const haveFilteredCards = filteredCards.length > 0

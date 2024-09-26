@@ -35,6 +35,7 @@ export const GenericTextInput: FC<GenericTextInputProps> = ({
                 {!!forgetPasswordAction &&
                     <S.PasswordEye
                         onClick={handleEyeChange}
+                        type="button"
                         $eyeClosed={inputType !== "password"}
                         aria-label={
                             inputType === "password" ?
@@ -51,6 +52,7 @@ export const GenericTextInput: FC<GenericTextInputProps> = ({
                         tabIndex={0}
                         aria-label="Forgot your password?"
                         onClick={forgetPasswordAction}
+                        type="button"
                     />
                 }
             </S.MessagesWrapper>

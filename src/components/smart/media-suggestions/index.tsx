@@ -16,7 +16,7 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
 }) => {
     const exceptionMediaID = propExceptionMediaID ?? ""
     const medias = propMedias ?? useMediaStore(state => state.medias)
-    const { readAriaNotification, clearAriaNotification } = useAriaNotification()
+    const { readAriaNotification } = useAriaNotification()
 
     const suggestionMedias = useMemo(() => (
         createSuggestionMedias(medias, exceptionMediaID)
@@ -75,8 +75,6 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
             setTimeout(() => setFreePointerEvents(true), 330)
         }, 360)
     }
-
-    useLayoutEffect(() => clearAriaNotification, [])
 
     return (
         <S.Component {...rest}>

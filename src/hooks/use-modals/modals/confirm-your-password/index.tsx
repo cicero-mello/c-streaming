@@ -1,9 +1,11 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from "react"
+import React, { FormEvent, forwardRef, useImperativeHandle, useRef, useState } from "react"
 import { BaseModalHandle } from "../base/types"
 import { BaseModal } from "../base"
-import { GenericTextInput } from "../../../../components/smart/generic-text-input"
+import { AriaNotification, GenericTextInput } from "../../../../components"
 import { useModals } from "../../.."
 import { GenericModalHandle } from ".."
+import { delay } from "../../../../shared/utils"
+import * as S from "./styles"
 
 export const ConfirmYourPassword = forwardRef<
     GenericModalHandle
@@ -12,14 +14,22 @@ export const ConfirmYourPassword = forwardRef<
     const baseModalRef = useRef<BaseModalHandle>(null)
     const [passwordErrorMessage, setPasswordErrorMessage] = useState("")
 
-    const open = () => {
-        if(!baseModalRef.current) return
-        baseModalRef.current.open(() => setPasswordErrorMessage(""))
-    }
-
     useImperativeHandle(ref, () => ({
         open: open
     }))
+
+    const open = () => {
+        if(!baseModalRef.current) return
+        setPasswordErrorMessage("")
+        baseModalRef.current.open()
+    }
+
+    const handleSubmit = async (event?: FormEvent<HTMLFormElement>) => {
+        if(event) event.preventDefault()
+        setPasswordErrorMessage("")
+        await delay(100)
+        setPasswordErrorMessage("Wrong password")
+    }
 
     return (
         <BaseModal
@@ -37,19 +47,22 @@ export const ConfirmYourPassword = forwardRef<
                 {
                     children: "Save Changes",
                     theme: "border-green",
-                    onClick: () => setPasswordErrorMessage("Wrong password")
+                    onClick: () => handleSubmit()
                 }
             ]}
         >
-            <GenericTextInput
-                label="Password"
-                type="password"
-                errorMessage={passwordErrorMessage}
-                forgetPasswordAction={() => {
-                    setTimeout(() => baseModalRef.current?.close(), 180)
-                    modals?.linkSendToEmail?.open()
-                }}
-            />
+            <S.Form onSubmit={handleSubmit}>
+                <GenericTextInput
+                    label="Password"
+                    type="password"
+                    errorMessage={passwordErrorMessage}
+                    forgetPasswordAction={() => {
+                        setTimeout(() => baseModalRef.current?.close(), 180)
+                        modals?.linkSendToEmail?.open()
+                    }}
+                />
+            </S.Form>
+            <AriaNotification message={passwordErrorMessage} />
         </BaseModal>
     )
 })

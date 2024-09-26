@@ -1,28 +1,43 @@
 import React, { FormEvent, FunctionComponent, useState } from "react"
 import { Button, GenericTextInput, Line } from "../../components"
 import { UserIcoBig } from "../../assets/icons"
-import { isEmailValid } from "../../shared/utils"
-import { useModals } from "../../hooks"
+import { delay, isEmailValid } from "../../shared/utils"
+import { useAriaNotification, useModals } from "../../hooks"
 import { type PageProps } from "gatsby"
 import * as S from "./styles"
 
 export const UserSettings: FunctionComponent<PageProps> = () => {
     const modals = useModals()
+    const { readAriaNotification } = useAriaNotification()
     const [formHasNewValue, setFormHasNewValue] = useState(false)
     const [emailErrorMessage, setEmailErrorMessage] = useState("")
+    const [usernameErrorMessage, setUsernameErrorMessage] = useState("")
 
-    const onSubmitForm = (event: FormEvent) => {
+    const onSubmitForm = async (event: FormEvent) => {
         event.preventDefault()
         const formData = new FormData(event.target as HTMLFormElement)
         const currentEmail = formData.get("email") + ""
+        const currentUsername = formData.get("username") + ""
 
-        if(isEmailValid(currentEmail)) {
-            setEmailErrorMessage("")
-            modals.confirmYourPassword?.open()
+        readAriaNotification("")
+        setUsernameErrorMessage("")
+        setEmailErrorMessage("")
+
+        if(!currentUsername){
+            await delay(100)
+            setUsernameErrorMessage("Invalid Username")
+            readAriaNotification("Invalid Username")
             return
         }
 
-        setEmailErrorMessage("Invalid Format")
+        if(!isEmailValid(currentEmail)) {
+            await delay(100)
+            setEmailErrorMessage("Invalid Format")
+            readAriaNotification("Invalid format on email")
+            return
+        }
+
+        modals.confirmYourPassword?.open()
     }
 
     const onChangeForm = (event: any) => {
@@ -42,6 +57,7 @@ export const UserSettings: FunctionComponent<PageProps> = () => {
                         name="username"
                         label="Username"
                         defaultValue="Gally"
+                        errorMessage={usernameErrorMessage}
                     />
                     <GenericTextInput
                         name="email"

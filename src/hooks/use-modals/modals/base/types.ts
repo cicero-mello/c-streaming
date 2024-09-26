@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import { ButtonProps } from "../../../../components"
 
 export interface BaseModalHandle {
-    open: (closeAction?: Function) => void
+    open: () => void
     close: () => void | Promise<void>
 }
 
