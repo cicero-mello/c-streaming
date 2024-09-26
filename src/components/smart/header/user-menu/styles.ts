@@ -1,12 +1,11 @@
 import styled, { css } from "styled-components"
 
-export const Component = styled.button.attrs((props: any) => ({
-    className: "user-menu",
-    $showMenu: props.$showMenu
-}))<{ $showMenu?: boolean }>` ${({ $showMenu }) => css`
+export const Component = styled.div.attrs({
+    className: "user-menu"
+})<{ $showMenu?: boolean }>` ${({ $showMenu }) => css`
     display: flex;
     position: relative;
-    cursor: pointer;
+
     .user-ico{
         fill: transparent;
         transition: 200ms ease-in-out;
@@ -25,13 +24,16 @@ export const Component = styled.button.attrs((props: any) => ({
             stroke: #090909;
         }
     }
-
-    &:disabled {
-        opacity: 0.5;
-        pointer-events: none;
-        user-select: none;
-    }
 `}`
+
+export const MenuButton = styled.button.attrs({
+    className: "user-menu-button"
+})`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+`
 
 export const UserName = styled.p.attrs({
     className: "user-name"

@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from "react"
+import React, { FC, useState, useRef, useEffect } from "react"
 import { UserIco } from "../../../../assets/icons"
 import { PATHS } from "../../../../paths"
 import { UseMenuProps } from "./types"
@@ -7,34 +7,45 @@ import {
     useOutsideEnter,
     useOutsideFocus
 } from "../../../../hooks"
-import * as S from "./styles"
 import { Button } from "../../button"
+import * as S from "./styles"
 
 export const UserMenu: FC<UseMenuProps> = ({
-    onClick, ...rest
+    ...rest
 }) => {
-    const componentRef = useRef(null)
+    const componentRef = useRef<HTMLDivElement>(null)
     const [showMenu, setShowMenu] = useState(false)
 
     useOutsideClick(componentRef, () => setShowMenu(false))
     useOutsideEnter(componentRef, () => setShowMenu(false))
     useOutsideFocus(componentRef, () => setShowMenu(false))
 
+    const handleClick = () => {
+        setShowMenu(state => !state)
+    }
+
+    useEffect(() => {
+        if(!showMenu || !componentRef?.current) return
+        const firstMenuItem: HTMLButtonElement | null = (
+            componentRef.current.querySelector(".menu-item-button")
+        )
+        if(firstMenuItem) firstMenuItem.focus()
+    }, [showMenu])
+
     return (
         <S.Component
-            {...rest}
             ref={componentRef}
             $showMenu={showMenu}
-            aria-expanded={showMenu}
-            aria-label={showMenu ?
-                "Close navigation menu" :
-                "Open navigation menu"
-            }
-            onClick={(event) => {
-                setShowMenu(old => !old)
-                if(onClick) onClick(event)
-            }}
+            {...rest}
         >
+            <S.MenuButton
+                onClick={handleClick}
+                aria-expanded={showMenu}
+                aria-label={showMenu ?
+                    "Close navigation menu" :
+                    "Open navigation menu"
+                }
+            />
             <S.UserName aria-hidden> Gally </S.UserName>
             <UserIco aria-hidden />
             <S.MenuList
@@ -46,7 +57,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                     children="Search"
                     aria-label="Search page"
                     aria-hidden={showMenu ? "false" : "true"}
-                    tabIndex={showMenu ? 1 : -1}
+                    tabIndex={showMenu ? 0 : -1}
                     url={{path: PATHS.SEARCH, params: {searchText: "", searchType: "all"}}}
                     onClick={() => setShowMenu(false)}
                 />
@@ -55,7 +66,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                     children="History"
                     aria-label="History page"
                     aria-hidden={showMenu ? "false" : "true"}
-                    tabIndex={showMenu ? 1 : -1}
+                    tabIndex={showMenu ? 0 : -1}
                     url={{path: PATHS.HISTORY}}
                     onClick={() => setShowMenu(false)}
                 />
@@ -64,7 +75,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                     children="Watch Later"
                     aria-label="Watch Later List"
                     aria-hidden={showMenu ? "false" : "true"}
-                    tabIndex={showMenu ? 1 : -1}
+                    tabIndex={showMenu ? 0 : -1}
                     url={{path: PATHS.WATCH_LATER}}
                     onClick={() => setShowMenu(false)}
                 />
@@ -73,7 +84,7 @@ export const UserMenu: FC<UseMenuProps> = ({
                     children="User Settings"
                     aria-label="User Settings - Last Menu Option"
                     aria-hidden={showMenu ? "false" : "true"}
-                    tabIndex={showMenu ? 1 : -1}
+                    tabIndex={showMenu ? 0 : -1}
                     url={{path: PATHS.USER_SETTINGS}}
                     onClick={() => setShowMenu(false)}
                 />

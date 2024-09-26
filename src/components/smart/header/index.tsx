@@ -7,11 +7,11 @@ import * as S from "./styles"
 export const Header: FC = () => (
     <S.Component>
         <Button
-            tabIndex={1}
+            tabIndex={0}
             theme="border-logo"
             url={{path:PATHS.HOME}}
             aria-label="Home page: C-Streaming"
         />
-        <UserMenu tabIndex={1}/>
+        <UserMenu />
     </S.Component>
 )

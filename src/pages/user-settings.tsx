@@ -7,4 +7,10 @@ const UserSettingsPage: FunctionComponent<PageProps> = (props) => (
 )
 
 export default UserSettingsPage
-export const Head: HeadFC = () => <title> User Settings </title>
+
+export const Head: HeadFC = () => (
+    <>
+        <html lang="en" />
+        <title> User Settings </title>
+    </>
+)

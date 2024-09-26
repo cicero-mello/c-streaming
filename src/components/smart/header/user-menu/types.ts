@@ -1,6 +1,6 @@
-import { ButtonHTMLAttributes } from "react";
+import { HTMLAttributes } from "react"
 
 export type UseMenuProps = Omit<
-    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLAttributes<HTMLDivElement>,
     "className" | "ref"
 >

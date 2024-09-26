@@ -7,4 +7,10 @@ const HistoryPage: FC = () => (
 )
 
 export default HistoryPage
-export const Head: HeadFC = () => <title> History Page </title>
+
+export const Head: HeadFC = () => (
+    <>
+        <html lang="en" />
+        <title> History Page </title>
+    </>
+)

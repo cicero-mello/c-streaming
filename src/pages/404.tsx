@@ -7,4 +7,10 @@ const NotFoundPage: FunctionComponent<PageProps> = (props) => (
 )
 
 export default NotFoundPage
-export const Head: HeadFC = () => <title> Not found </title>
+
+export const Head: HeadFC = () => (
+    <>
+        <html lang="en" />
+        <title> Not found </title>
+    </>
+)

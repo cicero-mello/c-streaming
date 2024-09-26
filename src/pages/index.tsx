@@ -19,7 +19,13 @@ const IndexPage: FC<PageProps> = (props) => {
 }
 
 export default IndexPage
-export const Head: HeadFC = () => <title> C-Streaming </title>
+
+export const Head: HeadFC = () => (
+    <>
+        <html lang="en" />
+        <title> C-Streaming </title>
+    </>
+)
 
 export const pageQuery = graphql`
     query GatsbyImagesDataQuery {

@@ -17,7 +17,13 @@ const MoviePage: FC<PageProps> = (props) => {
 }
 
 export default MoviePage
-export const Head: HeadFC = () => <title> Movie </title>
+
+export const Head: HeadFC = () => (
+    <>
+        <html lang="en" />
+        <title> Movie </title>
+    </>
+)
 
 export const pageQuery = graphql`
     query GatsbyImagesDataQuery {

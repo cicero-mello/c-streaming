@@ -98,6 +98,7 @@ export const Carousel: FC<CarouselProps> = ({
                 onClick={handleClickGoBack}
                 disabled={!canGoBack}
                 tabIndex={-1}
+                aria-label="Scroll carousel left"
             >
                 <TriangleNextIco />
             </S.TriangleNextButton>
@@ -116,6 +117,7 @@ export const Carousel: FC<CarouselProps> = ({
                 onClick={handleClickGoAhead}
                 disabled={!canGoAhead}
                 tabIndex={-1}
+                aria-label="Scroll carousel right"
             >
                 <TriangleNextIco />
             </S.TriangleNextButton>
