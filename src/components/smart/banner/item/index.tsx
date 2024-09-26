@@ -3,7 +3,6 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { ItemAnimationState, BannerItemProps } from "./types"
 import { getMediaPathByMediaType } from "../../../../paths"
 import { Button, WatchLatterButton } from "../../../smart"
-import { Wrapper } from "../../../dumb"
 import { useAriaNotification } from "../../../../hooks"
 import * as S from "./styles"
 
@@ -29,31 +28,31 @@ export const Item: FC<BannerItemProps> = ({
     }, [itemMedia.id])
 
     return (
-        <S.Component $animationState={itemAnimation}>
-            <Wrapper
+        <S.Component
+            $animationState={itemAnimation}
+            aria-hidden={isBannerHidden ? "true" : "false"}
+        >
+            <GatsbyImage
+                className="gatsby-image"
+                image={showingMedia.image as IGatsbyImageData}
+                alt={`Banner image of ${showingMedia.name}`}
+                tabIndex={-1}
+                aria-hidden="true"
+            />
+            <S.InfoAndButtons
                 role="presentation"
-                aria-label={`Banner image of ${showingMedia.name}`}
-                tabIndex={isBannerHidden ? -1 : 0}
+                tabIndex={0}
+                aria-label="Suggestion media banner"
             >
-                <GatsbyImage
-                    className="gatsby-image"
-                    image={showingMedia.image as IGatsbyImageData}
-                    alt={`Banner image of ${showingMedia.name}`}
-                    tabIndex={-1}
-                />
-            </Wrapper>
-            <S.InfoAndButtons>
                 <S.InfoWrapper>
                     <S.MediaName
                         role="presentation"
-                        aria-label={`Banner title: ${showingMedia.name}`}
                         tabIndex={isBannerHidden ? -1 : 0}
                     >
                         {showingMedia.name?.toLocaleUpperCase() ?? ""}
                     </S.MediaName>
                     <S.Synopsis
                         role="presentation"
-                        aria-label={`Synopsis: ${showingMedia.synopsis}`}
                         tabIndex={isBannerHidden ? -1 : 0}
                     >
                         {showingMedia.synopsis}

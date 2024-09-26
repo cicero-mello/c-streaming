@@ -22,7 +22,7 @@ export const SearchInput: FC = () => {
     }
 
     return (
-        <S.Component tabIndex={-1}>
+        <S.Component>
             <S.Input
                 ref={ref}
                 spellCheck={false}
