@@ -1,23 +1,24 @@
-import React, { FC, ChangeEvent, useLayoutEffect, useMemo, useState, useEffect } from "react"
-import { UrlState, useUrlState } from "../../hooks"
+import React, { FC, ChangeEvent, useMemo, useState, useEffect } from "react"
+import { GenericTextInput, Line, Poster, SelectInput } from "../../components"
+import { useAriaNotification, UrlState, useUrlState } from "../../hooks"
 import { debounce, delay, scrollPageToTop } from "../../shared/utils"
 import { getAriaMessage, getFilteredPosters } from "./core"
 import { usePosters } from "./use-posters"
-import { useFocusControl } from "./use-focus-control"
-import { GenericTextInput, Line, Poster, SelectInput } from "../../components"
-import { useAriaNotification } from "../../hooks/use-aria-notification"
 import * as S from "./styles"
 
 export const Search: FC = () => {
     const { readAriaNotification } = useAriaNotification()
     const [showPosters, setShowPosters] = useState(true)
     const [urlState, setUrlStateKey] = useUrlState()
-    const { isToFocusSelectBeforeInput } = useFocusControl()
     const posters = usePosters()
 
     const filteredPosters = useMemo(() => (
         getFilteredPosters(urlState, posters)
     ), [urlState, posters])
+
+    const ariaMessage = useMemo(() => getAriaMessage(
+        urlState, filteredPosters
+    ), [filteredPosters, urlState])
 
     const handleFilterChange = async (
         event: ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -33,18 +34,15 @@ export const Search: FC = () => {
     }
 
     useEffect(() => {
-        const ariaMessage = getAriaMessage(
-            urlState, filteredPosters
-        )
         readAriaNotification(ariaMessage)
-    }, [urlState, filteredPosters])
+    }, [ariaMessage])
 
     return (
         <S.Component>
             <Line />
             <S.Form>
                 <GenericTextInput
-                    tabIndex={2}
+                    tabIndex={0}
                     onFocus={scrollPageToTop}
                     label="Name"
                     name="searchText"
@@ -55,7 +53,7 @@ export const Search: FC = () => {
                     )}
                 />
                 <SelectInput
-                    tabIndex={isToFocusSelectBeforeInput ? 1 : 2}
+                    tabIndex={0}
                     label="Type"
                     name="searchType"
                     aria-label="Select the type of media: "

@@ -19,7 +19,6 @@ export const UserSettings: FunctionComponent<PageProps> = () => {
         const currentEmail = formData.get("email") + ""
         const currentUsername = formData.get("username") + ""
 
-        readAriaNotification("")
         setUsernameErrorMessage("")
         setEmailErrorMessage("")
 

@@ -39,6 +39,7 @@ export const FakeVideo: FC<FakeVideoProps> = ({
                 ref={messageRef}
                 role="presentation"
                 tabIndex={showVideo ? 0 : -1}
+                aria-hidden={showVideo ? "false" : "true"}
             >
                 This page is just a demo.<br/>
                 There is no real video here.
@@ -48,14 +49,16 @@ export const FakeVideo: FC<FakeVideoProps> = ({
             </S.ScreenSaverContainer>
             <S.PlayButton
                 onClick={handleClickPlayButton}
-                tabIndex={showVideo ? -1 : 0}
                 aria-label={`Play: ${videoName}`}
+                tabIndex={showVideo ? -1 : 0}
+                aria-hidden={showVideo ? "true" : "false"}
             >
                 <PlayTriangleIco />
             </S.PlayButton>
             <GatsbyImage
                 image={thumbImage}
                 alt={`Image of ${videoName}`}
+                aria-hidden="true"
             />
         </S.Component>
     )

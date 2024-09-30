@@ -84,10 +84,7 @@ export const Series: FC = () => {
                             title={media.name}
                             episode={currentEpisode}
                         />
-                        <S.Sinopspys800MediaWidth
-                            tabIndex={0}
-                            aria-label={`Synopsis: ${media.synopsis}`}
-                        >
+                        <S.Sinopspys800MediaWidth tabIndex={0}>
                             {media.synopsis}
                         </S.Sinopspys800MediaWidth>
                         {nextEpisode ?
@@ -119,10 +116,7 @@ export const Series: FC = () => {
                         }
                     </S.RightSide>
                 </S.TopWrapper>
-                <S.Sinopsys
-                    tabIndex={0}
-                    aria-label={`Synopsis: ${media.synopsis}`}
-                >
+                <S.Sinopsys tabIndex={0}>
                     {media.synopsis}
                 </S.Sinopsys>
             </S.FirstSection>

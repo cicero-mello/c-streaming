@@ -1,11 +1,10 @@
-import React, { FC, useLayoutEffect, useMemo, useState } from "react"
+import React, { FC, useMemo, useState } from "react"
 import { MediaSuggestionsProps, SuggestionMedia, OnTransitionState } from "./types"
 import { SuggestionTrianglesIco } from "../../../assets/icons"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { getMediaPathByMediaType } from "../../../paths"
 import { useMediaStore } from "../../../stores"
 import { createSuggestionMedias } from "./core"
-import { useAriaNotification } from "../../../hooks"
 import { Button } from "../button"
 import * as S from "./styles"
 
@@ -16,7 +15,6 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
 }) => {
     const exceptionMediaID = propExceptionMediaID ?? ""
     const medias = propMedias ?? useMediaStore(state => state.medias)
-    const { readAriaNotification } = useAriaNotification()
 
     const suggestionMedias = useMemo(() => (
         createSuggestionMedias(medias, exceptionMediaID)
@@ -56,7 +54,6 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
             const nextSuggestion = getNextSuggestion()
             setCurrentSuggestionMedia(nextSuggestion)
             setOnTransition("next-to-none")
-            readAriaNotification("Changed to: " + nextSuggestion.mediaName)
             setTimeout(() => setFreePointerEvents(true), 330)
         }, 360)
     }
@@ -71,7 +68,6 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
             const previusSuggestion = getPreviusSuggestion()
             setCurrentSuggestionMedia(previusSuggestion)
             setOnTransition("previus-to-none")
-            readAriaNotification("Changed to: " + previusSuggestion.mediaName)
             setTimeout(() => setFreePointerEvents(true), 330)
         }, 360)
     }
@@ -102,7 +98,7 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
                             image={currentSuggestionMedia.bannerImage}
                             alt={`Image of ${currentSuggestionMedia.mediaName}`}
                         />
-                        <S.SuggestionMediaName>
+                        <S.SuggestionMediaName aria-live="assertive">
                             {currentSuggestionMedia.mediaName}
                         </S.SuggestionMediaName>
                     </S.ImageWrapper>

@@ -31,6 +31,8 @@ const hideElement = keyframes`
 export const Component = styled.div.attrs({
     className: "history-card"
 })<{ $closing?: boolean }>`${({ $closing }) => css`
+    position: relative;
+
     > a {
         display: flex;
         position: relative;

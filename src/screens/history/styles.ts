@@ -18,7 +18,7 @@ export const Screen = styled.main`
 
     @media (max-width: 800px){
         .content-wrapper {
-            flex-wrap: wrap-reverse;
+            flex-wrap: wrap;
         }
         .action-wrapper {
             position: static;
@@ -102,9 +102,10 @@ export const ContentWrapper = styled.div.attrs({
     justify-content: space-evenly;
     padding: 46px 79px;
     width: 100%;
+    flex-direction: row-reverse;
 
     &:has(.history-clear-message){
-        justify-content: space-between;
+        justify-content: flex-end;
     }
 `
 

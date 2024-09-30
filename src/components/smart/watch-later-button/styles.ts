@@ -1,9 +1,8 @@
 import styled, { css } from "styled-components"
 
-export const Button = styled.button.attrs((props: any)=> ({
-    className: "watch-later-button",
-    $alreadySaveToWatch: props.$alreadySaveToWatch || false
-}))<{ $alreadySaveToWatch: boolean }>`
+export const Button = styled.button.attrs({
+    className: "watch-later-button"
+})<{ $alreadySaveToWatch: boolean }>`
 
     height: min-content;
     position: relative;
@@ -14,24 +13,36 @@ export const Button = styled.button.attrs((props: any)=> ({
     line-height: 15px;
     font-size: 15px;
     border: 1px solid #8D8D8D;
-    color: #8D8D8D;
     border-radius: 3px;
     background: none;
     font-family: "Arsenal", sans-serif;
 
     transition-property:
+        outline,
+        outline-offset,
         border-color,
-        color,
         background-color,
         left,
         padding-left,
         opacity
     ;
-    transition-duration: 200ms;
-    transition-timing-function: ease-in-out;
+    transition-duration: 50ms, 50ms, 200ms;
+    transition-timing-function: linear, linear, ease-in-out;
 
-    &:hover, &:focus-visible{
-        color: #cccccc;
+    span {
+        transition-property:
+            outline,
+            outline-offset,
+            color
+        ;
+        transition-duration: 50ms, 50ms, 200ms;
+        transition-timing-function: linear, linear, ease-in-out;
+
+        color: #8D8D8D;
+    }
+
+    &:hover, &:focus-visible {
+        span { color: #cccccc; }
         border-color: #cccccc;
 
         &::before{

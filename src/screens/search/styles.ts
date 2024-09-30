@@ -12,18 +12,18 @@ export const Component = styled.main`
         margin: 14px 0px 30px 0px;
 
         form {
-            flex-wrap: wrap-reverse;
+            flex-wrap: wrap;
             padding: 0px 60px;
             margin-top: 32px;
 
             .select-input{
                 max-width: unset;
+                margin-top: 24px;
             }
 
             .generic-text-input{
                 max-width: unset;
                 margin-right: 0px;
-                margin-top: 24px;
             }
         }
 

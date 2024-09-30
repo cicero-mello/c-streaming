@@ -1,19 +1,16 @@
-import React, { FC, useLayoutEffect, useRef } from "react"
+import React, { FC, useRef } from "react"
 import { ButtonProps } from "./types"
-import { HiddenSpan, StyledButton, StyledLink } from "./styles"
+import { StyledButton, StyledLink } from "./styles"
 import { createLinkPath } from "../../../paths"
 import { useNavigation } from "../../../hooks"
 
 export const Button: FC<ButtonProps> = ({
-    theme, url, disabled, onClick,
-    tabIndex, keepFocusPositionWhenDisabled,
+    theme, url, disabled, onClick, tabIndex,
     ...rest
 }) => {
     const { navigate } = useNavigation()
-    const hiddenSpanRef = useRef<HTMLSpanElement>(null)
     const styledLinkRef = useRef<any>(null)
     const styledButtonRef = useRef<HTMLButtonElement>(null)
-    const buttonWasFocused = useRef<boolean>()
 
     if(url) return (
         <StyledLink
@@ -45,50 +42,14 @@ export const Button: FC<ButtonProps> = ({
         />
     )
 
-    useLayoutEffect(() => {
-        if(!keepFocusPositionWhenDisabled) return
-
-        const setButtonWasFocused = () => {
-            buttonWasFocused.current = true
-        }
-        document.addEventListener("focusin", setButtonWasFocused)
-
-        return () => {
-            buttonWasFocused.current = false
-            document.removeEventListener("focusin", setButtonWasFocused)
-        }
-    }, [keepFocusPositionWhenDisabled])
-
-    useLayoutEffect(() => {
-        if(!keepFocusPositionWhenDisabled) return
-
-        const isToFocusHiddenSpan = (
-            keepFocusPositionWhenDisabled &&
-            disabled &&
-            buttonWasFocused
-        )
-        if(isToFocusHiddenSpan) hiddenSpanRef.current?.focus()
-    }, [keepFocusPositionWhenDisabled, disabled])
-
     return (
-        <>
-            <StyledButton
-                ref={styledButtonRef}
-                tabIndex={disabled ? -1 : tabIndex ?? 0}
-                disabled={disabled}
-                $disabled={disabled}
-                $theme={theme}
-                onClick={onClick}
-                {...rest}
-            />
-            {keepFocusPositionWhenDisabled && disabled &&
-                <HiddenSpan
-                    ref={hiddenSpanRef}
-                    tabIndex={-1}
-                    aria-hidden="true"
-                    role="none"
-                />
-            }
-        </>
+        <StyledButton
+            ref={styledButtonRef}
+            tabIndex={disabled ? -1 : tabIndex ?? 0}
+            $disabled={disabled}
+            $theme={theme}
+            onClick={disabled ? () => {} : onClick}
+            {...rest}
+        />
     )
 }

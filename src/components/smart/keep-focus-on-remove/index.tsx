@@ -8,15 +8,15 @@ import * as S from "./styles"
  * screen readers and users.
  *
  * - Before the children are removed, if they were focused,
- * create an hidden "span" with no "aria" content in the "same"
+ * create an hidden tag with no "aria" content in the "same"
  * children position (DOM), transfer focus to it,
  * and finally remove the children.
- * - After the "span" loses focus due to user action,
- * the span will also be removed from the DOM.
+ * - After the hidden tag loses focus due to user action,
+ * the hidden tag will also be removed from the DOM.
  *
  * Important:
  * - Each child needs a exclusive id
- * - When the hidden "span" is focused
+ * - When the hidden tag is focused
  *  dont remove, add or change the children.
  *
  * @component
@@ -32,29 +32,29 @@ import * as S from "./styles"
  * </KeepFocusOnRemove>
  */
 export const KeepFocusOnRemove: FC<KeepFocusOnRemoveProps> = ({
-    children: childrenProp
+    children: childrenProp, ariaNotification
 }) => {
     const children = useMemo(() => (
         !childrenProp ? [] :
         Array.isArray(childrenProp) ? childrenProp : [childrenProp]
     ), [childrenProp])
 
-    const hiddenSpanRef = useRef<HTMLSpanElement>(null)
+    const hiddenTagRef = useRef<HTMLParagraphElement>(null)
     const [copyChildren, setCopyChildren] = useState(children)
 
     useEffect(() => {
-        const isHiddenSpanFocused = !!hiddenSpanRef.current
+        const isHiddenSpanFocused = !!hiddenTagRef.current
         if(!isHiddenSpanFocused) setCopyChildren(children)
     }, [children])
 
     useEffect(() => {
-        const originalChildrenRemoveSomeElement = !!hiddenSpanRef.current
+        const originalChildrenRemoveSomeElement = !!hiddenTagRef.current
         if(originalChildrenRemoveSomeElement) {
-            hiddenSpanRef.current.focus()
+            hiddenTagRef.current.focus()
             const removeCopyElementFromDOM = () => {
                 setCopyChildren(children)
             }
-            hiddenSpanRef.current.addEventListener(
+            hiddenTagRef.current.addEventListener(
                 "focusout",
                 removeCopyElementFromDOM,
                 { once: true }
@@ -77,15 +77,15 @@ export const KeepFocusOnRemove: FC<KeepFocusOnRemoveProps> = ({
             document.activeElement
         )
 
-        if(isCopyChildFocused || !!hiddenSpanRef.current) return(
-            <S.HiddenSpan
-                ref={hiddenSpanRef}
-                aria-label=" "
-                aria-hidden="true"
+        if(isCopyChildFocused || !!hiddenTagRef.current) return(
+            <S.HiddenTag
+                ref={hiddenTagRef}
                 tabIndex={-1}
-                role="none"
+                role="presentation"
                 key={"hidden-span-key-" + copyChild.props.id}
-            />
+            >
+                {ariaNotification ?? "Removed"}
+            </S.HiddenTag>
         )
     })
 }

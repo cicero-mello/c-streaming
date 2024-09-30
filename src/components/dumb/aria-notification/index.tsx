@@ -7,8 +7,8 @@ export const AriaNotification: FC<AriaNotificationProps> = ({
 }) => (
     <S.Component
         aria-label={message ?? undefined}
-        aria-live={"polite"}
-        aria-atomic={true}
+        aria-live="polite"
+        aria-atomic="true"
         {...rest}
     />
 )

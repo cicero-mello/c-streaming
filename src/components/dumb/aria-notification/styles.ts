@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Component = styled.span.attrs({
+export const Component = styled.p.attrs({
     className: "hidden-aria-notification"
 })`
     position: absolute;

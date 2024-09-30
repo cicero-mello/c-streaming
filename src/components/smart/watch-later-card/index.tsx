@@ -1,10 +1,9 @@
-import React, { FC, useLayoutEffect, useRef, useState } from "react"
+import React, { FC, useRef, useState } from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { WatchLaterCardProps } from "./types"
 import { getMediaPathByMediaType } from "../../../paths"
 import { customLocalStorage } from "../../../stores"
 import { delay } from "../../../shared/utils"
-import { useAriaNotification } from "../../../hooks/"
 import { Button } from "../button"
 import * as S from "./styles"
 
@@ -13,12 +12,10 @@ export const WatchLaterCard: FC<WatchLaterCardProps> = ({
 }) => {
     const componentRef = useRef<HTMLDivElement>(null)
     const [closeAnimationStarted, setCloseAnimationStarted] = useState(false)
-    const { readAriaNotification } = useAriaNotification()
 
     const handleClickRemove = async () => {
         S.prepareToClose(componentRef)
         setCloseAnimationStarted(true)
-        readAriaNotification(`${mediaName} removed`)
         await delay(S.CLOSE_CARD_TIME)
         customLocalStorage.removeWatchLater(mediaId)
         if(onRemove) onRemove()

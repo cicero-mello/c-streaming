@@ -1,6 +1,10 @@
-import React, { FC, createContext, useContext, useLayoutEffect, useState } from "react"
+import React, {
+    FC, createContext, useContext,
+    useEffect, useLayoutEffect, useState
+} from "react"
 import { UseAriaNotification } from "./types"
 import { AriaNotification } from "../../components"
+import { debounce } from "../../shared/utils"
 
 const AriaNotificationContext = createContext<UseAriaNotification>({
     readAriaNotification: () => {},
@@ -18,15 +22,37 @@ export const useAriaNotification = () => {
 export const AriaNotificationProvider: FC<any> = ({
     children
 }) => {
+    const [render, setRender] = useState("")
     const [message, setMessage] = useState("")
-
-    const readAriaNotification = (message: string) => {
-        setMessage(message)
-    }
 
     const clearAriaNotification = () => {
         setMessage("")
+        setRender("")
     }
+
+    const readAriaNotification = (
+        message: string,
+        timeToRead?: number
+    ) => {
+        setRender(message)
+
+        document.addEventListener(
+            "focusout",
+            clearAriaNotification,
+            { once: true }
+        )
+
+        debounce(
+            clearAriaNotification,
+            timeToRead ?? 2000,
+            "aria-notification"
+        )
+    }
+
+    useEffect(() => {
+        if(!render) return
+        setTimeout(() => setMessage(render), 300)
+    }, [render])
 
     return (
         <AriaNotificationContext.Provider
@@ -35,7 +61,7 @@ export const AriaNotificationProvider: FC<any> = ({
                 clearAriaNotification: clearAriaNotification
             }}
         >
-            <AriaNotification message={message}/>
+            {render && <AriaNotification message={message}/>}
             {children}
         </AriaNotificationContext.Provider>
     )

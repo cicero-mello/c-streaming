@@ -1,8 +1,11 @@
 import { HTMLAttributes } from "react"
 
 export interface UseAriaNotification {
-    readAriaNotification: (message: string) => void
     clearAriaNotification: () => void
+    readAriaNotification: (
+        message: string,
+        timeToRead?: number
+    ) => void
 }
 
 export interface AriaNotificationProps extends Omit<

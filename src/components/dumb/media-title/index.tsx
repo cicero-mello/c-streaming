@@ -15,9 +15,12 @@ export const MediaTitle: FC<MediaTitleProps> = ({
         {episode &&
             <S.MediaEpisodeName
                 aria-label={getEpisodeAriaLabel(episode)}
-                children={getEpisodeNameShowed(episode)}
                 tabIndex={0}
-            />
+            >
+                <span aria-hidden="true">
+                    {getEpisodeNameShowed(episode)}
+                </span>
+            </S.MediaEpisodeName>
         }
         <WatchLatterButton
             mediaId={mediaId}

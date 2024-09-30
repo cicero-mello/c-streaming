@@ -1,9 +1,20 @@
-import styled, { css, keyframes } from "styled-components"
+import styled, { keyframes } from "styled-components"
 
-export const Component = styled.div.attrs((props: any) => ({
+const show = keyframes`
+    from {
+        opacity: 0;
+        margin-top: 270px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 200px;
+    }
+`
+
+export const Component = styled.div.attrs({
     className: "page-loader",
-    $show: props.$show
-}))<{ $show?: boolean }>`
+    role: "presentation"
+})`
     pointer-events: none;
     position: absolute;
     display: flex;
@@ -11,12 +22,7 @@ export const Component = styled.div.attrs((props: any) => ({
     justify-content: center;
     margin-top: 270px;
     transition: 350ms ease-out;;
-
-    opacity: 0;
-    ${({ $show }) => $show && css`
-        opacity: 1;
-        margin-top: 200px;
-    `}
+    animation: ${show} 350ms ease-out forwards;
 `
 
 const rotate = keyframes`

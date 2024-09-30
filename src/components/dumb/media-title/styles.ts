@@ -25,4 +25,8 @@ export const MediaEpisodeName = styled.p.attrs({
     font-size: 23px;
     max-width: 573px;
     width: fit-content;
+
+    > * {
+        color: #8D8D8D;
+    }
 `

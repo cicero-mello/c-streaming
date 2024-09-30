@@ -26,14 +26,3 @@ export const StyledLink = styled(Link).attrs((props: any) => ({
         if(theme) return theme($disabled)
     }}
 `
-
-export const HiddenSpan = styled.span`
-    position: absolute;
-    width: 0px;
-    height: 0px;
-    opacity: 0;
-
-    &:focus-visible{
-        outline: none;
-    }
-`

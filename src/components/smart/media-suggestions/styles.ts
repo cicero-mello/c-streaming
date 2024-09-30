@@ -165,7 +165,7 @@ export const ImageWrapper = styled.div.attrs((props: any) => ({
     `}
 `}`
 
-export const SuggestionMediaName = styled.h2.attrs({
+export const SuggestionMediaName = styled.span.attrs({
     className: "suggestion-media-name"
 })`
     color: #EDEDED;

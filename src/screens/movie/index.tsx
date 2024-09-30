@@ -36,10 +36,7 @@ export const Movie: FC = () => {
                         title={media.name}
                         mediaId={media.id}
                     />
-                    <S.Sinopsys
-                        tabIndex={0}
-                        aria-label={`Synopsis: ${media.synopsis}`}
-                    >
+                    <S.Sinopsys tabIndex={0}>
                         {media.synopsis}
                     </S.Sinopsys>
                 </S.RightSide>

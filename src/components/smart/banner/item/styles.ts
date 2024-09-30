@@ -53,7 +53,7 @@ export const InfoWrapper = styled.div.attrs({
     transition: 340ms ease-in-out;
 `
 
-export const MediaName = styled.p`
+export const MediaName = styled.span`
     max-width: 85%;
     white-space: nowrap;
     font-size: 37px;
@@ -84,6 +84,6 @@ export const ButtonsWrapper = styled.div.attrs({
     transition: 340ms ease-in-out;
     opacity: 100%;
 
-    :first-child{ margin: 0px 18px 4px 18px; }
-    :last-child{ padding: 6px 26px; }
+    >:first-child{ margin: 0px 18px 4px 18px; }
+    >:last-child{ padding: 6px 26px; }
 `

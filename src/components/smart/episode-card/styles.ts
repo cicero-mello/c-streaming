@@ -48,7 +48,7 @@ export const Component = styled.div.attrs({
             .was-watched-icon{
                 border-color: #EDEDED;
             }
-            p {
+            span {
                 color: #EDEDED;
             }
         }
@@ -57,20 +57,20 @@ export const Component = styled.div.attrs({
             .gatsby-image-wrapper{
                 filter: grayscale(1);
             }
-            p {
+            span {
                 color: #9d9d9d;
             }
         `}
     }
 `}`
 
-export const TopText = styled.p`
+export const TopText = styled.span`
     margin: 0px 9px 9px 9px;
     color: #EDEDED;
     font-size: 20px;
 `
 
-export const Title = styled.p.attrs({
+export const Title = styled.span.attrs({
     className: "episode-card-title"
 })`
     white-space: nowrap;
@@ -79,7 +79,7 @@ export const Title = styled.p.attrs({
     color: #EDEDED;
 `
 
-export const Text = styled.p.attrs({
+export const Text = styled.span.attrs({
     className: "episode-card-text"
 })`
     max-width: 180px;

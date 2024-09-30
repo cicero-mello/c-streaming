@@ -3,13 +3,11 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { ItemAnimationState, BannerItemProps } from "./types"
 import { getMediaPathByMediaType } from "../../../../paths"
 import { Button, WatchLatterButton } from "../../../smart"
-import { useAriaNotification } from "../../../../hooks"
 import * as S from "./styles"
 
 export const Item: FC<BannerItemProps> = ({
     isBannerHidden, ...itemMedia
 }) => {
-    const { readAriaNotification } = useAriaNotification()
     const [firstRender, setFirstRender] = useState(true)
     const [showingMedia, setShowingMedia] = useState(itemMedia)
     const [
@@ -22,8 +20,7 @@ export const Item: FC<BannerItemProps> = ({
         setTimeout(() => {
             setShowingMedia(itemMedia)
             setItemAnimation("open")
-            if(!firstRender) readAriaNotification(itemMedia.name)
-            else setFirstRender(false)
+            if(firstRender) setFirstRender(false)
         }, firstRender ? 100 : 360)
     }, [itemMedia.id])
 
@@ -41,15 +38,20 @@ export const Item: FC<BannerItemProps> = ({
             />
             <S.InfoAndButtons
                 role="presentation"
-                tabIndex={0}
+                tabIndex={isBannerHidden ? -1 : 0}
                 aria-label="Suggestion media banner"
+                aria-hidden={isBannerHidden ? "true" : "false"}
             >
                 <S.InfoWrapper>
                     <S.MediaName
                         role="presentation"
                         tabIndex={isBannerHidden ? -1 : 0}
+                        aria-label={showingMedia.name}
+                        aria-live="assertive"
                     >
-                        {showingMedia.name?.toLocaleUpperCase() ?? ""}
+                        <span aria-hidden="true">
+                            {showingMedia.name?.toLocaleUpperCase() ?? ""}
+                        </span>
                     </S.MediaName>
                     <S.Synopsis
                         role="presentation"

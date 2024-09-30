@@ -68,10 +68,7 @@ export const EpisodesCarousel: FC<EpisodesCarrouselProps> = ({
 
     return (
         <S.Component>
-            <S.TopText
-                tabIndex={0}
-                aria-label={topText.toLowerCase()}
-            >
+            <S.TopText tabIndex={0}>
                 {topText}
             </S.TopText>
             <S.CarouselWrapper>

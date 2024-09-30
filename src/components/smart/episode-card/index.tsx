@@ -18,7 +18,11 @@ export const EpisodeCard: FC<EpisodeCardProps> = ({
 
     return (
         <S.Component $wasWatched={wasWatched} {...rest}>
-            {isNextEpisode && <S.TopText> Next Episode: </S.TopText>}
+            {isNextEpisode &&
+                <S.TopText aria-hidden="true">
+                    Next Episode:
+                </S.TopText>
+            }
             <Button
                 theme="none"
                 url={url}
@@ -27,8 +31,12 @@ export const EpisodeCard: FC<EpisodeCardProps> = ({
                 <GatsbyImage
                     image={thumbImage}
                     alt={`Image of ${episodeName}`}
+                    aria-hidden="true"
                 />
-                <Wrapper $direction="column">
+                <Wrapper
+                    $direction="column"
+                    aria-hidden="true"
+                >
                     <S.Title> {titleText} </S.Title>
                     <S.Text> {episodeName} </S.Text>
                 </Wrapper>

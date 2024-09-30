@@ -5,14 +5,12 @@ import { getMediaPathByMediaType } from "../../../paths"
 import { delay } from "../../../shared/utils"
 import { customLocalStorage } from "../../../stores"
 import * as S from "./styles"
-import { useAriaNotification } from "../../../hooks"
 
 export const HistoryCard: FC<HistoryCardProps> = ({
     mediaId, mediaType, mediaName,
     historyViewDate, episode, onRemove,
     ...rest
 }) => {
-    const { readAriaNotification } = useAriaNotification()
     const [closeAnimationStarted, setCloseAnimationStarted] = useState(false)
     const cardRef = useRef<HTMLDivElement>(null)
 
@@ -25,7 +23,6 @@ export const HistoryCard: FC<HistoryCardProps> = ({
         event.preventDefault()
         S.prepareToClose(cardRef)
         setCloseAnimationStarted(true)
-        readAriaNotification(`${ariaName} removed`)
         await delay(S.CLOSE_ANIMATION_TIME)
         customLocalStorage.removeMediaFromHistory({
             mediaId: mediaId,
@@ -49,16 +46,6 @@ export const HistoryCard: FC<HistoryCardProps> = ({
                 }}
                 aria-label={`Watch "${ariaName}"`}
             >
-                <S.CloseButton
-                    onClick={handleCloseClick}
-                    aria-label={`Remove "${ariaName}" from history`}
-                    onContextMenu={(e) => {
-                        e.stopPropagation()
-                    }}
-                    onKeyDown={(e) => {
-                        e.stopPropagation()
-                    }}
-                />
                 <S.Title> {mediaName} </S.Title>
                 {episode &&
                     <>
@@ -71,6 +58,16 @@ export const HistoryCard: FC<HistoryCardProps> = ({
                     </>
                 }
             </Button>
+            <S.CloseButton
+                onClick={handleCloseClick}
+                aria-label={`Remove "${ariaName}"`}
+                onContextMenu={(e) => {
+                    e.stopPropagation()
+                }}
+                onKeyDown={(e) => {
+                    e.stopPropagation()
+                }}
+            />
         </S.Component>
     )
 }

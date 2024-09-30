@@ -52,7 +52,7 @@ export const BaseModal = forwardRef<
         >
             <S.ModalContent ref={modalContentRef}>
                 {title &&
-                    <S.Title tabIndex={0} aria-label={title}>
+                    <S.Title tabIndex={0}>
                         {title}
                     </S.Title>
                 }
@@ -64,7 +64,10 @@ export const BaseModal = forwardRef<
                         ), "")}
                     >
                         {texts.map((text, index) =>
-                            <S.Text key={`${id}-text-${index}`}>
+                            <S.Text
+                                key={`${id}-text-${index}`}
+                                aria-hidden="true"
+                            >
                                 {text}
                             </S.Text>
                         )}
