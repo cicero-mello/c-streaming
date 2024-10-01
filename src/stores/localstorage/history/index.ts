@@ -1,4 +1,4 @@
-import { debounce } from "../../../shared/utils"
+import { debounce } from "@utils"
 import { getSerie } from "../serie"
 import { Episode } from "../serie/types"
 import { GetLastWatchedEpisodeParams, HistoryItem } from "./types"

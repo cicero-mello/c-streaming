@@ -1,7 +1,6 @@
 import { SetUrlStateKey,  UseURLState, UrlState, SearchType } from "./types"
-import { Stringified } from "../../shared/types"
-import { useForceUpdate } from "../use-force-update"
-import { delay } from "../../shared/utils"
+import { Stringified, delay } from "@utils"
+import { useForceUpdate } from "@hooks"
 
 export const useUrlState = (): UseURLState => {
     const forceUpdate = useForceUpdate()

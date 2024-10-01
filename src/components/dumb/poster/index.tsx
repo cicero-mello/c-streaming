@@ -1,8 +1,8 @@
 import React, { FC } from "react"
-import { PosterProps } from "./types"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { getMediaPathByMediaType } from "../../../paths"
-import { Button } from "../../smart/button"
+import { getMediaPathByMediaType } from "@paths"
+import { PosterProps } from "./types"
+import { Button } from "@components"
 import * as S from "./styles"
 
 export const Poster: FC<PosterProps> = ({

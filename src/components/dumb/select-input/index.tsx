@@ -1,6 +1,6 @@
 import React, { FC, useRef } from "react"
 import { SelectInputProps } from "./types"
-import { useFocusOrigin } from "../../../hooks"
+import { useFocusOrigin } from "@hooks"
 import * as S from "./styles"
 
 export const SelectInput: FC<SelectInputProps> = ({

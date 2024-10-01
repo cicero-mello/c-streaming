@@ -1,4 +1,4 @@
-import { randomLoremWords } from "../../../shared/lorem"
+import { randomLoremWords } from "@utils"
 import { Serie, Episode, Season, SeasonLocalStorage, SerieLocalStorage, GetNextEpisodeParams } from "./types"
 
 const STORAGE_NAME = "series"

@@ -1,13 +1,9 @@
 import React, { FC, useState, useRef, useEffect } from "react"
-import { UserIco } from "../../../../assets/icons"
-import { PATHS } from "../../../../paths"
+import { useOutsideClick, useOutsideEnter, useOutsideFocus } from "@hooks"
 import { UseMenuProps } from "./types"
-import {
-    useOutsideClick,
-    useOutsideEnter,
-    useOutsideFocus
-} from "../../../../hooks"
-import { Button } from "../../button"
+import { Button } from "@components"
+import { UserIco } from "@icons"
+import { PATHS } from "@paths"
 import * as S from "./styles"
 
 export const UserMenu: FC<UseMenuProps> = ({

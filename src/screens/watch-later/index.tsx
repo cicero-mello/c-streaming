@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { KeepFocusOnRemove, Line, WatchLaterCard } from "../../components"
+import { KeepFocusOnRemove, Line, WatchLaterCard } from "@components"
 import { useWatchLaterCards } from "./use-watch-later-cards"
 import * as S from "./styles"
 

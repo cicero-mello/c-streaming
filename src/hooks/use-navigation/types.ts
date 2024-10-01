@@ -1,5 +1,5 @@
-import { PATHS } from "../../paths"
-import { UrlState } from "../use-url-state/types"
+import { PATHS } from "@paths"
+import { UrlState } from "@hooks"
 
 export interface NavigationContextType {
     navigate: (

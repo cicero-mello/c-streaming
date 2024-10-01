@@ -1,9 +1,8 @@
 import React, { FC } from "react"
-import { EpisodeCardProps } from "./types"
-import { GatsbyImage } from "gatsby-plugin-image"
-import { Wrapper } from "../../dumb/wrapper"
-import { Button } from ".."
 import { getAriaLabel, getTitleText } from "./core"
+import { GatsbyImage } from "gatsby-plugin-image"
+import { Wrapper, Button } from "@components"
+import { EpisodeCardProps } from "./types"
 import * as S from "./styles"
 
 export const EpisodeCard: FC<EpisodeCardProps> = ({

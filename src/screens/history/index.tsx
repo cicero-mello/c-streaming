@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FC, useCallback, useMemo, useRef } from "react"
-import { Button, GenericTextInput, HistoryCard, KeepFocusOnRemove, Line } from "../../components"
-import { useAriaNotification, useDidMountEffect, useUrlState } from "../../hooks"
+import { Button, GenericTextInput, HistoryCard, KeepFocusOnRemove, Line } from "@components"
+import { useAriaNotification, useDidMountEffect, useUrlState } from "@hooks"
 import { createSearchResultsMessage, getFilteredHistoryCards } from "./core"
-import { debounce, scrollPageToTop } from "../../shared/utils"
 import { useHistoryCards } from "./use-history-cards"
-import { customLocalStorage } from "../../stores"
+import { debounce, scrollPageToTop } from "@utils"
 import { usePageFlow } from "./use-page-flow"
+import { customLocalStorage } from "@stores"
 import * as S from "./styles"
 
 export const History: FC = () => {

@@ -1,11 +1,8 @@
 import React, { FC, useEffect } from "react"
-import { useUrlState } from "../../hooks"
-import { useMediaStore, customLocalStorage } from "../../stores"
+import { MediaSuggestions, FakeVideo, Line, MediaTitle, Error } from "@components"
+import { useMediaStore, customLocalStorage } from "@stores"
 import { IGatsbyImageData } from "gatsby-plugin-image"
-import {
-    MediaSuggestions, FakeVideo,
-    Line, MediaTitle, Error
-} from "../../components"
+import { useUrlState } from "@hooks"
 import * as S from "./styles"
 
 export const Movie: FC = () => {

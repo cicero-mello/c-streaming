@@ -1,10 +1,10 @@
 import React, { FC, useRef, useState } from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
+import { getMediaPathByMediaType } from "@paths"
 import { WatchLaterCardProps } from "./types"
-import { getMediaPathByMediaType } from "../../../paths"
-import { customLocalStorage } from "../../../stores"
-import { delay } from "../../../shared/utils"
-import { Button } from "../button"
+import { customLocalStorage } from "@stores"
+import { Button } from "@components"
+import { delay } from "@utils"
 import * as S from "./styles"
 
 export const WatchLaterCard: FC<WatchLaterCardProps> = ({

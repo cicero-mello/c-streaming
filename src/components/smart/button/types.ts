@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react"
-import { PATHS } from "../../../paths"
-import { UrlState } from "../../../hooks"
+import { PATHS } from "@paths"
+import { UrlState } from "@hooks"
 
 export type ButtonThemes = (
     "border" | "border-red" | "border-danger" |

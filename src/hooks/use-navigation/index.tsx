@@ -1,15 +1,10 @@
-import React, {
-    FunctionComponent, createContext,
-    useContext, useEffect, useRef,
-    useState
-} from "react"
+import React, { FC, createContext, useContext, useEffect, useRef, useState } from "react"
+import { Header, PageLoader } from "@components"
 import { NavigationContextType } from "./types"
-import { scrollPageToTop } from "../../shared/utils"
-
+import { createLinkPath, PATHS } from "@paths"
+import { scrollPageToTop } from "@utils"
 import { navigate } from "gatsby"
-import { Header, PageLoader } from "../../components"
-import { UrlState } from "../use-url-state/types"
-import { createLinkPath, PATHS } from "../../paths"
+import { UrlState } from "@hooks"
 import * as S from "./styles"
 
 const NavigationContext = createContext<NavigationContextType>({
@@ -18,7 +13,7 @@ const NavigationContext = createContext<NavigationContextType>({
 
 export const useNavigation = () => useContext(NavigationContext)
 
-export const NavigationProvider: FunctionComponent<any> = ({
+export const NavigationProvider: FC<any> = ({
     children
 }) => {
     const transitionRef = useRef<HTMLDivElement>(null)

@@ -1,9 +1,9 @@
 import React, { FC, useCallback, useRef, useState } from "react"
+import { debounce, getRandomID } from "@utils"
+import { useDidMountEffect } from "@hooks"
+import { TriangleNextIco } from "@icons"
 import { CarouselProps } from "./types"
-import { Poster } from "../../../dumb"
-import { debounce, getRandomID } from "../../../../shared/utils"
-import { useDidMountEffect } from "../../../../hooks"
-import { TriangleNextIco } from "../../../../assets/icons"
+import { Poster } from "@components"
 import * as S from "./styles"
 
 export const Carousel: FC<CarouselProps> = ({

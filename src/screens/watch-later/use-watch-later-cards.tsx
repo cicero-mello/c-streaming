@@ -1,7 +1,7 @@
 import { useCallback, useLayoutEffect, useState } from "react"
-import { customLocalStorage, useMediaStore } from "../../stores"
+import { customLocalStorage, useMediaStore } from "@stores"
+import { WatchLaterCardProps } from "@components"
 import { UseWatchLaterCards } from "./types"
-import { WatchLaterCardProps } from "../../components"
 
 export const useWatchLaterCards = (): UseWatchLaterCards => {
     const { getMediaById } = useMediaStore()

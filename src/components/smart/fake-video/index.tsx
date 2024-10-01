@@ -1,8 +1,8 @@
 import React, { FC, useState, useRef, useEffect } from "react"
-import { FakeVideoProps } from "./types"
+import { PlayTriangleIco, TrianglePongIco } from "@icons"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { PlayTriangleIco, TrianglePongIco } from "../../../assets/icons"
-import { useDidMountEffect } from "../../../hooks"
+import { useDidMountEffect } from "@hooks"
+import { FakeVideoProps } from "./types"
 import * as core from "./core"
 import * as S from "./styles"
 

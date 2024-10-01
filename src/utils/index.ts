@@ -1,3 +1,9 @@
+export * from "./lorem"
+
+export type Stringified<T> = {
+    [K in keyof T]: string
+}
+
 interface TimeOut { [key: string]: NodeJS.Timeout | number }
 const timeOut: TimeOut = {}
 

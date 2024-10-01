@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import { FocusOrigin } from "../../../hooks"
+import { FocusOrigin } from "@hooks"
 
 export const Component = styled.div.attrs({
     className: "search-input"

@@ -1,13 +1,9 @@
 import React, { FC, useEffect, useMemo } from "react"
-import { useUrlState } from "../../hooks"
+import { EpisodeCard, FakeVideo, Line, MediaTitle, EpisodesCarousel, MediaSuggestions, Error } from "@components"
+import { useUrlState } from "@hooks"
 import { IGatsbyImageData } from "gatsby-plugin-image"
-import { customLocalStorage } from "../../stores"
-import { useMediaStore } from "../../stores"
-import { PATHS } from "../../paths"
-import {
-    EpisodeCard, FakeVideo, Line, MediaTitle,
-    EpisodesCarousel, MediaSuggestions, Error
-} from "../../components"
+import { customLocalStorage, useMediaStore } from "@stores"
+import { PATHS } from "@paths"
 import * as S from "./styles"
 
 export const Series: FC = () => {

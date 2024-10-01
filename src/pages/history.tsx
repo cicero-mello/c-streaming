@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import type { HeadFC } from "gatsby"
-import * as Screens from "../screens"
+import * as Screens from "@screens"
 
 const HistoryPage: FC = () => (
     <Screens.History />

@@ -1,9 +1,9 @@
 import React, { FC, MouseEvent, useRef, useState } from "react"
+import { getMediaPathByMediaType } from "@paths"
+import { customLocalStorage } from "@stores"
 import { HistoryCardProps } from "./types"
-import { Button } from "../button"
-import { getMediaPathByMediaType } from "../../../paths"
-import { delay } from "../../../shared/utils"
-import { customLocalStorage } from "../../../stores"
+import { Button } from "@components"
+import { delay } from "@utils"
 import * as S from "./styles"
 
 export const HistoryCard: FC<HistoryCardProps> = ({

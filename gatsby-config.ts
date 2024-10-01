@@ -16,6 +16,22 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
+        resolve: `gatsby-plugin-alias-imports`,
+        options: {
+            alias: {
+                "@assets": "src/assets",
+                "@icons": "src/assets/icons",
+                "@components": "src/components",
+                "@hooks": "src/hooks",
+                "@paths": "src/paths",
+                "@screens": "src/screens",
+                "@utils": "src/utils",
+                "@stores": "src/stores"
+            },
+            extensions: ["ts", "tsx", "svg"]
+        }
+    },
+    {
         resolve: "gatsby-source-filesystem",
         options: {
             path: "./src/assets/images/media/banner/",

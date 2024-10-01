@@ -1,6 +1,6 @@
-import { UrlState } from "../../hooks"
-import { stringIncludes } from "../../shared/utils"
+import { stringIncludes } from "@utils"
 import { PagePoster } from "./types"
+import { UrlState } from "@hooks"
 
 export const getFilteredPosters = (
     urlState: UrlState,

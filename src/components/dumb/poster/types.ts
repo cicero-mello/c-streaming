@@ -1,6 +1,6 @@
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import { HTMLAttributes } from "react"
-import { MediaType } from "../../../stores"
+import { MediaType } from "@stores"
 
 export interface PosterProps extends Omit<
     HTMLAttributes<HTMLDivElement>, "className"

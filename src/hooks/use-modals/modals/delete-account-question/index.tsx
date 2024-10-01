@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react"
 import { BaseModalHandle } from "../base/types"
-import { BaseModal } from "../base"
-import { useModals } from "../../.."
 import { GenericModalHandle } from ".."
+import { BaseModal } from "../base"
+import { useModals } from "@hooks"
 
 export const DeleteAccountQuestion = forwardRef<
     GenericModalHandle

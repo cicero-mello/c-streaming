@@ -1,11 +1,11 @@
 import React, { FC, useMemo, useState } from "react"
 import { MediaSuggestionsProps, SuggestionMedia, OnTransitionState } from "./types"
-import { SuggestionTrianglesIco } from "../../../assets/icons"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { getMediaPathByMediaType } from "../../../paths"
-import { useMediaStore } from "../../../stores"
+import { getMediaPathByMediaType } from "@paths"
+import { SuggestionTrianglesIco } from "@icons"
 import { createSuggestionMedias } from "./core"
-import { Button } from "../button"
+import { useMediaStore } from "@stores"
+import { Button } from "@components"
 import * as S from "./styles"
 
 export const MediaSuggestions: FC<MediaSuggestionsProps> = ({

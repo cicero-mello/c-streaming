@@ -1,5 +1,5 @@
 import { IGatsbyImageData } from "gatsby-plugin-image"
-import { MediaType } from "../../../../stores"
+import { MediaType } from "@stores"
 
 export interface BannerMedia {
     image: IGatsbyImageData

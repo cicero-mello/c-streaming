@@ -1,6 +1,6 @@
-import { HistoryCardProps } from "../../components"
-import { stringIncludes } from "../../shared/utils"
-import { UrlState } from "../../hooks"
+import { HistoryCardProps } from "@components"
+import { stringIncludes } from "@utils"
+import { UrlState } from "@hooks"
 
 export const getFilteredHistoryCards = (
     historyCards: HistoryCardProps[],

@@ -1,8 +1,8 @@
 import React, { FC, useLayoutEffect, useState } from "react"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { ItemAnimationState, BannerItemProps } from "./types"
-import { getMediaPathByMediaType } from "../../../../paths"
-import { Button, WatchLatterButton } from "../../../smart"
+import { Button, WatchLatterButton } from "@components"
+import { getMediaPathByMediaType } from "@paths"
 import * as S from "./styles"
 
 export const Item: FC<BannerItemProps> = ({

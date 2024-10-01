@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from "react"
-import { PostersProps } from "./types"
-import { SeeAllButton } from "../../dumb"
-import { Carousel } from "./carousel"
-import { useMediaStore } from "../../../stores"
-import { PATHS } from "../../../paths"
 import { IGatsbyImageData } from "gatsby-plugin-image"
-import { PosterProps } from "../../dumb/poster/types"
+import { SeeAllButton, PosterProps } from "@components"
+import { useMediaStore } from "@stores"
+import { PostersProps } from "./types"
+import { Carousel } from "./carousel"
+import { PATHS } from "@paths"
 import * as S from "./styles"
 
 export const Posters: FunctionComponent<PostersProps> = ({

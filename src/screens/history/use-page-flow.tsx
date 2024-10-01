@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { delay, scrollPageToTop } from "../../shared/utils"
+import { delay, scrollPageToTop } from "@utils"
 import { UsePageFlow } from "./types"
 
 export const usePageFlow = (): UsePageFlow => {

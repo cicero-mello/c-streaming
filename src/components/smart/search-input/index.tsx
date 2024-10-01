@@ -1,7 +1,7 @@
 import React, { KeyboardEvent, FC, useRef, useState } from "react"
-import { useFocusOrigin, useNavigation } from "../../../hooks"
-import { PATHS } from "../../../paths"
-import { Button } from "../button"
+import { useFocusOrigin, useNavigation } from "@hooks"
+import { PATHS } from "@paths"
+import { Button } from "@components"
 import * as S from "./styles"
 
 export const SearchInput: FC = () => {

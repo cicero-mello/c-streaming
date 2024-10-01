@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react"
 import { BaseModalProps, BaseModalHandle } from "./types"
-import { Button } from "../../../../components"
-import { useForceUpdate, useOutsideClick } from "../../.."
+import { useForceUpdate, useOutsideClick } from "@hooks"
+import { Button } from "@components"
 import * as S from "./styles"
 
 export const BaseModal = forwardRef<

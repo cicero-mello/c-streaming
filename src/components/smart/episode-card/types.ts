@@ -1,7 +1,7 @@
-import { IGatsbyImageData } from "gatsby-plugin-image"
 import { HTMLAttributes } from "react"
-import { PATHS } from "../../../paths"
-import { UrlState } from "../../../hooks"
+import { IGatsbyImageData } from "gatsby-plugin-image"
+import { UrlState } from "@hooks"
+import { PATHS } from "@paths"
 
 export interface EpisodeCardProps extends Omit<
     HTMLAttributes<HTMLDivElement>, "className"

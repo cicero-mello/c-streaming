@@ -1,10 +1,10 @@
 import React, { FormEvent, forwardRef, useImperativeHandle, useRef, useState } from "react"
+import { AriaNotification, GenericTextInput } from "@components"
 import { BaseModalHandle } from "../base/types"
-import { BaseModal } from "../base"
-import { AriaNotification, GenericTextInput } from "../../../../components"
-import { useModals } from "../../.."
 import { GenericModalHandle } from ".."
-import { delay } from "../../../../shared/utils"
+import { BaseModal } from "../base"
+import { useModals } from "@hooks"
+import { delay } from "@utils"
 import * as S from "./styles"
 
 export const ConfirmYourPassword = forwardRef<

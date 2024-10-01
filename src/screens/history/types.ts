@@ -1,4 +1,4 @@
-import { HistoryCardProps } from "../../components"
+import { HistoryCardProps } from "@components"
 
 export type UseHistoryCards = [
     cards: HistoryCardProps[],

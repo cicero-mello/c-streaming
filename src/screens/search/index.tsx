@@ -1,8 +1,8 @@
 import React, { FC, ChangeEvent, useMemo, useState, useEffect } from "react"
-import { GenericTextInput, Line, Poster, SelectInput } from "../../components"
-import { useAriaNotification, UrlState, useUrlState } from "../../hooks"
-import { debounce, delay, scrollPageToTop } from "../../shared/utils"
+import { GenericTextInput, Line, Poster, SelectInput } from "@components"
+import { useAriaNotification, UrlState, useUrlState } from "@hooks"
 import { getAriaMessage, getFilteredPosters } from "./core"
+import { debounce, delay, scrollPageToTop } from "@utils"
 import { usePosters } from "./use-posters"
 import * as S from "./styles"
 

@@ -1,6 +1,6 @@
-import { shuffle } from "../../../shared/utils"
-import { Media } from "../../../stores"
 import { SuggestionMedia } from "./types"
+import { shuffle } from "@utils"
+import { Media } from "@stores"
 
 export const createSuggestionMedias = (
     medias: Media[], idException: string

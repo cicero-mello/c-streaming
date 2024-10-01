@@ -1,8 +1,8 @@
 import React, { FC, useLayoutEffect } from "react"
 import { HeadFC, PageProps, graphql } from "gatsby"
-import { useMediaStore } from "../stores"
-import { Error } from "../components"
-import * as S from "../screens"
+import { useMediaStore } from "@stores"
+import { Error } from "@components"
+import * as S from "@screens"
 
 const IndexPage: FC<PageProps> = (props) => {
     const { updateMedias, medias } = useMediaStore()

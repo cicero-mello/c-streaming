@@ -1,6 +1,6 @@
-import { IGatsbyImageData } from "gatsby-plugin-image"
 import { HTMLAttributes } from "react"
-import { Media, MediaType } from "../../../stores"
+import { IGatsbyImageData } from "gatsby-plugin-image"
+import { Media, MediaType } from "@stores"
 
 export interface SuggestionMedia {
     bannerImage: IGatsbyImageData

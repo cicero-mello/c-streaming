@@ -1,8 +1,8 @@
 import { useMemo } from "react"
-import { useMediaStore } from "../../stores"
 import { IGatsbyImageData } from "gatsby-plugin-image"
+import { PosterProps } from "@components"
+import { useMediaStore } from "@stores"
 import { PagePoster } from "./types"
-import { PosterProps } from "../../components"
 
 export const usePosters = (): PagePoster[] => {
     const { medias } = useMediaStore()

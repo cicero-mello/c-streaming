@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { StaticImage } from "gatsby-plugin-image"
-import { GitHubIco } from "../../../assets/icons"
+import { GitHubIco } from "@icons"
 import * as S from "./styles"
 
 const instaLogoSrc = "../../../assets/images/insta-logo.png"

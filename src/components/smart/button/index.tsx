@@ -1,8 +1,8 @@
 import React, { FC, useRef } from "react"
-import { ButtonProps } from "./types"
 import { StyledButton, StyledLink } from "./styles"
-import { createLinkPath } from "../../../paths"
-import { useNavigation } from "../../../hooks"
+import { createLinkPath } from "@paths"
+import { useNavigation } from "@hooks"
+import { ButtonProps } from "./types"
 
 export const Button: FC<ButtonProps> = ({
     theme, url, disabled, onClick, tabIndex,

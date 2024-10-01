@@ -1,10 +1,10 @@
 import React, { FormEvent, forwardRef, useImperativeHandle, useRef, useState } from "react"
+import { GenericTextInput, AriaNotification } from "@components"
 import { BaseModalHandle } from "../base/types"
-import { BaseModal } from "../base"
-import { useModals } from "../../.."
 import { GenericModalHandle } from ".."
-import { GenericTextInput, AriaNotification } from "../../../../components"
-import { delay } from "../../../../shared/utils"
+import { BaseModal } from "../base"
+import { useModals } from "@hooks"
+import { delay } from "@utils"
 import * as S from "./styles"
 
 export const DeleteAccountConfirmation = forwardRef<

@@ -3,7 +3,7 @@ import { ButtonThemes } from "../types"
 import { borderThemes } from "./border.styles"
 import { classicThemes } from "./classic.styles"
 import { menuItemThemes } from "./menu-item.styles"
-import { Link } from "gatsby";
+import { Link } from "gatsby"
 
 const buttonThemes = new Map([
     ...borderThemes, ...classicThemes, ...menuItemThemes

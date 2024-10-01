@@ -1,5 +1,5 @@
-import { useMediaStore } from "../../../stores"
 import { BannerMedia } from "./item/types"
+import { useMediaStore } from "@stores"
 
 const choicedMediaNamesToBanner: string[] = [
     "Neon Genesis Evangelion",

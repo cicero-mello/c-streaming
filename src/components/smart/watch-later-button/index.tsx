@@ -1,7 +1,7 @@
 import React, { FC, useState, useLayoutEffect } from "react"
-import { customLocalStorage, useMediaStore } from "../../../stores"
+import { customLocalStorage, useMediaStore } from "@stores"
 import { WatchLatterButtonProps } from "./types"
-import { useAriaNotification } from "../../../hooks"
+import { useAriaNotification } from "@hooks"
 import * as S from "./styles"
 
 export const WatchLatterButton: FC<WatchLatterButtonProps> = ({

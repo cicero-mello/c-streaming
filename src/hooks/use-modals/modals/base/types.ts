@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { ButtonProps } from "../../../../components"
+import { ButtonProps } from "@components"
 
 export interface BaseModalHandle {
     open: () => void

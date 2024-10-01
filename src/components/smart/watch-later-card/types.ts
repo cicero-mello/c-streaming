@@ -1,6 +1,6 @@
-import { IGatsbyImageData } from "gatsby-plugin-image"
 import { HTMLAttributes } from "react"
-import { MediaType } from "../../../stores"
+import { IGatsbyImageData } from "gatsby-plugin-image"
+import { MediaType } from "@stores"
 
 export interface WatchLaterCardProps extends Omit<
     HTMLAttributes<HTMLDivElement>, "className"

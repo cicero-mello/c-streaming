@@ -1,6 +1,6 @@
-import { UrlState } from "../hooks";
-import { objectToQueryString } from "../shared/utils";
-import { MediaType } from "../stores";
+import { objectToQueryString } from "@utils"
+import { MediaType } from "@stores"
+import { UrlState } from "@hooks"
 
 export enum PATHS {
     HOME = "/",

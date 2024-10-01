@@ -1,7 +1,6 @@
 import React, { FC } from "react"
-import { TriangleSeeAllIco } from "../../../assets/icons"
-import { Button } from "../../smart/button"
-import { ButtonProps } from "../../smart/button/types"
+import { Button, ButtonProps } from "@components"
+import { TriangleSeeAllIco } from "@icons"
 import * as S from "./styles"
 
 export const SeeAllButton: FC<ButtonProps> = ({

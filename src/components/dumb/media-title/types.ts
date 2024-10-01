@@ -1,4 +1,4 @@
-import { Episode } from "../../../stores"
+import { Episode } from "@stores"
 
 export interface MediaTitleProps {
     title: string

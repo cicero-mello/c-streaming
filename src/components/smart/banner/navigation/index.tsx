@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react"
 import { BannerNavigationProps } from "./types"
-import { TriangleBannerNavIco } from "../../../../assets/icons"
-import { debounce } from "../../../../shared/utils"
+import { TriangleBannerNavIco } from "@icons"
+import { debounce } from "@utils"
 import * as S from "./styles"
 
 export const Navigation: FunctionComponent<BannerNavigationProps> = ({

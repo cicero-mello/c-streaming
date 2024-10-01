@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react"
-import { Episode, HistoryItem, MediaType } from "../../../stores"
+import { Episode, MediaType } from "@stores"
 
 export interface HistoryCardProps extends Omit<
     HTMLAttributes<HTMLDivElement>, "className" | "ref"

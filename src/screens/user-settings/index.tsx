@@ -1,9 +1,9 @@
 import React, { FormEvent, FunctionComponent, useState } from "react"
-import { Button, GenericTextInput, Line } from "../../components"
-import { UserIcoBig } from "../../assets/icons"
-import { delay, isEmailValid } from "../../shared/utils"
-import { useAriaNotification, useModals } from "../../hooks"
+import { Button, GenericTextInput, Line } from "@components"
+import { useAriaNotification, useModals } from "@hooks"
+import { delay, isEmailValid } from "@utils"
 import { type PageProps } from "gatsby"
+import { UserIcoBig } from "@icons"
 import * as S from "./styles"
 
 export const UserSettings: FunctionComponent<PageProps> = () => {

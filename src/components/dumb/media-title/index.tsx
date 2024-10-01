@@ -1,7 +1,7 @@
 import React, { FC } from "react"
-import { MediaTitleProps } from "./types"
-import { WatchLatterButton } from "../../smart"
 import { getEpisodeAriaLabel, getEpisodeNameShowed } from "./core"
+import { WatchLatterButton } from "@components"
+import { MediaTitleProps } from "./types"
 import * as S from "./styles"
 
 export const MediaTitle: FC<MediaTitleProps> = ({

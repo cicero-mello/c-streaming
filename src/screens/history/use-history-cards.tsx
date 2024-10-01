@@ -1,8 +1,8 @@
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
-import { customLocalStorage, useMediaStore } from "../../stores"
-import { getRandomID } from "../../shared/utils"
-import { HistoryCardProps } from "../../components"
+import { customLocalStorage, useMediaStore } from "@stores"
 import { PageFlowControl, UseHistoryCards } from "./types"
+import { HistoryCardProps } from "@components"
+import { getRandomID } from "@utils"
 
 export const useHistoryCards = (
     pageFlowControl: PageFlowControl

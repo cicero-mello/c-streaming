@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from "react"
 import { GenericTextInputProps } from "./types"
-import { useFocusOrigin } from "../../../hooks"
+import { useFocusOrigin } from "@hooks"
 import * as S from "./styles"
 
 export const GenericTextInput: FC<GenericTextInputProps> = ({

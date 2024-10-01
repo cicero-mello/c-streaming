@@ -1,10 +1,7 @@
-import React, {
-    FC, createContext, useContext,
-    useEffect, useLayoutEffect, useState
-} from "react"
+import React, { FC, createContext, useContext, useEffect, useLayoutEffect, useState } from "react"
+import { AriaNotification } from "@components"
 import { UseAriaNotification } from "./types"
-import { AriaNotification } from "../../components"
-import { debounce } from "../../shared/utils"
+import { debounce } from "@utils"
 
 const AriaNotificationContext = createContext<UseAriaNotification>({
     readAriaNotification: () => {},
