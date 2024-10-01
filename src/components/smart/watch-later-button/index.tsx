@@ -23,13 +23,13 @@ export const WatchLatterButton: FC<WatchLatterButtonProps> = ({
             readAriaNotification("Removed")
             setTimeout(() => {
                 setAriaLabel(`Add ${mediaName} to Watch Later List`)
-            }, 200)
+            }, 500)
         }
         else{
             readAriaNotification("Added")
             setTimeout(() => {
                 setAriaLabel(`Remove ${mediaName} from Watch Later List`)
-            }, 200)
+            }, 500)
         }
 
         customLocalStorage.addWatchLater(mediaId, !watchLater)
