@@ -15,6 +15,7 @@ export const UserSettings: FunctionComponent<PageProps> = () => {
 
     const onSubmitForm = async (event: FormEvent) => {
         event.preventDefault()
+        if(!formHasNewValue) return
         const formData = new FormData(event.target as HTMLFormElement)
         const currentEmail = formData.get("email") + ""
         const currentUsername = formData.get("username") + ""
