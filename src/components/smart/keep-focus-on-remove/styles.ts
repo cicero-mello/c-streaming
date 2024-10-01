@@ -1,7 +1,8 @@
 import styled from "styled-components"
 
 export const HiddenTag = styled.p.attrs({
-    className: "hidden-tag-keep-focus-on-remove"
+    className: "hidden-tag-keep-focus-on-remove",
+    role: "presentation"
 })`
     position: absolute;
     width: 0;

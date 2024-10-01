@@ -9,7 +9,6 @@ export const Error: FC<ErrorProps> = ({
         <S.ErrorCodeMessage
             $errorCode={errorCode}
             aria-label={`ERROR: ErrorCode: ${errorCode}`}
-            role="presentation"
             tabIndex={0}
         >
             {errorCode}

@@ -15,7 +15,10 @@ export const Component = styled.main.attrs({
     }
 `
 
-export const ErrorCodeMessage = styled.h1<{
+export const ErrorCodeMessage = styled.h1.attrs({
+    className: "error-code-message",
+    role: "presentation"
+})<{
     $errorCode: ErrorCode
 }>`${({ $errorCode }) => css`
 

@@ -81,7 +81,6 @@ export const KeepFocusOnRemove: FC<KeepFocusOnRemoveProps> = ({
             <S.HiddenTag
                 ref={hiddenTagRef}
                 tabIndex={-1}
-                role="presentation"
                 key={"hidden-span-key-" + copyChild.props.id}
             >
                 {ariaNotification ?? "Removed"}

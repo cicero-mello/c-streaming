@@ -74,7 +74,7 @@ export const MediaSuggestions: FC<MediaSuggestionsProps> = ({
 
     return (
         <S.Component {...rest}>
-            <S.Text role="presentation" tabIndex={0}>
+            <S.Text tabIndex={0}>
                 Want something different? <br/>
                 Why not try...
             </S.Text>

@@ -37,14 +37,12 @@ export const Item: FC<BannerItemProps> = ({
                 aria-hidden="true"
             />
             <S.InfoAndButtons
-                role="presentation"
                 tabIndex={isBannerHidden ? -1 : 0}
                 aria-label="Suggestion media banner"
                 aria-hidden={isBannerHidden ? "true" : "false"}
             >
                 <S.InfoWrapper>
                     <S.MediaName
-                        role="presentation"
                         tabIndex={isBannerHidden ? -1 : 0}
                         aria-label={showingMedia.name}
                         aria-live="assertive"
@@ -53,10 +51,7 @@ export const Item: FC<BannerItemProps> = ({
                             {showingMedia.name?.toLocaleUpperCase() ?? ""}
                         </span>
                     </S.MediaName>
-                    <S.Synopsis
-                        role="presentation"
-                        tabIndex={isBannerHidden ? -1 : 0}
-                    >
+                    <S.Synopsis tabIndex={isBannerHidden ? -1 : 0}>
                         {showingMedia.synopsis}
                     </S.Synopsis>
                 </S.InfoWrapper>

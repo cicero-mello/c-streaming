@@ -104,7 +104,6 @@ export const Carousel: FC<CarouselProps> = ({
             </S.TriangleNextButton>
             <S.Carousel
                 tabIndex={0}
-                role="presentation"
                 ref={carouselRef}
                 onScroll={onScrollMobile}
                 aria-label={`${mediaType} suggestions`}

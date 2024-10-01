@@ -35,7 +35,10 @@ export const Component = styled.div.attrs((props: any) => ({
     `}
 `}`
 
-export const InfoAndButtons = styled.div`
+export const InfoAndButtons = styled.div.attrs({
+    className: "info-and-buttons",
+    role: "presentation"
+})`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -53,7 +56,10 @@ export const InfoWrapper = styled.div.attrs({
     transition: 340ms ease-in-out;
 `
 
-export const MediaName = styled.span`
+export const MediaName = styled.span.attrs({
+    className: "media-name",
+    role: "presentation"
+})`
     max-width: 85%;
     white-space: nowrap;
     font-size: 37px;
@@ -63,7 +69,10 @@ export const MediaName = styled.span`
     font-style: normal;
 `
 
-export const Synopsis = styled.p`
+export const Synopsis = styled.p.attrs({
+    className: "synopsis",
+    role: "presentation"
+})`
     font-size: 23px;
     color: #9B9B9B;
     margin-top: 11px;

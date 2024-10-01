@@ -50,7 +50,8 @@ export const Component = styled.div.attrs({
 `
 
 export const Text = styled.h2.attrs({
-    className: "suggestion-text"
+    className: "suggestion-text",
+    role: "presentation"
 })`
     color: #EDEDED;
     font-size: 28px;

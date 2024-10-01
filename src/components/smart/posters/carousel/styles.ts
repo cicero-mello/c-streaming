@@ -50,7 +50,8 @@ export const Component = styled.div.attrs({
 `
 
 export const Carousel = styled.div.attrs({
-    className: "carousel-scroll"
+    className: "carousel-scroll",
+    role: "presentation"
 })`
     display: flex;
     margin: 0px 21px;

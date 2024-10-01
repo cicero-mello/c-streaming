@@ -1,6 +1,9 @@
 import styled from "styled-components"
 
-export const Component = styled.footer`
+export const Component = styled.footer.attrs({
+    className: "footer",
+    role: "presentation"
+})`
     display: flex;
     width: fit-content;
     align-self: flex-end;

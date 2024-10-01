@@ -8,7 +8,6 @@ const instaLogoSrc = "../../../assets/images/insta-logo.png"
 export const Footer: FC = () => (
     <S.Component
         tabIndex={0}
-        role="presentation"
         aria-label="footer: more information:"
     >
         <S.InfoLink

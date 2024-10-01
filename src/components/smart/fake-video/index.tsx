@@ -37,7 +37,6 @@ export const FakeVideo: FC<FakeVideoProps> = ({
         <S.Component {...rest} $showVideo={showVideo}>
             <S.Message
                 ref={messageRef}
-                role="presentation"
                 tabIndex={showVideo ? 0 : -1}
                 aria-hidden={showVideo ? "false" : "true"}
             >

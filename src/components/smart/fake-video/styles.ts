@@ -59,7 +59,8 @@ export const ScreenSaverContainer = styled.div`
 `
 
 export const Message = styled.p.attrs({
-    className: "fake-video-message"
+    className: "fake-video-message",
+    role: "presentation"
 })`
     position: absolute;
     opacity: 0;
