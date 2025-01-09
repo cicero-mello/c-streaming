@@ -21,14 +21,6 @@ export const Component = styled.footer.attrs({
 
     .footer-info:first-child{
         margin-bottom: 10px;
-
-        .footer-link {
-            margin-bottom: 1px;
-            &::before{
-                width: 48px;
-                margin-left: 10px;
-            }
-        }
     }
 `
 
@@ -42,22 +34,11 @@ export const InfoLink = styled.a.attrs({
     text-decoration: none;
     cursor: pointer;
 
-    .instagram-logo{
-        width: 22px;
-        filter: grayscale(1);
-        margin-right: 4px;
-        transition: 100ms linear;
-    }
-
     &:hover, &:focus-within{
         opacity: 100%;
         .footer-link::before{
             background-color: white;
         }
-        .instagram-logo{
-            filter: grayscale(0);
-        }
-
         .github-ico {
             path {
                 fill: #f5f5f5;
